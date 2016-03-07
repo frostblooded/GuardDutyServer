@@ -1,6 +1,5 @@
 module CallSender
   def CallSender::send_all
-    # Get all devices
     devices = Device.all
 
     devices.each do |device|
@@ -29,8 +28,8 @@ module CallSender
       # Set headers
       req['Content-Type'] = 'application/json'
       req['Authorization'] = "key=#{Rails.application.secrets.push_notification_send_key}"
+
       req.body = params
-      puts req.body
       res = https.request(req)
       puts "Response #{res.code} #{res.message}: #{res.body}"
     end
