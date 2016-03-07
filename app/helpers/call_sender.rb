@@ -1,9 +1,11 @@
 module CallSender
   def CallSender::send_all
-    # Get all tokens
-    tokens = Device.pluck :token
+    # Get all devices
+    devices = Device.all
 
-    tokens.each do |token|
+    devices.each do |device|
+      token = device.token
+
       # Set the sent parameters
       # As of now most of them are hardcoded for testing purposes
       params = {
@@ -12,10 +14,12 @@ module CallSender
           time: Time.now,
           submission_interval: 60000,
           alarm_time: 60000,
-          id: 3
+          id: device.id
         },
         'to': token
       }.to_json
+
+      puts params
 
       uri = URI.parse('https://gcm-http.googleapis.com/gcm/send')
       https = Net::HTTP.new(uri.host, uri.port)
