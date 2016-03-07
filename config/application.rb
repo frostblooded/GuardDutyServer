@@ -22,14 +22,5 @@ module AttendanceCheckRailsapp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-
-    config.after_initialize do
-      scheduler = Rufus::Scheduler.new
-
-      # Run code every minute
-      scheduler.every '1m' do
-        puts "Printing: #{Time.current}"
-      end
-    end
   end
 end
