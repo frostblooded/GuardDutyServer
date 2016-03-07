@@ -1,5 +1,3 @@
 class Device < ActiveRecord::Base
-  # Validation for length automatically
-  # validates for presence too
-  validates :token, length: { is: 30 }
+  validates :token, length: { is: 30 }, presence: true
 end
