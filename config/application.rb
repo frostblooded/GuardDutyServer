@@ -26,6 +26,7 @@ module AttendanceCheckRailsapp
     config.after_initialize do
       scheduler = Rufus::Scheduler.new
 
+      # Run code every minute
       scheduler.every '1m' do
         puts "Printing: #{Time.current}"
       end
