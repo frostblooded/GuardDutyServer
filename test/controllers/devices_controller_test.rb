@@ -7,9 +7,15 @@ class DevicesControllerTest < ActionController::TestCase
     end
   end
 
-  test "do not create devices with tokens that are below the length limit" do
+  test "do not create device with token that has wrong length" do
     assert_no_difference 'Device.count' do
-      post :create, token: "12321412"
+      post :create, token: 'a' * 100
+    end
+  end
+
+  test "create device with valid token length" do
+    assert_difference 'Device.count', 1 do
+      post :create, token: 'a' * 152
     end
   end
 end
