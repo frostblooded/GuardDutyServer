@@ -15,7 +15,7 @@ module DevicesHelper
           alarm_time: 60000,
           id: device.id
         },
-        'to': token
+        to: token
       }.to_json
 
       # Create https connction object
