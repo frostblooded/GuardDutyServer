@@ -6,5 +6,5 @@ set :environment, :development
 set :output, {:error => 'error.log', :standard => 'cron.log'}
 
 every 1.minutes do
-  runner 'CallSender.send_all'
+  runner 'DevicesHelper.send_all'
 end
