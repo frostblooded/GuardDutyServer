@@ -222,3 +222,6 @@ DEPENDENCIES
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
   whenever (= 0.9.4)
+
+BUNDLED WITH
+   1.11.2
