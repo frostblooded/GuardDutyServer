@@ -27,7 +27,7 @@ module DevicesHelper
 
       # Set headers
       req['Content-Type'] = 'application/json'
-      req['Authorization'] = "key=#{Rails.application.secrets.push_notification_send_key}"
+      req['Authorization'] = "key=#{Figaro.env.push_notification_send_key}"
 
       # Make request
       req.body = params
