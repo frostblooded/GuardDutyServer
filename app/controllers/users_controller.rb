@@ -4,24 +4,13 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
-  def create
-		@user = User.new(user_params)
-		if @user.save
-    	flash[:success] = "Welcome to AttendanceCheck"
-			redirect_to @user
-		else
-			render 'new'
-		end
-  end
-
   def show
-  	@user = User.find(params[:id])
+    @user = User.all
+    # If this show page is only for the currently logged in user change it to @user = current_user
   end
 
-  private
-
-		def user_params
-		  params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                   :password_confirmation)
-		end
+  def destroy
+  	sign_out
+  	redirect_to root_path
+  end
 end
