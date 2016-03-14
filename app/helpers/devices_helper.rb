@@ -1,38 +1,41 @@
 module DevicesHelper
-  def DevicesHelper::send_all
-    devices = Device.all
+  module_function
 
-    devices.each do |device|
-      token = device.token
+    def send_all
+      GCM_URL = 'https://gcm-http.googleapis.com/gcm/send'
+      devices = Device.all
 
-      # Set the sent parameters
-      # As of now most of them are hardcoded for testing purposes
-      params = {
-        data:{
-          token: token,
-          time: Time.now,
-          submission_interval: 60000,
-          alarm_time: 60000,
-          id: device.id
-        },
-        to: token
-      }.to_json
+      devices.each do |device|
+        token = device.token
 
-      # Create https connction object
-      uri = URI.parse('https://gcm-http.googleapis.com/gcm/send')
-      https = Net::HTTP.new(uri.host, uri.port)
-      https.use_ssl = true
-      
-      req = Net::HTTP::Post.new(uri.path)
+        # Set the sent parameters
+        # As of now most of them are hardcoded for testing purposes
+        params = {
+          data:{
+            token: token,
+            time: Time.now,
+            submission_interval: 60000,
+            alarm_time: 60000,
+            id: device.id
+          },
+          to: token
+        }.to_json
 
-      # Set headers
-      req['Content-Type'] = 'application/json'
-      req['Authorization'] = "key=#{Figaro.env.push_notification_send_key}"
+        # Create https connction object
+        uri = URI.parse(GCM_URL)
+        https = Net::HTTP.new(uri.host, uri.port)
+        https.use_ssl = true
+        
+        req = Net::HTTP::Post.new(uri.path)
 
-      # Make request
-      req.body = params
-      res = https.request(req)
-      puts "Response #{res.code} #{res.message}: #{res.body}"
+        # Set headers
+        req['Content-Type'] = 'application/json'
+        req['Authorization'] = "key=#{Figaro.env.push_notification_send_key}"
+
+        # Make request
+        req.body = params
+        res = https.request(req)
+        puts "Sent tokens: Response #{res.code} #{res.message}: #{res.body}"
+      end
     end
   end
-end
