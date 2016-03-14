@@ -1,8 +1,8 @@
 module DevicesHelper
-  module_function
+  GCM_URL = 'https://gcm-http.googleapis.com/gcm/send'
 
+  module_function
     def send_all
-      GCM_URL = 'https://gcm-http.googleapis.com/gcm/send'
       devices = Device.all
 
       devices.each do |device|
