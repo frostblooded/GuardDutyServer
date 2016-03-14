@@ -1,9 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters, :only => [:create]
 
-  protected
+	protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:company_name, :username, :email, :password) }
-    end
+		def configure_permitted_parameters
+			devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:company_name, :email, :password) }
+			devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password) }
+		end
+
 end

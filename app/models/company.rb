@@ -3,9 +3,4 @@ class Company < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  def destroy
-		sign_out
-  	redirect_to root_path
-  end
 end
