@@ -5,7 +5,10 @@ class RegistrationsController < Devise::RegistrationsController
 
 		def configure_permitted_parameters
 			devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:company_name, :email, :password) }
-			devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password) }
+		  devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+    		user_params.permit(:company_name, :password)
+			end
 		end
+end
 
 end
