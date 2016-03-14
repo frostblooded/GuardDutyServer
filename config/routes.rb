@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :companies
   root             'static_page#home'
   get 'help'       => 'static_page#help'
   get 'about'      => 'static_page#about'
   get 'contact'    => 'static_page#contact'
-  get '/sign_out'  => 'users#destroy'
+
   resources :devices
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
