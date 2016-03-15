@@ -5,4 +5,12 @@ class Company < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :password
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
 end

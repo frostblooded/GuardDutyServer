@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :companies, :controllers => { registrations: 'registrations' }
+  devise_for :companies
   root                'static_page#home'
   get 'help'       => 'static_page#help'
   get 'about'      => 'static_page#about'
