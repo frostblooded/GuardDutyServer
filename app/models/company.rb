@@ -4,8 +4,6 @@ class Company < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessor :company_name
-
   def email_required?
     false
   end
