@@ -15,4 +15,10 @@ class CompanyTest < ActiveSupport::TestCase
 		@company.company_name = "a" * 51
 		assert_not @company.valid?
 	end
+
+	test "company name should be unique" do
+		duplicate_company = @company.dup
+		@company.save
+		assert_not duplicate_company.valid?
+	end
 end
