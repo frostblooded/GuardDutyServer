@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+  has_many :companies
   # Documentation says email_required? and email_changed? should be implemented as follows:
   def email_required?
     false
