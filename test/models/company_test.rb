@@ -21,4 +21,14 @@ class CompanyTest < ActiveSupport::TestCase
 		@company.save
 		assert_not duplicate_company.valid?
 	end
+	
+	test "email should be valid" do
+		@company.email = "example@email.com"
+		assert @company.valid?
+	end
+
+	test "password should be present" do
+		@company.password = "   "
+		assert_not @company.valid?
+	end
 end
