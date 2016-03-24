@@ -1,7 +1,31 @@
 require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @worker = Worker.new(first_name: "Example FName", last_name: "Example LName")
+  end
+
+  test "should be valid" do
+    assert @worker.valid?
+  end
+
+	test "first name should be present" do
+  	@worker.first_name = "   "
+  	assert_not @worker.valid?
+	end
+
+	test "last name should be present" do
+  	@worker.last_name = "   "
+  	assert_not @worker.valid?
+	end	
+
+	test "first name should not be too long" do
+		@worker.first_name = "a" * 50
+		assert_not @worker.valid?
+	end
+	
+	test "last name should not be too long" do
+		@worker.last_name = "a" * 50
+		assert_not @worker.valid?
+	end		
 end
