@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',        		'4.2.2'
+gem 'cancancan'
 gem 'devise'
 gem 'figaro',           '1.1.1'
 gem 'bcrypt',           '3.1.7'
