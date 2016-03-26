@@ -1,4 +1,4 @@
-<h1>All workers</h1>
+<h1>List of your workers</h1>
 
 <ul class="workers">
   <% @worker.each do |worker| %>
@@ -8,3 +8,7 @@
     </li>
   <% end %>
 </ul>
+
+<div class = "button">
+	<%= link_to('Add new worker', workers_new_path, 'data-popup' => true ) %>
+</div>

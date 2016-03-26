@@ -10,7 +10,7 @@ class WorkerController < ApplicationController
   def create
     @worker = Worker.create(worker_params)
     if @worker.save
-      redirect_to workers_all_path, :notice => "Signed up!"
+      redirect_to workers_path, :notice => "Signed up!"
     else
       render "new"
     end
