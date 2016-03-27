@@ -1,8 +1,3 @@
-$('a[data-popup]').live('click', function(e) { 
-  window.open( $(this).attr('href'), "Popup", "height=600, width=600" ); 
-  e.preventDefault(); 
-});
-
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -20,3 +15,7 @@ $('a[data-popup]').live('click', function(e) {
 //= require turbolinks
 //= require_tree .
 
+$('a[data-popup]').live('click', function(e) { 
+  window.open( $(this).attr('href'), "Popup", "height=600, width=600" ); 
+  e.preventDefault(); 
+});

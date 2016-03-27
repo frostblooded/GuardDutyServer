@@ -1,17 +1,23 @@
 <p> Here you can add workers of yours </p>
 
-<%= form_for(@worker) do |f| %>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@worker) do |f| %>
+      <%= render 'shared/error_message' %>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: 'form-control' %>
 
-  <div class="actions">
-    <%= f.submit "Add this worker" %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "Create new worker", class: "btn btn-primary" %>
+    <% end %>
   </div>
-<% end %>
+</div>

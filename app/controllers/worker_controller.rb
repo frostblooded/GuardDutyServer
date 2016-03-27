@@ -19,6 +19,6 @@ class WorkerController < ApplicationController
   private
 
   def worker_params
-    params.require(:worker).permit(:first_name, :last_name)
+    params.require(:worker).permit(:first_name, :last_name, :password, :password_confirmation)
   end
 end
