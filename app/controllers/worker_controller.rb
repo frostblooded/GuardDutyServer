@@ -1,6 +1,6 @@
 class WorkerController < ApplicationController
 	def show
-		@worker = Worker.all
+    @worker = Worker.all
 	end
 
   def new
@@ -8,6 +8,8 @@ class WorkerController < ApplicationController
   end
 
   def create
+    #@company = Company.new
+    #@worker = company.worker.create(worker_params)
     @worker = Worker.create(worker_params)
     if @worker.save
       redirect_to workers_path, :notice => "Signed up!"

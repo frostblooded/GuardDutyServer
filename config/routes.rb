@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get  'contact'    => 'static_page#contact'
   get  'workers/new'    => 'worker#new'
   post 'workers'    => 'worker#create'
-  get  'workers'=> 'worker#show'
+  get  'workers'    => 'worker#show'
+  get  'settings'   => 'company_settings#show'
   resources :devices
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
