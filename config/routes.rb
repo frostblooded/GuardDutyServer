@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-devise_for :companies
+  devise_for :companies
   root                'static_page#home'
   get  'help'       => 'static_page#help'
   get  'about'      => 'static_page#about'

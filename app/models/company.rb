@@ -14,6 +14,7 @@ class Company < ActiveRecord::Base
   end
 
   def send_admin_mail
+    CompanyNotifier.sample_email(Company.first).deliver
   end
 
   def email_changed?

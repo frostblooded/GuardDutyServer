@@ -3,11 +3,9 @@ class Company::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
-    if company.save
-    ExampleMailer.sample_email(@company).deliver
-  end
+  #def new
+  #  super
+  #end
 
   # POST /resource
   #def create
