@@ -7,14 +7,16 @@ class Company < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :company_name, presence: true, length: { maximum: 50},
                            uniqueness: true
-  after_create :send_admin_mail
   # Documentation says email_required? and email_changed? should be implemented as follows:
   def email_required?
     false
   end
 
-  def send_admin_mail
-    CompanyNotifier.sample_email(Company.first).deliver
+  def send_report_mail
+    Company.all.each do |c|
+      CompanyNotifier.sample_email(c).deliver
+    end
+    
   end
 
   def email_changed?

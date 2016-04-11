@@ -5,6 +5,12 @@
 set :environment, :development
 set :output, {:error => 'error.log', :standard => 'cron.log'}
 
+
+
 every 1.minutes do
   runner 'DevicesHelper.send_all'
+end
+
+every 24.hours do
+  runner 'CompanyHelper.send_report_mail'
 end

@@ -6,7 +6,8 @@
   <body>
     <h1>Hi <%= @company.company_name %> </h1> 
     <p>
-      Sample mail sent using smtp.
+    	here is the report for your workers:
+    	<%= render @company.workers %>
     </p>
   </body>
 </html>
