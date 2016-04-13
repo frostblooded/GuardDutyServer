@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Converter::Currency => '/api'
   devise_for :companies
   root                'static_page#home'
   get  'help'       => 'static_page#help'
