@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Add Grape routes, so that the API works
-  mount Converter::Currency => '/api'
+  mount AttendanceCheck::Workers => '/api'
 
   # Add Devise routes for Company
   devise_for :companies
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get  'workers'     => 'worker#show'
   get  'settings'    => 'company_settings#show'
   resources :devices
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
