@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  # Add Grape routes, so that the API works
   mount Converter::Currency => '/api'
+
+  # Add Devise routes for Company
   devise_for :companies
-  root                'static_page#home'
-  get  'help'       => 'static_page#help'
-  get  'about'      => 'static_page#about'
-  get  'contact'    => 'static_page#contact'
-  get  'workers/new'    => 'worker#new'
-  post 'workers'    => 'worker#create'
-  get  'workers'    => 'worker#show'
-  get  'settings'   => 'company_settings#show'
+
+  root                  'static_page#home'
+  get  'help'        => 'static_page#help'
+  get  'about'       => 'static_page#about'
+  get  'contact'     => 'static_page#contact'
+  get  'workers/new' => 'worker#new'
+  post 'workers'     => 'worker#create'
+  get  'workers'     => 'worker#show'
+  get  'settings'    => 'company_settings#show'
   resources :devices
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
