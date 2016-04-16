@@ -1,5 +1,7 @@
 class Company < ActiveRecord::Base
   has_many :workers
+  has_one :api_key
+  
   enum role: [ :logged_in, :logged_out ]  
 
   # Include default devise modules. Others available are:

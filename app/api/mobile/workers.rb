@@ -10,33 +10,25 @@ module Mobile
     rescue_from :all
 
     helpers do
-      # Uses the request parameters do determine if the password is valid
-      def valid_password?
-        company = Company.find_by(company_name: params[:company_name])
-        company.encrypted_password == params[:password_digest]
+      # Check if the access token is valid
+      def restrict_access
+        api_key = ApiKey.find_by(access_token: params[:access_token])
+        error!("Invalid token", 401) unless api_key
       end
     end
     
     resource :mobile do
+      # Before every request
+      before {restrict_access}
+
       # Set parameter requirements for workers GET request
       params do
-        requires :token, type: String
+        requires :access_token, type: String
       end
 
       # Get current company's workers
       get :workers do
-        params
-      end
-
-      # Set parameter requirements for login POST request
-      params do
-        requires :company_name, type: String
-        requires :password_digest, type: String
-      end
-
-      # Login the company
-      post :login do
-        return error!("Invalid username/password combination!", 401) unless valid_password?
+        Worker.all
       end
     end
   end

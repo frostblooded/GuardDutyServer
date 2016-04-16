@@ -1,4 +1,6 @@
 class ApiKey < ActiveRecord::Base
+  belongs_to :company
+  
   before_create :generate_access_token
 
   private
