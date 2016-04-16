@@ -9,23 +9,27 @@ module Mobile
     # Catch and return exceptions as response
     rescue_from :all
 
+    # Before every request
+    before {restrict_access}
+
     helpers do
-      # Check if the access token is valid
-      def restrict_access
-        api_key = ApiKey.find_by(access_token: params[:access_token])
-        error!("Invalid token", 401) unless api_key
+      # Get api_key based on access_token parameter
+      def get_api_key
+        ApiKey.find_by(access_token: params[:access_token])
       end
 
+      # Check if the access token is valid
+      def restrict_access
+        error!("Invalid token", 401) unless get_api_key
+      end
+
+      # Returns the current company based on the access_token parameter
       def get_current_company
-        api_key = ApiKey.find_by(access_token: params[:access_token])
-        api_key.company
+        get_api_key.company
       end
     end
     
     resource :mobile do
-      # Before every request
-      before {restrict_access}
-
       # Set parameter requirements for workers GET request
       params do
         requires :access_token, type: String
@@ -33,8 +37,7 @@ module Mobile
 
       # Get current company's workers
       get :workers do
-        Worker.all
-        get_current_company
+        # TODO: Implement functionality
       end
     end
   end
