@@ -36,7 +36,7 @@ module Mobile
         company = Company.find_by(company_name: params[:company_name])
         company.api_key = ApiKey.create
         
-        # Return the created generated token
+        # Return the generated token
         {access_token: company.api_key.access_token}
       end
     end
