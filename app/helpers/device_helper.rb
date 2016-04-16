@@ -1,4 +1,4 @@
-module DevicesHelper
+module DeviceHelper
   GCM_URL = 'https://gcm-http.googleapis.com/gcm/send'
 
   module_function
