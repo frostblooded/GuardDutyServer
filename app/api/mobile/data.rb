@@ -13,13 +13,14 @@ module Mobile
     before {restrict_access}
 
     helpers do
-      # Get api_key based on access_token parameter
+      # Get API key based on access token parameter
       def get_api_key
         ApiKey.find_by(access_token: params[:access_token])
       end
 
       # Check if the access token is valid
       def restrict_access
+        # Return error if the API key doesn't exist
         error!("Invalid token", 401) unless get_api_key
       end
 
