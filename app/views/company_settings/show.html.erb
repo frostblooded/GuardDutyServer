@@ -5,10 +5,17 @@
 	</head>
 	<body>
 		<p> Here you are able to change the durations of the calls and other things </p>
-		<span> Do you want something? </span>
-		<input type="radio">
-			<div> <span> Yes </span> </div>
-			<div> <span> No </span></div>
-		</input>
+		<span> Do you want daily report sent to your email? </span>
+		<div class="form_row">
+		   <form action = "/settings">
+				<br>
+				<input type="radio" name="YesOrNoButton" value="Yes">Yes, I would like yo get daily report for my workers
+				<input type="radio" name="YesOrNoButton" value="No">No, I dont want it
+				<br>
+				<br>
+				<button type="Submit"> Save changes </button>
+				<%= @company_daily_mail %>
+		    </form>
+		</div>
   	</body>
 </html>
