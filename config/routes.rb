@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Add Grape routes, so that the API works
-  mount AttendanceCheck::Workers => '/api'
+  mount Mobile::Workers => '/api'
 
   # Add Devise routes for Company
   devise_for :companies

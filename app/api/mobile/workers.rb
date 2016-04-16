@@ -1,4 +1,4 @@
-module AttendanceCheck
+module Mobile
   class Workers < Grape::API
     # Set API version and determine it from URL
     version 'v1', using: :path
@@ -9,7 +9,7 @@ module AttendanceCheck
     # Catch and return exceptions as response
     rescue_from :all
     
-    resource :attendance_check do
+    resource :mobile do
       params do
         requires :token, type: String
       end
