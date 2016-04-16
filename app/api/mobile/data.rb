@@ -1,5 +1,5 @@
 module Mobile
-  class Workers < Grape::API
+  class Data < Grape::API
     # Set API version and determine it from URL
     version 'v1', using: :path
 
