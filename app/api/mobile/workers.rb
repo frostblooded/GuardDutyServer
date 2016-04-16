@@ -10,7 +10,7 @@ module Mobile
     rescue_from :all
 
     helpers do
-      # Uses the passed parameters do determine if the password is valid
+      # Uses the request parameters do determine if the password is valid
       def valid_password?
         company = Company.find_by(company_name: params[:company_name])
         company.encrypted_password == params[:password_digest]
