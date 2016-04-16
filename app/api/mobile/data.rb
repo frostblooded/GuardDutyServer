@@ -29,13 +29,13 @@ module Mobile
         get_api_key.company
       end
     end
+
+    # Set parameter requirements for data requests
+    params do
+      requires :access_token, type: String
+    end
     
     resource :mobile do
-      # Set parameter requirements for workers GET request
-      params do
-        requires :access_token, type: String
-      end
-
       # Get current company's workers
       get :workers do
         # TODO: Implement functionality
