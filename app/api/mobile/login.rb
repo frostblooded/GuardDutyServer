@@ -13,12 +13,7 @@ module Mobile
       # Uses the request parameters do determine if the password is valid
       def valid_password?
         company = Company.find_by(company_name: params[:company_name])
-
-        if company
-          company.encrypted_password == params[:password_digest]
-        else
-          error!("Invalid company name", 400)
-        end
+        company.encrypted_password == params[:password_digest]
       end
     end
     
@@ -31,6 +26,9 @@ module Mobile
 
       # Login the company
       post :login do
+        # Check company existence
+        error!("Invalid company name", 400) unless Company.exists?(company_name: params[:company_name])
+
         # Validate company
         error!("Invalid company name/password combination", 401) unless valid_password?
 
