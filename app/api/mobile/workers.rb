@@ -18,17 +18,17 @@ module Mobile
     end
     
     resource :mobile do
-      # Set params requirements for workers GET request
+      # Set parameter requirements for workers GET request
       params do
         requires :token, type: String
       end
 
-      # Get current user's workers
+      # Get current company's workers
       get :workers do
         params
       end
 
-      # Set params requirements for login POST request
+      # Set parameter requirements for login POST request
       params do
         requires :company_name, type: String
         requires :password_digest, type: String
