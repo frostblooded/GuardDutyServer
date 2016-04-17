@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   has_many :workers
   has_one :api_key, dependent: :destroy
+  has_settings :daily_mail
   
   enum role: [ :logged_in, :logged_out ]  
 
