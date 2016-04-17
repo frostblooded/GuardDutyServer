@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   get  'workers/new' => 'worker#new'
   post 'workers'     => 'worker#create'
   get  'workers'     => 'worker#show'
-  get  'settings'    => 'company_settings#show'
+  get  'settings'    => 'settings#index'
   resources :devices
 end

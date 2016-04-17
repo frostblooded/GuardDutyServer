@@ -11,6 +11,6 @@ every 1.minutes do
   runner 'DevicesHelper.send_all'
 end
 
-every 1.minutes do
+every 24.hours do
   runner 'CompanyHelper.send_report_mail'
 end
