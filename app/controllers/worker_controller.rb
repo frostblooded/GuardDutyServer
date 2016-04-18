@@ -1,5 +1,5 @@
 class WorkerController < ApplicationController
-	def show
+  def show
     if current_company
       @company = current_company
       @worker = @company.workers
