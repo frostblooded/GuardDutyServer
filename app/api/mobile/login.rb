@@ -27,10 +27,10 @@ module Mobile
       # Login the company
       post :login do
         # Return error if company with such company_name doesn't exist
-        error!("Invalid company name", 400) unless Company.exists?(company_name: params[:company_name])
+        error!("invalid company name", 400) unless Company.exists?(company_name: params[:company_name])
 
         # Return error if the company_name/password combination isn't valid
-        error!("Invalid company name/password combination", 401) unless valid_password?
+        error!("invalid company name/password combination", 401) unless valid_password?
 
         # Generate API key
         company = Company.find_by(company_name: params[:company_name])
