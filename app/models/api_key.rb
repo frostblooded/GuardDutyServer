@@ -5,7 +5,7 @@ class ApiKey < ActiveRecord::Base
 
   private
     def generate_access_token
-      # May need to repeat if token already exists
+      # Generate again if token already exists
       begin
         self.access_token = SecureRandom.hex
       end while self.class.exists?(access_token: access_token)
