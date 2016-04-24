@@ -1,7 +1,7 @@
 class ApiKey < ActiveRecord::Base
   belongs_to :company
   
-  before_create :generate_access_token
+  after_initialize :generate_access_token
 
   VALID_HOURS = 2
 
@@ -15,5 +15,7 @@ class ApiKey < ActiveRecord::Base
       begin
         self.access_token = SecureRandom.hex
       end while self.class.exists?(access_token: access_token)
+
+      self.created_at = Time.now
     end
 end

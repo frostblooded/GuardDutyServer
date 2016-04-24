@@ -29,8 +29,8 @@ module Mobile
         error!("expired token", 401) if api_key.expired?
       end
 
-      # Returns the current company based on the access_token parameter
-      def get_current_company
+      # Returns the company based on the access_token parameter
+      def token_company
         get_api_key.company
       end
     end
@@ -43,7 +43,7 @@ module Mobile
     resource :mobile do
       # Get current company's workers
       get :workers do
-        # TODO: Implement functionality
+        Company.first.workers
       end
     end
   end
