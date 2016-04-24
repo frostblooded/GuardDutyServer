@@ -1,9 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#Create workers for test_company
 
-one:
-  first_name: MyString
-  last_name: MyString
+ivan:
+  first_name: Ivan
+  last_name: Ivanov
+  password_digest: <%= BCrypt::Password.create("foobar", cost: 10).to_s %>
+  company_id: <%= ActiveRecord::FixtureSet.identify(:test_company) %>
 
-two:
-  first_name: MyString
-  last_name: MyString
+petar:
+  first_name: Petar
+  last_name: Petrov
+  password_digest: <%= BCrypt::Password.create("foobar", cost: 10).to_s %>
+  company_id: <%= ActiveRecord::FixtureSet.identify(:test_company) %>
