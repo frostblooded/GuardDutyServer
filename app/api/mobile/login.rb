@@ -12,8 +12,8 @@ module Mobile
     helpers do
       # Uses the request parameters do determine if the password is valid
       def valid_password?
-        company = Company.find_by(company_name: params[:company_name])
-        company.encrypted_password == params[:password_digest]
+        Company.find_by(company_name: params[:company_name])
+               .valid_password?(params[:password])
       end
     end
     
@@ -21,7 +21,7 @@ module Mobile
       # Set parameter requirements for login POST request
       params do
         requires :company_name, type: String
-        requires :password_digest, type: String
+        requires :password, type: String
       end
 
       # Login the company
