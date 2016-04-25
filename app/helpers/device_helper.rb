@@ -30,7 +30,7 @@ module DeviceHelper
 
         # Set headers
         req['Content-Type'] = 'application/json'
-        req['Authorization'] = "key=#{Figaro.env.push_notification_send_key}"
+        req['Authorization'] = "key=#{Figaro.env.PUSH_NOTIFICATION_SEND_KEY}"
 
         # Make request
         req.body = params
