@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.0'
 
 gem 'rails',        		'4.2.2'
 gem 'ledermann-rails-settings'
@@ -31,6 +32,7 @@ group :test do
 end
 
 group :production do
+  gem 'puma',             '3.4.0'
   gem 'pg',             	'0.17.1'
   gem 'rails_12factor', 	'0.0.2'
 end
