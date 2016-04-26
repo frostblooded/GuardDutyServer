@@ -43,7 +43,7 @@ module Mobile
     resource :mobile do
       # Get current company's workers
       get :workers do
-        Company.first.workers
+        token_company.workers
       end
     end
   end
