@@ -18,7 +18,6 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'forbid access to invalid token' do
-    access_token = request_access_token
     get '/api/v1/mobile/workers', { access_token: request_access_token + 'a' }
     assert_equal "401", @response.code
   end
