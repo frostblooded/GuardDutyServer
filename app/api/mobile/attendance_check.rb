@@ -11,6 +11,7 @@ module Mobile
 
     # Mount the other API files
     mount Mobile::Data
-    mount Mobile::Login
+    mount Mobile::LoginCompany
+    mount Mobile::RegisterDevice
   end
 end

@@ -6,7 +6,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   def request_access_token
-    post '/api/v1/mobile/login', { company_name: @company.company_name,
+    post '/api/v1/mobile/login_company', { company_name: @company.company_name,
                                    password: @company.password }
     json = JSON.parse @response.body
     json['access_token']

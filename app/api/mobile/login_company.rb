@@ -1,5 +1,5 @@
 module Mobile
-  class Login < Grape::API
+  class LoginCompany < Grape::API
     helpers do
       # Uses the request parameters do determine if the password is valid
       def valid_password?
@@ -16,7 +16,7 @@ module Mobile
       end
 
       # Login the company
-      post :login do
+      post :login_company do
         # Return error if company with such company_name doesn't exist
         error!("invalid company name", 400) unless Company.exists?(company_name: params[:company_name])
 
