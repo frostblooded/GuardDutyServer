@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # Add Grape routes, so that the API works
-  mount Mobile::Data => '/api'
-  mount Mobile::Login   => '/api'
+  mount Mobile::AttendanceCheck => '/api'
   
   # Add Devise routes for Company
   devise_for :companies
@@ -14,5 +13,4 @@ Rails.application.routes.draw do
   post 'workers'     => 'worker#create'
   get  'workers'     => 'worker#show'
   get  'settings'    => 'settings#index'
-  resources :devices
 end
