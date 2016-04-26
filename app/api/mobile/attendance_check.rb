@@ -7,7 +7,7 @@ module Mobile
     format :json
 
     # Catch and return exceptions as response
-    # rescue_from :all
+    rescue_from :all
 
     # Mount the other API files
     mount Mobile::Data
