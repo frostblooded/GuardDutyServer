@@ -22,8 +22,6 @@ class Company < ActiveRecord::Base
   end
 
   def send_report_mail
-    Company.all.each do |c|
-      CompanyNotifier.sample_email(c).deliver
-    end
+    CompanyNotifier.sample_email(self).deliver
   end
 end

@@ -1,8 +1,6 @@
 module CompanyHelper
   module_function
     def send_report_mail
-      Company.all.each do |c|
-        CompanyNotifier.sample_email(c).deliver
-      end
+      Company.all.each { |c| c.send_report_mail }
     end
 end
