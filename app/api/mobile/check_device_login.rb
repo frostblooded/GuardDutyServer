@@ -13,7 +13,7 @@ module Mobile
                .valid_password?(params[:password])
       end
 
-      post :register_device do
+      post :check_device_login do
         {
           success: valid_password? ? true : false
         }
