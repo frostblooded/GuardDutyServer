@@ -1,3 +1,0 @@
-test_company:
-  company_name: Test Company
-  encrypted_password: <%= BCrypt::Password.create("foobar", cost: 10).to_s %>
