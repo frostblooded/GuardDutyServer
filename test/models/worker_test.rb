@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @worker = Worker.new(first_name: "Example FName", last_name: "Example LName",
+    @worker = Worker.create(first_name: "Example FName", last_name: "Example LName",
     					 password: "Somethinglike", password_confirmation: "Somethinglike")
   end
 
@@ -29,6 +29,11 @@ class WorkerTest < ActiveSupport::TestCase
 		@worker.last_name = "a" * 50
 		assert_not @worker.valid?
 	end
+
+  test "names should be downcase" do
+    assert @worker.first_name == @worker.first_name.downcase
+    assert @worker.last_name == @worker.last_name.downcase 
+  end
 
 	test "password should be present" do
 		@worker.password = @worker.password_confirmation = " " * 8

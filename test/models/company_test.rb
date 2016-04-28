@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompanyTest < ActiveSupport::TestCase
 	def setup 
-		@company = Company.new(company_name: "Foobar", email: "dasdas@email.com", 
+		@company = Company.create(company_name: "Foobar", email: "dasdas@email.com", 
 													 password: "asjfsajkdsa")
 	end
 
@@ -21,6 +21,10 @@ class CompanyTest < ActiveSupport::TestCase
 		@company.save
 		assert_not duplicate_company.valid?
 	end
+
+  test "company name should be downcase" do
+    assert @company.company_name == @company.company_name.downcase
+  end
 	
 	test "email should be valid" do
 		@company.email = "example@email.com"
