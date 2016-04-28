@@ -13,6 +13,6 @@ module Mobile
     mount Mobile::Data
     mount Mobile::LoginCompany
     mount Mobile::RegisterDevice
-    mount Mobile::CheckDeviceLogin
+    mount Mobile::CheckWorkerLogin
   end
 end
