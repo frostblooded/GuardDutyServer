@@ -12,6 +12,12 @@ class Company < ActiveRecord::Base
   validates :company_name, presence: true, length: { maximum: 50},
                            uniqueness: true
 
+  before_save :lowercase_name
+
+  def lowercase_name
+    self.company_name = self.company_name.downcase
+  end
+
   # Documentation says email_required? and email_changed? should be implemented as follows:
   def email_required?
     false
