@@ -6,6 +6,11 @@ module Mobile
         Worker.find_by(first_name: params[:first_name],
                    last_name: params[:last_name]).authenticate(params[:password])
       end
+
+      def downcase_params
+        params[:first_name] = params[:first_name].downcase
+        params[:last_name] = params[:last_name].downcase
+      end
     end
 
     resource :mobile do
@@ -16,6 +21,8 @@ module Mobile
       end 
 
       post :check_worker_login do
+        downcase_params
+
         # Return error if worker with such names doesn't exist
         return {error: 'invalid names'} unless Worker.exists?(first_name: params[:first_name],
                                                            last_name: params[:last_name])

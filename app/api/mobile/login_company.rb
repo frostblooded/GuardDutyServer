@@ -6,6 +6,10 @@ module Mobile
         Company.find_by(company_name: params[:company_name])
                .valid_password?(params[:password])
       end
+
+      def downcase_params
+        params[:company_name] = params[:company_name].downcase
+      end
     end
     
     resource :mobile do
@@ -17,6 +21,8 @@ module Mobile
 
       # Login the company
       post :login_company do
+        downcase_params
+        
         # Return error if company with such company_name doesn't exist
         error!("invalid company name", 400) unless Company.exists?(company_name: params[:company_name])
 
