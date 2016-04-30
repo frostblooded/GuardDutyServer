@@ -13,24 +13,24 @@ class ApiTest < ActionDispatch::IntegrationTest
     json['access_token']
   end
 
-  test 'return access token on company login success' do
+  test 'returns access token on company login success' do
     assert_not request_access_token.nil?
     assert_equal "201", @response.code
   end
 
-  test 'forbid access to data when token is invalid' do
+  test 'forbids access to data when token is invalid' do
     get '/api/v1/mobile/workers', { access_token: request_access_token + 'a' }
     assert_equal "401", @response.code
   end
 
-  test 'GET correct data with access token' do
+  test 'GETs correct data with access token' do
     get '/api/v1/mobile/workers', { access_token: request_access_token }
     assert_equal "200", @response.code
     workers = JSON.parse @response.body
     assert_equal @company.workers.as_json, workers
   end
 
-  test 'worker login responds to valid worker' do
+  test 'worker login responds on valid credentials' do
     post '/api/v1/mobile/check_worker_login', {first_name: @worker.first_name,
                                                last_name: @worker.last_name,
                                                password: @worker.password}
@@ -57,6 +57,41 @@ class ApiTest < ActionDispatch::IntegrationTest
 
     assert_equal "201", @response.code
     json_response = JSON.parse @response.body
-    assert_equal "invalid names/password combination", json_response['error']
+    assert_equal 'invalid names/password combination', json_response['error']
+  end
+
+  test 'device registration creates device on valid credentials' do
+    post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
+                                            last_name: @worker.last_name,
+                                            password: @worker.password,
+                                            gcm_token: 'a' * 152}
+
+    assert_equal "201", @response.code
+    json_response = JSON.parse @response.body
+
+    device = Device.find_by(gcm_token: 'a' * 152)
+    assert_equal @worker, device.worker
+  end
+
+  test 'device registration returns error on invalid names' do
+    post '/api/v1/mobile/register_device', {first_name: @worker.first_name + 'a',
+                                            last_name: @worker.last_name + 'b',
+                                            password: @worker.password,
+                                            gcm_token: 'a' * 152}
+
+    assert_equal "400", @response.code
+    json_response = JSON.parse @response.body
+    assert_equal 'invalid names', json_response['error']
+  end
+
+  test 'device registration returns error on wrong names/password combination' do
+    post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
+                                            last_name: @worker.last_name,
+                                            password: @worker.password + 'a',
+                                            gcm_token: 'a' * 152}
+
+    assert_equal "400", @response.code
+    json_response = JSON.parse @response.body
+    assert_equal 'invalid names/password combination', json_response['error']
   end
 end

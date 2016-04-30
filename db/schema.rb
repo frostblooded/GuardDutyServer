@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426072109) do
+ActiveRecord::Schema.define(version: 20160430064544) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -43,7 +43,10 @@ ActiveRecord::Schema.define(version: 20160426072109) do
     t.string   "gcm_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "worker_id"
   end
+
+  add_index "devices", ["worker_id"], name: "index_devices_on_worker_id"
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",         null: false
