@@ -89,10 +89,12 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'device registration creates device on valid credentials' do
-    post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
-                                            last_name: @worker.last_name,
-                                            password: @worker.password,
-                                            gcm_token: 'a' * 152}
+    assert_difference 'Device.count', 1 do
+      post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
+                                              last_name: @worker.last_name,
+                                              password: @worker.password,
+                                              gcm_token: 'a' * 152}
+    end
 
     assert_equal "201", @response.code
     json_response = JSON.parse @response.body
@@ -102,10 +104,12 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'device registration returns error on invalid names' do
-    post '/api/v1/mobile/register_device', {first_name: @worker.first_name + 'a',
-                                            last_name: @worker.last_name + 'b',
-                                            password: @worker.password,
-                                            gcm_token: 'a' * 152}
+    assert_no_difference 'Device.count' do
+      post '/api/v1/mobile/register_device', {first_name: @worker.first_name + 'a',
+                                              last_name: @worker.last_name + 'b',
+                                              password: @worker.password,
+                                              gcm_token: 'a' * 152}
+    end
 
     assert_equal "400", @response.code
     json_response = JSON.parse @response.body
@@ -113,10 +117,12 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'device registration returns error on wrong names/password combination' do
-    post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
-                                            last_name: @worker.last_name,
-                                            password: @worker.password + 'a',
-                                            gcm_token: 'a' * 152}
+    assert_no_difference 'Device.count' do
+      post '/api/v1/mobile/register_device', {first_name: @worker.first_name,
+                                              last_name: @worker.last_name,
+                                              password: @worker.password + 'a',
+                                              gcm_token: 'a' * 152}
+    end
 
     assert_equal "400", @response.code
     json_response = JSON.parse @response.body
