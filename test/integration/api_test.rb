@@ -16,7 +16,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Company login
   test 'company login requires parameters' do
     post '/api/v1/mobile/login_company'
-    assert_equal "500", @response.code
+    assert_equal '500', @response.code
 
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, password is missing', json['error']
@@ -24,13 +24,13 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company login returns access token on company login success' do
     assert_not request_access_token.nil?
-    assert_equal "201", @response.code
+    assert_equal '201', @response.code
   end
 
   # Workers data
   test 'workers data requires parameters' do
     post '/api/v1/mobile/workers'
-    assert_equal "401", @response.code
+    assert_equal '401', @response.code
 
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
@@ -38,12 +38,12 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'data forbids access to data when token is invalid' do
     get '/api/v1/mobile/workers', { access_token: request_access_token + 'a' }
-    assert_equal "401", @response.code
+    assert_equal '401', @response.code
   end
 
   test 'GETs correct data with access token' do
     get '/api/v1/mobile/workers', { access_token: request_access_token }
-    assert_equal "200", @response.code
+    assert_equal '200', @response.code
     workers = JSON.parse @response.body
     assert_equal @company.workers.as_json, workers
   end
@@ -51,7 +51,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Worker login
   test 'worker login check requires parameters' do
     post '/api/v1/mobile/check_worker_login'
-    assert_equal "500", @response.code
+    assert_equal '500', @response.code
 
     json = JSON.parse @response.body
     assert_equal 'first_name is missing, last_name is missing, password is missing', json['error']
@@ -62,7 +62,7 @@ class ApiTest < ActionDispatch::IntegrationTest
                                                last_name: @worker.last_name,
                                                password: @worker.password}
 
-    assert_equal "201", @response.code
+    assert_equal '201', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['success']
   end
@@ -72,9 +72,9 @@ class ApiTest < ActionDispatch::IntegrationTest
                                                last_name: @worker.last_name + 'i',
                                                password: @worker.password}
 
-    assert_equal "201", @response.code
+    assert_equal '201', @response.code
     json_response = JSON.parse @response.body
-    assert_equal "invalid names", json_response['error']
+    assert_equal 'invalid names', json_response['error']
   end
 
   test 'worker login responds to invalid names/password combination' do
@@ -82,7 +82,7 @@ class ApiTest < ActionDispatch::IntegrationTest
                                                last_name: @worker.last_name,
                                                password: @worker.password + 'a' }
 
-    assert_equal "201", @response.code
+    assert_equal '201', @response.code
     json_response = JSON.parse @response.body
     assert_equal 'invalid names/password combination', json_response['error']
   end
@@ -90,7 +90,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Device registration
   test 'device registration requires parameters' do
     post '/api/v1/mobile/check_worker_login'
-    assert_equal "500", @response.code
+    assert_equal '500', @response.code
 
     json = JSON.parse @response.body
     assert_equal 'first_name is missing, last_name is missing, password is missing', json['error']
@@ -104,7 +104,7 @@ class ApiTest < ActionDispatch::IntegrationTest
                                               gcm_token: 'a' * 152}
     end
 
-    assert_equal "201", @response.code
+    assert_equal '201', @response.code
     json_response = JSON.parse @response.body
 
     device = Device.find_by(gcm_token: 'a' * 152)
@@ -119,7 +119,7 @@ class ApiTest < ActionDispatch::IntegrationTest
                                               gcm_token: 'a' * 152}
     end
 
-    assert_equal "400", @response.code
+    assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal 'invalid names', json_response['error']
   end
@@ -132,7 +132,7 @@ class ApiTest < ActionDispatch::IntegrationTest
                                               gcm_token: 'a' * 152}
     end
 
-    assert_equal "400", @response.code
+    assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal 'invalid names/password combination', json_response['error']
   end
