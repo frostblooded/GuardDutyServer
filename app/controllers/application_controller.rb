@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_company!, :except => [:home, :help, :about]
   
+  #def test_exception
+   # raise 'Testing, 1 2 3.'
+  #end
+
   protected
 
     def configure_permitted_parameters

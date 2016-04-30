@@ -1,0 +1,15 @@
+<h1>List of your workers</h1>
+
+<ul class="workers">
+  <% @worker.each do |worker| %>
+    <li>
+      li><%= link_to worker.first_name, workers_profile_path %></li>
+      <%= worker.last_name %>
+    </li>
+  <% end %>
+</ul>
+
+<div class = "button">
+	<%= link_to '<button type="button">Add worker</button>'.html_safe, workers_new_path %>
+</div>
+

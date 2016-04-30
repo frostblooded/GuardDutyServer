@@ -16,7 +16,6 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -32,7 +31,15 @@ Rails.application.configure do
     :user_name => "attendancecheck1337@gmail.com",
     :password => "@zSumMnogoQk",
     :enable_starttls_auto => true
-}
+  }
+
+  #Exception Notifier
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[PREFIX] ",
+    :sender_address => %{"notifier" <attendancecheck1337@gmail.com>},
+    :exception_recipients => %w{ihzahariev@gmail.com}
+  }
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load

@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails',              '4.2.2'
 gem 'ledermann-rails-settings'
+gem 'exception_notification'
 gem 'devise'
 gem 'timecop'
 gem 'figaro',           	'1.1.1'

@@ -1,5 +1,5 @@
 class WorkerController < ApplicationController
-  def show
+  def index
     if current_company
       @company = current_company
       @worker = @company.workers
@@ -17,6 +17,10 @@ class WorkerController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def show
+    @worker = Worker.find_by(@worker)
   end
 
   private
