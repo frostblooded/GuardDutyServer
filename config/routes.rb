@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get  'contact'     => 'static_page#contact'
   get  'workers/new' => 'worker#new'
   post 'workers'     => 'worker#create'
-  get  'workers'     => 'worker#show'
+  get  'workers'     => 'worker#index'
   get  'settings'    => 'settings#index'
+  get  'workers/profile' => 'worker#show'
 end
