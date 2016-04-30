@@ -80,6 +80,9 @@ GEM
     enumerable-lazy (0.0.1)
     equalizer (0.0.11)
     erubis (2.7.0)
+    exception_notification (4.1.4)
+      actionmailer (~> 4.0)
+      activesupport (~> 4.0)
     execjs (2.6.0)
     ffi (1.9.10)
     figaro (1.1.1)
@@ -263,6 +266,7 @@ DEPENDENCIES
   byebug (= 3.4.0)
   coffee-rails (= 4.1.0)
   devise
+  exception_notification
   figaro (= 1.1.1)
   grape (= 0.16.2)
   guard-minitest (= 2.3.1)
@@ -285,6 +289,3 @@ DEPENDENCIES
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
   whenever (= 0.9.4)
-
-BUNDLED WITH
-   1.11.2
