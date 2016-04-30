@@ -1,7 +1,7 @@
 module Mobile
   class Data < Grape::API
     # Before every request
-    before {restrict_access}
+    before_validation {restrict_access}
 
     helpers do
       # Get API key based on access token parameter
