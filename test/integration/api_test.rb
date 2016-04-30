@@ -16,6 +16,8 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Company login
   test 'company login requires parameters' do
     post '/api/v1/mobile/login_company'
+    assert_equal "500", @response.code
+
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, password is missing', json['error']
   end
@@ -28,6 +30,8 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Workers data
   test 'workers data requires parameters' do
     post '/api/v1/mobile/workers'
+    assert_equal "401", @response.code
+
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
   end
@@ -47,6 +51,8 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Worker login
   test 'worker login check requires parameters' do
     post '/api/v1/mobile/check_worker_login'
+    assert_equal "500", @response.code
+
     json = JSON.parse @response.body
     assert_equal 'first_name is missing, last_name is missing, password is missing', json['error']
   end
@@ -84,6 +90,8 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Device registration
   test 'device registration requires parameters' do
     post '/api/v1/mobile/check_worker_login'
+    assert_equal "500", @response.code
+
     json = JSON.parse @response.body
     assert_equal 'first_name is missing, last_name is missing, password is missing', json['error']
   end
