@@ -4,6 +4,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   def setup
     @company = Company.create(company_name: 'test', password: 'foobarrr')
     @worker = Worker.create(first_name: 'foo', last_name: 'bar', password: 'foobarrr')
+    @device = Device.create(gcm_token: 'b' * 152)
   end
 
   def request_access_token
@@ -135,5 +136,26 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal 'invalid names/password combination', json_response['error']
+  end
+
+  # Check device login status
+  test 'checking device login status requires parameters' do
+    post '/api/v1/mobile/check_device_login_status', {}
+    assert_equal '500', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal 'gcm_token is missing', json_response['error']
+  end
+
+  test 'checking device login status returns correct result' do
+    post '/api/v1/mobile/check_device_login_status', {gcm_token: 'b' * 152}
+    assert_equal '201', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal true, json_response['device_exists']
+
+
+    post '/api/v1/mobile/check_device_login_status', {gcm_token: 'c' * 152}
+    assert_equal '201', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal false, json_response['device_exists']
   end
 end
