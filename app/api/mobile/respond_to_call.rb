@@ -23,6 +23,7 @@ module Mobile
         call.received_at = Time.now
         call.time_left = params[:time_left]
         call.save
+        {success: true}
       end 
     end 
   end 

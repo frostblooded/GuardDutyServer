@@ -8,15 +8,17 @@ class Device < ActiveRecord::Base
   belongs_to :worker
 
   def call
+    call = self.worker.calls.create
+
     # Set the sent parameters
     # As of now most of them are hardcoded for testing purposes
     params = {
       data:{
-        token: self.gcm_token,
-        time: Time.now,
+        call_token: call.token,
+        send_time: Time.now,
         submission_interval: 60000,
         alarm_time: 60000,
-        id: self.id
+        call_id: call.id
       },
       to: self.gcm_token
     }.to_json
