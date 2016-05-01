@@ -19,21 +19,57 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company login requires parameters' do
     post '/api/v1/mobile/login_company'
     assert_equal '500', @response.code
-
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, password is missing', json['error']
   end
 
   test 'company login returns access token on company login success' do
-    assert_not request_access_token.nil?
+    assert_difference 'ApiKey.count' do
+      assert_not request_access_token.nil?
+    end
+
     assert_equal '201', @response.code
+  end
+
+  # Company signup
+  test 'company signup requires parameters' do
+    post '/api/v1/mobile/signup_company'
+    assert_equal '500', @response.code
+
+    json = JSON.parse @response.body
+    assert_equal 'company_name is missing, email is missing, password is missing, password_confirmation is missing', json['error']
+  end
+
+  test 'company signup works if valid parameters are passed' do
+    assert_difference 'Company.count', 1 do
+      post '/api/v1/mobile/signup_company', {company_name: 'Ivan Co.',
+                                            email: 'frostblooded@yahoo.com',
+                                            password: 'foobarrr',
+                                            password_confirmation: 'foobarrr'}
+    end
+
+    assert_equal '201', @response.code
+    json = JSON.parse @response.body
+    assert_equal true, json['success']
+  end
+
+  test 'company signup responds correctly if passwords do not match' do
+    assert_no_difference 'Company.count' do
+      post '/api/v1/mobile/signup_company', company_name: 'frostblooded',
+                                            email: 'frostblooded@yahoo.com',
+                                            password: 'foobarrr',
+                                            password_confirmation: 'foobarr'
+    end
+
+    assert_equal '400', @response.code
+    json = JSON.parse @response.body
+    assert_equal 'passwords don\'t match', json['error']
   end
 
   # Workers data
   test 'workers data requires parameters' do
     post '/api/v1/mobile/workers'
     assert_equal '401', @response.code
-
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
   end
@@ -47,7 +83,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     get '/api/v1/mobile/workers', { access_token: request_access_token }
     assert_equal '200', @response.code
     workers = JSON.parse @response.body
-    puts workers
     assert_equal @company.workers.as_json, workers
   end
 
@@ -55,12 +90,11 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'worker login check requires parameters' do
     post '/api/v1/mobile/check_worker_login'
     assert_equal '500', @response.code
-
     json = JSON.parse @response.body
     assert_equal 'first_name is missing, last_name is missing, password is missing', json['error']
   end
 
-  test 'worker login responds on valid credentials' do
+  test 'worker login check responds on valid credentials' do
     post '/api/v1/mobile/check_worker_login', {first_name: @worker.first_name,
                                                last_name: @worker.last_name,
                                                password: @worker.password}
@@ -70,7 +104,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal true, json_response['success']
   end
 
-  test 'worker login responds to invalid worker names' do
+  test 'worker login check responds to invalid worker names' do
     post '/api/v1/mobile/check_worker_login', {first_name: @worker.first_name + 'a',
                                                last_name: @worker.last_name + 'i',
                                                password: @worker.password}
@@ -80,7 +114,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'invalid names', json_response['error']
   end
 
-  test 'worker login responds to invalid names/password combination' do
+  test 'worker login check responds to invalid names/password combination' do
     post '/api/v1/mobile/check_worker_login', {first_name: @worker.first_name,
                                                last_name: @worker.last_name,
                                                password: @worker.password + 'a' }
