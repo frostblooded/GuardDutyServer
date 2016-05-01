@@ -20,7 +20,7 @@ class WorkerController < ApplicationController
   end
 
   def show
-    @worker = Worker.find_by(@worker)
+    @worker = Worker.find(params[:id])
   end
 
   private

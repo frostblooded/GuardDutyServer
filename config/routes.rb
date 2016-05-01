@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   post 'workers'     => 'worker#create'
   get  'workers'     => 'worker#index'
   get  'settings'    => 'settings#index'
-  get  'workers/profile' => 'worker#show'
+  get  'workers/:id' => 'worker#show'
+  resources :worker
 end
