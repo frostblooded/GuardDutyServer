@@ -1,6 +1,7 @@
 class Worker < ActiveRecord::Base
   belongs_to :company
   has_one :device
+  has_many :calls
 
   validates :first_name, presence: true,	length: { maximum: 40 }
   validates :last_name,	presence: true,	length: { maximum: 40 }

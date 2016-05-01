@@ -1,7 +1,7 @@
 class ApiKey < ActiveRecord::Base
   belongs_to :company
   
-  after_initialize :generate_access_token
+  before_create :generate_access_token
 
   VALID_HOURS = 2
 

@@ -12,13 +12,13 @@ class Device < ActiveRecord::Base
     # As of now most of them are hardcoded for testing purposes
     params = {
       data:{
-        token: self.token,
+        token: self.gcm_token,
         time: Time.now,
         submission_interval: 60000,
         alarm_time: 60000,
         id: self.id
       },
-      to: self.token
+      to: self.gcm_token
     }.to_json
 
     # Create https connction object

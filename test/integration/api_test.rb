@@ -5,6 +5,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     @company = Company.create(company_name: 'test', password: 'foobarrr')
     @worker = Worker.create(first_name: 'foo', last_name: 'bar', password: 'foobarrr')
     @device = Device.create(gcm_token: 'b' * 152)
+    @call = @worker.calls.create
   end
 
   def request_access_token
@@ -46,6 +47,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     get '/api/v1/mobile/workers', { access_token: request_access_token }
     assert_equal '200', @response.code
     workers = JSON.parse @response.body
+    puts workers
     assert_equal @company.workers.as_json, workers
   end
 
@@ -157,5 +159,34 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '201', @response.code
     json_response = JSON.parse @response.body
     assert_equal false, json_response['device_exists']
+  end
+
+  # Respond to call
+  test 'responding to call requires parameters' do
+    post '/api/v1/mobile/respond_to_call', {}
+    assert_equal '500', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal "time_left is missing, call_token is missing, call_id is missing", json_response['error']
+  end
+
+  test 'responding to call with invalid id returns error' do
+    random_id = 98019
+
+    # Get new id if this already exists in database
+    while Call.exists?(id: random_id)
+      random_id = Random.rand(1..10000000)
+    end
+
+    post '/api/v1/mobile/respond_to_call', {call_id: 1, call_token: '', time_left: 59}
+    assert_equal '400', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal "call doesn\'t exist", json_response['error']
+  end
+
+  test 'responding to call with invalid token returns error' do
+    post '/api/v1/mobile/respond_to_call', {call_id: @call.id, call_token: '', time_left: 59}
+    assert_equal '401', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal "invalid token", json_response['error']
   end
 end

@@ -15,5 +15,6 @@ module Mobile
     mount Mobile::RegisterDevice
     mount Mobile::CheckWorkerLogin
     mount Mobile::CheckDeviceLoginStatus
+    mount Mobile::RespondToCall
   end
 end
