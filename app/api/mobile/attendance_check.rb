@@ -14,5 +14,8 @@ module Mobile
     mount Mobile::LoginCompany
     mount Mobile::RegisterDevice
     mount Mobile::CheckWorkerLogin
+    mount Mobile::CheckDeviceLoginStatus
+    mount Mobile::RespondToCall
+    mount Mobile::SignupCompany
   end
 end
