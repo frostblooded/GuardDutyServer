@@ -1,7 +1,22 @@
-<div class="workerFN">
-	<span> First name: <%= @worker.first_name %> </span>
+<div class="worker">
+	<p>Worker: <%= @worker.first_name %> <%= @worker.last_name %></p>
 </div>
 
-<div class="workerLN">
-	<span> Last name: <%= @worker.last_name %> </span>
+<div class="wtable">
+	<table>
+		<tr>
+  			<th>Start of the shift </th>
+  			<th>End of the shift </th>
+  			<th>Calls </th>
+  		</tr>
+  		<tr>
+  			<td> Something </td>
+  			<td> Something v2 </td>
+  			<td>   
+  				<% @calls.each do |call| %>
+					<%= call %>
+    			<% end %>
+    	 	</td>
+  		</tr>
+	</table>
 </div>
