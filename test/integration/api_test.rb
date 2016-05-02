@@ -61,9 +61,9 @@ class ApiTest < ActionDispatch::IntegrationTest
                                             password_confirmation: 'foobarr'
     end
 
-    assert_equal '400', @response.code
+    assert_equal '201', @response.code
     json = JSON.parse @response.body
-    assert_equal 'passwords don\'t match', json['error']
+    assert_equal "doesn't match Password", json['error']['password_confirmation'][0]
   end
 
   # Workers data
