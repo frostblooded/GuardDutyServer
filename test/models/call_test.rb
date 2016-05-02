@@ -12,4 +12,8 @@ class CallTest < ActiveSupport::TestCase
   test 'token has valid length' do
     assert_equal 32, @call.token.length
   end
+
+  test 'call is not answered when created' do
+    assert_not @call.answered?
+  end
 end
