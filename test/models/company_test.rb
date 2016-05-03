@@ -3,7 +3,8 @@ require 'test_helper'
 class CompanyTest < ActiveSupport::TestCase
 	def setup 
 		@company = Company.create(company_name: "Foobar", email: "dasdas@email.com", 
-													 password: "asjfsajkdsa")
+													 password: "asjfsajkdsa", 
+													 password_confirmation: "asjfsajkdsa")
 	end
 
 	test "company name should be present" do
