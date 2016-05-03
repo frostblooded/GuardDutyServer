@@ -21,6 +21,7 @@ class WorkerController < ApplicationController
 
   def show
     @worker = Worker.find(params[:id])
+    @calls = @worker.calls
   end
 
   private
