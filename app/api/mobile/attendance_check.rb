@@ -17,5 +17,6 @@ module Mobile
     mount Mobile::CheckDeviceLoginStatus
     mount Mobile::RespondToCall
     mount Mobile::SignupCompany
+    mount Mobile::SignoutDevice
   end
 end

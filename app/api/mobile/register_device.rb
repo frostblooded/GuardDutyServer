@@ -7,6 +7,7 @@ module Mobile
                                        last_name: params[:last_name]
       end
 
+      # Uses the request parameters to return a company
       def params_company
         Company.find_by company_name: params[:company_name]
       end

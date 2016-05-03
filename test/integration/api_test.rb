@@ -38,7 +38,6 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company signup requires parameters' do
     post '/api/v1/mobile/signup_company'
     assert_equal '500', @response.code
-
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, email is missing, password is missing, password_confirmation is missing', json['error']
   end
@@ -141,7 +140,6 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'device registration requires parameters' do
     post '/api/v1/mobile/register_device'
     assert_equal '500', @response.code
-
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, first_name is missing, last_name is missing, password is missing, gcm_token is missing', json['error']
   end
@@ -157,6 +155,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
     assert_equal '201', @response.code
     json_response = JSON.parse @response.body
+    assert_equal true, json_response['success']
 
     device = Device.find_by(gcm_token: 'a' * 152)
     assert_equal @worker, device.worker
@@ -204,6 +203,36 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'invalid names/password combination', json_response['error']
   end
 
+  # Device signout
+  test 'device signout requires parameters' do
+    post '/api/v1/mobile/signout_device'
+    assert_equal '500', @response.code
+    json = JSON.parse @response.body
+    assert_equal 'gcm_token is missing', json['error']
+  end
+
+  test 'device signout works successfully if parameters are valid' do
+    assert_difference 'Device.count', -1 do
+      post '/api/v1/mobile/signout_device', {gcm_token: @device.gcm_token}
+    end
+
+    assert_equal '201', @response.code
+    json = JSON.parse @response.body
+    assert_equal true, json['success']
+  end
+
+  test 'device signout returns error on nonexistent device' do
+    token = 'b' * 151 + 'a'
+
+    assert_no_difference 'Device.count' do
+      post '/api/v1/mobile/signout_device', {gcm_token: token}
+    end
+
+    assert_equal '400', @response.code
+    json = JSON.parse @response.body
+    assert_equal 'no such device in database', json['error']
+  end
+
   # Check device login status
   test 'checking device login status requires parameters' do
     post '/api/v1/mobile/check_device_login_status', {}
@@ -230,6 +259,13 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '500', @response.code
     json_response = JSON.parse @response.body
     assert_equal "time_left is missing, call_token is missing, call_id is missing", json_response['error']
+  end
+
+  test 'responding to call succeeds with valid parameters' do
+    post '/api/v1/mobile/respond_to_call', {call_id: @call.id, call_token: @call.token, time_left: 59}
+    assert_equal '201', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal true, json_response['success']
   end
 
   test 'responding to call with invalid id returns error' do
