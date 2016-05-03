@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501063008) do
+ActiveRecord::Schema.define(version: 20160503173224) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -45,9 +45,13 @@ ActiveRecord::Schema.define(version: 20160501063008) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "company_name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
   add_index "companies", ["company_name"], name: "index_companies_on_company_name", unique: true
+  add_index "companies", ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
   add_index "companies", ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
 
   create_table "devices", force: :cascade do |t|
