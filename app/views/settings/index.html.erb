@@ -4,18 +4,22 @@
 		<title>Settings</title>
 	</head>
 	<body>
-		<p> Here you are able to change the durations of the calls and other things </p>
-		<span> Do you want daily report sent to your email? </span>
-		<div class="form_row">
+		<div class="DailyMail">
+			<p> Do you want daily report sent to your email? </p>
 			<form>
-				<br>
 				<input type="radio" name="button_output" value="Yes">Yes, I would like yo get daily report for my workers
 				<input type="radio" name="button_output" value="No">No, I dont want it
-				<br>
 				<br>
 				<button type="Submit"> Save changes </button>
 			</form>
 							<%= @daily_mail %>
+		</div>
+
+		<div>
+		</div>
+
+		<div class ="ChangePassword">
+			<%= link_to "Change your password", edit_company_registration_path %>
 		</div>
   	</body>
 </html>
