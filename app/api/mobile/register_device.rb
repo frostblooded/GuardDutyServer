@@ -3,13 +3,17 @@ module Mobile
     helpers do
       # Uses the request parameters to return a worker
       def params_worker
-        Worker.find_by(first_name: params[:first_name], last_name: params[:last_name])
+        params_company.workers.find_by first_name: params[:first_name],
+                                       last_name: params[:last_name]
+      end
+
+      def params_company
+        Company.find_by company_name: params[:company_name]
       end
 
       # Uses the request parameters do determine if the password is valid
       def valid_password?
-        Worker.find_by(first_name: params[:first_name],
-                   last_name: params[:last_name]).authenticate(params[:password])
+        params_worker.authenticate(params[:password])
       end
 
       def downcase_params
@@ -20,6 +24,7 @@ module Mobile
 
     resource :mobile do
       params do
+        requires :company_name, type: String
         requires :first_name, type: String
         requires :last_name, type: String
         requires :password, type: String
@@ -30,8 +35,10 @@ module Mobile
         downcase_params
 
         # Return error if worker with such names doesn't exist
-        error!('invalid names', 400) unless Worker.exists?(first_name: params[:first_name],
-                                                           last_name: params[:last_name])
+        error!('company doesn\'t exist', 400) unless params_company
+
+        # Return error if worker with such names doesn't exist
+        error!('company has no such worker', 400) unless params_worker
 
         # Return error if the names/password combination isn't valid
         error!('invalid names/password combination', 400) unless valid_password?
