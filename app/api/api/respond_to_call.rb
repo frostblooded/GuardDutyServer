@@ -1,4 +1,4 @@
-module Mobile
+module API
   class RespondToCall < Grape::API
     helpers do
       def params_call

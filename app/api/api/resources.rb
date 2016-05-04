@@ -1,5 +1,5 @@
-module Mobile
-  class Data < Grape::API
+module API
+  class Resources < Grape::API
     # Before every request
     before_validation {restrict_access}
 

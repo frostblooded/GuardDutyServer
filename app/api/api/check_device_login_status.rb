@@ -1,4 +1,4 @@
-module Mobile
+module API
   class CheckDeviceLoginStatus < Grape::API
     resource :mobile do
       params do

@@ -1,4 +1,4 @@
-module Mobile
+module API
   class SignupCompany < Grape::API
     resource :mobile do
       params do

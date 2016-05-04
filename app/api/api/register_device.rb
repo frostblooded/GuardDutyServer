@@ -1,4 +1,4 @@
-module Mobile
+module API
   class RegisterDevice < Grape::API
     helpers do
       # Uses the request parameters to return a worker

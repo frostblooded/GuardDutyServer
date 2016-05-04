@@ -1,4 +1,4 @@
-module Mobile
+module API
   class CheckWorkerLogin < Grape::API
     helpers do
       # Uses the request parameters do determine if the password is valid

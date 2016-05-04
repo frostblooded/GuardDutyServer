@@ -1,4 +1,4 @@
-module Mobile
+module API
   class AttendanceCheck < Grape::API
     # Set API version and determine it from URL
     version 'v1', using: :path
@@ -10,13 +10,13 @@ module Mobile
     rescue_from :all
 
     # Mount the other API files
-    mount Mobile::Data
-    mount Mobile::LoginCompany
-    mount Mobile::RegisterDevice
-    mount Mobile::CheckWorkerLogin
-    mount Mobile::CheckDeviceLoginStatus
-    mount Mobile::RespondToCall
-    mount Mobile::SignupCompany
-    mount Mobile::SignoutDevice
+    mount Resources
+    mount LoginCompany
+    mount RegisterDevice
+    mount CheckWorkerLogin
+    mount CheckDeviceLoginStatus
+    mount RespondToCall
+    mount SignupCompany
+    mount SignoutDevice
   end
 end
