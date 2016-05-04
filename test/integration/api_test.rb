@@ -194,19 +194,12 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Device signout
-  test 'device signout requires parameters' do
-    post '/api/v1/mobile/signout_device'
-    assert_equal '500', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'gcm_token is missing', json['error']
-  end
-
   test 'device signout works successfully if parameters are valid' do
     assert_difference 'Device.count', -1 do
-      post '/api/v1/mobile/signout_device', {gcm_token: @device.gcm_token}
+      delete '/api/v1/devices/' + @device.gcm_token
     end
 
-    assert_equal '201', @response.code
+    assert_equal '200', @response.code
     json = JSON.parse @response.body
     assert_equal true, json['success']
   end
@@ -215,7 +208,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     token = 'b' * 151 + 'a'
 
     assert_no_difference 'Device.count' do
-      post '/api/v1/mobile/signout_device', {gcm_token: token}
+      delete '/api/v1/devices/' + token
     end
 
     assert_equal '400', @response.code

@@ -12,6 +12,11 @@ module API
         Company.find_by company_name: params[:company_name]
       end
 
+      # Uses the request parameters to return a device
+      def params_device
+        Device.find_by gcm_token: params[:gcm_token]
+      end
+
       # Uses the request parameters do determine if the password is valid
       def valid_password?
         params_worker.authenticate(params[:password])
@@ -46,6 +51,16 @@ module API
 
         params_worker.device = Device.create!(gcm_token: params[:gcm_token])
         {success: true}
+      end
+
+      route_param :gcm_token do
+        delete '/' do
+          # Return error if device isn't found in database
+          error!('no such device in database', 400) unless params_device
+
+          params_device.destroy
+          {success:true}
+        end
       end
     end 
   end
