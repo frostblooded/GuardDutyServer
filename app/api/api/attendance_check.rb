@@ -11,12 +11,11 @@ module API
 
     # Mount the other API files
     mount Resources
-    mount LoginCompany
+    mount Companies
     mount RegisterDevice
     mount CheckWorkerLogin
     mount CheckDeviceLoginStatus
     mount RespondToCall
-    mount SignupCompany
     mount SignoutDevice
   end
 end

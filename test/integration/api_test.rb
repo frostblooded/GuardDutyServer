@@ -12,7 +12,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   def request_access_token
-    post '/api/v1/mobile/login_company', {company_name: @company.company_name,
+    post '/api/v1/companies/login', {company_name: @company.company_name,
                                           password: @company.password}
     json = JSON.parse @response.body
     json['access_token']
@@ -20,7 +20,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Company login
   test 'company login requires parameters' do
-    post '/api/v1/mobile/login_company'
+    post '/api/v1/companies/login'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, password is missing', json['error']
@@ -28,7 +28,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company login returns access token on company login success' do
     assert_difference 'ApiKey.count' do
-      post '/api/v1/mobile/login_company', {company_name: @company.company_name,
+      post '/api/v1/companies/login', {company_name: @company.company_name,
                                             password: @company.password}
     end
 
@@ -39,7 +39,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company login returns error on nonexistent company' do
     assert_no_difference 'ApiKey.count' do
-      post '/api/v1/mobile/login_company', {company_name: @company.company_name + 'a',
+      post '/api/v1/companies/login', {company_name: @company.company_name + 'a',
                                             password: @company.password}
     end
 
@@ -50,7 +50,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company login returns error on invalid company/password combination' do
     assert_no_difference 'ApiKey.count' do
-      post '/api/v1/mobile/login_company', {company_name: @company.company_name,
+      post '/api/v1/companies/login', {company_name: @company.company_name,
                                             password: @company.password + 'a'}
     end
 
@@ -61,7 +61,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Company signup
   test 'company signup requires parameters' do
-    post '/api/v1/mobile/signup_company'
+    post '/api/v1/companies'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, email is missing, password is missing, password_confirmation is missing', json['error']
@@ -69,7 +69,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company signup works if valid parameters are passed' do
     assert_difference 'Company.count', 1 do
-      post '/api/v1/mobile/signup_company', {company_name: 'Ivan Co.',
+      post '/api/v1/companies', {company_name: 'Ivan Co.',
                                             email: 'frostblooded@yahoo.com',
                                             password: 'foobarrr',
                                             password_confirmation: 'foobarrr'}
@@ -82,7 +82,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company signup responds correctly if passwords do not match' do
     assert_no_difference 'Company.count' do
-      post '/api/v1/mobile/signup_company', company_name: 'frostblooded',
+      post '/api/v1/companies', company_name: 'frostblooded',
                                             email: 'frostblooded@yahoo.com',
                                             password: 'foobarrr',
                                             password_confirmation: 'foobarr'

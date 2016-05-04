@@ -1,5 +1,5 @@
 module API
-  class LoginCompany < Grape::API
+  class Companies < Grape::API
     helpers do
       # Uses the request parameters do determine if the password is valid
       def valid_password?
@@ -15,15 +15,36 @@ module API
       end
     end
     
-    resource :mobile do
+    resource :companies do
+      params do
+        requires :company_name, type: String
+        requires :email, type: String
+        requires :password, type: String
+        requires :password_confirmation, type: String
+      end
+
+      # Sign up company
+      post '/' do
+        c = Company.create(company_name: params[:company_name],
+                           email: params[:email],
+                           password: params[:password],
+                           password_confirmation: params[:password_confirmation])
+
+        if !c.errors.messages.empty?
+          return {error: c.errors.messages}
+        end
+
+        {success:true}
+      end
+
       # Set parameter requirements for login POST request
       params do
         requires :company_name, type: String
         requires :password, type: String
       end
 
-      # Login the company
-      post :login_company do
+      # Login company
+      post :login do
         downcase_params
         
         # Return error if company with such company_name doesn't exist
