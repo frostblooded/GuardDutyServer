@@ -28,10 +28,35 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'company login returns access token on company login success' do
     assert_difference 'ApiKey.count' do
-      assert_not request_access_token.nil?
+      post '/api/v1/mobile/login_company', {company_name: @company.company_name,
+                                            password: @company.password}
     end
 
+    json_response = JSON.parse @response.body
     assert_equal '201', @response.code
+    assert_not json_response['access_token'].nil?
+  end
+
+  test 'company login returns error on nonexistent company' do
+    assert_no_difference 'ApiKey.count' do
+      post '/api/v1/mobile/login_company', {company_name: @company.company_name + 'a',
+                                            password: @company.password}
+    end
+
+    json_response = JSON.parse @response.body
+    assert_equal '400', @response.code
+    assert_equal 'invalid company name', json_response['error']
+  end
+
+  test 'company login returns error on invalid company/password combination' do
+    assert_no_difference 'ApiKey.count' do
+      post '/api/v1/mobile/login_company', {company_name: @company.company_name,
+                                            password: @company.password + 'a'}
+    end
+
+    json_response = JSON.parse @response.body
+    assert_equal '401', @response.code
+    assert_equal 'invalid company name/password combination', json_response['error']
   end
 
   # Company signup
