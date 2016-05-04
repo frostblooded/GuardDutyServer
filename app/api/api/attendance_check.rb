@@ -13,8 +13,6 @@ module API
     mount API::ProtectedData
     mount API::Companies
     mount API::Devices
-    mount API::CheckDeviceLoginStatus
-    mount API::RespondToCall
-    mount API::SignoutDevice
+    mount API::Calls
   end
 end

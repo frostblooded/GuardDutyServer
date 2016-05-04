@@ -217,36 +217,22 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Check device login status
-  test 'checking device login status requires parameters' do
-    post '/api/v1/mobile/check_device_login_status', {}
-    assert_equal '500', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal 'gcm_token is missing', json_response['error']
-  end
-
   test 'checking device login status returns correct result' do
-    post '/api/v1/mobile/check_device_login_status', {gcm_token: 'b' * 152}
-    assert_equal '201', @response.code
+    get '/api/v1/devices/' + @device.gcm_token
+    assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['device_exists']
 
-    post '/api/v1/mobile/check_device_login_status', {gcm_token: 'c' * 152}
-    assert_equal '201', @response.code
+    get '/api/v1/devices/' + 'c' * 152
+    assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal false, json_response['device_exists']
   end
 
   # Respond to call
-  test 'responding to call requires parameters' do
-    post '/api/v1/mobile/respond_to_call', {}
-    assert_equal '500', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal "time_left is missing, call_token is missing, call_id is missing", json_response['error']
-  end
-
   test 'responding to call succeeds with valid parameters' do
-    post '/api/v1/mobile/respond_to_call', {call_id: @call.id, call_token: @call.token, time_left: 59}
-    assert_equal '201', @response.code
+    put '/api/v1/calls/' + @call.id.to_s, {call_token: @call.token, time_left: 59}
+    assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['success']
   end
@@ -259,14 +245,14 @@ class ApiTest < ActionDispatch::IntegrationTest
       random_id = Random.rand(1..10000000)
     end
 
-    post '/api/v1/mobile/respond_to_call', {call_id: 1, call_token: '', time_left: 59}
+    put '/api/v1/calls/1', {call_token: '', time_left: 59}
     assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal "call doesn\'t exist", json_response['error']
   end
 
   test 'responding to call with invalid token returns error' do
-    post '/api/v1/mobile/respond_to_call', {call_id: @call.id, call_token: '', time_left: 59}
+    put '/api/v1/calls/' + @call.id.to_s, {call_token: '', time_left: 59}
     assert_equal '401', @response.code
     json_response = JSON.parse @response.body
     assert_equal "invalid token", json_response['error']

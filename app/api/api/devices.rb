@@ -54,6 +54,11 @@ module API
       end
 
       route_param :gcm_token do
+        get '/' do
+          device_exists = !Device.find_by(gcm_token: params[:gcm_token]).nil?
+          {device_exists: device_exists}
+        end
+
         delete '/' do
           # Return error if device isn't found in database
           error!('no such device in database', 400) unless params_device
