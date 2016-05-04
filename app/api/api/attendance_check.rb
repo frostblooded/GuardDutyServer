@@ -12,7 +12,7 @@ module API
     # Mount the other API files
     mount API::ProtectedData
     mount API::Companies
-    mount API::RegisterDevice
+    mount API::Devices
     mount API::CheckDeviceLoginStatus
     mount API::RespondToCall
     mount API::SignoutDevice

@@ -1,5 +1,5 @@
 module API
-  class RegisterDevice < Grape::API
+  class Devices < Grape::API
     helpers do
       # Uses the request parameters to return a worker
       def params_worker
@@ -23,7 +23,7 @@ module API
       end
     end
 
-    resource :mobile do
+    resource :devices do
       params do
         requires :company_name, type: String
         requires :first_name, type: String
@@ -32,7 +32,7 @@ module API
         requires :gcm_token, type: String
       end
 
-      post :register_device do
+      post '/' do
         downcase_params
 
         # Return error if worker with such names doesn't exist

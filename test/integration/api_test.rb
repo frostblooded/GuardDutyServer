@@ -95,7 +95,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Workers data
   test 'workers data requires parameters' do
-    post '/api/v1/workers'
+    get '/api/v1/workers'
     assert_equal '401', @response.code
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
@@ -128,7 +128,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Device registration
   test 'device registration requires parameters' do
-    post '/api/v1/mobile/register_device'
+    post '/api/v1/devices'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
     assert_equal 'company_name is missing, first_name is missing, last_name is missing, password is missing, gcm_token is missing', json['error']
@@ -136,11 +136,11 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration creates device on valid credentials' do
     assert_difference 'Device.count', 1 do
-      post '/api/v1/mobile/register_device', {company_name: @worker.company.company_name,
-                                              first_name: @worker.first_name,
-                                              last_name: @worker.last_name,
-                                              password: @worker.password,
-                                              gcm_token: 'a' * 152}
+      post '/api/v1/devices', {company_name: @worker.company.company_name,
+                               first_name: @worker.first_name,
+                               last_name: @worker.last_name,
+                               password: @worker.password,
+                               gcm_token: 'a' * 152}
     end
 
     assert_equal '201', @response.code
@@ -153,11 +153,11 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on inexistent company' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/mobile/register_device', {company_name: @worker.company.company_name + 'a',
-                                              first_name: @worker.first_name,
-                                              last_name: @worker.last_name,
-                                              password: @worker.password,
-                                              gcm_token: 'a' * 152}
+      post '/api/v1/devices', {company_name: @worker.company.company_name + 'a',
+                               first_name: @worker.first_name,
+                               last_name: @worker.last_name,
+                               password: @worker.password,
+                               gcm_token: 'a' * 152}
     end
 
     assert_equal '400', @response.code
@@ -167,11 +167,11 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on invalid names' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/mobile/register_device', {company_name: @worker.company.company_name,
-                                              first_name: @worker.first_name + 'a',
-                                              last_name: @worker.last_name + 'b',
-                                              password: @worker.password,
-                                              gcm_token: 'a' * 152}
+      post '/api/v1/devices', {company_name: @worker.company.company_name,
+                               first_name: @worker.first_name + 'a',
+                               last_name: @worker.last_name + 'b',
+                               password: @worker.password,
+                               gcm_token: 'a' * 152}
     end
 
     assert_equal '400', @response.code
@@ -181,11 +181,11 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on wrong names/password combination' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/mobile/register_device', {company_name: @worker.company.company_name,
-                                              first_name: @worker.first_name,
-                                              last_name: @worker.last_name,
-                                              password: @worker.password + 'a',
-                                              gcm_token: 'a' * 152}
+      post '/api/v1/devices', {company_name: @worker.company.company_name,
+                               first_name: @worker.first_name,
+                               last_name: @worker.last_name,
+                               password: @worker.password + 'a',
+                               gcm_token: 'a' * 152}
     end
 
     assert_equal '400', @response.code
