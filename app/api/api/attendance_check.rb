@@ -10,12 +10,12 @@ module API
     rescue_from :all
 
     # Mount the other API files
-    mount Resources
-    mount Companies
-    mount RegisterDevice
-    mount CheckWorkerLogin
-    mount CheckDeviceLoginStatus
-    mount RespondToCall
-    mount SignoutDevice
+    mount API::ProtectedData
+    mount API::Companies
+    mount API::RegisterDevice
+    mount API::CheckWorkerLogin
+    mount API::CheckDeviceLoginStatus
+    mount API::RespondToCall
+    mount API::SignoutDevice
   end
 end

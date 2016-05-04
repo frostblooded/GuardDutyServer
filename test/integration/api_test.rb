@@ -95,14 +95,14 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Workers data
   test 'workers data requires parameters' do
-    post '/api/v1/mobile/workers'
+    post '/api/v1/workers'
     assert_equal '401', @response.code
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
   end
 
   test 'data forbids access when token is invalid' do
-    get '/api/v1/mobile/workers', { access_token: request_access_token + 'a' }
+    get '/api/v1/workers', { access_token: request_access_token + 'a' }
     assert_equal '401', @response.code
   end
 
@@ -113,14 +113,14 @@ class ApiTest < ActionDispatch::IntegrationTest
     api_key.created_at = (ApiKey::VALID_HOURS + 1).hours.ago
     api_key.save
 
-    get '/api/v1/mobile/workers', { access_token: token }
+    get '/api/v1/workers', { access_token: token }
     assert_equal '401', @response.code
     json = JSON.parse @response.body
     assert_equal 'expired token', json['error']
   end
 
   test 'GETs correct data with access token' do
-    get '/api/v1/mobile/workers', { access_token: request_access_token }
+    get '/api/v1/workers', { access_token: request_access_token }
     assert_equal '200', @response.code
     workers = JSON.parse @response.body
     assert_equal @company.workers.as_json, workers
