@@ -126,54 +126,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal @company.workers.as_json, workers
   end
 
-  # Worker login
-  test 'worker login check requires parameters' do
-    post '/api/v1/mobile/check_worker_login'
-    assert_equal '500', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'company_name is missing, first_name is missing, last_name is missing, password is missing', json['error']
-  end
-
-  test 'worker login check responds on valid credentials' do
-    post '/api/v1/mobile/check_worker_login', {company_name: @worker.company.company_name,
-                                               first_name: @worker.first_name,
-                                               last_name: @worker.last_name,
-                                               password: @worker.password}
-    assert_equal '201', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal true, json_response['success']
-  end
-
-  test 'worker login check responds to invalid company name' do
-    post '/api/v1/mobile/check_worker_login', {company_name: @worker.company.company_name + 'a',
-                                               first_name: @worker.first_name,
-                                               last_name: @worker.last_name,
-                                               password: @worker.password}
-    assert_equal '201', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal 'company doesn\'t exist', json_response['error']
-  end
-
-  test 'worker login check responds to invalid worker names' do
-    post '/api/v1/mobile/check_worker_login', {company_name: @worker.company.company_name,
-                                               first_name: @worker.first_name + 'a',
-                                               last_name: @worker.last_name + 'i',
-                                               password: @worker.password}
-    assert_equal '201', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal 'company has no such worker', json_response['error']
-  end
-
-  test 'worker login check responds to invalid names/password combination' do
-    post '/api/v1/mobile/check_worker_login', {company_name: @worker.company.company_name,
-                                               first_name: @worker.first_name,
-                                               last_name: @worker.last_name,
-                                               password: @worker.password + 'a' }
-    assert_equal '201', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal 'invalid names/password combination', json_response['error']
-  end
-
   # Device registration
   test 'device registration requires parameters' do
     post '/api/v1/mobile/register_device'
