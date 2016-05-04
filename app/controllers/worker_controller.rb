@@ -25,6 +25,12 @@ class WorkerController < ApplicationController
     @calls = @worker.calls
   end
 
+  def destroy
+    Worker.find(params[:id]).destroy
+    flash[:success] = "Worker deleted"
+    redirect_to workers_path
+  end  
+
   private
 
   def worker_params
