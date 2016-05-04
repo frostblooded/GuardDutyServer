@@ -13,7 +13,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   def request_access_token
     post '/api/v1/companies/login', {company_name: @company.company_name,
-                                          password: @company.password}
+                                     password: @company.password}
     json = JSON.parse @response.body
     json['access_token']
   end
@@ -29,7 +29,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company login returns access token on company login success' do
     assert_difference 'ApiKey.count' do
       post '/api/v1/companies/login', {company_name: @company.company_name,
-                                            password: @company.password}
+                                       password: @company.password}
     end
 
     json_response = JSON.parse @response.body
@@ -40,7 +40,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company login returns error on nonexistent company' do
     assert_no_difference 'ApiKey.count' do
       post '/api/v1/companies/login', {company_name: @company.company_name + 'a',
-                                            password: @company.password}
+                                       password: @company.password}
     end
 
     json_response = JSON.parse @response.body
@@ -51,7 +51,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company login returns error on invalid company/password combination' do
     assert_no_difference 'ApiKey.count' do
       post '/api/v1/companies/login', {company_name: @company.company_name,
-                                            password: @company.password + 'a'}
+                                       password: @company.password + 'a'}
     end
 
     json_response = JSON.parse @response.body
@@ -70,9 +70,9 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company signup works if valid parameters are passed' do
     assert_difference 'Company.count', 1 do
       post '/api/v1/companies', {company_name: 'Ivan Co.',
-                                            email: 'frostblooded@yahoo.com',
-                                            password: 'foobarrr',
-                                            password_confirmation: 'foobarrr'}
+                                 email: 'frostblooded@yahoo.com',
+                                 password: 'foobarrr',
+                                 password_confirmation: 'foobarrr'}
     end
 
     assert_equal '201', @response.code
@@ -83,9 +83,9 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'company signup responds correctly if passwords do not match' do
     assert_no_difference 'Company.count' do
       post '/api/v1/companies', company_name: 'frostblooded',
-                                            email: 'frostblooded@yahoo.com',
-                                            password: 'foobarrr',
-                                            password_confirmation: 'foobarr'
+                                email: 'frostblooded@yahoo.com',
+                                password: 'foobarrr',
+                                password_confirmation: 'foobarr'
     end
 
     assert_equal '201', @response.code
