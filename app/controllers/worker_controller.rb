@@ -10,6 +10,10 @@ class WorkerController < ApplicationController
     @worker = Worker.new
   end
 
+  def edit
+    @worker = Worker.find(params[:id])
+  end
+
   def create
     @worker = current_company.workers.create(worker_params)
     if @worker.save
