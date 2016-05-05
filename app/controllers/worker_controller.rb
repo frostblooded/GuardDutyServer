@@ -23,6 +23,15 @@ class WorkerController < ApplicationController
     end
   end
 
+  def update
+    @worker = Worker.find(params[:id])
+    if @worker.update_attributes(worker_params)
+      redirect_to workers_path, :notice => "Changes saved!"
+    else
+      render 'edit'
+    end
+  end
+
   def show
     @company = current_company
     @worker = Worker.find(params[:id])
