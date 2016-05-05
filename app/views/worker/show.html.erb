@@ -1,6 +1,5 @@
 <div class="worker">
 	<p><%= @worker.first_name %> <%= @worker.last_name %></p>
-    <%= link_to "Wanna edit your worker?", edit_worker_path(@worker) %>
 		<p><%= @company.company_name %> </p>
 </div>
 
@@ -10,6 +9,7 @@
   			<th>Start of the shift </th>
   			<th>End of the shift </th>
   			<th>Calls </th>
+        <th>Answered calls </th>
   		</tr>
   		<tr>
   			<td> Something </td>
@@ -19,6 +19,13 @@
 					<%= call %>
     			<% end %>
     	 	</td>
-  		</tr>
+        <td>   
+          <% @calls.each do |call| %>
+            <% if call.answered? %>
+              <%= call %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 	</table>
 </div>
