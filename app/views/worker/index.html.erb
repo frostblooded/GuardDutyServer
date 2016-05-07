@@ -4,8 +4,13 @@
   <% @worker.each do |worker| %>
     <li>
     	<%=link_to worker_path(worker) do %>
-			<%= worker.first_name %>
-			<%= worker.last_name %>
+			<div class="workersInfo">
+        <%= worker.first_name %>
+  			<%= worker.last_name %>
+      </div>
+      <span>|</span> <%= link_to "edit", edit_worker_path(worker)%>
+      <span>|</span> <%= link_to "delete", worker, method: :delete,
+                                  data: { confirm: "You sure?" } %>
     	<% end %>
     </li>
   <% end %>

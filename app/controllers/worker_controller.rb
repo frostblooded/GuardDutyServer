@@ -10,6 +10,10 @@ class WorkerController < ApplicationController
     @worker = Worker.new
   end
 
+  def edit
+    @worker = Worker.find(params[:id])
+  end
+
   def create
     @worker = current_company.workers.create(worker_params)
     if @worker.save
@@ -19,11 +23,26 @@ class WorkerController < ApplicationController
     end
   end
 
+  def update
+    @worker = Worker.find(params[:id])
+    if @worker.update_attributes(worker_params)
+      redirect_to workers_path, :notice => "Changes saved!"
+    else
+      render 'edit'
+    end
+  end
+
   def show
     @company = current_company
     @worker = Worker.find(params[:id])
     @calls = @worker.calls
   end
+
+  def destroy
+    Worker.find(params[:id]).destroy
+    flash[:success] = "Worker deleted"
+    redirect_to workers_path
+  end  
 
   private
 

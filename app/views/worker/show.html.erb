@@ -9,6 +9,7 @@
   			<th>Start of the shift </th>
   			<th>End of the shift </th>
   			<th>Calls </th>
+        <th>Answered calls </th>
   		</tr>
   		<tr>
   			<td> Something </td>
@@ -18,6 +19,13 @@
 					<%= call %>
     			<% end %>
     	 	</td>
-  		</tr>
+        <td>   
+          <% @calls.each do |call| %>
+            <% if call.answered? %>
+              <%= call %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
 	</table>
 </div>
