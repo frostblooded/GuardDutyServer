@@ -35,6 +35,8 @@ class ApiTest < ActionDispatch::IntegrationTest
     json_response = JSON.parse @response.body
     assert_equal '201', @response.code
     assert_not json_response['access_token'].nil?
+    assert_not json_response['company_id'].nil?
+    assert_not json_response['company_name'].nil?
   end
 
   test 'company login returns error on nonexistent company' do
@@ -57,21 +59,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     json_response = JSON.parse @response.body
     assert_equal '401', @response.code
     assert_equal 'invalid company name/password combination', json_response['error']
-  end
-
-  # Company show get
-  test 'company show returns correct company' do
-    get '/api/v1/companies/' + @company.id.to_s
-    json_response = JSON.parse @response.body
-    assert_equal '200', @response.code
-    assert_equal @company.company_name, json_response['company_name']
-  end
-
-  test 'company show returns error on invalid id' do
-    get '/api/v1/companies/' + (@company.id + 9999).to_s
-    json_response = JSON.parse @response.body
-    assert_equal '400', @response.code
-    assert_equal 'inexistent company', json_response['error']
   end
 
   # Company signup

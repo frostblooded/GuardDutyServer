@@ -59,16 +59,8 @@ module API
         
         # Return the generated token
         {access_token: company.api_key.access_token,
-         company_id: company.id}
-      end
-
-      route_param :id do
-        get '/' do
-          error!('inexistent company', 400) if !Company.exists?(id: params[:id])
-
-          c = Company.find params[:id]
-          {company_name: c.company_name}
-        end
+         company_id: company.id,
+         company_name: company.company_name}
       end
     end
   end
