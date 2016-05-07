@@ -59,6 +59,21 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'invalid company name/password combination', json_response['error']
   end
 
+  # Company show get
+  test 'company show returns correct company' do
+    get '/api/v1/companies/' + @company.id.to_s
+    json_response = JSON.parse @response.body
+    assert_equal '200', @response.code
+    assert_equal @company.company_name, json_response['company_name']
+  end
+
+  test 'company show returns error on invalid id' do
+    get '/api/v1/companies/' + (@company.id + 9999).to_s
+    json_response = JSON.parse @response.body
+    assert_equal '400', @response.code
+    assert_equal 'inexistent company', json_response['error']
+  end
+
   # Company signup
   test 'company signup requires parameters' do
     post '/api/v1/companies'
