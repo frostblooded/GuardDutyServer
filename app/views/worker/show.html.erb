@@ -24,10 +24,18 @@
           <% end %>
         </td>
         <td>
-          <p>...</p>
+          <% @calls.each do |call| %>
+            <% if call.answered? %>
+              <%= call.time_left %>
+            <% end %>
+          <% end %>
         </td>
         <td>
-          <p> .... </p>
+          <% @calls.each do |call| %>
+            <% if call.answered? %>
+              <%= call.sent_at %>
+            <% end %>
+          <% end %>
         </td>
         <td>
           <% @calls.each do |call| %>
