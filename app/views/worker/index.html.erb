@@ -6,12 +6,12 @@
     	<%=link_to worker_path(worker) do %>
 			<div class="workersInfo">
         <%= worker.first_name %>
-  			<%= worker.last_name %>
+    		<%= worker.last_name %>
+        <span>|</span> <%= link_to "edit", edit_worker_path(worker)%>
+        <span>|</span> <%= link_to "delete", worker, method: :delete,
+                                    data: { confirm: "You sure?" } %>
+      	<% end %>
       </div>
-      <span>|</span> <%= link_to "edit", edit_worker_path(worker)%>
-      <span>|</span> <%= link_to "delete", worker, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-    	<% end %>
     </li>
   <% end %>
 </ul>

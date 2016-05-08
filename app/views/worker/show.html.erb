@@ -8,20 +8,30 @@
 		<tr>
   			<th>Start of the shift </th>
   			<th>End of the shift </th>
-  			<th>Calls </th>
         <th>Answered calls </th>
+        <th>Time left </th>
+        <th>Sent at </th>
+        <th>Unanswered calls </th>
   		</tr>
   		<tr>
   			<td> Something </td>
   			<td> Something v2 </td>
-  			<td>   
-  				<% @calls.each do |call| %>
-					<%= call %>
-    			<% end %>
-    	 	</td>
         <td>   
           <% @calls.each do |call| %>
             <% if call.answered? %>
+              <%= call %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <p>...</p>
+        </td>
+        <td>
+          <p> .... </p>
+        </td>
+        <td>
+          <% @calls.each do |call| %>
+            <% if call.unanswered? %>
               <%= call %>
             <% end %>
           <% end %>

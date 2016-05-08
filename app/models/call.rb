@@ -11,6 +11,10 @@ class Call < ActiveRecord::Base
     !self.received_at.nil?
   end
 
+  def unanswered?
+    self.received_at.nil?
+  end
+
   private
     def generate_token
       # Generate again if token already exists
