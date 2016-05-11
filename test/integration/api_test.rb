@@ -96,7 +96,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration creates device on valid credentials' do
     assert_difference 'Device.count', 1 do
-      post '/api/v1/devices', {company_name: @worker.site.company.company_name,
+      post '/api/v1/devices', {company_name: @company.company_name,
                                site_name: @site.name,
                                worker_name: @worker.name,
                                password: @worker.password,
@@ -113,7 +113,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on inexistent company' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_name: @worker.site.company.company_name + 'a',
+      post '/api/v1/devices', {company_name: @company.company_name + 'a',
                                site_name: @site.name,
                                worker_name: @worker.name,
                                password: @worker.password,
@@ -127,7 +127,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on inexistent site' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_name: @worker.site.company.company_name,
+      post '/api/v1/devices', {company_name: @company.company_name,
                                site_name: @site.name + 'a',
                                worker_name: @worker.name,
                                password: @worker.password,
@@ -141,7 +141,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on invalid names' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_name: @worker.site.company.company_name,
+      post '/api/v1/devices', {company_name: @company.company_name,
                                site_name: @site.name,
                                worker_name: @worker.name + 'a',
                                password: @worker.password,
@@ -155,7 +155,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on wrong names/password combination' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_name: @worker.site.company.company_name,
+      post '/api/v1/devices', {company_name: @company.company_name,
                                site_name: @site.name,
                                worker_name: @worker.name,
                                password: @worker.password + 'a',

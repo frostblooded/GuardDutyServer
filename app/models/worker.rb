@@ -1,5 +1,5 @@
 class Worker < ActiveRecord::Base
-  belongs_to :site
+  has_and_belongs_to_many :site
   has_one :device
   has_many :calls
 
