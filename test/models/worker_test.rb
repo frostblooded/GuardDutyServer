@@ -2,37 +2,27 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @worker = Worker.create(first_name: "Example FName", last_name: "Example LName",
-    					 password: "Somethinglike", password_confirmation: "Somethinglike")
+    @worker = Worker.create(name: "Example LName",
+    					              password: "Somethinglike",
+                            password_confirmation: "Somethinglike")
   end
 
   test "should be valid" do
     assert @worker.valid?
   end
 
-	test "first name should be present" do
-  	@worker.first_name = "   "
+	test "name should be present" do
+  	@worker.name = "   "
   	assert_not @worker.valid?
-	end
-
-	test "last name should be present" do
-  	@worker.last_name = "   "
-  	assert_not @worker.valid?
-	end	
-
-	test "first name should not be too long" do
-		@worker.first_name = "a" * 50
-		assert_not @worker.valid?
 	end
 	
-	test "last name should not be too long" do
-		@worker.last_name = "a" * 50
+	test "name should not be too long" do
+		@worker.name = "a" * 50
 		assert_not @worker.valid?
 	end
 
   test "names should be downcase" do
-    assert @worker.first_name == @worker.first_name.downcase
-    assert @worker.last_name == @worker.last_name.downcase 
+    assert @worker.name == @worker.name.downcase
   end
 
 	test "password should be present" do

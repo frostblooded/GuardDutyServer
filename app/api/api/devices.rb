@@ -3,8 +3,7 @@ module API
     helpers do
       # Uses the request parameters to return a worker
       def params_worker
-        params_site.workers.find_by first_name: params[:first_name],
-                                       last_name: params[:last_name]
+        params_site.workers.find_by name: params[:worker_name]
       end
 
       # Uses the request parameters to return a company
@@ -28,8 +27,7 @@ module API
       end
 
       def downcase_params
-        params[:first_name] = params[:first_name].downcase
-        params[:last_name] = params[:last_name].downcase
+        params[:worker_name] = params[:worker_name].downcase
       end
     end
 
@@ -37,8 +35,7 @@ module API
       params do
         requires :company_name, type: String
         requires :site_name, type: String
-        requires :first_name, type: String
-        requires :last_name, type: String
+        requires :worker_name, type: String
         requires :password, type: String
         requires :gcm_token, type: String
       end

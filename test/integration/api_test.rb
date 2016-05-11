@@ -4,7 +4,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   def setup
     @company = Company.create(company_name: 'test', password: 'foobarrr')
     @site = @company.sites.create(name: 'Test site')
-    @worker = @site.workers.create(first_name: 'foo', last_name: 'bar', password: 'foobarrr')
+    @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
 
     @device = Device.create(gcm_token: 'b' * 152)
     @call = @worker.calls.create
@@ -91,15 +91,14 @@ class ApiTest < ActionDispatch::IntegrationTest
     post '/api/v1/devices'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
-    assert_equal 'company_name is missing, site_name is missing, first_name is missing, last_name is missing, password is missing, gcm_token is missing', json['error']
+    assert_equal 'company_name is missing, site_name is missing, worker_name is missing, password is missing, gcm_token is missing', json['error']
   end
 
   test 'device registration creates device on valid credentials' do
     assert_difference 'Device.count', 1 do
       post '/api/v1/devices', {company_name: @worker.site.company.company_name,
                                site_name: @site.name,
-                               first_name: @worker.first_name,
-                               last_name: @worker.last_name,
+                               worker_name: @worker.name,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
     end
@@ -116,8 +115,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Device.count' do
       post '/api/v1/devices', {company_name: @worker.site.company.company_name + 'a',
                                site_name: @site.name,
-                               first_name: @worker.first_name,
-                               last_name: @worker.last_name,
+                               worker_name: @worker.name,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
     end
@@ -131,8 +129,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Device.count' do
       post '/api/v1/devices', {company_name: @worker.site.company.company_name,
                                site_name: @site.name + 'a',
-                               first_name: @worker.first_name,
-                               last_name: @worker.last_name,
+                               worker_name: @worker.name,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
     end
@@ -146,8 +143,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Device.count' do
       post '/api/v1/devices', {company_name: @worker.site.company.company_name,
                                site_name: @site.name,
-                               first_name: @worker.first_name + 'a',
-                               last_name: @worker.last_name + 'b',
+                               worker_name: @worker.name + 'a',
                                password: @worker.password,
                                gcm_token: 'a' * 152}
     end
@@ -161,8 +157,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Device.count' do
       post '/api/v1/devices', {company_name: @worker.site.company.company_name,
                                site_name: @site.name,
-                               first_name: @worker.first_name,
-                               last_name: @worker.last_name,
+                               worker_name: @worker.name,
                                password: @worker.password + 'a',
                                gcm_token: 'a' * 152}
     end
