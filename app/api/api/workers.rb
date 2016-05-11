@@ -10,7 +10,7 @@ module API
     resource :workers do
       # Get current company's workers
       get '/' do
-        token_company.workers
+        {}
       end
     end
   end

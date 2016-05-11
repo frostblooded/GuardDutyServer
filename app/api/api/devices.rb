@@ -3,7 +3,7 @@ module API
     helpers do
       # Uses the request parameters to return a worker
       def params_worker
-        params_company.workers.find_by first_name: params[:first_name],
+        params_site.workers.find_by first_name: params[:first_name],
                                        last_name: params[:last_name]
       end
 
@@ -15,6 +15,11 @@ module API
       # Uses the request parameters to return a device
       def params_device
         Device.find_by gcm_token: params[:gcm_token]
+      end
+
+      # Uses the request parameters to return a site
+      def params_site
+        params_company.sites.find_by name: params[:site_name]
       end
 
       # Uses the request parameters do determine if the password is valid
@@ -31,6 +36,7 @@ module API
     resource :devices do
       params do
         requires :company_name, type: String
+        requires :site_name, type: String
         requires :first_name, type: String
         requires :last_name, type: String
         requires :password, type: String
@@ -40,8 +46,11 @@ module API
       post '/' do
         downcase_params
 
-        # Return error if worker with such names doesn't exist
+        # Return error if company with such name doesn't exist
         error!('company doesn\'t exist', 400) unless params_company
+
+        # Return error if site with such name doesn't exist
+        error!('company has no such site', 400) unless params_site
 
         # Return error if worker with such names doesn't exist
         error!('company has no such worker', 400) unless params_worker
