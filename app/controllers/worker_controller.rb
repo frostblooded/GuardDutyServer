@@ -33,7 +33,7 @@ class WorkerController < ApplicationController
   end
 
   def show
-    @company = current_company
+    @company = current_company 
     @worker = Worker.find(params[:id])
     @calls = @worker.calls
   end
