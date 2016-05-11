@@ -24,7 +24,6 @@ module API
 
       # Login company
       post '/' do
-        puts params
         downcase_params
         
         # Return error if company with such company_name doesn't exist

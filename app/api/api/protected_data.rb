@@ -6,6 +6,7 @@ module API
     helpers do
       # Get API key based on access token parameter
       def get_api_key
+        puts params
         ApiKey.find_by(access_token: params[:access_token])
       end
 
