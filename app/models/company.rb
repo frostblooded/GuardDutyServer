@@ -1,5 +1,8 @@
 class Company < ActiveRecord::Base
   has_many :sites
+  
+  # Can access its workers, but indirectly through 'sites'
+  has_many :workers, through: :sites
   has_one :api_key, dependent: :destroy
   has_settings :daily_mail
   
