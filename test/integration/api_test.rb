@@ -60,40 +60,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'invalid company name/password combination', json_response['error']
   end
 
-  # Company signup
-  test 'company signup requires parameters' do
-    post '/api/v1/companies'
-    assert_equal '500', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'company_name is missing, email is missing, password is missing, password_confirmation is missing', json['error']
-  end
-
-  test 'company signup works if valid parameters are passed' do
-    assert_difference 'Company.count', 1 do
-      post '/api/v1/companies', {company_name: 'Ivan Co.',
-                                 email: 'frostblooded@yahoo.com',
-                                 password: 'foobarrr',
-                                 password_confirmation: 'foobarrr'}
-    end
-
-    assert_equal '201', @response.code
-    json = JSON.parse @response.body
-    assert_equal true, json['success']
-  end
-
-  test 'company signup responds correctly if passwords do not match' do
-    assert_no_difference 'Company.count' do
-      post '/api/v1/companies', company_name: 'frostblooded',
-                                email: 'frostblooded@yahoo.com',
-                                password: 'foobarrr',
-                                password_confirmation: 'foobarr'
-    end
-
-    assert_equal '201', @response.code
-    json = JSON.parse @response.body
-    assert_equal "doesn't match Password", json['error']['password_confirmation'][0]
-  end
-
   # Protected data
   test 'workers data requires parameters' do
     get '/api/v1/workers'
