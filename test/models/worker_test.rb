@@ -2,9 +2,9 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @worker = Worker.create(name: "Example LName",
+    @worker = Worker.create name: "Example LName",
     					              password: "Somethinglike",
-                            password_confirmation: "Somethinglike")
+                            password_confirmation: "Somethinglike"
   end
 
   test "should be valid" do
