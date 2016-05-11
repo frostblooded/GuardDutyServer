@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+company = Company.create company_name: 'frostblooded',
+                         password: 'foobarrr',
+                         password_confirmation: 'foobarrr',
+                         email: Faker::Internet.free_email
+site = company.sites.create name: 'test site'
+
+5.times do |i|
+  site.workers.create(name: Faker::Name.name, password: 'foobarrr')
+end
