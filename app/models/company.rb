@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  has_many :workers
+  has_many :sites
   has_one :api_key, dependent: :destroy
   has_settings :daily_mail
   
