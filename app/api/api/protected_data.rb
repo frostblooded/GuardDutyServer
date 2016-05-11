@@ -6,7 +6,6 @@ module API
     helpers do
       # Get API key based on access token parameter
       def get_api_key
-        puts params
         ApiKey.find_by(access_token: params[:access_token])
       end
 
@@ -20,6 +19,16 @@ module API
         # Return error if the access token has expired
         error!("expired token", 401) if api_key.expired?
       end
+
+      # Returns the company based on the access_token parameter
+      def token_company
+        get_api_key.company
+      end
+
+      # Returns the site based on the access_token parameter
+      def token_site
+        token_company.sites.find_by name: params[:site_name]
+      end
     end
 
     # Set parameter requirements for data requests
@@ -27,7 +36,22 @@ module API
       requires :access_token, type: String
     end
 
-    mount API::Workers
-    mount API::Sites
+    resource :companies do
+      route_param :company_name do
+        resource :sites do
+          get '/' do
+            token_company.sites
+          end
+
+          route_param :site_name do
+            resource :workers do
+              get '/' do
+                token_site.workers
+              end
+            end
+          end
+        end
+      end
+    end
   end
 end
