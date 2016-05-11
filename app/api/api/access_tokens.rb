@@ -1,5 +1,5 @@
 module API
-  class Companies < Grape::API
+  class AccessTokens < Grape::API
     helpers do
       # Uses the request parameters do determine if the password is valid
       def valid_password?
@@ -15,7 +15,7 @@ module API
       end
     end
     
-    resource :companies do
+    resource :access_tokens do
       # Set parameter requirements for login POST request
       params do
         requires :company_name, type: String
@@ -23,7 +23,7 @@ module API
       end
 
       # Login company
-      post :login do
+      post '/' do
         downcase_params
         
         # Return error if company with such company_name doesn't exist
