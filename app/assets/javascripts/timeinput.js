@@ -1,2 +1,1 @@
-var time = $('#timepicker').timepicker('showWidget');
-  $('#timepicker').timepicker('setTime', '12:45 AM');
+ $(function() { $('#timepicker2').timepicker();});

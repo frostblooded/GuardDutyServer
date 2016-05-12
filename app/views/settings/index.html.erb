@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Settings</title>
-	</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Settings</title>
+    </head>
 	<body>
 		<div class="daily_mail">
 			<span> Do you want daily report sent to your email? </span>
@@ -20,14 +21,25 @@
 			<form>
 				<div>
 					<span>Enter the start of the shift!</span>
-					<input type="time" name="shift_start" />
+					<span>(format is HH/MM/</span>
+			        <div class="input-group bootstrap-timepicker timepicker">
+			            <input id="timepicker1" type="text" class="form-control input-small">
+			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			        </div>
 					<span>Enter the end of the shift!</span>
-					<input type="time" name="shift_end" />
+			        <div class="input-group bootstrap-timepicker timepicker">
+			            <input id="timepicker2" type="text" class="form-control input-small">
+			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			        </div>
+			<script type="text/javascript">
+            $('#timepicker1').timepicker();
+        </script>
+
+        	<script type="text/javascript">
+            $('#timepicker2').timepicker();
+        </script>
 					<button type="Submit"> Save changes </button>
 				</div>
-  				<div class="input-group bootstrap-timepicker timepicker"><input id="timepicker" class="form-control" data-provide="timepicker" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/></div>
-
-			  <div class="input-group bootstrap-timepicker timepicker"><input id="timepicker" class="form-control" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/></div>
 			</form>
 		</div>
 
