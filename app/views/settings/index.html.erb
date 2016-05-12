@@ -14,21 +14,20 @@
 					<button type="Submit"> Save changes </button>
 				</div>
 			<% end %>
-							<%= @daily_mail %>
 		</div>
 
 		<div class ="shift_start_end">
-			<form>
+			<%= form_tag do %>
 				<div>
 					<span>Enter the start of the shift!</span>
 					<span>(format is HH/MM/</span>
 			        <div class="input-group bootstrap-timepicker timepicker">
-			            <input id="timepicker1" type="text" class="form-control input-small">
+			            <input id="timepicker1" name="shift_start" type="text" class="form-control input-small">
 			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 			        </div>
 					<span>Enter the end of the shift!</span>
 			        <div class="input-group bootstrap-timepicker timepicker">
-			            <input id="timepicker2" type="text" class="form-control input-small">
+			            <input id="timepicker2" name="shift_end" type="text" class="form-control input-small">
 			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 			        </div>
 					<script type="text/javascript">
@@ -40,7 +39,7 @@
         			</script>
 					<button type="Submit"> Save changes </button>
 				</div>
-			</form>
+			<% end %>
 		</div>
 
 		<div class ="change_password">
