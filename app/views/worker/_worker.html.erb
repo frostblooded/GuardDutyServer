@@ -1,7 +1,27 @@
-<div>
+<div class="email_content">
 	<% @company.workers.each do |worker| %>
-		<li><%= worker.first_name %>
-			<%= worker.last_name %>
+		<li>
+			<%= worker.name %>
+			<!-- Have to put 24h limit -->
+			<% worker.calls.each do |call| %>
+				<p>
+					The following calls have been made today: <%= call %>
+				</p>
+
+				<p> 
+					Answered calls : 
+					<% if call.answered? %>
+						<%= call %>
+					<% end %>
+				</p>
+
+				<p> 
+					Unanswered calls :
+	            	<% if call.unanswered? %>
+	              		<%= call %>
+	            	<% end %>
+	            </p>
+			<% end %>
 		</li>
 	<% end %>
 </div>

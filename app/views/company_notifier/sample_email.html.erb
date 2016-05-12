@@ -4,11 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @company.company_name %> </h1> 
-    <p>
-    	here is the report for your workers:
-    	<%= render 'worker/worker' %>
-    </p>
-    </body>
+    <h1>Hello, <%= @company.company_name %> </h1> 
+    <div class ="email_content">
+        <p class ="email_content">
+          <font size ="4">here is the report for your workers:
+          <%= render 'worker/worker' %>
+          </font>
+        </p>
+    </div>
   </body>
 </html>
