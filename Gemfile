@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 #ruby '2.3.0'
 
 gem 'rails',              '4.2.2'
+gem 'bootstrap-timepicker-rails-addon'
 gem 'ledermann-rails-settings'
 gem 'exception_notification'
 gem 'devise'
