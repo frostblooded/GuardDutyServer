@@ -3,6 +3,11 @@
 		<p><%= @company.company_name %> </p>
 </div>
 
+<% if @company.settings(:daily_mail).daily_mail %>
+  <p> Are you going to recieve daily mail: Yes</p>
+<% else %>
+  <p> Are you going to recieve daily mail: No</p>
+<% end %>
 <div class="wtable">
 	<table>
 		<tr>
