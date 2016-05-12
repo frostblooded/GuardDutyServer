@@ -16,6 +16,18 @@
 							<%= @daily_mail %>
 		</div>
 
+		<div class ="shift_start_end">
+			<form>
+				<div>
+					<span>Enter the start of the shift!</span>
+					<input type="time" name="shift_start" />
+					<span>Enter the end of the shift!</span>
+					<input type="time" name="shift_end" />
+					<button type="Submit"> Save changes </button>
+				</div>
+			</form>
+		</div>
+
 		<div class ="change_password">
 			<%= link_to "Want to change your password?", edit_company_registration_path %>
 		</div>
