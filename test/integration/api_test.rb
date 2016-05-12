@@ -61,29 +61,47 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Protected data
-  test 'workers data requires parameters' do
-    get '/api/v1/companies/' + @company.company_name + '/sites/' + @site.name + '/workers'
+  test 'protected data requires parameters' do
+    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers'
     assert_equal '401', @response.code
     json = JSON.parse @response.body
     assert_equal 'invalid token', json['error']
   end
 
-  test 'data forbids access when token is invalid' do
-    get '/api/v1/companies/' + @company.company_name + '/sites/' + @site.name + '/workers', { access_token: request_access_token + 'a' }
+  test 'protected data forbids access when token is invalid' do
+    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: request_access_token + 'a' }
     assert_equal '401', @response.code
   end
 
-  test 'data forbids access when token has expired' do
+  test 'protected data forbids access when token has expired' do
     token = request_access_token
 
     api_key = ApiKey.find_by(access_token: token)
     api_key.created_at = (ApiKey::VALID_HOURS + 1).hours.ago
     api_key.save
 
-    get '/api/v1/companies/' + @company.company_name + '/sites/' + @site.name + '/workers', { access_token: token }
+    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: token }
     assert_equal '401', @response.code
     json = JSON.parse @response.body
     assert_equal 'expired token', json['error']
+  end
+
+  test 'companies returns error when company doesn\'t exist' do
+    token = request_access_token
+
+    get '/api/v1/companies/' + (@company.id + 1).to_s + '/sites', { access_token: token }
+    assert_equal '400', @response.code
+    json = JSON.parse @response.body
+    assert_equal 'inexsitent company', json['error']
+  end
+
+  test 'companies returns error when site doesn\'t exist' do
+    token = request_access_token
+
+    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + (@site.id + 1).to_s + '/workers', { access_token: token }
+    assert_equal '400', @response.code
+    json = JSON.parse @response.body
+    assert_equal 'company has no such site', json['error']
   end
 
   # Device registration

@@ -4,6 +4,11 @@ module API
     before_validation {restrict_access}
 
     helpers do
+      # Get API key based on access token parameter
+      def get_api_key
+        ApiKey.find_by access_token: params[:access_token]
+      end
+
       # Check if the access token is valid
       def restrict_access
         api_key = get_api_key
@@ -17,12 +22,12 @@ module API
 
       # Returns the company based on the access_token parameter
       def params_company
-        Company.find_by company_name: params[:company_name]
+        Company.find params[:company_id].to_i
       end
 
       # Returns the site based on the access_token parameter
       def params_site
-        params_company.sites.find_by name: params[:site_name]
+        Site.find params[:site_id].to_i
       end
     end
 
@@ -32,9 +37,9 @@ module API
     end
 
     resource :companies do
-      route_param :company_name do
+      route_param :company_id do
         before do
-          error!("inexsitent company", 400) unless params_company
+          error!("inexsitent company", 400) unless Company.exists? id: params["company_id"].to_i
         end
 
         resource :sites do
@@ -42,9 +47,9 @@ module API
             params_company.sites
           end
 
-          route_param :site_name do
+          route_param :site_id do
             before do
-              error!("company has no such site", 400) unless params_site
+              error!("company has no such site", 400) unless Site.exists? id: params["site_id"].to_i
             end
 
             resource :workers do
