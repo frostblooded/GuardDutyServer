@@ -61,12 +61,6 @@ module API
                 params_site.workers
               end
             end
-
-            resource :routes do
-              get '/' do
-                params_site.routes
-              end
-            end
           end
         end
       end

@@ -6,19 +6,9 @@ module API
         Worker.find params[:worker_id]
       end
 
-      # Uses the request parameters to return a company
-      def params_company
-        Company.find params[:company_id]
-      end
-
       # Uses the request parameters to return a device
       def params_device
         Device.find_by gcm_token: params[:gcm_token]
-      end
-
-      # Uses the request parameters to return a site
-      def params_site
-        Site.find params[:site_id]
       end
 
       # Uses the request parameters do determine if the password is valid
