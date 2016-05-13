@@ -28,6 +28,29 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
+  #Email sender
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true 
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "gmail.com",
+    :authentication => 'plain',
+    :user_name => "attendancecheck1337@gmail.com",
+    :password => "@zSumMnogoQk",
+    :enable_starttls_auto => true
+  }
+
+  #Exception Notifier
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "Dont get crazy",
+    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
+    :exception_recipients => %w{ihzahariev@gmail.com}
+  }
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 

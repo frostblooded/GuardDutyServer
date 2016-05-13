@@ -36,6 +36,9 @@ class WorkerController < ApplicationController
     @company = current_company 
     @worker = Worker.find(params[:id])
     @calls = @worker.calls
+    @company.settings(:daily_mail).daily_mail
+    @company.settings(:shift_start).shift_start
+    @company.settings(:shift_end).shift_end
   end
 
   def destroy

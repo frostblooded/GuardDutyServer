@@ -3,6 +3,7 @@
 		<p><%= @company.company_name %> </p>
 </div>
 
+<p> Are you going to recieve daily mail: <%= @company.settings(:daily_mail).daily_mail %> </p>
 <div class="wtable">
 	<table>
 		<tr>
@@ -14,8 +15,8 @@
         <th>Unanswered calls </th>
   		</tr>
   		<tr>
-  			<td> Something </td>
-  			<td> Something v2 </td>
+  			<td> <%= @company.settings(:shift_start).shift_start %></td>
+  			<td> <%= @company.settings(:shift_end).shift_end %> </td>
         <td>   
           <% @calls.each do |call| %>
             <% if call.answered? %>

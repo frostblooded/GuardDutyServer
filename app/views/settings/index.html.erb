@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Settings</title>
-	</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Settings</title>
+    </head>
 	<body>
 		<div class="daily_mail">
 			<span> Do you want daily report sent to your email? </span>
-			<form>
+			<%= form_tag do %>
 				<div class="radio_buttons">
 					<input type="radio" name="daily_mail" value="True"/>Yes, I would like yo get daily report for my workers <br>
 					<input type="radio" name="daily_mail" value="False"/>No, I dont want it <br>
 					<button type="Submit"> Save changes </button>
 				</div>
-			</form>
-							<%= @daily_mail %>
+			<% end %>
 		</div>
 
 		<div class ="shift_start_end">
-			<form>
+			<%= form_tag do %>
 				<div>
 					<span>Enter the start of the shift!</span>
-					<input type="time" name="shift_start" />
+					<span>(format is HH/MM/</span>
+			        <div class="input-group bootstrap-timepicker timepicker">
+			            <input id="timepicker1" name="shift_start" type="text" class="form-control input-small">
+			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			        </div>
 					<span>Enter the end of the shift!</span>
-					<input type="time" name="shift_end" />
+			        <div class="input-group bootstrap-timepicker timepicker">
+			            <input id="timepicker2" name="shift_end" type="text" class="form-control input-small">
+			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			        </div>
+					<script type="text/javascript">
+            			$('#timepicker1').timepicker();
+        			</script>
+
+        			<script type="text/javascript">
+            			$('#timepicker2').timepicker();
+        			</script>
 					<button type="Submit"> Save changes </button>
 				</div>
-  				<div class="input-group bootstrap-timepicker timepicker"><input id="timepicker" class="form-control" data-provide="timepicker" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/></div>
-
-			  <div class="input-group bootstrap-timepicker timepicker"><input id="timepicker" class="form-control" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/></div>
-			</form>
+			<% end %>
 		</div>
 
 		<div class ="change_password">
