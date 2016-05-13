@@ -1,50 +1,19 @@
 <div class="worker">
-	<p><%= @worker.name %></p>
-		<p><%= @company.company_name %> </p>
+	<p><%= @company.company_name %> </p>
+  <p><%= @worker.name %></p>
+  <p>Calls</p>
 </div>
-
-<p> Are you going to recieve daily mail: <%= @company.settings(:daily_mail).daily_mail %> </p>
 <div class="wtable">
 	<table>
 		<tr>
-  			<th>Start of the shift </th>
-  			<th>End of the shift </th>
-        <th>Answered calls </th>
-        <th>Time left </th>
-        <th>Sent at </th>
-        <th>Unanswered calls </th>
+        <th>Sent at</th>
+        <th>Received at</th>
   		</tr>
-  		<tr>
-  			<td> <%= @company.settings(:shift_start).shift_start %></td>
-  			<td> <%= @company.settings(:shift_end).shift_end %> </td>
-        <td>   
-          <% @calls.each do |call| %>
-            <% if call.answered? %>
-              <%= call %>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <% @calls.each do |call| %>
-            <% if call.answered? %>
-              <%= call.time_left %>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <% @calls.each do |call| %>
-            <% if call.answered? %>
-              <%= call.sent_at %>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <% @calls.each do |call| %>
-            <% if call.unanswered? %>
-              <%= call %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
+      <% @calls.each do |call| %>
+        <tr>
+          <td><%= call.created_at %></td>
+          <td><%= call.received_at %></td>
+        </tr>
+      <% end %>
 	</table>
 </div>
