@@ -210,5 +210,18 @@ input[type='radio'] + label {
   padding-top: 10px;
 }
 
+.shift_end {
+  padding-top: 10px;
+}
+
+/* calls */
+
+.answered_call {
+  background: green;
+}
+
+.unanswered_call {
+  background: red;
+}
 
 
