@@ -9,8 +9,8 @@
 			<span> Do you want daily report sent to your email? </span>
 			<%= form_tag do %>
 				<div class="radio_buttons">
-					<input type="radio" name="daily_mail" value="True"/>Yes, I would like yo get daily report for my workers <br>
-					<input type="radio" name="daily_mail" value="False"/>No, I dont want it <br>
+					<input type="checkbox" name="daily_mail" <%= 'checked' if @daily_mail %>/>Yes, I would like yo get daily report for my workers<br>
+					<input type="checkbox" name="daily_mail"/>No, I dont want it <br>
 					<button type="Submit"> Save changes </button>
 				</div>
 			<% end %>
