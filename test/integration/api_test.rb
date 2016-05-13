@@ -61,13 +61,6 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Protected data
-  test 'protected data requires parameters' do
-    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers'
-    assert_equal '401', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'invalid token', json['error']
-  end
-
   test 'protected data forbids access when token is invalid' do
     get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: request_access_token + 'a' }
     assert_equal '401', @response.code
