@@ -1,6 +1,9 @@
 <div class="worker">
 	<p><%= @company.company_name %> </p>
   <p><%= @worker.name %></p>
+  <p>Start of the shift <%= @company.settings(:shift_start).shift_start %> </p>
+  <p>End of the shift <%= @company.settings(:shift_end).shift_end %> </p>
+  <P><%= link_to "You can change or set start and end of the shift here: ", settings_path %>
   <p>Calls</p>
 </div>
 <div class="wtable">
@@ -8,11 +11,13 @@
 		<tr>
         <th>Sent at</th>
         <th>Received at</th>
+        <th>Time left </th>
   		</tr>
       <% @calls.each do |call| %>
         <tr>
           <td><%= call.created_at %></td>
           <td><%= call.received_at %></td>
+          <td><%= call.time_left %></td>
         </tr>
       <% end %>
 	</table>

@@ -176,5 +176,25 @@ div.pass-hint {
     border-top: 1px solid #eaeaea;
 }
 
+input[type='radio'] {
+  float: right;
+  margin-right: 750px;
+  width: 10px;
+  transform: scale(1.7);
+
+}
+input[type='radio'] + label {
+  width: 100px;
+  display: inline;
+}
+
+.first_radio {
+  padding-top: 10px;
+}
+
+.second_radio {
+  padding-top: 10px;
+}
+
 
 

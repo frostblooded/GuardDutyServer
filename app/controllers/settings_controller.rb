@@ -1,6 +1,8 @@
 class SettingsController < ApplicationController
   def index
-    @daily_mail = params[:daily_mail]
+    if params[:daily_mail] == "true"
+      @daily_mail == true
+    end
     @company = current_company
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
@@ -12,9 +14,10 @@ class SettingsController < ApplicationController
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
 
-    if @daily_mail == "True"
+    if @daily_mail == "true"
       @company.settings(:daily_mail).daily_mail = "True"
       @company.settings(:daily_mail).save!
+      @daily_mail == true
     else
       @company.settings(:daily_mail).daily_mail = "False"
       @company.settings(:daily_mail).save!

@@ -8,9 +8,16 @@
 		<div class="daily_mail">
 			<span> Do you want daily report sent to your email? </span>
 			<%= form_tag do %>
-				<div class="radio_buttons">
-					<input type="checkbox" name="daily_mail" <%= 'checked' if @daily_mail %>/>Yes, I would like yo get daily report for my workers<br>
-					<input type="checkbox" name="daily_mail"/>No, I dont want it <br>
+				<div class="checkboxes">
+					<div class="first_radio">
+						<input id="daily_mail" type="radio" name="daily_mail" value="true" class="radio1"/>
+						<label for="daily_mail"> Yes, I would like yo get daily report for my workers </label>
+					</div>
+					<div class="second_radio">
+						<input id="daily_mail" type="radio" name="daily_mail" value="false" class="radio2"/>
+						<label for="daily_mail"> No, I dont want it </label>
+					</div>
+					<br>
 					<button type="Submit"> Save changes </button>
 				</div>
 			<% end %>
