@@ -37,6 +37,10 @@ module API
     end
 
     resource :companies do
+      get '/' do
+        Company.all
+      end
+
       route_param :company_id do
         before do
           error!("inexsitent company", 400) unless Company.exists? id: params["company_id"].to_i
@@ -55,6 +59,12 @@ module API
             resource :workers do
               get '/' do
                 params_site.workers
+              end
+            end
+
+            resource :routes do
+              get '/' do
+                params_site.routes
               end
             end
           end
