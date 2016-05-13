@@ -156,6 +156,20 @@ div.pass-hint {
     }
 }
 
+
+.settings {
+  button{
+      height:20%; 
+      width:10%; 
+      margin: 0 auto;
+      margin-top: 10px;
+      position:relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+}
+
 .workersInfo {
     font-size: 160%;
     text-decoration: none;

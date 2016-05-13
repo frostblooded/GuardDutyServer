@@ -5,27 +5,23 @@
         <title>Settings</title>
     </head>
 	<body>
-		<div class="daily_mail">
-			<span> Do you want daily report sent to your email? </span>
-			<%= form_tag do %>
-				<div class="checkboxes">
-					<div class="first_radio">
-						<input id="daily_mail" type="radio" name="daily_mail" value="true" class="radio1"/>
-						<label for="daily_mail"> Yes, I would like yo get daily report for my workers </label>
+		<%= form_tag do %>
+			<div class="settings">
+				<div class="daily_mail">
+					<span> Do you want daily report sent to your email? </span>
+					<div class="checkboxes">
+						<div class="first_radio">
+							<input id="daily_mail" type="radio" name="daily_mail" value="true" class="radio1"/>
+							<label for="daily_mail"> Yes, I would like yo get daily report for my workers </label>
+						</div>
+						<div class="second_radio">
+							<input id="daily_mail" type="radio" name="daily_mail" value="false" class="radio2"/>
+							<label for="daily_mail"> No, I dont want it </label>
+						</div>
 					</div>
-					<div class="second_radio">
-						<input id="daily_mail" type="radio" name="daily_mail" value="false" class="radio2"/>
-						<label for="daily_mail"> No, I dont want it </label>
-					</div>
-					<br>
-					<button type="Submit"> Save changes </button>
 				</div>
-			<% end %>
-		</div>
 
-		<div class ="shift_start_end">
-			<%= form_tag do %>
-				<div>
+				<div class ="shift_start_end">
 					<span>Enter the start of the shift!</span>
 					<span>(format is HH/MM/</span>
 			        <div class="input-group bootstrap-timepicker timepicker">
@@ -38,16 +34,16 @@
 			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 			        </div>
 					<script type="text/javascript">
-            			$('#timepicker1').timepicker();
-        			</script>
+	        			$('#timepicker1').timepicker();
+	    			</script>
 
-        			<script type="text/javascript">
-            			$('#timepicker2').timepicker();
-        			</script>
-					<button type="Submit"> Save changes </button>
+	    			<script type="text/javascript">
+	        			$('#timepicker2').timepicker();
+	    			</script>
+					<button type="Submit" class="submit_button"> Save changes </button>
 				</div>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 
 		<div class ="change_password">
 			<%= link_to "Want to change your password?", edit_company_registration_path %>

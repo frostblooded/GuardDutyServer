@@ -29,6 +29,7 @@ class SettingsController < ApplicationController
     @company.settings(:shift_end).shift_end = @shift_end
     @company.settings(:shift_end).save!
 
+    flash[:success] = "Settings saved"
     redirect_to settings_path
   end
 end
