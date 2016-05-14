@@ -29,19 +29,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   #Email sender
-  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'}  #I've also tried it without ":protocol => 'http'"
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => 'app49921759@heroku.com',
-    :password       => '8TrSnysfTfp1',
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'}
 
   #Exception Notifier
   Rails.application.config.middleware.use ExceptionNotification::Rack,
