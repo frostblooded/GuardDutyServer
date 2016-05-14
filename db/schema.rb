@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513073720) do
+ActiveRecord::Schema.define(version: 20160514213255) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20160513073720) do
   end
 
   add_index "devices", ["worker_id"], name: "index_devices_on_worker_id"
+
+  create_table "positions", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "route_id"
+  end
+
+  add_index "positions", ["route_id"], name: "index_positions_on_route_id"
 
   create_table "routes", force: :cascade do |t|
     t.string   "name"
