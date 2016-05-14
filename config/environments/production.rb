@@ -51,13 +51,18 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
-config.action_mailer.default_url_options = { :host => 'hidden-shelf-43728.herokuapp.com' }
-ActionMailer::Base.smtp_settings = {
-  :address        => "smtp.sendgrid.net",
-  :port           => "25",
-  :authentication => :plain,
-  :user_name      => ENV['app49921759@heroku.com'],
-  :password       => ENV['8TrSnysfTfp1'],
+config.action_mailer.default_url_options = { :host =&gt; 'hidden-shelf-43728.herokuapp.com'}
+
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+address: "smtp.sendgrid.net",
+port: 25,
+domain: "heroku.com", 
+authentication: "plain",
+enable_starttls_auto: true,
+user_name: ENV["app49921759@heroku.com"],
+password: ENV["8TrSnysfTfp1"]
 }
 
   # Prepend all log lines with the following tags.
