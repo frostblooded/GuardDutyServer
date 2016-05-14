@@ -36,7 +36,7 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "hidden-shelf-43728.herokuapp.com",
+    :domain => "gmail.com",
     :authentication => 'plain',
     :user_name => "attendancecheck1337@gmail.com",
     :password => "@zSumMnogoQk",
