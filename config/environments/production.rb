@@ -29,14 +29,13 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   #Email sender
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = {:host => 'hidden-shelf-43728.herokuapp.com'} #I've also tried it without ":protocol => 'http'"
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "gmail.com",
     :authentication => 'plain',
     :user_name => "attendancecheck1337@gmail.com",
     :password => "@zSumMnogoQk",
