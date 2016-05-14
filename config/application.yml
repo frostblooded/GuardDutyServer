@@ -1,6 +1,9 @@
 PUSH_NOTIFICATION_SEND_KEY: "AIzaSyAF0-3_iHMBBjaAJDHaRUOeFajbfxynplk"
 RACK_ENV: "development"
 PORT: "3000"
+SENDGRID_PASSWORD: "0pkiq1j91716"
+SENDGRID_USERNAME: "app49921759@heroku.com"
+
 
 # These can be pushed to heroku with the command
 # `figaro heroku:set -e production`
