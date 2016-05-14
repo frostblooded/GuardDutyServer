@@ -60,10 +60,6 @@ module API
               params_site.workers
             end
 
-            get :routes do
-              {what_the_fuck: true}
-            end
-
             params do
               requires :positions
             end
