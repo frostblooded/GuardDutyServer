@@ -62,7 +62,7 @@ domain: "heroku.com",
 authentication: "plain",
 enable_starttls_auto: true,
 user_name: ENV["app49921759@heroku.com"],
-password: ENV["8TrSnysfTfp1"]
+password: ENV["0pkiq1j91716"]
 }
 
   # Prepend all log lines with the following tags.
