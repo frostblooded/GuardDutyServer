@@ -65,6 +65,14 @@ module API
             end
 
             post :routes do
+              r = params_site.routes.create(name: 'test route')
+
+              params['positions'].each_with_index do |p, index|
+                r.positions.create(longitude: p['longitude'],
+                                   latitude: p['latitude'],
+                                   index: index)
+              end
+              
               {success: true}
             end
           end
