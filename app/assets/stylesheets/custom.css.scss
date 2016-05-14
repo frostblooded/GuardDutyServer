@@ -124,6 +124,10 @@ div.pass-hint {
 .worker {
   font-size: 200%;
   text-align: center;
+  span {
+    font-size: 70%;
+    padding-bottom: 10px;
+  }
 }
 
 .wtable {
@@ -175,6 +179,12 @@ div.pass-hint {
     text-decoration: none;
     display: inline;
     margin-left: 5px;
+}
+
+.info_for_dailymail {
+  h3 {
+  display: inline;
+  }
 }
 
 /* Settings tab, change password */

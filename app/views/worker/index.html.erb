@@ -1,5 +1,15 @@
+<div class="info_for_dailymail">
+  <h3>
+    Are you going to recieve daily mail for your workers:
+    <% if @company.settings(:daily_mail).daily_mail == "True" %>
+      <h3>Yes</h3>
+    <% else %>
+      <h3>No</h3>
+    <% end %>
+    <span><%= link_to '(change it here)', settings_path %></span> 
+  </h3>
+</div>
 <h1>List of your workers</h1>
-
 <ul class="workers">
   <% @worker.each do |worker| %>
     <li>

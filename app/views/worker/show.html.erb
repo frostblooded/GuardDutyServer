@@ -3,7 +3,7 @@
   <p><%= @worker.name %></p>
   <p>Start of the shift <%= @company.settings(:shift_start).shift_start %> </p>
   <p>End of the shift <%= @company.settings(:shift_end).shift_end %> </p>
-  <P><%= link_to "You can change or set start and end of the shift here", settings_path %>
+  <span><%= link_to '(change it here)', settings_path %></span>
   <p>Calls</p>
 </div>
 <div class="wtable">
