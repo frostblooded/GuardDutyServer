@@ -51,20 +51,27 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
-config.action_mailer.default_url_options = { :host => 'hidden-shelf-43728.herokuapp.com'}
+  config.action_mailer.default_url_options = { :host => 'hidden-shelf-43728.herokuapp.com'}
 
-config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
 
 
-config.action_mailer.smtp_settings = {
-address: "smtp.sendgrid.net",
-port: 25,
-domain: "heroku.com", 
-authentication: "plain",
-enable_starttls_auto: true,
-user_name: ENV["SENDGRID_USERNAME"],
-password: ENV["SENDGRID_PASSWORD"]
-}
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 25,
+    domain: "heroku.com", 
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"]
+  }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "Dont get crazy",
+    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
+    :exception_recipients => %w{ihzahariev@gmail.com}
+  }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
