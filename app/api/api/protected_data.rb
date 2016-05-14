@@ -56,10 +56,16 @@ module API
               error!("company has no such site", 400) unless Site.exists? id: params["site_id"].to_i
             end
 
-            resource :workers do
-              get '/' do
-                params_site.workers
-              end
+            get :workers do
+              params_site.workers
+            end
+
+            params do
+              requires :positions
+            end
+
+            post :routes do
+              {success: true}
             end
           end
         end
