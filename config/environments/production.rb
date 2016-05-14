@@ -58,7 +58,6 @@ ActionMailer::Base.smtp_settings = {
   :authentication => :plain,
   :user_name      => ENV['app49921759@heroku.com'],
   :password       => ENV['8TrSnysfTfp1'],
-  :domain         => ENV['heroku.com']
 }
 
   # Prepend all log lines with the following tags.
