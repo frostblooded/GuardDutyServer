@@ -29,15 +29,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   #Email sender
-  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'}
-
-  #Exception Notifier
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "Dont get crazy",
-    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
-    :exception_recipients => %w{ihzahariev@gmail.com}
-  }
+  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'} 
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
