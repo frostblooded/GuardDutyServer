@@ -11,6 +11,10 @@ module API
         Device.find_by gcm_token: params[:gcm_token]
       end
 
+      def params_site
+        Site.find params[:site_id]
+      end
+
       # Uses the request parameters do determine if the password is valid
       def valid_password?
         params_worker.authenticate(params[:password])
@@ -39,7 +43,9 @@ module API
         # Return error if the names/password combination isn't valid
         error!('invalid names/password combination', 400) unless valid_password?
 
-        params_worker.device = Device.create!(gcm_token: params[:gcm_token])
+        d = params_site.devices.create!(gcm_token: params[:gcm_token])
+        params_worker.device = d
+
         {success: true}
       end
 
