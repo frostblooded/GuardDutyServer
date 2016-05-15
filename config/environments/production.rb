@@ -29,26 +29,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   #Email sender
-  config.action_mailer.default_url_options = {:host => 'hidden-shelf-43728.herokuapp.com'} #I've also tried it without ":protocol => 'http'"
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :authentication => 'plain',
-    :user_name => "attendancecheck1337@gmail.com",
-    :password => "@zSumMnogoQk",
-    :enable_starttls_auto => true
-  }
-
-  #Exception Notifier
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "Dont get crazy",
-    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
-    :exception_recipients => %w{ihzahariev@gmail.com}
-  }
+  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'} 
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
@@ -69,6 +50,28 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
+
+  config.action_mailer.default_url_options = { :host => 'hidden-shelf-43728.herokuapp.com'}
+
+  config.action_mailer.delivery_method = :smtp
+
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 25,
+    domain: "heroku.com", 
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"]
+  }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "Dont get crazy",
+    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
+    :exception_recipients => %w{ihzahariev@gmail.com}
+  }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
