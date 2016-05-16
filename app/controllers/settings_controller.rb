@@ -6,7 +6,9 @@ class SettingsController < ApplicationController
     @company = current_company
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
+    @worker = @company.workers
   end
+
 
   def update
     @company = current_company

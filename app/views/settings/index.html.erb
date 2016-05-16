@@ -46,12 +46,11 @@
 			</div>
 
 			<div class="sites_for_workers">
-				<span>Enter a site for the selected worker </span>
+				<span>Select a worker</span>
 				<select name="Contact[email_provider]">
-					<option></option>
-					<option>yahoo</option>
-					<option>gmail</option>
-					<option>msn</option>
+					<% @worker.each do |worker| %>
+						<option>worker</option>
+					<% end %>
 				</select>
 			</div>
 		<% end %>
