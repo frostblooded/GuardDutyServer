@@ -9,7 +9,8 @@
 company = Company.create company_name: 'frostblooded',
                          password: 'foobarrr',
                          password_confirmation: 'foobarrr',
-                         email: Faker::Internet.free_email
+                         email: Faker::Internet.free_email,
+                         confirmed_at: Time.now
 site = company.sites.create name: 'test site'
 
 5.times do |i|
