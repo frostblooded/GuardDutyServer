@@ -6,8 +6,6 @@ class SettingsController < ApplicationController
     @company = current_company
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
-    @worker = @company.workers
-    @site = @company.workers.sites
   end
 
 
