@@ -141,6 +141,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
     device = Device.find_by(gcm_token: 'a' * 152)
     assert_equal @worker, device.worker
+    assert_equal @site, device.site
   end
 
   test 'device registration returns error on inexistent company' do
@@ -262,5 +263,22 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '401', @response.code
     json_response = JSON.parse @response.body
     assert_equal "invalid token", json_response['error']
+  end
+
+  # Route creation
+  test 'creating route requires parameters' do
+    post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes?access_token=#{request_access_token}"
+    assert_equal '500', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal "positions is missing", json_response['error']
+  end
+
+  test 'creating route returns success on valid parameters' do
+    data = [{latitude: 42, longitude: 42}]
+    post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes",
+      {positions: data, access_token: request_access_token}
+    assert_equal '201', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal true, json_response['success']
   end
 end
