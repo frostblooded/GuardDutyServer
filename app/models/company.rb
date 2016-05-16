@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
   has_many :sites
   has_many :workers
   has_one :api_key, dependent: :destroy
-  has_settings :daily_mail, :shift_start, :shift_end
+  has_settings :daily_mail, :shift_start, :shift_end, :call_length
   
   enum role: [ :logged_in, :logged_out ]  
 
