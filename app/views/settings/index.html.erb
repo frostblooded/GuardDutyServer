@@ -47,11 +47,19 @@
 
 			<div class="select_worker">
 				<span>Select a worker</span>
-				<select name="Contact[email_provider]">
+				<select name="worker_selecter">
 					<% @worker.each do |worker| %>
 						<option><%= worker.name %></option>
 					<% end %>
 				</select>
+			</div>
+
+			<div class="select_site">
+				<span>Select a site</span>
+				<select name="site_selecter">
+					
+				</select>
+				
 			</div>
 		<% end %>
 
