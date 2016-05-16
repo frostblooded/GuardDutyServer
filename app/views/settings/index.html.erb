@@ -45,11 +45,11 @@
 				</div>
 			</div>
 
-			<div class="sites_for_workers">
+			<div class="select_worker">
 				<span>Select a worker</span>
 				<select name="Contact[email_provider]">
 					<% @worker.each do |worker| %>
-						<option>worker.name</option>
+						<option><%= worker.name %></option>
 					<% end %>
 				</select>
 			</div>
