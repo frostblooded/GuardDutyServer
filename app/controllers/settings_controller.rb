@@ -8,6 +8,7 @@ class SettingsController < ApplicationController
     @shift_end = params[:shift_end]
   end
 
+
   def update
     @company = current_company
     @daily_mail = params[:daily_mail]

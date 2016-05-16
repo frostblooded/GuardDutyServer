@@ -4,23 +4,15 @@
 			<%= worker.name %>
 			<!-- Have to put 24h limit -->
 			<% worker.calls.each do |call| %>
-				<p>
-					The following calls have been made today: <%= call %>
-				</p>
+			<p> Answered calls </p>
+              <% if call.answered? %>
+                <%= call.received_at.localtime %>
+              <% end %>
 
-				<p> 
-					Answered calls : 
-					<% if call.answered? %>
-						<%= call %>
-					<% end %>
-				</p>
-
-				<p> 
-					Unanswered calls :
-	            	<% if call.unanswered? %>
-	              		<%= call %>
-	            	<% end %>
-	            </p>
+            <p> Unanswered calls </p>
+              <% if !call.answered? %>
+                <%= call.received_at.localtime %>
+              <% end %>
 			<% end %>
 		</li>
 	<% end %>

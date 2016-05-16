@@ -45,7 +45,11 @@ class WorkerController < ApplicationController
     Worker.find(params[:id]).destroy
     flash[:success] = "Worker deleted"
     redirect_to workers_path
-  end  
+  end
+
+  def settings
+    
+  end
 
   private
 
