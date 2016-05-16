@@ -9,7 +9,8 @@ class Device < ActiveRecord::Base
   belongs_to :site
 
   def call
-    call = self.worker.calls.create
+    puts worker
+    call = worker.calls.create
 
     # Set the sent parameters
     # As of now most of them are hardcoded for testing purposes

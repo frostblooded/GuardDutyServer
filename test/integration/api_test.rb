@@ -28,7 +28,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'access token obtaining returns access token on company login success' do
     assert_difference 'ApiKey.count' do
       post '/api/v1/access_tokens', {company_name: @company.company_name,
-                                       password: @company.password}
+                                     password: @company.password}
     end
 
     json_response = JSON.parse @response.body
@@ -41,7 +41,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'access token obtaining returns error on nonexistent company' do
     assert_no_difference 'ApiKey.count' do
       post '/api/v1/access_tokens', {company_name: @company.company_name + 'a',
-                                       password: @company.password}
+                                     password: @company.password}
     end
 
     json_response = JSON.parse @response.body
@@ -52,7 +52,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'access token obtaining returns error on invalid company/password combination' do
     assert_no_difference 'ApiKey.count' do
       post '/api/v1/access_tokens', {company_name: @company.company_name,
-                                       password: @company.password + 'a'}
+                                     password: @company.password + 'a'}
     end
 
     json_response = JSON.parse @response.body
