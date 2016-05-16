@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get  'settings'    => 'settings#index'
   post 'settings'     => 'settings#update'
   get  'workers/:id' => 'worker#show'
+  post 'workers/:id'  => 'worker#update'
+
   resources :worker
   resources :site
   post 'sites'     => 'site#create'

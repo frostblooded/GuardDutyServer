@@ -14,7 +14,6 @@ class SettingsController < ApplicationController
     @daily_mail = params[:daily_mail]
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
-    @call_length = params[:call_length]
 
     if @daily_mail == "true"
       @company.settings(:daily_mail).daily_mail = "True"
@@ -24,15 +23,13 @@ class SettingsController < ApplicationController
       @company.settings(:daily_mail).daily_mail = "False"
       @company.settings(:daily_mail).save!
     end
+    
 
     @company.settings(:shift_start).shift_start = @shift_start
     @company.settings(:shift_start).save!
 
     @company.settings(:shift_end).shift_end = @shift_end
     @company.settings(:shift_end).save!
-
-    @company.settings(:call_length).call_length = @call_length
-    @company.settings(:call_length).save!
 
     flash[:success] = "Settings saved"
     redirect_to settings_path

@@ -25,30 +25,32 @@ class WorkerController < ApplicationController
 
   def update
     @worker = Worker.find(params[:id])
-    if @worker.update_attributes(worker_params)
-      redirect_to workers_path, :notice => "Changes saved!"
-    else
-      render 'edit'
-    end
+    @call_length = params[:call_length]
+
+    @worker.settings(:call_length).call_length = @call_length
+    @worker.settings(:call_length).save!
+
+    flash[:success] = "Settings saved"
+    redirect_to worker_path
   end
 
   def show
     @company = current_company 
     @worker = Worker.find(params[:id])
     @calls = @worker.calls
+    @call_length = params[:call_length]
     @company.settings(:daily_mail).daily_mail
     @company.settings(:shift_start).shift_start
     @company.settings(:shift_end).shift_end
+    @worker.settings(:call_length).call_length
+
+
   end
 
   def destroy
     Worker.find(params[:id]).destroy
     flash[:success] = "Worker deleted"
     redirect_to workers_path
-  end
-
-  def settings
-    
   end
 
   private
