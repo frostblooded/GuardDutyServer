@@ -13,13 +13,13 @@
 <ul class="workers">
   <% @worker.each do |worker| %>
     <li>
-    	<%=link_to worker_path(worker) do %>
-			<div class="workersInfo">
-        <%= worker.name %>
-      <% end %> 
+      <div class="workersInfo">
+      	<%=link_to worker_path(worker) do %>
+          <%= worker.name %>
+        <% end %>
         <span>|</span> <%= link_to "edit", edit_worker_path(worker)%>
         <span>|</span> <%= link_to "delete", worker, method: :delete,
-                                    data: { confirm: "You sure?" } %>
+                                      data: { confirm: "You sure?" } %>
       </div>
     </li>
   <% end %>
