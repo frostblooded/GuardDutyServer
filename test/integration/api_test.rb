@@ -66,18 +66,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '401', @response.code
   end
 
-  test 'protected data forbids access when token has expired' do
-    token = request_access_token
-    api_key = ApiKey.find_by(access_token: token)
-    api_key.created_at = (ApiKey::VALID_HOURS + 1).hours.ago
-    api_key.save
-
-    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: token }
-    assert_equal '401', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'expired token', json['error']
-  end
-
   test 'protected data returns error when company doesn\'t exist' do
     token = request_access_token
     get '/api/v1/companies/' + (@company.id + 1).to_s + '/sites', { access_token: token }
