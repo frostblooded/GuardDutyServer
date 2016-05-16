@@ -141,6 +141,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
     device = Device.find_by(gcm_token: 'a' * 152)
     assert_equal @worker, device.worker
+    assert_equal @site, device.site
   end
 
   test 'device registration returns error on inexistent company' do
@@ -273,7 +274,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'creating route returns success on valid parameters' do
-    data = [{latitude: 42, longitude: 42}].to_json
+    data = [{latitude: 42, longitude: 42}]
     post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes",
       {positions: data, access_token: request_access_token}
     assert_equal '201', @response.code

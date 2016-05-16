@@ -8,7 +8,7 @@ class Call < ActiveRecord::Base
   end
 
   def answered?
-    !self.received_at.nil?
+    !unanswered?
   end
 
   def unanswered?

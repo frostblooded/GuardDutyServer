@@ -1,0 +1,10 @@
+<h1>List of your sites</h1>
+<ul class="sites">
+  <% @site.each do |site| %>
+    <li>
+      <div class="workersInfo">
+        <%= site.name %>
+      </div>
+    </li>
+  <% end %>
+</ul>
