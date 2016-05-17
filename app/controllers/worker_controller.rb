@@ -25,13 +25,20 @@ class WorkerController < ApplicationController
 
   def update
     @worker = Worker.find(params[:id])
-    @call_length = params[:call_length]
+    if params[:call_length].present?
+      @call_length = params[:call_length]
 
-    @worker.settings(:call_length).call_length = @call_length
-    @worker.settings(:call_length).save!
+      @worker.settings(:call_length).call_length = @call_length
+      @worker.settings(:call_length).save!
 
-    flash[:success] = "Settings saved"
-    redirect_to worker_path
+      flash[:success] = "Settings saved"
+      redirect_to worker_path
+
+    elsif @worker.update_attributes(worker_params)
+      redirect_to workers_path, :notice => "Changes saved!"
+    elsif 
+      render 'edit'
+    end
   end
 
   def show
