@@ -3,7 +3,9 @@
   <% @site.each do |site| %>
     <li>
       <div class="workersInfo">
-        <%= site.name %>
+		<%=link_to site_path(site) do %>
+        	<%= site.name %>
+        <% end %>
       </div>
     </li>
   <% end %>

@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   resources :site
   post 'sites'     => 'site#create'
   get  'sites'     => 'site#index'
+  get  'sites/:id' => 'site#show'
 end
