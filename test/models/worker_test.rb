@@ -2,9 +2,12 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @worker = Worker.create name: "Example LName",
-    					              password: "Somethinglike",
-                            password_confirmation: "Somethinglike"
+    @company = Company.create(company_name: 'frostblooded', password: 'foobarrr')
+    @worker = @company.workers.create name: "Example LName",
+              					              password: "Somethinglike",
+                                      password_confirmation: "Somethinglike"
+    @site = Site.create(name: 'test site')
+    @worker.sites << @site
   end
 
   test "should be valid" do
@@ -34,4 +37,12 @@ class WorkerTest < ActiveSupport::TestCase
 		@worker.password = @worker.password_confirmation = "a" * 7
 		assert_not @worker.valid?
 	end
+
+  test "belongs to correct company" do
+    assert_equal @company, @worker.company
+  end
+
+  test "belongs to correct site" do
+    assert_equal @site, @worker.sites[0]
+  end
 end

@@ -2,7 +2,8 @@ require 'test_helper'
 
 class CallTest < ActiveSupport::TestCase
   def setup
-    @call = Call.create
+    @worker = Worker.create(name: 'Ivan Testov', password: 'foobarrr')
+    @call = @worker.calls.create
   end
 
   test 'call has token' do
