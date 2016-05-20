@@ -23,7 +23,6 @@ module API
 
     resource :devices do
       params do
-        requires :company_id, type: String
         requires :site_id, type: String
         requires :worker_id, type: String
         requires :password, type: String
@@ -31,9 +30,6 @@ module API
       end
 
       post '/' do
-        # Return error if company with such name doesn't exist
-        error!('company doesn\'t exist', 400) unless Company.exists? params['company_id']
-
         # Return error if site with such name doesn't exist
         error!('company has no such site', 400) unless Site.exists? params['site_id']
 

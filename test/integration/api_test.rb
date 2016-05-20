@@ -111,13 +111,12 @@ class ApiTest < ActionDispatch::IntegrationTest
     post '/api/v1/devices'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
-    assert_equal 'company_id is missing, site_id is missing, worker_id is missing, password is missing, gcm_token is missing', json['error']
+    assert_equal 'site_id is missing, worker_id is missing, password is missing, gcm_token is missing', json['error']
   end
 
-  test 'device registration creates device' do
+  test 'registers device' do
     assert_difference 'Device.count', 1 do
-      post '/api/v1/devices', {company_id: @company.id,
-                               site_id: @site.id,
+      post '/api/v1/devices', {site_id: @site.id,
                                worker_id: @worker.id,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -132,24 +131,9 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal @site, device.site
   end
 
-  test 'device registration returns error on inexistent company' do
-    assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_id: @company.id + 1,
-                               site_id: @site.id,
-                               worker_id: @worker.id,
-                               password: @worker.password,
-                               gcm_token: 'a' * 152}
-    end
-
-    assert_equal '400', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal 'company doesn\'t exist', json_response['error']
-  end
-
   test 'device registration returns error on inexistent site' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_id: @company.id,
-                               site_id: @site.id + 1,
+      post '/api/v1/devices', {site_id: @site.id + 1,
                                worker_id: @worker.id,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -162,8 +146,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on invalid names' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_id: @company.id,
-                               site_id: @site.id,
+      post '/api/v1/devices', {site_id: @site.id,
                                worker_id: @worker.id + 1,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -176,8 +159,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on wrong names/password combination' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {company_id: @company.id,
-                               site_id: @site.id,
+      post '/api/v1/devices', {site_id: @site.id,
                                worker_id: @worker.id,
                                password: @worker.password + 'a',
                                gcm_token: 'a' * 152}
