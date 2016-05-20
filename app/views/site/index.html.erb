@@ -3,8 +3,14 @@
   <% @site.each do |site| %>
     <li>
       <div class="workersInfo">
-        <%= site.name %>
+		<%=link_to site_path(site) do %>
+        	<%= site.name %>
+        <% end %>
       </div>
     </li>
   <% end %>
 </ul>
+
+<div class="create_site">
+	<%= link_to "Create new site here", new_site_path %>
+</div>

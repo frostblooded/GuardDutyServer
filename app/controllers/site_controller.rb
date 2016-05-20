@@ -10,6 +10,12 @@ class SiteController < ApplicationController
     end
 	end
 
+  def show
+    @site = Site.find(params[:id])
+    @company = current_company
+    
+  end
+
   def create
     @company = current_company
     @site = @company.sites.create(site_params) 
