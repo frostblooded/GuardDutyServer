@@ -43,6 +43,6 @@ class WorkerTest < ActiveSupport::TestCase
   end
 
   test "belongs to correct site" do
-    assert_equal @site, @worker.sites[0]
+    assert_equal @site, @worker.sites.first
   end
 end

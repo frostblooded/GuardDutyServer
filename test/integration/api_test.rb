@@ -82,28 +82,28 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'company has no such site', json['error']
   end
 
-  test 'protected data returns correct companies when access token is valid' do
+  test 'returns companies' do
     token = request_access_token
     get '/api/v1/companies/', { access_token: token }
     assert_equal '200', @response.code
     json = JSON.parse @response.body
-    assert_equal json[0]['id'], @company.id
+    assert_equal @company.id, json.first['id']
   end
 
-  test 'protected data returns correct sites when access token is valid' do
+  test 'returns sites' do
     token = request_access_token
     get '/api/v1/companies/' + @company.id.to_s + '/sites', { access_token: token }
     assert_equal '200', @response.code
     json = JSON.parse @response.body
-    assert_equal @site.id, json[0]['id']
+    assert_equal @site.id, json.first['id']
   end
 
-  test 'protected data returns correct workers when access token is valid' do
+  test 'returns workers' do
     token = request_access_token
     get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: token }
     assert_equal '200', @response.code
     json = JSON.parse @response.body
-    assert_equal @worker.id, json[0]['id']
+    assert_equal @worker.id, json.first['id']
   end
 
   # Device registration
@@ -114,7 +114,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'company_id is missing, site_id is missing, worker_id is missing, password is missing, gcm_token is missing', json['error']
   end
 
-  test 'device registration creates device on valid credentials' do
+  test 'device registration creates device' do
     assert_difference 'Device.count', 1 do
       post '/api/v1/devices', {company_id: @company.id,
                                site_id: @site.id,
@@ -189,7 +189,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Device signout
-  test 'device signout works successfully if parameters are valid' do
+  test 'device signs out' do
     assert_difference 'Device.count', -1 do
       delete '/api/v1/devices/' + @device.gcm_token
     end
@@ -212,7 +212,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Check device login status
-  test 'checking device login status returns correct result' do
+  test 'checks device login status' do
     get '/api/v1/devices/' + @device.gcm_token
     assert_equal '200', @response.code
     json_response = JSON.parse @response.body
@@ -225,7 +225,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   # Respond to call
-  test 'responding to call succeeds with valid parameters' do
+  test 'responds to call' do
     put '/api/v1/calls/' + @call.id.to_s, {call_token: @call.token, time_left: 59}
     assert_equal '200', @response.code
     json_response = JSON.parse @response.body
@@ -261,7 +261,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal "positions is missing", json_response['error']
   end
 
-  test 'creating route returns success on valid parameters' do
+  test 'creates route' do
     data = [{latitude: 42, longitude: 42}]
     post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes",
       {positions: data, access_token: request_access_token}
