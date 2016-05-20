@@ -12,7 +12,5 @@ module API
     # Mount the other API files
     mount API::ProtectedData
     mount API::AccessTokens
-    mount API::Devices
-    mount API::Calls
   end
 end

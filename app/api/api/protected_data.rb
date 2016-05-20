@@ -28,12 +28,11 @@ module API
       end
     end
 
-    # Set parameter requirements for data requests
-    params do
-      requires :access_token, type: String
-    end
+    mount API::Devices
+    mount API::Calls
 
     resource :companies do
+      # Return all companies
       get '/' do
         Company.all
       end
@@ -44,6 +43,7 @@ module API
         end
 
         resource :sites do
+          # Return all of the company's sites
           get '/' do
             params_company.sites
           end
@@ -53,6 +53,7 @@ module API
               error!("company has no such site", 400) unless Site.exists? id: params["site_id"].to_i
             end
 
+            # Return all of the sites' workers
             get :workers do
               params_site.workers
             end
@@ -61,6 +62,7 @@ module API
               requires :positions
             end
 
+            # Create a new route
             post :routes do
               r = params_site.routes.create(name: 'test route')
 

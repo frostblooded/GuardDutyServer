@@ -12,7 +12,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   def request_access_token
     post '/api/v1/access_tokens', {company_name: @company.company_name,
-                                     password: @company.password}
+                                   password: @company.password}
     json = JSON.parse @response.body
     json['access_token']
   end
@@ -60,7 +60,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'invalid company name/password combination', json_response['error']
   end
 
-  # Protected data
+  # Data
   test 'protected data forbids access when token is invalid' do
     get '/api/v1/companies/' + @company.id.to_s + '/sites/' + @site.id.to_s + '/workers', { access_token: request_access_token + 'a' }
     assert_equal '401', @response.code
@@ -108,7 +108,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Device registration
   test 'device registration requires parameters' do
-    post '/api/v1/devices'
+    post '/api/v1/devices', {access_token: request_access_token}
     assert_equal '500', @response.code
     json = JSON.parse @response.body
     assert_equal 'site_id is missing, worker_id is missing, password is missing, gcm_token is missing', json['error']
@@ -116,7 +116,8 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'registers device' do
     assert_difference 'Device.count', 1 do
-      post '/api/v1/devices', {site_id: @site.id,
+      post '/api/v1/devices', {access_token: request_access_token,
+                               site_id: @site.id,
                                worker_id: @worker.id,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -133,7 +134,8 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on inexistent site' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {site_id: @site.id + 1,
+      post '/api/v1/devices', {access_token: request_access_token,
+                               site_id: @site.id + 1,
                                worker_id: @worker.id,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -146,7 +148,8 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on invalid names' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {site_id: @site.id,
+      post '/api/v1/devices', {access_token: request_access_token,
+                               site_id: @site.id,
                                worker_id: @worker.id + 1,
                                password: @worker.password,
                                gcm_token: 'a' * 152}
@@ -159,7 +162,8 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'device registration returns error on wrong names/password combination' do
     assert_no_difference 'Device.count' do
-      post '/api/v1/devices', {site_id: @site.id,
+      post '/api/v1/devices', {access_token: request_access_token,
+                               site_id: @site.id,
                                worker_id: @worker.id,
                                password: @worker.password + 'a',
                                gcm_token: 'a' * 152}
@@ -173,7 +177,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Device signout
   test 'device signs out' do
     assert_difference 'Device.count', -1 do
-      delete '/api/v1/devices/' + @device.gcm_token
+      delete '/api/v1/devices/' + @device.gcm_token, {access_token: request_access_token}
     end
 
     assert_equal '200', @response.code
@@ -185,7 +189,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     token = 'b' * 151 + 'a'
 
     assert_no_difference 'Device.count' do
-      delete '/api/v1/devices/' + token
+      delete '/api/v1/devices/' + token, {access_token: request_access_token}
     end
 
     assert_equal '400', @response.code
@@ -195,12 +199,12 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Check device login status
   test 'checks device login status' do
-    get '/api/v1/devices/' + @device.gcm_token
+    get '/api/v1/devices/' + @device.gcm_token, {access_token: request_access_token}
     assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['device_exists']
 
-    get '/api/v1/devices/' + 'c' * 152
+    get '/api/v1/devices/' + 'c' * 152, {access_token: request_access_token}
     assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal false, json_response['device_exists']
@@ -208,7 +212,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Respond to call
   test 'responds to call' do
-    put '/api/v1/calls/' + @call.id.to_s, {call_token: @call.token, time_left: 59}
+    put '/api/v1/calls/' + @call.id.to_s, {access_token: request_access_token, call_token: @call.token, time_left: 59}
     assert_equal '200', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['success']
@@ -222,7 +226,7 @@ class ApiTest < ActionDispatch::IntegrationTest
       random_id = Random.rand(1..10000000)
     end
 
-    put '/api/v1/calls/1', {call_token: '', time_left: 59}
+    put '/api/v1/calls/1', {access_token: request_access_token, call_token: '', time_left: 59}
     assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal "call doesn\'t exist", json_response['error']
@@ -237,8 +241,8 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Route creation
   test 'creating route requires parameters' do
-    post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes?access_token=#{request_access_token}"
-    assert_equal '500', @response.code
+    post "/api/v1/companies/#{@company.id.to_s}/sites/#{@site.id.to_s}/routes", {access_token: request_access_token}
+    # assert_equal '500', @response.code
     json_response = JSON.parse @response.body
     assert_equal "positions is missing", json_response['error']
   end
