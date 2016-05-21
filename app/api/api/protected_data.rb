@@ -32,11 +32,6 @@ module API
     mount API::Calls
 
     resource :companies do
-      # Return all companies
-      get '/' do
-        Company.all
-      end
-
       route_param :company_id do
         before do
           error!("inexsitent company", 400) unless Company.exists? id: params["company_id"].to_i
@@ -45,7 +40,7 @@ module API
         resource :sites do
           # Return all of the company's sites
           get '/' do
-            params_company.sites
+            params_company.sites.select(:id, :name)
           end
 
           route_param :site_id do
@@ -55,7 +50,7 @@ module API
 
             # Return all of the sites' workers
             get :workers do
-              params_site.workers
+              params_site.workers.select(:id, :name)
             end
 
             params do
