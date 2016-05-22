@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@site) do |f| %>
+    <%= form_for(new_site_route_path) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
     
-      <%= f.submit "Create new site", class: "btn btn-primary" %>
+      <%= f.submit "Create new route", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

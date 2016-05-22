@@ -5,3 +5,7 @@
 <div class="site_name">
 	<span><%= @site.name %></span>
 </div>
+
+<div class = "button">
+	<%= link_to '<button type="button">Add new route</button>'.html_safe, new_site_route_path(@site, @route) %>
+</div>

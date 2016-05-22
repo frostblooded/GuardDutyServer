@@ -19,8 +19,13 @@ Rails.application.routes.draw do
   post 'workers/:id'  => 'worker#update'
 
   resources :worker
-  resources :site
   post 'sites'     => 'site#create'
   get  'sites'     => 'site#index'
-  get  'sites/:id' => 'site#show'
+  get  'sites/:id' => 'site#show', as: :current_site
+
+  post '/site/:site_id/route/new' => 'route#new'
+
+  resources :site do
+    resources :route
+  end
 end
