@@ -1,0 +1,10 @@
+<h1>List of your routes</h1>
+<ul class="sites">
+  <% @route.each do |route| %>
+    <li>
+      <div class="workersInfo">
+        <%= route.name %>
+      </div>
+    </li>
+  <% end %>
+</ul>

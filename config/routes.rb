@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get  'sites'     => 'site#index'
   get  'sites/:id' => 'site#show', as: :current_site
 
-  post '/site/:site_id/route/new' => 'route#new'
+  post '/site/:site_id/route/new' => 'route#create'
+
 
   resources :site do
     resources :route
