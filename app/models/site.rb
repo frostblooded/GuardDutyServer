@@ -8,5 +8,7 @@ class Site < ActiveRecord::Base
   has_many :devices, dependent: :destroy
   belongs_to :company
 
+  has_settings :shift_start, :shift_end
+
   validates :name, presence: true, length: { maximum: 40 }
 end

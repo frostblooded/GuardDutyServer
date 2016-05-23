@@ -13,7 +13,24 @@ class SiteController < ApplicationController
   def show
     @site = Site.find(params[:id])
     @company = current_company
+    @site.settings(:shift_start).shift_start
+    @site.settings(:shift_end).shift_end
     
+  end
+
+  def update
+    @site = Site.find(params[:id])
+    @shift_start = params[:shift_start]
+    @shift_end = params[:shift_end]
+
+    @site.settings(:shift_start).shift_start = @shift_start
+    @site.settings(:shift_start).save!
+
+    @site.settings(:shift_end).shift_end = @shift_end
+    @site.settings(:shift_end).save!
+
+    flash[:success] = "Settings saved"
+    redirect_to current_site_path
   end
 
   def create

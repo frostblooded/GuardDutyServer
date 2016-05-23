@@ -6,6 +6,36 @@
 	<span><%= @site.name %></span>
 </div>
 
+<p>Start of the shift <%= @site.settings(:shift_start).shift_start %> </p>
+<p>End of the shift <%= @site.settings(:shift_end).shift_end %> </p>
+
+<%= form_tag do %>
+  <div class="settings">
+    <div class ="shift_start_end">
+      <span>Enter the start of the shift!</span>
+          <div class="input-group bootstrap-timepicker timepicker">
+              <input id="timepicker1" name="shift_start" type="text" class="form-control input-small">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+          </div>
+          <div class ="shift_end">
+        <span>Enter the end of the shift!</span>
+            <div class="input-group bootstrap-timepicker timepicker">
+                <input id="timepicker2" name="shift_end" type="text" class="form-control input-small">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+            <button type="Submit" class="submit_button"> Save changes </button>
+        </div>
+      <script type="text/javascript">
+            $('#timepicker1').timepicker();
+        </script>
+
+        <script type="text/javascript">
+            $('#timepicker2').timepicker();
+        </script>
+    </div>
+  </div>
+<% end %>
+
 <div class = "button">
 	<%= link_to '<button type="button">Add new route</button>'.html_safe, new_site_route_path(@site, @route) %>
 </div>
