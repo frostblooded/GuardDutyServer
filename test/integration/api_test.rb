@@ -82,14 +82,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal 'company has no such site', json['error']
   end
 
-  test 'returns companies' do
-    token = request_access_token
-    get '/api/v1/companies/', { access_token: token }
-    assert_equal '200', @response.code
-    json = JSON.parse @response.body
-    assert_equal @company.id, json.first['id']
-  end
-
   test 'returns sites' do
     token = request_access_token
     get '/api/v1/companies/' + @company.id.to_s + '/sites', { access_token: token }
