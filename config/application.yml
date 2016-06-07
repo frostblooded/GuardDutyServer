@@ -3,7 +3,7 @@ RACK_ENV: "development"
 PORT: "3000"
 SENDGRID_PASSWORD: "0pkiq1j91716"
 SENDGRID_USERNAME: "app49921759@heroku.com"
-
+SECRET_KEY_BASE: "42213c473b19445be50e67e5e6b5f9125fbda887b0409488724508af99502700350be7d001b16a30e8d7aaa0e26e040ead3d396a0d371a2b85ea736012a8da46"
 
 # These can be pushed to heroku with the command
 # `figaro heroku:set -e production`
