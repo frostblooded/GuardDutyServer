@@ -43,6 +43,12 @@ class SiteController < ApplicationController
     end
   end	
 
+  def destroy
+    Site.find(params[:id]).destroy
+    flash[:success] = "Site destroyed"
+    redirect_to site_index_path
+  end
+
 	private
 
   def site_params
