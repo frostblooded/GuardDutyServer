@@ -12,6 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+  config.case_insensitive_keys = [:email, :company_name]
 
   config.mailer_sender = ENV["SENDGRID_USERNAME"]
 
