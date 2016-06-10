@@ -5,6 +5,7 @@ class Company::SessionsController < Devise::SessionsController
   def lowercase_name
     self.company_name = self.company_name.downcase
   end
+  
   # GET /resource/sign_in
   # def new
   #   super

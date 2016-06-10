@@ -20,38 +20,19 @@
 						</div>
 					</div>
 				</div>
-
-				<div class ="shift_start_end">
-					<span>Enter the start of the shift!</span>
-			        <div class="input-group bootstrap-timepicker timepicker">
-			            <input id="timepicker1" name="shift_start" type="text" class="form-control input-small">
-			            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-			        </div>
-			        <div class ="shift_end">
-						<span>Enter the end of the shift!</span>
-				        <div class="input-group bootstrap-timepicker timepicker">
-				            <input id="timepicker2" name="shift_end" type="text" class="form-control input-small">
-				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-				        </div>
-				        <button type="Submit" class="submit_button"> Save changes </button>
-				    </div>
-					<script type="text/javascript">
-	        			$('#timepicker1').timepicker();
-	    			</script>
-
-	    			<script type="text/javascript">
-	        			$('#timepicker2').timepicker();
-	    			</script>
-				</div>
+				<button type="Submit" class="submit_button"> Save changes </button>
 			</div>
+			<script type="text/javascript">
+    			$('#timepicker1').timepicker();
+			</script>
+
+			<script type="text/javascript">
+    			$('#timepicker2').timepicker();
+			</script>
 		<% end %>
 
 		<div class ="change_password">
 			<%= link_to "Want to edit your email or credentials?", edit_company_registration_path %>
-		</div>
-
-		<div class="create_site">
-			<%= link_to "Create new site here", new_site_path %>
 		</div>
   	</body>
 </html>
