@@ -1,6 +1,6 @@
 class Company::SessionsController < Devise::SessionsController
   before_filter :configure_sign_in_params
-  before_save :lowercase_name
+  before_create :lowercase_name
 
   def lowercase_name
     self.company_name = self.company_name.downcase
