@@ -2,6 +2,11 @@ class Company::RegistrationsController < Devise::RegistrationsController
   before_action :require_no_authentication, only: [:new, :create, :cancel]
   before_action :authenticate_scope!, only: [:edit, :update, :destroy]
   before_filter :configure_permitted_parameters
+  before_save :lowercase_name
+
+  def lowercase_name
+    self.company_name = self.company_name.downcase
+  end
 
   # GET /resource/sign_up
   #def new
