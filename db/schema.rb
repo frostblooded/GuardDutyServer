@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515150309) do
+ActiveRecord::Schema.define(version: 20160614102939) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -53,17 +53,6 @@ ActiveRecord::Schema.define(version: 20160515150309) do
   add_index "companies", ["company_name"], name: "index_companies_on_company_name", unique: true
   add_index "companies", ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
   add_index "companies", ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
-
-  create_table "devices", force: :cascade do |t|
-    t.string   "gcm_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "worker_id"
-    t.integer  "site_id"
-  end
-
-  add_index "devices", ["site_id"], name: "index_devices_on_site_id"
-  add_index "devices", ["worker_id"], name: "index_devices_on_worker_id"
 
   create_table "positions", force: :cascade do |t|
     t.float    "latitude"

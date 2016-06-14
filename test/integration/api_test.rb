@@ -6,7 +6,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     @site = @company.sites.create(name: 'test site')
     @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
 
-    @device = Device.create(gcm_token: 'b' * 152)
     @call = @worker.calls.create
   end
 
