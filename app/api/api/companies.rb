@@ -29,6 +29,14 @@ module API
               error!("company has no such site", 400) unless Site.exists? id: params["site_id"].to_i
             end
 
+            get :settings do
+              {
+                time: Time.now,
+                shift_start: 13,
+                shift_end: 20
+              }
+            end
+
             # Return all of the sites' workers
             get :workers do
               params_site.workers.select(:id, :name)

@@ -125,6 +125,15 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal @worker.id, json.first['id']
   end
 
+  test 'returns site settings' do
+    get "/api/v1/companies/#{@company.id}/sites/#{@site.id}/settings", { access_token: request_access_token }
+    assert_equal '200', @response.code
+    json = JSON.parse @response.body
+    assert_in_delta Time.now, Time.parse(json['time']), 1.second
+    assert_equal @site.settings(:shift_start).shift_start, json['shift_start']
+    assert_equal @site.settings(:shift_end).shift_end, json['shift_end']
+  end
+
   # Respond to call
   test 'responds to call' do
     put '/api/v1/calls/' + @call.id.to_s, {access_token: request_access_token, call_token: @call.token, time_left: 59}
