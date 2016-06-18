@@ -31,7 +31,6 @@ module API
 
             get :settings do
               {
-                time: Time.now,
                 shift_start: params_site.settings(:shift_start).shift_start,
                 shift_end: params_site.settings(:shift_end).shift_end
               }
