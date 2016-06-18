@@ -7,7 +7,7 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  has_settings :shift_start, :shift_end
+  has_settings :shift_start, :shift_end, :call_length
 
   validates :name, presence: true, length: { maximum: 40 }
 end

@@ -1,15 +1,6 @@
 <div class="worker">
 	<p><%= @company.company_name %> </p>
   <p><%= @worker.name %></p>
-  <p>Range : <%= @worker.settings(:call_length).call_length %></p>
-  <%= form_tag do %>
-    <div class="call_length">
-      <span>Enter range between every call (in minutes)</span>
-      <input id="call_length" name="call_length" min="5" max="60" type="number" />
-      <button type="Submit" class="submit_button"> Save changes </button>
-    </div>
-  <% end %>
-
   <p>Calls</p>
 </div>
 <div class="wtable">

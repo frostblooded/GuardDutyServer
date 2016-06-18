@@ -15,13 +15,18 @@ class SiteController < ApplicationController
     @company = current_company
     @site.settings(:shift_start).shift_start
     @site.settings(:shift_end).shift_end
+    @site.settings(:call_length).call_length
     
   end
 
   def update
     @site = Site.find(params[:id])
+    @call_length = params[:call_length]
     @shift_start = params[:shift_start]
     @shift_end = params[:shift_end]
+
+    @site.settings(:call_length).call_length = @call_length
+    @site.settings(:call_length).save!
 
     @site.settings(:shift_start).shift_start = @shift_start
     @site.settings(:shift_start).save!
