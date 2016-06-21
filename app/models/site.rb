@@ -7,7 +7,10 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  has_settings :shift_start, :shift_end, :call_length
+  has_settings do |s|
+    s.key :call, :defaults => { :interval => '' }
+    s.key :shift, :defaults => { :start => '', :end => ''}
+  end
 
   validates :name, presence: true, length: { maximum: 40 }
 end

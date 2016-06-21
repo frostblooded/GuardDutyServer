@@ -5,16 +5,15 @@
 <div class="site_name">
 	<span><%= @site.name %></span>
 </div>
+<p>Start of the shift: <%= @site.settings(:shift).start %> </p>
+<p>End of the shift: <%= @site.settings(:shift).end %> </p>
 
-<p>Start of the shift <%= @site.settings(:shift_start).shift_start %> </p>
-<p>End of the shift <%= @site.settings(:shift_end).shift_end %> </p>
-
-<p>Call length : <%= @site.settings(:call_length).call_length %></p>
+<p>Call interval : <%= @site.settings(:call).interval %></p>
 <%= form_tag do %>
   <div class="settings">
-    <div class="call_length">
-      <span>Enter call length</span>
-      <input id="call_length" name="call_length" min="5" max="60" type="number" />
+    <div class="call_interval">
+      <span>Enter call interval</span>
+      <input id="call_interval" name="call_interval" min="5" max="60" type="number" />
     </div>
     <div class ="shift_start_end">
       <span>Enter the start of the shift!</span>

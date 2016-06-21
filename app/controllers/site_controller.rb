@@ -13,26 +13,26 @@ class SiteController < ApplicationController
   def show
     @site = Site.find(params[:id])
     @company = current_company
-    @site.settings(:shift_start).shift_start
-    @site.settings(:shift_end).shift_end
-    @site.settings(:call_length).call_length
+    @site.settings(:shift).start
+    @site.settings(:shift).end
+    @site.settings(:call).interval
     
   end
 
   def update
     @site = Site.find(params[:id])
-    @call_length = params[:call_length]
-    @shift_start = params[:shift_start]
-    @shift_end = params[:shift_end]
+    @interval = params[:call_interval]
+    @start = params[:shift_start]
+    @end = params[:shift_end ]
 
-    @site.settings(:call_length).call_length = @call_length
-    @site.settings(:call_length).save!
+    @site.settings(:call).interval = @interval
+    @site.settings(:call).save!
 
-    @site.settings(:shift_start).shift_start = @shift_start
-    @site.settings(:shift_start).save!
+    @site.settings(:shift).start = @start
+    @site.settings(:shift).save!
 
-    @site.settings(:shift_end).shift_end = @shift_end
-    @site.settings(:shift_end).save!
+    @site.settings(:shift).end = @end
+    @site.settings(:shift).save!
 
     flash[:success] = "Settings saved"
     redirect_to current_site_path
