@@ -131,6 +131,7 @@ class ApiTest < ActionDispatch::IntegrationTest
     json = JSON.parse @response.body
     assert_equal @site.settings(:shift).start, json['shift_start']
     assert_equal @site.settings(:shift).end, json['shift_end']
+    assert_equal @site.settings(:call).interval, json['call_interval']
   end
 
   # Respond to call

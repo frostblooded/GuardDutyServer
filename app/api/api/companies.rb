@@ -32,7 +32,8 @@ module API
             get :settings do
               {
                 shift_start: params_site.settings(:shift).start,
-                shift_end: params_site.settings(:shift).end
+                shift_end: params_site.settings(:shift).end,
+                call_interval: params_site.settings(:call).interval
               }
             end
 
