@@ -1,5 +1,5 @@
 class SiteController < ApplicationController
-	def new
+  def new
 		@site = Site.new
 	end
 
