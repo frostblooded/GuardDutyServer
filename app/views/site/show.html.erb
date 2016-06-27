@@ -5,6 +5,7 @@
 <div class="site_name">
 	<span><%= @site.name %></span>
 </div>
+
 <%= form_tag do %>
   <div class="settings">
     <div class="call_interval">
@@ -27,4 +28,6 @@
       </div>
     </div>
   </div>
-<% end %> 
+<% end %>
+
+<%= javascript_include_tag('timeinput.js') %>
