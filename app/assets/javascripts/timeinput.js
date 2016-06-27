@@ -1,1 +1,3 @@
- $(function() { $('#timepicker2').timepicker();});
+$(document).ready(function() {
+	$('.timepicker').timepicker({defaultTime: 'value'});
+});

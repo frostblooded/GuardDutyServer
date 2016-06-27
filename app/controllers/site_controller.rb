@@ -13,10 +13,6 @@ class SiteController < ApplicationController
   def show
     @site = Site.find(params[:id])
     @company = current_company
-    @site.settings(:shift).start
-    @site.settings(:shift).end
-    @site.settings(:call).interval
-    
   end
 
   def update

@@ -13,28 +13,21 @@
   <div class="settings">
     <div class="call_interval">
       <span>Enter call interval</span>
-      <input id="call_interval" name="call_interval" min="5" max="60" type="number" />
+      <input id="call_interval" name="call_interval" min="5" max="60" type="number" value="<%= @site.settings(:call).interval %>"/>
     </div>
     <div class ="shift_start_end">
       <span>Enter the start of the shift!</span>
       <div class="input-group bootstrap-timepicker timepicker">
-        <input id="timepicker1" name="shift_start" type="text" class="form-control input-small">
+        <input name="shift_start" type="text" class="form-control input-small timepicker" value="<%= @site.settings(:shift).start %>">
         <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
       </div>
       <div class ="shift_end">
         <span>Enter the end of the shift!</span>
         <div class="input-group bootstrap-timepicker timepicker">
-          <input id="timepicker2" name="shift_end" type="text" class="form-control input-small">
+          <input name="shift_end" type="text" class="form-control input-small timepicker" value="<%= @site.settings(:shift).end %>">
           <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
         </div>
         <button type="Submit" class="submit_button"> Save changes </button>
-        <script type="text/javascript">
-            $('#timepicker1').timepicker();
-        </script>
-
-        <script type="text/javascript">
-            $('#timepicker2').timepicker();
-        </script>
       </div>
     </div>
   </div>
