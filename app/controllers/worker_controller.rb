@@ -46,7 +46,7 @@ class WorkerController < ApplicationController
     @worker = Worker.find(params[:id])
     @calls = @worker.calls
     @call_length = params[:call_length]
-    @company.settings(:daily_mail).daily_mail
+    @company.settings(:mail).daily
     @company.settings(:shift_start).shift_start
     @company.settings(:shift_end).shift_end
     @worker.settings(:call_length).call_length

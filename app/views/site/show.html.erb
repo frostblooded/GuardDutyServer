@@ -4,6 +4,10 @@
 
 <div class="site_name">
 	<span><%= @site.name %></span>
+</div>  
+
+<div class="site_name">
+  <span><%= @current_worker%></span>
 </div>
 
 <%= form_tag do %>
@@ -11,6 +15,15 @@
     <div class="call_interval">
       <span>Enter call interval</span>
       <input id="call_interval" name="call_interval" min="5" max="60" type="number" value="<%= @site.settings(:call).interval %>"/>
+    </div>
+
+    <div class="worker_attachment">
+      <span>Enter a worker you would want to attach </span>
+      <select class="form-control" name="attached_worker" id="attached_worker">
+        <% @worker.each do |worker| %>
+          <option name="attached_worker" id="attached_worker"><%= worker.name %></option>
+        <% end %>
+      </select>
     </div>
     <div class ="shift_start_end">
       <span>Enter the start of the shift!</span>
