@@ -26,10 +26,8 @@ class WorkerController < ApplicationController
   def update
     @worker = Worker.find(params[:id])
     if params[:call_length].present?
-      @call_length = params[:call_length]
-
-      @worker.settings(:call_length).call_length = @call_length
-      @worker.settings(:call_length).save!
+      @worker.settings(:call).interval = params[:call_interval]
+      @worker.settings(:call).save!
 
       flash[:success] = "Settings saved"
       redirect_to worker_path
@@ -47,11 +45,6 @@ class WorkerController < ApplicationController
     @calls = @worker.calls
     @call_length = params[:call_length]
     @company.settings(:mail).daily
-    @company.settings(:shift_start).shift_start
-    @company.settings(:shift_end).shift_end
-    @worker.settings(:call_length).call_length
-
-
   end
 
   def destroy
