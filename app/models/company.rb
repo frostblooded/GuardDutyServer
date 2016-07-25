@@ -34,4 +34,8 @@ class Company < ActiveRecord::Base
   def send_report_mail
     CompanyNotifier.sample_email(self).deliver
   end
+
+  def send_report_mail_second_email
+    
+  end
 end

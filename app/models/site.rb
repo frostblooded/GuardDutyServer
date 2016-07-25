@@ -8,6 +8,7 @@ class Site < ActiveRecord::Base
   belongs_to :company
 
   has_settings do |s|
+    s.key :attached_worker, :defaults => { :name => ''}
     s.key :call, :defaults => { :interval => '' }
     s.key :shift, :defaults => { :start => '', :end => ''}
   end

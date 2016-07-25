@@ -14,7 +14,6 @@ class SettingsController < ApplicationController
     if @daily_mail == "true"
       @company.settings(:mail).daily = "True"
       @company.settings(:mail).save!
-      @daily_mail == true
     else
       @company.settings(:mail).daily = "False"
       @company.settings(:mail).save!

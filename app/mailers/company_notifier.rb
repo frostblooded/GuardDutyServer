@@ -4,5 +4,10 @@ class CompanyNotifier < ApplicationMailer
   def sample_email(company)
     @company = company
     mail(to: @company.email, subject: "Worker's report")
-  end  
+  end
+
+  def second_email(email)
+  	@email = email
+  	mail(to: @email, subject: "Worker's report")
+   end 
 end
