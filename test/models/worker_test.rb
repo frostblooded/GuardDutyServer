@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @company = Company.create(company_name: 'frostblooded', password: 'foobarrr')
+    @company = Company.create(name: 'frostblooded', password: 'foobarrr')
     @worker = @company.workers.create name: "Example LName",
               					              password: "Somethinglike",
                                       password_confirmation: "Somethinglike"

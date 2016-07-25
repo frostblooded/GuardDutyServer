@@ -2,18 +2,18 @@ require 'test_helper'
 
 class CompanyTest < ActiveSupport::TestCase
 	def setup 
-		@company = Company.create(company_name: "Foobar", email: "dasdas@email.com", 
+		@company = Company.create(name: "Foobar", email: "dasdas@email.com", 
 														  password: "asjfsajkdsa", 
 														  password_confirmation: "asjfsajkdsa")
 	end
 
 	test "company name should be present" do
-		@company.company_name = "   "
+		@company.name = "   "
 		assert_not @company.valid?
 	end
 
 	test "company name should not be too long" do
-		@company.company_name = "a" * 51
+		@company.name = "a" * 51
 		assert_not @company.valid?
 	end
 
@@ -24,7 +24,7 @@ class CompanyTest < ActiveSupport::TestCase
 	end
 
   test "company name should be downcase" do
-    assert @company.company_name == @company.company_name.downcase
+    assert @company.name == @company.name.downcase
   end
 	
 	test "email should be valid" do

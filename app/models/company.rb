@@ -12,14 +12,14 @@ class Company < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  validates :company_name, presence: true, length: { maximum: 50},
+  validates :name, presence: true, length: { maximum: 50},
                            uniqueness: true
 
   validates_confirmation_of :password
   before_save :lowercase_name
 
   def lowercase_name
-    self.company_name = self.company_name.downcase
+    self.name = self.name.downcase
   end
 
   # Documentation says email_required? and email_changed? should be implemented as follows:
