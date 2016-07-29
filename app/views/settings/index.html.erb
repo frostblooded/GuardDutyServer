@@ -20,8 +20,14 @@
 						</div>
 					</div>
 				</div>
-				<button type="Submit" class="submit_button"> Save changes </button>
+
+				<div class="additional_email">
+					<span> Add email man </span>
+					<input type="email" name="add_email" id="add_email"/>
+				</div>
+				<button type="Submit" value="update" class="submit_button"> Save changes </button>
 			</div>
+			
 			<script type="text/javascript">
     			$('#timepicker1').timepicker();
 			</script>
@@ -34,5 +40,7 @@
 		<div class ="change_password">
 			<%= link_to "Want to edit your email or credentials?", edit_company_registration_path %>
 		</div>
+
+		<%= @company.settings(:mail).additional %>
   	</body>
 </html>

@@ -14,3 +14,7 @@ end
 every 24.hours do
   runner 'CompanyHelper.send_report_mail'
 end
+
+every 24.hours do 
+  runner 'CompanyHelper.send_report_mail_additional_email'
+end

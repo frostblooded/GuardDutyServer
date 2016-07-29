@@ -6,8 +6,9 @@ class CompanyNotifier < ApplicationMailer
     mail(to: @company.email, subject: "Worker's report")
   end
 
-  def second_email(email)
-  	@email = email
-  	mail(to: @email, subject: "Worker's report")
+  def additional_email(company)
+  	@company = company
+  	@reciever = @company.settings(:mail).additional
+  	mail(to: @reciever, subject: "Worker's report")
    end 
 end

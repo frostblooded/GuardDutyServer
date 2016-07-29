@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
   has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
   has_settings do |s|
-    s.key :mail, :defaults => { :daily => '' }
+    s.key :mail, :defaults => { :daily => '', :additional => '' }
   end
   
   enum role: [ :logged_in, :logged_out ]  
@@ -35,7 +35,7 @@ class Company < ActiveRecord::Base
     CompanyNotifier.sample_email(self).deliver
   end
 
-  def send_report_mail_second_email
-    
+  def send_report_mail_additional_email
+    CompanyNotifier.additional_email(self).deliver
   end
 end
