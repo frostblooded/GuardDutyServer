@@ -40,7 +40,7 @@ class Company::RegistrationsController < Devise::RegistrationsController
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:company_name, :email, :password, :pasword_confirmation) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :pasword_confirmation) }
   end
 
   # If you have extra params to permit, append them to the sanitizer.

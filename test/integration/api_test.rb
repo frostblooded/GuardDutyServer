@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ApiTest < ActionDispatch::IntegrationTest
   def setup
-    @company = Company.create(company_name: 'test', password: 'foobarrr')
+    @company = Company.create(name: 'test', password: 'foobarrr')
     @site = @company.sites.create(name: 'test site')
     @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
 
@@ -10,7 +10,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   def request_access_token
-    post '/api/v1/access_tokens', {company_name: @company.company_name,
+    post '/api/v1/access_tokens', {name: @company.name,
                                    password: @company.password}
     json = JSON.parse @response.body
     json['access_token']
@@ -21,12 +21,12 @@ class ApiTest < ActionDispatch::IntegrationTest
     post '/api/v1/access_tokens'
     assert_equal '500', @response.code
     json = JSON.parse @response.body
-    assert_equal 'company_name is missing, password is missing', json['error']
+    assert_equal 'name is missing, password is missing', json['error']
   end
 
   test 'access token obtaining returns access token on company login success' do
     assert_difference 'ApiKey.count' do
-      post '/api/v1/access_tokens', {company_name: @company.company_name,
+      post '/api/v1/access_tokens', {name: @company.name,
                                      password: @company.password}
     end
 
@@ -34,12 +34,12 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_equal '201', @response.code
     assert_not json_response['access_token'].nil?
     assert_not json_response['company_id'].nil?
-    assert_not json_response['company_name'].nil?
+    assert_not json_response['name'].nil?
   end
 
   test 'access token obtaining returns error on nonexistent company' do
     assert_no_difference 'ApiKey.count' do
-      post '/api/v1/access_tokens', {company_name: @company.company_name + 'a',
+      post '/api/v1/access_tokens', {name: @company.name + 'a',
                                      password: @company.password}
     end
 
@@ -50,7 +50,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test 'access token obtaining returns error on invalid company/password combination' do
     assert_no_difference 'ApiKey.count' do
-      post '/api/v1/access_tokens', {company_name: @company.company_name,
+      post '/api/v1/access_tokens', {name: @company.name,
                                      password: @company.password + 'a'}
     end
 

@@ -8294,12 +8294,12 @@ input[type='radio'] + label {
 }
 
 /* line 246, /home/nikolay/Dropbox/Code/Rails/attendancecheck-rails-app/app/assets/stylesheets/custom.css.scss */
-.company_name {
+.name {
   font-size: 200%;
   text-align: center;
 }
 /* line 249, /home/nikolay/Dropbox/Code/Rails/attendancecheck-rails-app/app/assets/stylesheets/custom.css.scss */
-.company_name span {
+.name span {
   font-size: 120%;
   padding-bottom: 10px;
 }

@@ -3,7 +3,7 @@ class Company::SessionsController < Devise::SessionsController
   before_filter :lowercase_name
 
   def lowercase_name
-    self.company_name = self.company_name.downcase
+    self.name = self.name.downcase
   end
   
   # GET /resource/sign_in

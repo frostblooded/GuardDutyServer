@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
   def setup
-    @company = Company.create(company_name: 'foobarrr', password: 'foobarrr')
+    @company = Company.create(name: 'foobarrr', password: 'foobarrr')
     @site = @company.sites.create(name: 'test site')
   end
 
