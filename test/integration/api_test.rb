@@ -136,13 +136,16 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Respond to call
   test 'responds to call' do
-    put '/api/v1/calls/' + @call.id.to_s, {access_token: request_access_token, call_token: @call.token, time_left: 59}
-    assert_equal '200', @response.code
+    assert_difference 'Call.count', 1 do
+      post "/api/v1/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
+    end
+
+    assert_equal '201', @response.code
     json_response = JSON.parse @response.body
     assert_equal true, json_response['success']
   end
 
-  test 'responding to call with invalid id returns error' do
+  test 'responding to call to unexisting worker throws error' do
     random_id = 98019
 
     # Get new id if this already exists in database
@@ -150,17 +153,13 @@ class ApiTest < ActionDispatch::IntegrationTest
       random_id = Random.rand(1..10000000)
     end
 
-    put '/api/v1/calls/1', {access_token: request_access_token, call_token: '', time_left: 59}
+    assert_no_difference 'Call.count' do
+      post "/api/v1/workers/#{@worker.id + 1}/calls", {access_token: request_access_token, time_left: 59}
+    end
+    
     assert_equal '400', @response.code
     json_response = JSON.parse @response.body
-    assert_equal "call doesn\'t exist", json_response['error']
-  end
-
-  test 'responding to call with invalid token returns error' do
-    put '/api/v1/calls/' + @call.id.to_s, {call_token: '', time_left: 59}
-    assert_equal '401', @response.code
-    json_response = JSON.parse @response.body
-    assert_equal "invalid token", json_response['error']
+    assert_equal "inexsitent worker", json_response['error']
   end
 
   # Route creation

@@ -22,6 +22,16 @@ module API
 
           {success: true}
         end
+
+        params do
+          requires :time_left, type: Integer
+        end
+
+        post '/calls' do
+          Call.create(worker_id: params[:id], time_left: params[:time_left])
+
+          {success: true}
+        end
       end
     end 
   end 
