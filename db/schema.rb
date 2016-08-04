@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725105655) do
+ActiveRecord::Schema.define(version: 20160804142648) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -21,11 +21,9 @@ ActiveRecord::Schema.define(version: 20160725105655) do
   end
 
   create_table "calls", force: :cascade do |t|
-    t.string   "token"
-    t.datetime "received_at"
     t.integer  "time_left"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "worker_id"
   end
 

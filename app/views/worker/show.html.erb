@@ -6,29 +6,14 @@
 <div class="wtable">
 	<table>
 		<tr>
-        <th>Sent at</th>
-        <th>Received at</th>
-        <th>Time left </th>
-  		</tr>
-      <% @calls.each do |call| %>
-        <tr>
-          <td><%= call.created_at.localtime %></td>
-          <%= call.received_at.localtime %>
-          <td>
-            <div class ="answered_call">
-              <% if call.answered? %>
-                <%= call.received_at.localtime %>
-              <% end %>
-            </div>
-
-            <div class ="unanswered_call">
-              <% if !call.answered? %>
-                <%= call.received_at.localtime %>
-              <% end %>
-            </div>
-          </td>
-          <td><%= call.time_left %></td>
-        </tr>
-      <% end %>
+      <th>Received at</th>
+      <th>Time left </th>
+		</tr>
+    <% @calls.each do |call| %>
+      <tr>
+        <td><%= call.created_at.localtime %></td>
+        <td><%= call.time_left %></td>
+      </tr>
+    <% end %>
 	</table>
 </div>
