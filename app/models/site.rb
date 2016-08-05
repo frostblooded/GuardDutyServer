@@ -9,8 +9,8 @@ class Site < ActiveRecord::Base
 
   has_settings do |s|
     s.key :attached_worker, :defaults => { :name => ''}
-    s.key :call, :defaults => { :interval => '' }
-    s.key :shift, :defaults => { :start => '', :end => ''}
+    s.key :call, :defaults => { :interval => '10' }
+    s.key :shift, :defaults => { :start => '12:00', :end => '13:00'}
   end
 
   validates :name, presence: true, length: { maximum: 40 }
