@@ -1,7 +1,12 @@
 class Call < ActiveRecord::Base
   belongs_to :worker
+  before_create :check_worker_calls_count
 
   DAYS_TO_KEEP = 30
+
+  def answered?
+    self.time_left != 0
+  end
 
   private
     # When a call is created, delete all calls
