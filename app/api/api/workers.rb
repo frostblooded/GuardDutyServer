@@ -21,7 +21,11 @@ module API
                                                   .authenticate(params[:password])
 
           Activity.create(category: :login, worker_id: params[:id])
+          {success: true}
+        end
 
+        post '/logout' do
+          Activity.create(category: :logout, worker_id: params[:id])
           {success: true}
         end
       end
