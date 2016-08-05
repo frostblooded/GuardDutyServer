@@ -20,6 +20,8 @@ module API
           error!('Invalid worker/password combination', 400) unless params_worker
                                                   .authenticate(params[:password])
 
+          Activity.create(category: :login, worker_id: params[:id])
+
           {success: true}
         end
       end
