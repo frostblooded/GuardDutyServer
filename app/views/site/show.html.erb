@@ -6,6 +6,9 @@
   <span><%= @site.settings(:attached_worker).name %></span>
 </div>
 
+<%= @site.settings(:shift).start %>
+<%= @site.settings(:shift).end %>
+
 <%= form_tag do %>
   <div class="worker_attachment">
     <span>Enter a worker you would want to attach </span>
@@ -23,12 +26,12 @@
     <div class ="shift_start_end">
       <span>Enter the start of the shift!</span>
       <div class="input-group bootstrap-timepicker timepicker">
-        <input name="shift_start" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM"value="<%= @site.settings(:shift).start %>">
+        <input name="shift_start" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM"value="<%= @site.settings(:shift).start ? @site.settings(:shift).start : '12:00' %>">
       </div>
       <div class ="shift_end">
         <span>Enter the end of the shift!</span>
         <div class="input-group bootstrap-timepicker timepicker">
-          <input name="shift_end" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM" value="<%= @site.settings(:shift).end %>">
+          <input name="shift_end" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM" value="<%= @site.settings(:shift).end ? @site.settings(:shift).end : '13:00'  %>">
         </div>
         <button type="Submit" class="submit_button"> Save changes </button>
       </div>
