@@ -12,12 +12,10 @@
 		</tr>
 
     <% @activities.each do |a| %>
-      <tr>
+      <tr class="<%= a.row_class %>">
         <td><%= a.created_at.localtime %></td>
         <td><%= a.category %></td>
-        <td class="<%= a.time_left != 0 ? "answered" : "unanswered" %>_call">
-          <%= a.time_left %>
-        </td>
+        <td><%= a.time_left %></td>
       </tr>
     <% end %>
 	</table>

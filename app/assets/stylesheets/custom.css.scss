@@ -228,12 +228,20 @@ input[type='radio'] + label {
 
 /* calls */
 
-.answered_call {
-  background: green;
+.answered_call_activity {
+  background-color: rgba(51, 204, 51, 0.6);
 }
 
-.unanswered_call {
-  background: red;
+.unanswered_call_activity {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.login_activity {
+  background-color: rgba(204, 204, 0, 0.6);
+}
+
+.logout_activity {
+  background-color: rgba(153, 102, 0, 0.6);
 }
 
 .create_site {

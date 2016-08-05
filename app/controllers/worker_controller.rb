@@ -45,6 +45,19 @@ class WorkerController < ApplicationController
     @activities = @worker.activities
     @call_length = params[:call_length]
     @company.settings(:mail).daily
+
+    # Set classes for the HTML tags from here
+    @activities.each do |a|
+      a.row_class = ""
+
+      if a.call?
+        a.row_class = (a.time_left != 0 ? "answered" : "unanswered") + "_call_activity"
+      elsif a.login?
+        a.row_class = "login_activity"
+      elsif a.logout?
+        a.row_class = "logout_activity"
+      end
+    end
   end
 
   def destroy
