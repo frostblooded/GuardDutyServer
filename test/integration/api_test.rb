@@ -137,7 +137,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   # Respond to call
   test 'responds to call' do
     assert_difference 'Call.count', 1 do
-      post "/api/v1/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
+      post "/api/v1/sites/#{@site.id}/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
     end
 
     assert_equal '201', @response.code
@@ -146,20 +146,23 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'responding to call to unexisting worker throws error' do
-    random_id = 98019
-
-    # Get new id if this already exists in database
-    while Call.exists?(id: random_id)
-      random_id = Random.rand(1..10000000)
-    end
-
     assert_no_difference 'Call.count' do
-      post "/api/v1/workers/#{@worker.id + 1}/calls", {access_token: request_access_token, time_left: 59}
+      post "/api/v1/sites/#{@site.id}/workers/#{@worker.id + 1}/calls", {access_token: request_access_token, time_left: 59}
     end
     
     assert_equal '400', @response.code
     json_response = JSON.parse @response.body
     assert_equal "inexsitent worker", json_response['error']
+  end
+
+  test 'responding to call to unexisting site throws error' do
+    assert_no_difference 'Call.count' do
+      post "/api/v1/sites/#{@site.id + 1}/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
+    end
+    
+    assert_equal '400', @response.code
+    json_response = JSON.parse @response.body
+    assert_equal "inexsitent site", json_response['error']
   end
 
   # Route creation
