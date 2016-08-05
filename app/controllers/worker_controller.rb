@@ -42,7 +42,7 @@ class WorkerController < ApplicationController
   def show
     @company = current_company 
     @worker = Worker.find(params[:id])
-    @calls = @worker.calls
+    @activities = @worker.activities
     @call_length = params[:call_length]
     @company.settings(:mail).daily
   end
