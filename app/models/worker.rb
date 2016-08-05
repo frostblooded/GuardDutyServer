@@ -1,7 +1,7 @@
 class Worker < ActiveRecord::Base
   has_and_belongs_to_many :sites
   belongs_to :company
-  has_many :calls, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   validates :name, presence: true,	length: { maximum: 40 }
   validates :password, presence: true, length: { minimum: 8 }
