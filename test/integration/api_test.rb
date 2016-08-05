@@ -5,8 +5,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     @company = Company.create(name: 'test', password: 'foobarrr')
     @site = @company.sites.create(name: 'test site')
     @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
-
-    @call = @worker.calls.create
   end
 
   def request_access_token
@@ -136,7 +134,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Respond to call
   test 'responds to call' do
-    assert_difference 'Call.count', 1 do
+    assert_difference 'Activity.count', 1 do
       post "/api/v1/sites/#{@site.id}/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
     end
 
@@ -146,7 +144,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'responding to call to unexisting worker throws error' do
-    assert_no_difference 'Call.count' do
+    assert_no_difference 'Activity.count' do
       post "/api/v1/sites/#{@site.id}/workers/#{@worker.id + 1}/calls", {access_token: request_access_token, time_left: 59}
     end
     
@@ -156,7 +154,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'responding to call to unexisting site throws error' do
-    assert_no_difference 'Call.count' do
+    assert_no_difference 'Activity.count' do
       post "/api/v1/sites/#{@site.id + 1}/workers/#{@worker.id}/calls", {access_token: request_access_token, time_left: 59}
     end
     

@@ -19,7 +19,6 @@ module API
     end
 
     mount API::Sites
-    mount API::Calls
     mount API::Workers
     mount API::Companies
   end

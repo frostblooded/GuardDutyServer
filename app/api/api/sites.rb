@@ -17,7 +17,7 @@ module API
             end
 
             post '/calls' do
-              Call.create(worker_id: params[:worker_id], time_left: params[:time_left])
+              Activity.create(category: :call, time_left: params[:time_left], worker_id: params[:worker_id])
 
               {success: true}
             end
