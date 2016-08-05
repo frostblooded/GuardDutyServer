@@ -16,7 +16,7 @@ module API
           requires :password, type: String
         end
 
-        post '/check_login' do
+        post '/login' do
           error!('Invalid worker/password combination', 400) unless params_worker
                                                   .authenticate(params[:password])
 

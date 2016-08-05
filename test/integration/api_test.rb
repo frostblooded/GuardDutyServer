@@ -59,7 +59,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   # Check worker login
   test 'worker login check' do
-    post "/api/v1/workers/#{@worker.id}/check_login", {password: @worker.password,
+    post "/api/v1/workers/#{@worker.id}/login", {password: @worker.password,
                                                        access_token: request_access_token}
 
     json_response = JSON.parse @response.body
@@ -68,7 +68,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'worker login check return error on invalid worker' do
-    post "/api/v1/workers/#{@worker.id + 1}/check_login", {password: @worker.password,
+    post "/api/v1/workers/#{@worker.id + 1}/login", {password: @worker.password,
                                                            access_token: request_access_token}
 
     json_response = JSON.parse @response.body
@@ -77,7 +77,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'worker login check return error on invalid combination' do
-    post "/api/v1/workers/#{@worker.id}/check_login", {password: @worker.password + 'a',
+    post "/api/v1/workers/#{@worker.id}/login", {password: @worker.password + 'a',
                                                        access_token: request_access_token}
 
     json_response = JSON.parse @response.body
