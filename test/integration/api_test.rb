@@ -7,13 +7,6 @@ class ApiTest < ActionDispatch::IntegrationTest
     @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
   end
 
-  def request_access_token
-    post '/api/v1/access_tokens', {name: @company.name,
-                                   password: @company.password}
-    json = JSON.parse @response.body
-    json['access_token']
-  end
-
   # Access token acquiring
   test 'access token obtaining requires parameters' do
     post '/api/v1/access_tokens'
