@@ -5,7 +5,7 @@ FactoryGirl.define do
     password { Faker::Internet.password(8) }
 
     after(:create) do |company|
-      create_list(:site, 5, company: company)
+      create_list(:site, 2, company: company)
     end
   end
 
@@ -13,7 +13,7 @@ FactoryGirl.define do
     name { Faker::GameOfThrones.city }
 
     after(:create) do |site|
-      create_list(:worker, 5, sites: [site])
+      create_list(:worker, 2, sites: [site])
     end
   end
 

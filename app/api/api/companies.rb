@@ -15,7 +15,7 @@ module API
     resource :companies do
       route_param :company_id do
         before do
-          error!("inexsitent company", 400) unless Company.exists? id: params["company_id"].to_i
+          error!("inexistent company", 400) unless Company.exists? id: params["company_id"].to_i
         end
 
         resource :sites do
@@ -26,7 +26,7 @@ module API
 
           route_param :site_id do
             before do
-              error!("company has no such site", 400) unless Site.exists? id: params["site_id"].to_i
+              error!("inexistent site", 400) unless Site.exists? id: params["site_id"].to_i
             end
 
             get :settings do

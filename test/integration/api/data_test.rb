@@ -18,7 +18,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
     get "/api/v1/companies/-1/sites/", { access_token: token }
     assert_equal '400', @response.code
     json = JSON.parse @response.body
-    assert_equal 'inexsitent company', json['error']
+    assert_equal 'inexistent company', json['error']
   end
 
   test 'protected data returns error when site doesn\'t exist' do
@@ -26,7 +26,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
     get "/api/v1/companies/#{@company.id}/sites/-1/workers", { access_token: token }
     assert_equal '400', @response.code
     json = JSON.parse @response.body
-    assert_equal 'company has no such site', json['error']
+    assert_equal 'inexistent site', json['error']
   end
 
   test 'returns sites' do
