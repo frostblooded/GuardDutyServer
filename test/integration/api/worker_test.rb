@@ -20,7 +20,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
 
   test 'worker login return error on invalid worker' do
     assert_no_difference 'Activity.count' do
-      post "/api/v1/workers/#{@worker.id + 1}/login", {password: @worker.password,
+      post "/api/v1/workers/-1/login", {password: @worker.password,
                                                        access_token: request_access_token}
     end
 
@@ -53,7 +53,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
 
   test 'worker logout returns error on invalid worker' do
     assert_no_difference 'Activity.count' do
-      post "/api/v1/workers/#{@worker.id + 1}/logout", {access_token: request_access_token}
+      post "/api/v1/workers/-1/logout", {access_token: request_access_token}
     end
 
     json_response = JSON.parse @response.body
