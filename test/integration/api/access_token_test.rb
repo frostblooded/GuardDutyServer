@@ -8,9 +8,9 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
   # Access token acquiring
   test 'access token obtaining requires parameters' do
     post '/api/v1/access_tokens'
+    
     assert_equal '500', @response.code
-    json = JSON.parse @response.body
-    assert_equal 'name is missing, password is missing', json['error']
+    assert_equal 'name is missing, password is missing', json_response['error']
   end
 
   test 'access token obtaining returns access token on company login success' do
@@ -19,7 +19,6 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
                                      password: @company.password}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '201', @response.code
     assert_not json_response['access_token'].nil?
     assert_not json_response['company_id'].nil?
@@ -32,7 +31,6 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
                                      password: @company.password}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '400', @response.code
     assert_equal 'invalid company name', json_response['error']
   end
@@ -43,7 +41,6 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
                                      password: @company.password + 'a'}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '401', @response.code
     assert_equal 'invalid company name/password combination', json_response['error']
   end

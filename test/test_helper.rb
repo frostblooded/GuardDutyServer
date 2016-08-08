@@ -18,8 +18,11 @@ class ActiveSupport::TestCase
   def request_access_token
     post '/api/v1/access_tokens', {name: @company.name,
                                    password: @company.password}
-    json = JSON.parse @response.body
-    json['access_token']
+    json_response['access_token']
+  end
+
+  def json_response
+    JSON.parse @response.body
   end
 end
 

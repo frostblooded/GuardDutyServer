@@ -13,7 +13,6 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
                                                    access_token: request_access_token}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '201', @response.code
     assert_equal true, json_response['success']
   end
@@ -21,10 +20,9 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
   test 'worker login return error on invalid worker' do
     assert_no_difference 'Activity.count' do
       post "/api/v1/workers/-1/login", {password: @worker.password,
-                                                       access_token: request_access_token}
+                                        access_token: request_access_token}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '400', @response.code
     assert_equal 'inexsitent worker', json_response['error']
   end
@@ -35,7 +33,6 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
                                                    access_token: request_access_token}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '400', @response.code
     assert_equal 'Invalid worker/password combination', json_response['error']
   end
@@ -46,7 +43,6 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
       post "/api/v1/workers/#{@worker.id}/logout", {access_token: request_access_token}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '201', @response.code
     assert_equal true, json_response['success']
   end
@@ -56,7 +52,6 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
       post "/api/v1/workers/-1/logout", {access_token: request_access_token}
     end
 
-    json_response = JSON.parse @response.body
     assert_equal '400', @response.code
     assert_equal 'inexsitent worker', json_response['error']
   end

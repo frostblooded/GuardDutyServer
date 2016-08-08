@@ -14,7 +14,6 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '201', @response.code
-    json_response = JSON.parse @response.body
     assert_equal true, json_response['success']
   end
 
@@ -24,7 +23,6 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
     
     assert_equal '400', @response.code
-    json_response = JSON.parse @response.body
     assert_equal "inexsitent worker", json_response['error']
   end
 
@@ -34,7 +32,6 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
     
     assert_equal '400', @response.code
-    json_response = JSON.parse @response.body
     assert_equal "inexsitent site", json_response['error']
   end
 end
