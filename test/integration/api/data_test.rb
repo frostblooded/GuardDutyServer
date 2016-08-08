@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ApiDataTest < ActionDispatch::IntegrationTest
   def setup
-    @company = Company.create(name: 'test', password: 'foobarrr')
-    @site = @company.sites.create(name: 'test site')
-    @worker = @site.workers.create(name: 'foo bar', password: 'foobarrr')
+    @company = create(:company)
+    @site = @company.sites.first
+    @worker = @site.workers.first
   end
   
   # Data
@@ -23,7 +23,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
 
   test 'protected data returns error when site doesn\'t exist' do
     token = request_access_token
-    get '/api/v1/companies/' + @company.id.to_s + '/sites/' + (@site.id + 1).to_s + '/workers', { access_token: token }
+    get '/api/v1/companies/' + @company.id.to_s + '/sites/-1/workers', { access_token: token }
     assert_equal '400', @response.code
     json = JSON.parse @response.body
     assert_equal 'company has no such site', json['error']

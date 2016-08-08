@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ApiRouteTest < ActionDispatch::IntegrationTest
   def setup
-    @company = Company.create(name: 'test', password: 'foobarrr')
-    @site = @company.sites.create(name: 'test site')
+    @company = create(:company)
+    @site = @company.sites.first
   end
 
   # Route creation

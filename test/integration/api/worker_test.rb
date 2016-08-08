@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ApiWorkerTest < ActionDispatch::IntegrationTest
   def setup
-    @company = Company.create(name: 'test', password: 'foobarrr')
-    @worker = Worker.create(name: 'foo bar', password: 'foobarrr')
+    @company = create(:company)
+    @worker = create(:worker)
   end
   
   # Login worker

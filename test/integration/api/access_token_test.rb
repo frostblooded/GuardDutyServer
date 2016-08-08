@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ApiAccessTokenTest < ActionDispatch::IntegrationTest
   def setup
-    @company = Company.create(name: 'test', password: 'foobarrr')
+    @company = create(:company)
   end
   
   # Access token acquiring
