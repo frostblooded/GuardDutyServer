@@ -14,7 +14,7 @@ gem 'bcrypt',           	'3.1.7'
 gem 'whenever',         	'0.9.4'
 gem 'grape',              '0.16.2'
 gem 'bootstrap-sass',   	'3.2.0.0'
-gem 'sass-rails',   		  '5.0.2'
+gem 'sass-rails',   		  '5.0.6'
 gem 'uglifier',     		  '2.5.3'
 gem 'coffee-rails', 		  '4.1.0'
 gem 'jquery-rails', 		  '4.0.3'
@@ -34,6 +34,7 @@ group :test do
   gem 'mini_backtrace',     '0.1.3'
   gem 'guard-minitest',     '2.3.1'
   gem 'simplecov',          '0.11.2', require: false
+  gem 'factory_girl_rails', '4.7.0'
 end
 
 group :production do
