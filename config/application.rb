@@ -26,5 +26,8 @@ module AttendanceCheckRailsapp
     # Adding 'api' folder to application files for the API
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    # Add lib
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
