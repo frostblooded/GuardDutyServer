@@ -14,4 +14,8 @@ class Site < ActiveRecord::Base
   end
 
   validates :name, presence: true, length: { maximum: 40 }
+
+  def get_last_shift
+    Shift.new
+  end
 end
