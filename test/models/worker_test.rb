@@ -2,11 +2,11 @@ require 'test_helper'
 
 class WorkerTest < ActiveSupport::TestCase
   def setup
-    @company = Company.create(name: 'frostblooded', password: 'foobarrr')
+    @company = create(:company)
     @worker = @company.workers.create name: "Example LName",
               					              password: "Somethinglike",
                                       password_confirmation: "Somethinglike"
-    @site = Site.create(name: 'test site')
+    @site = @company.sites.first
     @worker.sites << @site
   end
 

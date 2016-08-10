@@ -2,8 +2,8 @@ require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
   def setup
-    @company = Company.create(name: 'foobarrr', password: 'foobarrr')
-    @site = @company.sites.create(name: 'test site')
+    @company = create(:company)
+    @site = @company.sites.first
   end
 
   test 'position belongs to correct company' do
