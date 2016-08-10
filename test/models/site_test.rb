@@ -6,7 +6,10 @@ class SiteTest < ActiveSupport::TestCase
     @site = @company.sites.first
     @worker = @site.workers.first
 
-    base_time = Time.parse('11:00')
+    @site.settings(:shift).start = '11:00'
+    @site.settings(:shift).end = '12:00'
+
+    base_time = Time.parse(@site.settings(:shift).start)
     @activities = []
 
     6.times do |i|
@@ -20,9 +23,6 @@ class SiteTest < ActiveSupport::TestCase
 
       @activities << activity
     end
-
-    @site.settings(:shift).start = '11:00'
-    @site.settings(:shift).end = '12:00'
   end
 
   test 'position belongs to correct company' do
