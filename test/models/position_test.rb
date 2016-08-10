@@ -2,8 +2,8 @@ require 'test_helper'
 
 class PositionTest < ActiveSupport::TestCase
   def setup
-    @route = Route.create(name: 'test route')
-    @position = @route.positions.create(latitude: 42, longitude: 42)
+    @route = create(:route)
+    @position = @route.positions.first
   end
 
   test 'position belongs to correct route' do

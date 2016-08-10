@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ApiKeyTest < ActiveSupport::TestCase
   def setup
-    @company = Company.new
+    @company = create(:company)
     @company.api_key = ApiKey.create
   end
 
