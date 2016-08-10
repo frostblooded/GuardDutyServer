@@ -1,5 +1,7 @@
 class Shift
-  attr_accessor :start, :end, :activities
+  attr_accessor :start
+  attr_accessor :end
+  attr_accessor :activities
 
   def initialize
     @start = 0
