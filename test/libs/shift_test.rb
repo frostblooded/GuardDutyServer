@@ -3,10 +3,12 @@ require 'test_helper'
 class ShiftTest < ActiveSupport::TestCase
   def setup
     @shift = Shift.new(Time.parse('11:00'), Time.parse('12:00'))
+    @shift.site = create(:site)
+
     @workers = []
 
     # Make 3 workers - the third one isn't in the shift
-    3.times do
+    4.times do
       @workers << create(:worker)
     end
 
@@ -50,9 +52,34 @@ class ShiftTest < ActiveSupport::TestCase
 
   test 'returns correct workers' do
     workers = @shift.workers
+
     assert workers.include? @workers[0]
     assert workers.include? @workers[1]
     assert_not workers.include? @workers[2]
     assert workers.include? @workers[3]
+  end
+
+  test 'makes correct report' do
+    shift_report = @shift.report
+    assert_equal @shift.site, shift_report.site
+    assert_equal @shift.workers.size, shift_report.worker_reports.size
+
+    shift_report.worker_reports.each_with_index do |wr, i|
+      assert_equal @workers[i], shift_report.worker_reports[i].worker
+      worker_messages = shift_report.worker_reports[i].messages
+
+      # Check different things for the different workers
+      case i
+      when 0
+        assert_equal worker_messages.size, 0
+      when 1
+        assert_equal worker_messages[0], ('unreceived call around ' + (@shift.start + 20.minutes).to_s)
+        assert_equal worker_messages[1], ('unreceived call around ' + (@shift.start + 50.minutes).to_s)
+      when 3
+        assert_equal worker_messages[0], ('logged in 17 minutes too late')
+        assert_equal worker_messages[1], ('didn\'t answer call at ' + (@shift.start + 20.minutes).to_s)
+        assert_equal worker_messages[2], ('didn\'t answer call at ' + (@shift.start + 50.minutes).to_s)
+      end
+    end
   end
 end
