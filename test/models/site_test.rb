@@ -60,18 +60,22 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test 'correctly returns last shift' do
-    shift = @site.get_last_shift
+    time = Time.parse(@site.settings(:shift).end) + 30.minutes
 
-    # Make sure it returns only the activities which are part of the shift
-    assert_not shift.activities.include?(@activities[0])
-    assert shift.activities.include?(@activities[1])
-    assert shift.activities.include?(@activities[2])
-    assert shift.activities.include?(@activities[3])
-    assert shift.activities.include?(@activities[4])
-    assert_not shift.activities.include?(@activities[5])
+    Timecop.freeze(time) do
+      shift = @site.get_last_shift
 
-    assert_equal Time.parse(@site.settings(:shift).start), shift.start
-    assert_equal Time.parse(@site.settings(:shift).end), shift.end
-    assert_equal @site, shift.site
+      # Make sure it returns only the activities which are part of the shift
+      assert_not shift.activities.include?(@activities[0])
+      assert shift.activities.include?(@activities[1])
+      assert shift.activities.include?(@activities[2])
+      assert shift.activities.include?(@activities[3])
+      assert shift.activities.include?(@activities[4])
+      assert_not shift.activities.include?(@activities[5])
+
+      assert_equal Time.parse(@site.settings(:shift).start), shift.start
+      assert_equal Time.parse(@site.settings(:shift).end), shift.end
+      assert_equal @site, shift.site
+    end
   end
 end
