@@ -24,6 +24,13 @@ class ActiveSupport::TestCase
   def json_response
     JSON.parse @response.body
   end
+
+  # Used to create activities easily when you want to set created_at
+  def create_activity(category, worker, created_at)
+    activity = Activity.create(category: category, worker: worker)
+    activity.created_at = created_at
+    activity
+  end
 end
 
 class ActionController::TestCase
