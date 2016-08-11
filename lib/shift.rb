@@ -10,4 +10,16 @@ class Shift
     @activities = activities
     @site = site
   end
+
+  # Returns the workers, which participated in the shift
+  #
+  # NOTE: Only calls and logins (without logouts) are
+  #  counted towards participation
+  def workers
+    relevant_ativities = @activities.select do |a|
+      a.call? || a.login?
+    end
+
+    relevant_ativities.map { |a| a.worker }.uniq
+  end
 end
