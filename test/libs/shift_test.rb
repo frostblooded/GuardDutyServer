@@ -65,20 +65,22 @@ class ShiftTest < ActiveSupport::TestCase
     assert_equal @shift.workers.size, shift_report.worker_reports.size
 
     shift_report.worker_reports.each_with_index do |wr, i|
-      assert_equal @workers[i], shift_report.worker_reports[i].worker
       worker_messages = shift_report.worker_reports[i].messages
 
+      # puts 'Worker ' + i.to_s + ': '
+      # puts worker_messages
+
       # Check different things for the different workers
-      case i
-      when 0
+      case wr.worker
+      when @workers[0]
         assert_equal worker_messages.size, 0
-      when 1
-        assert_equal worker_messages[0], ('unreceived call around ' + (@shift.start + 20.minutes).to_s)
-        assert_equal worker_messages[1], ('unreceived call around ' + (@shift.start + 50.minutes).to_s)
-      when 3
-        assert_equal worker_messages[0], ('logged in 17 minutes too late')
-        assert_equal worker_messages[1], ('didn\'t answer call at ' + (@shift.start + 20.minutes).to_s)
-        assert_equal worker_messages[2], ('didn\'t answer call at ' + (@shift.start + 50.minutes).to_s)
+      when @workers[1]
+        assert_equal 'unreceived call around ' + (@shift.start + 20.minutes).to_s, worker_messages[0]
+        assert_equal 'unreceived call around ' + (@shift.start + 50.minutes).to_s, worker_messages[1]
+      when @workers[3]
+        assert_equal 'logged in 17 minutes too late', worker_messages[0]
+        assert_equal 'didn\'t answer call at ' + (@shift.start + 20.minutes).to_s, worker_messages[1]
+        assert_equal 'didn\'t answer call at ' + (@shift.start + 50.minutes).to_s, worker_messages[2]
       end
     end
   end
