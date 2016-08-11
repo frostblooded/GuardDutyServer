@@ -20,6 +20,6 @@ class Shift
       a.call? || a.login?
     end
 
-    relevant_ativities.map { |a| a.worker }.uniq
+    relevant_ativities.map(&:worker).uniq
   end
 end
