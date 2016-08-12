@@ -4,11 +4,29 @@ class WorkerReport
   attr_accessor :shift
   attr_accessor :messages
 
+  # In minutes
+  ALLOWED_LOGIN_DELAY = 10
+
+  # In minutes
+  ALLOWED_CALL_DELAY = 3
+
   def initialize(worker = nil, activities = [], shift = nil, messages = [])
     @worker = worker
     @activities = activities
     @shift = shift
     @messages = messages
+  end
+
+  def add_late_login(minutes)
+    @messages << 'logged in ' + minutes.to_s + ' minutes too late'
+  end
+
+  def add_unreceived_call(time)
+    @messages << 'unreceived call around ' + time.localtime.to_s
+  end
+
+  def add_unanswered_call(time)
+    @messages << 'didn\'t answer call at ' + time.localtime.to_s
   end
 
   # Returns when the worker logged in based on the worker's
@@ -21,43 +39,30 @@ class WorkerReport
 
   # Returns the login delay in minutes
   def login_delay
-    ((self.login_time - @shift.start) / 60).floor
+    ((login_time - @shift.start) / 60).floor
+  end
+
+  def next_call(last_call_time)
+    @activities.select do |a|
+      a.created_at > last_call_time \
+      && a.created_at < last_call_time + 15.minutes + ALLOWED_CALL_DELAY
+    end.first 
   end
 
   def generate_messages
-    next_expected_call = Time.new
+    last_call_time = login_time
+    add_late_login(login_delay) if login_delay > ALLOWED_LOGIN_DELAY
 
-    # If first activity isn't a login, then user must be logged in
-    # If that is the case, start expecting calls from the beginning of the shift
-    # Else start expecting from when the user logs in
-    if @activities.first.login?
-      # Get login delay in minutes
-      login_delay = (@activities.first.created_at - @shift.start).floor / 60
+    while last_call_time + 15.minutes < @shift.end
+      call = next_call(last_call_time)
 
-      if login_delay > 10
-        @messages << 'logged in ' + login_delay.to_s + ' minutes too late'
+      if call.nil?
+        add_unreceived_call(last_call_time + 15.minutes)
+        last_call_time += 15.minutes
+      else
+        add_unanswered_call(call.created_at) if call.time_left <= 0
+        last_call_time = call.created_at
       end
-
-      # TO DO: Actually call may appear exactly after login. Fix it.
-      next_expected_call = @activities.first.created_at + 15.minutes
-    else
-      next_expected_call = @shift.start + 15.minutes
-    end
-
-    while next_expected_call < @shift.end
-      # Give several minutes window for expected call
-      expected_call = @activities.select do |a|
-        a.created_at > next_expected_call - 5.minutes \
-         && a.created_at < next_expected_call + 5.minutes
-      end.first
-
-      if expected_call.nil?
-        @messages << 'unreceived call around ' + next_expected_call.localtime.to_s
-      elsif expected_call.time_left <= 0
-        @messages << 'didn\'t answer call at ' + next_expected_call.localtime.to_s
-      end
-
-      next_expected_call += 15.minutes
     end
   end
 end
