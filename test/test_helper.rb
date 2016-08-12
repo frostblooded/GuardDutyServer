@@ -29,6 +29,7 @@ class ActiveSupport::TestCase
   def create_activity(category, worker, created_at, time_left = 60)
     activity = Activity.create(category: category, worker: worker, time_left: time_left)
     activity.created_at = created_at
+    activity.save
     activity
   end
 end
