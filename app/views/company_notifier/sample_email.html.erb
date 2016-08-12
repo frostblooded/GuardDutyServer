@@ -4,13 +4,42 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello, <%= @company.name %> </h1> 
     <div class ="email_content">
-        <p class ="email_content">
-          <font size ="4">here is the report for your workers:
-          <%= render 'worker/worker' %>
-          </font>
-        </p>
+      <h1>Hello, <%= @company.name %>. This is your report for today. </h1>
+      The workers who showed up today to work are:
+
+      <div class="shift_workers">
+        <% @company.sites.each do |site| %>
+          <div class="site_workers">
+            <%= site.name %>: 
+            <% site.last_shift.workers.each do |worker| %>
+              <%= worker.name %>,
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <br>
+      The last completed shifts for all of your sites are included below: 
+      <br>
+
+      <div class="shift_report">
+        <% @company.sites.each do |site| %>
+          <div class="site_report">
+            <%= site.name %>
+            <ul>
+              <% site.last_shift.report.worker_reports.each do |worker_report| %>
+                <li class="worker_report">
+                  <%= worker_report.worker.name %>
+                  <ul>
+                    <% worker_report.messages %>
+                  </ul>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>
