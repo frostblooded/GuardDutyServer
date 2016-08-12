@@ -36,7 +36,18 @@ class WorkerReportTest < ActiveSupport::TestCase
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 40.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 25.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 55.minutes)
-    @worker_report.activities << create_activity(:logout, @worker, @shift.end + 5.minutes)
+    @worker_report.generate_messages
+
+    assert @worker_report.messages.empty?
+  end
+
+  # Unsynced calls are calls which start sooner than the call interval, which is expected
+  test 'worker report generates correct messages for perfect worker with unsynced calls' do
+    @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 11.minutes, 0)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 26.minutes, 0)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 41.minutes, 0)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 56.minutes, 0)
     @worker_report.generate_messages
 
     assert @worker_report.messages.empty?
@@ -55,15 +66,13 @@ class WorkerReportTest < ActiveSupport::TestCase
   end
 
   test 'worker report generates correct messages for worker with late login and 2 unanswered calls' do
-    @worker_report.activities << create_activity(:login, @worker, @shift.start + 17.minutes)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 20.minutes, 0)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 35.minutes)
+    @worker_report.activities << create_activity(:login, @worker, @shift.start + 20.minutes)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 35.minutes, 0)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 50.minutes, 0)
-    @worker_report.activities << create_activity(:logout, @worker, @shift.end + 5.minutes)
     @worker_report.generate_messages
 
-    assert_equal 'logged in 17 minutes too late', @worker_report.messages[0]
-    assert_equal 'didn\'t answer call at ' + (@shift.start + 20.minutes).to_s, @worker_report.messages[1]
+    assert_equal 'logged in 20 minutes too late', @worker_report.messages[0]
+    assert_equal 'didn\'t answer call at ' + (@shift.start + 35.minutes).to_s, @worker_report.messages[1]
     assert_equal 'didn\'t answer call at ' + (@shift.start + 50.minutes).to_s, @worker_report.messages[2]
   end
 end
