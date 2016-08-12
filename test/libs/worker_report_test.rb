@@ -17,6 +17,18 @@ class WorkerReportTest < ActiveSupport::TestCase
     assert @worker_report.messages.empty?
   end
 
+  test 'worker report returns correct login time for already logged in worker' do
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
+
+    assert_equal @shift.start, @worker_report.login_time.localtime
+  end
+
+  test 'worker report returns correct login time for worker that logs in during shift' do
+    @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
+
+    assert_equal @shift.start + 5.minutes, @worker_report.login_time.localtime
+  end
+
   test 'worker report generates correct messages for perfect worker' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start - 5.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
