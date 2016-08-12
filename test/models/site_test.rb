@@ -34,7 +34,7 @@ class SiteTest < ActiveSupport::TestCase
     time = Time.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ get_last_shift_times }
+      shift_times = @site.instance_eval{ last_shift_times }
       assert_equal shift_times[:start], Time.parse(@site.settings(:shift).start)
       assert_equal shift_times[:end], Time.parse(@site.settings(:shift).end)
     end
@@ -44,7 +44,7 @@ class SiteTest < ActiveSupport::TestCase
     time = Time.parse(@site.settings(:shift).start) + 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ get_last_shift_times }
+      shift_times = @site.instance_eval{ last_shift_times }
       assert_equal shift_times[:start], (Time.parse(@site.settings(:shift).start) - 1.day)
       assert_equal shift_times[:end], (Time.parse(@site.settings(:shift).end) - 1.day)
     end
@@ -54,7 +54,7 @@ class SiteTest < ActiveSupport::TestCase
     time = Time.parse(@site.settings(:shift).start) - 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ get_last_shift_times }
+      shift_times = @site.instance_eval{ last_shift_times }
       assert_equal shift_times[:start], (Time.parse(@site.settings(:shift).start) - 1.day)
       assert_equal shift_times[:end], (Time.parse(@site.settings(:shift).end) - 1.day)
     end
@@ -64,7 +64,7 @@ class SiteTest < ActiveSupport::TestCase
     time = Time.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do
-      shift = @site.get_last_shift
+      shift = @site.last_shift
 
       # Make sure it returns only the activities which are part of the shift
       assert_not shift.activities.include?(@activities[0])

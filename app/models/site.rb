@@ -16,8 +16,8 @@ class Site < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 40 }
 
   # Returns data about the last COMPLETED shift
-  def get_last_shift
-    shift_times = get_last_shift_times
+  def last_shift
+    shift_times = last_shift_times
 
     shift = Shift.new(shift_times[:start], shift_times[:end], self)
     shift.activities = Activity.where('created_at >= :shift_start AND created_at <= :shift_end',
@@ -29,7 +29,7 @@ class Site < ActiveRecord::Base
   private
     # Return start and end of last COMPLETED shift in a hash
     # NOTE: This method assumes that there is only one shift per day
-    def get_last_shift_times
+    def last_shift_times
       shift_times = Hash.new
       shift_end = Time.parse settings(:shift).end
 
