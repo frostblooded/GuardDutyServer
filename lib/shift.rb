@@ -29,7 +29,7 @@ class Shift
   end
 
   def report
-    report = ShiftReport.new(@site)
+    report = ShiftReport.new(@site, self)
 
     workers.each do |w|
       worker_activities = @activities.select { |a| a.worker == w }
