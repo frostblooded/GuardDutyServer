@@ -1,6 +1,7 @@
 class Shift
   attr_accessor :start
   attr_accessor :end
+  attr_accessor :call_interval
   attr_accessor :activities
   attr_accessor :site
 
@@ -9,6 +10,10 @@ class Shift
     @end = shift_end
     @activities = activities
     @site = site
+  end
+
+  def call_interval
+    @site.settings(:call).interval.to_i
   end
 
   # Returns the workers, which participated in the shift
