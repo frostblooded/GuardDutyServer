@@ -10,30 +10,30 @@ class WorkerTest < ActiveSupport::TestCase
     @worker.sites << @site
   end
 
-  test "should be valid" do
+  test "is valid" do
     assert @worker.valid?
   end
 
-	test "name should be present" do
+	test "name is present" do
   	@worker.name = "   "
   	assert_not @worker.valid?
 	end
 	
-	test "name should not be too long" do
+	test "name is not too long" do
 		@worker.name = "a" * 50
 		assert_not @worker.valid?
 	end
 
-  test "names should be downcase" do
+  test "names are downcase" do
     assert @worker.name == @worker.name.downcase
   end
 
-	test "password should be present" do
+	test "password is present" do
 		@worker.password = @worker.password_confirmation = " " * 8
 		assert_not @worker.valid?
 	end
 
-	test "password should have a minimum length" do
+	test "password has minimum length" do
 		@worker.password = @worker.password_confirmation = "a" * 7
 		assert_not @worker.valid?
 	end

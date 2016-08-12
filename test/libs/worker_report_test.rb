@@ -13,40 +13,40 @@ class WorkerReportTest < ActiveSupport::TestCase
     @worker_report = WorkerReport.new(@worker, [], @shift)
   end
 
-  test 'worker report initializes correctly' do
+  test 'initializes correctly' do
     assert_equal @worker, @worker_report.worker
     assert @worker_report.activities.empty?
     assert_equal @shift, @worker_report.shift
     assert @worker_report.messages.empty?
   end
 
-  test 'worker report returns correct login time for already logged in worker' do
+  test 'returns correct login time for already logged in worker' do
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
 
     assert_equal @shift.start, @worker_report.login_time.localtime
   end
 
-  test 'worker report returns correct login time for worker that logs in during shift' do
+  test 'returns correct login time for worker that logs in during shift' do
     login_time = @shift.start + 5.minutes
     @worker_report.activities << create_activity(:login, @worker, login_time)
 
     assert_equal login_time, @worker_report.login_time.localtime
   end
 
-  test 'worker report returns correct login delay for already logged in worker' do
+  test 'returns correct login delay for already logged in worker' do
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
 
     assert_equal 0, @worker_report.login_delay
   end
 
-  test 'worker report returns correct login delay for worker that logs in during shift' do
+  test 'returns correct login delay for worker that logs in during shift' do
     login_delay = 20
     @worker_report.activities << create_activity(:login, @worker, @shift.start + login_delay.minutes)
 
     assert_equal login_delay, @worker_report.login_delay
   end
 
-  test 'worker report generates correct messages for perfect worker' do
+  test 'generates correct messages for perfect worker' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start - 5.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 40.minutes)
@@ -58,7 +58,7 @@ class WorkerReportTest < ActiveSupport::TestCase
   end
 
   # Unsynced calls are calls which start sooner than the call interval, which is expected
-  test 'worker report generates correct messages for perfect worker with unsynced calls' do
+  test 'generates correct messages for perfect worker with unsynced calls' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 11.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 26.minutes)
@@ -69,7 +69,7 @@ class WorkerReportTest < ActiveSupport::TestCase
     assert @worker_report.messages.empty?
   end
 
-  test 'worker report generates correct messages for worker with 2 missing calls' do
+  test 'generates correct messages for worker with 2 missing calls' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
     # Missing call 20 minutes after shift has started
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 35.minutes)
@@ -81,7 +81,7 @@ class WorkerReportTest < ActiveSupport::TestCase
     assert_equal WorkerReport.format_unreceived_call(@shift.start + 50.minutes), @worker_report.messages[1]
   end
 
-  test 'worker report generates correct messages for worker with late login and 2 unanswered calls' do
+  test 'generates correct messages for worker with late login and 2 unanswered calls' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start + 20.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 35.minutes, 0)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 50.minutes, 0)

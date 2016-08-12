@@ -6,7 +6,7 @@ class RouteTest < ActiveSupport::TestCase
     @route = @site.routes.first
   end
 
-  test 'route belongs to correct site' do
+  test 'belongs to correct site' do
     assert_equal @site, @route.site
   end
 end

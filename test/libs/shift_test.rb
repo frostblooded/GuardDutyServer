@@ -36,14 +36,14 @@ class ShiftTest < ActiveSupport::TestCase
     @shift.activities = make_activities
   end
 
-  test 'shift has initialized properly' do
+  test 'initializes properly' do
     shift = Shift.new
     assert_not_nil shift.start
     assert_not_nil shift.end
     assert_not_nil shift.activities
   end
 
-  test 'shift returns correct call_interval' do
+  test 'returns correct call_interval' do
     site = Site.create(name: Faker::Name.name)
     site.settings(:call).interval = "20"
     shift = Shift.new
@@ -60,11 +60,11 @@ class ShiftTest < ActiveSupport::TestCase
     assert_not workers.include? @workers[2]
   end
 
-  test 'report has correct site' do
+  test 'generated report has correct site' do
     assert_equal @shift.site, @shift.report.site
   end
 
-  test 'report has correct number of workers' do
+  test 'generated report has correct number of workers' do
     assert_equal @shift.workers.size, @shift.report.worker_reports.size
   end
 end

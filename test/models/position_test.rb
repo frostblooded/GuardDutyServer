@@ -6,7 +6,7 @@ class PositionTest < ActiveSupport::TestCase
     @position = @route.positions.first
   end
 
-  test 'position belongs to correct route' do
+  test 'belongs to correct route' do
     assert_equal @route, @position.route
   end
 end

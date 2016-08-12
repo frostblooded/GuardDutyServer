@@ -6,7 +6,7 @@ class ApiKeyTest < ActiveSupport::TestCase
     @company.api_key = ApiKey.create
   end
 
-  test 'API key has token' do
+  test 'has token' do
     assert_not @company.api_key.access_token.nil?
   end
 
@@ -14,7 +14,7 @@ class ApiKeyTest < ActiveSupport::TestCase
     assert_equal 32, @company.api_key.access_token.length
   end
 
-  test 'Setting company API key removes old one' do
+  test 'setting company API key removes old one' do
     assert_no_difference('ApiKey.count') do
       @company.api_key = ApiKey.create
     end
