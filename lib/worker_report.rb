@@ -22,20 +22,16 @@ class WorkerReport
     'shared/worker_report'
   end
 
-  def format_time(time)
-    time.localtime.to_formatted_s(:long)
-  end
-
   def add_late_login(minutes, time)
-    @messages << format_time(time) + ': logged in ' + minutes.to_s + ' minutes too late'
+    @messages << WorkerReport.format_late_login(minutes, time)
   end
 
   def add_unreceived_call(time)
-    @messages << format_time(time) + ': unreceived call'
+    @messages << WorkerReport.format_unreceived_call(time)
   end
 
   def add_unanswered_call(time)
-    @messages << format_time(time) + ': didn\'t answer call'
+    @messages << WorkerReport.format_unanswered_call(time)
   end
 
   # Returns when the worker logged in based on the worker's
@@ -73,5 +69,21 @@ class WorkerReport
         last_call_time = call.created_at
       end
     end
+  end
+
+  def self.format_time(time)
+    time.localtime.to_formatted_s(:long)
+  end
+
+  def self.format_late_login(minutes, time)
+    format_time(time) + ': logged in ' + minutes.to_s + ' minutes too late'
+  end
+
+  def self.format_unreceived_call(time)
+    format_time(time) + ': unreceived call'
+  end
+
+  def self.format_unanswered_call(time)
+    format_time(time) + ': didn\'t answer call'
   end
 end

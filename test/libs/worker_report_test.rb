@@ -77,8 +77,8 @@ class WorkerReportTest < ActiveSupport::TestCase
     @worker_report.activities << create_activity(:logout, @worker, @shift.end - 5.minutes)
     @worker_report.generate_messages
 
-    assert_equal 'unreceived call around ' + (@shift.start + 20.minutes).to_s, @worker_report.messages[0]
-    assert_equal 'unreceived call around ' + (@shift.start + 50.minutes).to_s, @worker_report.messages[1]
+    assert_equal WorkerReport.format_unreceived_call(@shift.start + 20.minutes), @worker_report.messages[0]
+    assert_equal WorkerReport.format_unreceived_call(@shift.start + 50.minutes), @worker_report.messages[1]
   end
 
   test 'worker report generates correct messages for worker with late login and 2 unanswered calls' do
@@ -87,8 +87,8 @@ class WorkerReportTest < ActiveSupport::TestCase
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 50.minutes, 0)
     @worker_report.generate_messages
 
-    assert_equal 'logged in 20 minutes too late', @worker_report.messages[0]
-    assert_equal 'didn\'t answer call at ' + (@shift.start + 35.minutes).to_s, @worker_report.messages[1]
-    assert_equal 'didn\'t answer call at ' + (@shift.start + 50.minutes).to_s, @worker_report.messages[2]
+    assert_equal WorkerReport.format_late_login(20, @shift.start + 20.minutes), @worker_report.messages[0]
+    assert_equal WorkerReport.format_unanswered_call(@shift.start + 35.minutes), @worker_report.messages[1]
+    assert_equal WorkerReport.format_unanswered_call(@shift.start + 50.minutes), @worker_report.messages[2]
   end
 end
