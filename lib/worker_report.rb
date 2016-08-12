@@ -26,16 +26,16 @@ class WorkerReport
     time.localtime.to_formatted_s(:long)
   end
 
-  def add_late_login(minutes)
-    @messages << 'logged in ' + minutes.to_s + ' minutes too late'
+  def add_late_login(minutes, time)
+    @messages << format_time(time) + ': logged in ' + minutes.to_s + ' minutes too late'
   end
 
   def add_unreceived_call(time)
-    @messages << 'unreceived call around ' + format_time(time)
+    @messages << format_time(time) + ': unreceived call'
   end
 
   def add_unanswered_call(time)
-    @messages << 'didn\'t answer call at ' + format_time(time)
+    @messages << format_time(time) + ': didn\'t answer call'
   end
 
   # Returns when the worker logged in based on the worker's
@@ -60,7 +60,7 @@ class WorkerReport
 
   def generate_messages
     last_call_time = login_time
-    add_late_login(login_delay) if login_delay > ALLOWED_LOGIN_DELAY
+    add_late_login(login_delay, login_time) if login_delay > ALLOWED_LOGIN_DELAY
 
     while last_call_time + @shift.call_interval.minutes < @shift.end
       call = next_call(last_call_time)
