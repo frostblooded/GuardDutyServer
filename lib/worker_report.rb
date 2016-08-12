@@ -45,7 +45,7 @@ class WorkerReport
   def next_call(last_call_time)
     @activities.select do |a|
       a.created_at > last_call_time \
-      && a.created_at < last_call_time + 15.minutes + ALLOWED_CALL_DELAY
+      && a.created_at < last_call_time + @shift.call_interval.minutes + ALLOWED_CALL_DELAY
     end.first 
   end
 
@@ -53,12 +53,12 @@ class WorkerReport
     last_call_time = login_time
     add_late_login(login_delay) if login_delay > ALLOWED_LOGIN_DELAY
 
-    while last_call_time + 15.minutes < @shift.end
+    while last_call_time + @shift.call_interval.minutes < @shift.end
       call = next_call(last_call_time)
 
       if call.nil?
-        add_unreceived_call(last_call_time + 15.minutes)
-        last_call_time += 15.minutes
+        add_unreceived_call(last_call_time + @shift.call_interval.minutes)
+        last_call_time += @shift.call_interval.minutes
       else
         add_unanswered_call(call.created_at) if call.time_left <= 0
         last_call_time = call.created_at

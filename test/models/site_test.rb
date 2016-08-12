@@ -10,6 +10,7 @@ class SiteTest < ActiveSupport::TestCase
     @site.settings(:shift).end = '12:00'
 
     base_time = Time.parse(@site.settings(:shift).start)
+    call_interval = 15
     @activities = []
 
     6.times do |i|
@@ -17,7 +18,7 @@ class SiteTest < ActiveSupport::TestCase
 
       # Adds minutes to the time so that the first and the last
       # activities are not in the shift's time
-      activity.created_at = base_time - 5.minutes + 15.minutes*i
+      activity.created_at = base_time - 5.minutes + call_interval.minutes*i
       activity.updated_at = activity.created_at
       activity.save!
 

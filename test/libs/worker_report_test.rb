@@ -4,8 +4,11 @@ class WorkerReportTest < ActiveSupport::TestCase
   def setup
     @worker = create(:worker)
 
+    site = create(:site)
+    site.settings(:call).interval = "15"
+
     @shift = Shift.new(Time.parse('11:00'), Time.parse('12:00'))
-    @shift.site = create(:site)
+    @shift.site = site
 
     @worker_report = WorkerReport.new(@worker, [], @shift)
   end
