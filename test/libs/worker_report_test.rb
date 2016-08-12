@@ -24,9 +24,10 @@ class WorkerReportTest < ActiveSupport::TestCase
   end
 
   test 'worker report returns correct login time for worker that logs in during shift' do
-    @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
+    login_time = @shift.start + 5.minutes
+    @worker_report.activities << create_activity(:login, @worker, login_time)
 
-    assert_equal @shift.start + 5.minutes, @worker_report.login_time.localtime
+    assert_equal login_time, @worker_report.login_time.localtime
   end
 
   test 'worker report generates correct messages for perfect worker' do
