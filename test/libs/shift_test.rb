@@ -1,46 +1,62 @@
 require 'test_helper'
 
 class ShiftTest < ActiveSupport::TestCase
-  def setup
-    @shift = Shift.new(Time.parse('11:00'), Time.parse('12:00'))
-    @shift.site = create(:site)
+  def make_activities
+    activities = []
 
-    @workers = []
+    # Worker 0 (good worker - logged in before shift)
+    activities << create_activity(:login, @workers[0], @shift.start - 5.minutes)
+    activities << create_activity(:call, @workers[0], @shift.start + 10.minutes)
+    activities << create_activity(:call, @workers[0], @shift.start + 40.minutes)
+    activities << create_activity(:call, @workers[0], @shift.start + 25.minutes)
+    activities << create_activity(:call, @workers[0], @shift.start + 55.minutes)
+    activities << create_activity(:logout, @workers[0], @shift.end + 5.minutes)
 
-    # Make 3 workers - the third one isn't in the shift
+    # Worker 1 (okay worker - logged in a bit after shift started, but
+    #  2 calls haven't been received from him)
+    activities << create_activity(:login, @workers[1], @shift.start + 5.minutes)
+    # Missing call 20 minutes after shift has started
+    activities << create_activity(:call, @workers[1], @shift.start + 35.minutes)
+    # Missing call 50 minutes after shift has started
+    activities << create_activity(:logout, @workers[1], @shift.end - 5.minutes)
+
+    # Worker 2 (bad worker - only logged out)
+    activities << create_activity(:logout, @workers[2], @shift.end - 5.minutes)
+
+    # Worker 3 (bad worker - logged out too late and didn't answer some calls)
+    activities << create_activity(:login, @workers[3], @shift.start + 17.minutes)
+    activities << create_activity(:call, @workers[3], @shift.start + 20.minutes, 0)
+    activities << create_activity(:call, @workers[3], @shift.start + 35.minutes)
+    activities << create_activity(:call, @workers[3], @shift.start + 50.minutes, 0)
+    activities << create_activity(:logout, @workers[3], @shift.end + 5.minutes)
+
+    activities
+  end
+
+  def make_workers
+    workers = []
+
     4.times do
-      @workers << create(:worker)
+      workers << create(:worker)
     end
 
-    @activities = []
+    workers
+  end
 
-    # Worker 1(good worker - logged in before shift)
-    @activities << create_activity(:login, @workers[0], @shift.start - 5.minutes)
-    @activities << create_activity(:call, @workers[0], @shift.start + 10.minutes)
-    @activities << create_activity(:call, @workers[0], @shift.start + 40.minutes)
-    @activities << create_activity(:call, @workers[0], @shift.start + 25.minutes)
-    @activities << create_activity(:call, @workers[0], @shift.start + 55.minutes)
-    @activities << create_activity(:logout, @workers[0], @shift.end + 5.minutes)
+  def get_worker_report(shift, worker)
+    shift.report.worker_reports.select { |wr| wr.worker == worker }.first
+  end
 
-    # Worker 2(okay worker - logged in a bit after shift started, but
-    #  2 calls haven't been received from him)
-    @activities << create_activity(:login, @workers[1], @shift.start + 5.minutes)
-    # Missing call 20 minutes after shift has started
-    @activities << create_activity(:call, @workers[1], @shift.start + 35.minutes)
-    # Missing call 50 minutes after shift has started
-    @activities << create_activity(:logout, @workers[1], @shift.end - 5.minutes)
+  def get_worker_messages(shift, worker)
+    get_worker_report(shift, worker).messages
+  end
 
-    # Worker 3(bad worker - only logged out)
-    @activities << create_activity(:logout, @workers[2], @shift.end - 5.minutes)
+  def setup
+    @workers = make_workers
 
-    # Worker 4(bad worker - logged out too late and didn't answer some calls)
-    @activities << create_activity(:login, @workers[3], @shift.start + 17.minutes)
-    @activities << create_activity(:call, @workers[3], @shift.start + 20.minutes, 0)
-    @activities << create_activity(:call, @workers[3], @shift.start + 35.minutes)
-    @activities << create_activity(:call, @workers[3], @shift.start + 50.minutes, 0)
-    @activities << create_activity(:logout, @workers[3], @shift.end + 5.minutes)
-
-    @shift.activities = @activities
+    @shift = Shift.new(Time.parse('11:00'), Time.parse('12:00'))
+    @shift.site = create(:site)
+    @shift.activities = make_activities
   end
 
   test 'shift has initialized properly' do
@@ -59,29 +75,29 @@ class ShiftTest < ActiveSupport::TestCase
     assert workers.include? @workers[3]
   end
 
-  test 'makes correct report' do
-    shift_report = @shift.report
-    assert_equal @shift.site, shift_report.site
-    assert_equal @shift.workers.size, shift_report.worker_reports.size
+  test 'report has correct site' do
+    assert_equal @shift.site, @shift.report.site
+  end
 
-    shift_report.worker_reports.each_with_index do |wr, i|
-      worker_messages = shift_report.worker_reports[i].messages
+  test 'report has correct number of workers' do
+    assert_equal @shift.workers.size, @shift.report.worker_reports.size
+  end
 
-      # puts 'Worker ' + i.to_s + ': '
-      # puts worker_messages
+  test 'makes correct report for perfect worker' do
+    worker_messages = get_worker_messages @shift, @workers[0]
+    assert worker_messages.empty?
+  end
 
-      # Check different things for the different workers
-      case wr.worker
-      when @workers[0]
-        assert_equal worker_messages.size, 0
-      when @workers[1]
-        assert_equal 'unreceived call around ' + (@shift.start + 20.minutes).to_s, worker_messages[0]
-        assert_equal 'unreceived call around ' + (@shift.start + 50.minutes).to_s, worker_messages[1]
-      when @workers[3]
-        assert_equal 'logged in 17 minutes too late', worker_messages[0]
-        assert_equal 'didn\'t answer call at ' + (@shift.start + 20.minutes).to_s, worker_messages[1]
-        assert_equal 'didn\'t answer call at ' + (@shift.start + 50.minutes).to_s, worker_messages[2]
-      end
-    end
+  test 'makes correct report for worker with 2 unmade calls' do
+    worker_messages = get_worker_messages @shift, @workers[1]
+    assert_equal 'unreceived call around ' + (@shift.start + 20.minutes).to_s, worker_messages[0]
+    assert_equal 'unreceived call around ' + (@shift.start + 50.minutes).to_s, worker_messages[1]
+  end
+
+  test 'makes correct report for worker who logged in late and didn\'t answer 2 calls' do
+    worker_messages = get_worker_messages @shift, @workers[3]
+    assert_equal 'logged in 17 minutes too late', worker_messages[0]
+    assert_equal 'didn\'t answer call at ' + (@shift.start + 20.minutes).to_s, worker_messages[1]
+    assert_equal 'didn\'t answer call at ' + (@shift.start + 50.minutes).to_s, worker_messages[2]
   end
 end
