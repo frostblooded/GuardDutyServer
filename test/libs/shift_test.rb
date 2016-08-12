@@ -4,20 +4,16 @@ class ShiftTest < ActiveSupport::TestCase
   def make_activities
     activities = []
 
-    # Worker 0 (good worker - logged in before shift)
+    # Worker 0 (good worker - logged in before shift started)
     activities << create_activity(:login, @workers[0], @shift.start - 5.minutes)
     activities << create_activity(:logout, @workers[0], @shift.end + 5.minutes)
 
-    # Worker 1 (okay worker - logged in a bit after shift started)
+    # Worker 1 (okay worker - logged in after shift started)
     activities << create_activity(:login, @workers[1], @shift.start + 5.minutes)
     activities << create_activity(:logout, @workers[1], @shift.end - 5.minutes)
 
     # Worker 2 (bad worker - only logged out)
     activities << create_activity(:logout, @workers[2], @shift.end - 5.minutes)
-
-    # Worker 3 (bad worker - logged in too late)
-    activities << create_activity(:login, @workers[3], @shift.start + 17.minutes)
-    activities << create_activity(:logout, @workers[3], @shift.end + 5.minutes)
 
     activities
   end
@@ -25,7 +21,7 @@ class ShiftTest < ActiveSupport::TestCase
   def make_workers
     workers = []
 
-    4.times do
+    3.times do
       workers << create(:worker)
     end
 
@@ -61,7 +57,6 @@ class ShiftTest < ActiveSupport::TestCase
     assert workers.include? @workers[0]
     assert workers.include? @workers[1]
     assert_not workers.include? @workers[2]
-    assert workers.include? @workers[3]
   end
 
   test 'report has correct site' do
