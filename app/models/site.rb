@@ -31,18 +31,18 @@ class Site < ActiveRecord::Base
     # NOTE: This method assumes that there is only one shift per day
     def get_last_shift_times
       shift_times = Hash.new
-      shift_times[:end] = Time.parse settings(:shift).end
+      shift_end = Time.parse settings(:shift).end
 
-      while shift_times[:end] > Time.now
-        shift_times[:end] -= 1.day
+      while shift_end > Time.now
+        shift_end -= 1.day
       end
 
-      shift_times[:start] = Time.parse settings(:shift).start
+      shift_start = Time.parse settings(:shift).start
 
-      while shift_times[:start] > shift_times[:end]
-        shift_times[:start] -= 1.day
+      while shift_start > shift_end
+        shift_start -= 1.day
       end
 
-      shift_times
+      {start: shift_start, end: shift_end}
     end
 end
