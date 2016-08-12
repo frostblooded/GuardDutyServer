@@ -8,4 +8,12 @@ class ShiftReport
     @shift = shift
     @worker_reports = worker_reports
   end
+
+  def has_messages?
+    worker_reports.each do |wr|
+      return true if !wr.messages.empty?
+    end
+
+    false
+  end
 end
