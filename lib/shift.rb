@@ -26,7 +26,7 @@ class Shift
   def report
     report = ShiftReport.new(@site)
 
-    self.workers.each do |w|
+    workers.each do |w|
       worker_activities = @activities.select { |a| a.worker == w }
       worker_report = WorkerReport.new(w, worker_activities, self)
       worker_report.generate_messages
