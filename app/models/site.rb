@@ -17,12 +17,9 @@ class Site < ActiveRecord::Base
 
   # Returns data about the last COMPLETED shift
   def get_last_shift
-    shift = Shift.new
-    shift.site = self
     shift_times = get_last_shift_times
 
-    shift.start = shift_times[:start]
-    shift.end = shift_times[:end]
+    shift = Shift.new(shift_times[:start], shift_times[:end], self)
     shift.activities = Activity.where('created_at >= :shift_start AND created_at <= :shift_end',
       {shift_start: shift.start, shift_end: shift.end}).to_a
 
