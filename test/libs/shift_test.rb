@@ -28,14 +28,6 @@ class ShiftTest < ActiveSupport::TestCase
     workers
   end
 
-  def get_worker_report(shift, worker)
-    shift.report.worker_reports.select { |wr| wr.worker == worker }.first
-  end
-
-  def get_worker_messages(shift, worker)
-    get_worker_report(shift, worker).messages
-  end
-
   def setup
     @workers = make_workers
 
