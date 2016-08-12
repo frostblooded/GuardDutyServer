@@ -45,7 +45,7 @@ class WorkerReport
   def next_call(last_call_time)
     @activities.select do |a|
       a.created_at > last_call_time \
-      && a.created_at < last_call_time + @shift.call_interval.minutes + ALLOWED_CALL_DELAY
+      && a.created_at < last_call_time + @shift.call_interval.minutes + ALLOWED_CALL_DELAY.minutes
     end.first 
   end
 
