@@ -44,10 +44,10 @@ class WorkerReportTest < ActiveSupport::TestCase
   # Unsynced calls are calls which start sooner than the call interval, which is expected
   test 'worker report generates correct messages for perfect worker with unsynced calls' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start + 5.minutes)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 11.minutes, 0)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 26.minutes, 0)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 41.minutes, 0)
-    @worker_report.activities << create_activity(:call, @worker, @shift.start + 56.minutes, 0)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 11.minutes)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 26.minutes)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 41.minutes)
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 56.minutes)
     @worker_report.generate_messages
 
     assert @worker_report.messages.empty?
