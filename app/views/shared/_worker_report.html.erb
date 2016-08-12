@@ -1,0 +1,10 @@
+<% unless worker_report.messages.empty? %>
+  <li class="worker_report">
+    <%= worker_report.worker.name %>
+    <ul>
+      <% worker_report.messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

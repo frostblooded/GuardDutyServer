@@ -9,11 +9,11 @@
       The workers who showed up today to work are:
 
       <div class="workers">
-        <% @company.sites.each do |site| %>
+        <% @shift_reports.each do |report| %>
           <div class="site_workers">
-            <% unless site.last_shift.workers.empty? %>
-              <%= site.name %>: 
-              <% site.last_shift.workers.each do |worker| %>
+            <% unless report.shift.workers.empty? %>
+              <%= report.shift.site.name %>: 
+              <% report.shift.workers.each do |worker| %>
                 <%= worker.name %>,
               <% end %>
             <% end %>
@@ -26,27 +26,7 @@
       <br>
 
       <div class="report">
-        <% @company.sites.each do |site| %>
-          <div class="site_report">
-            <% if site.last_shift.report.has_messages? %>
-              <%= site.name %>
-              <ul>
-                <% site.last_shift.report.worker_reports.each do |worker_report| %>
-                  <li class="worker_report">
-                    <% unless worker_report.messages.empty? %>
-                      <%= worker_report.worker.name %>
-                      <ul>
-                        <% worker_report.messages.each do |message| %>
-                          <li><%= message %></li>
-                        <% end %>
-                      </ul>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
-        <% end %>
+        <%= render @shift_reports %>
       </div>
     </div>
   </body>

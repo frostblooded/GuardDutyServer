@@ -17,6 +17,11 @@ class WorkerReport
     @messages = messages
   end
 
+  # Used for finding the partial
+  def to_partial_path
+    'shared/worker_report'
+  end
+
   def add_late_login(minutes)
     @messages << 'logged in ' + minutes.to_s + ' minutes too late'
   end

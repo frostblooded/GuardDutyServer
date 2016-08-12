@@ -9,6 +9,11 @@ class ShiftReport
     @worker_reports = worker_reports
   end
 
+  # Used for finding the partial
+  def to_partial_path
+    'shared/shift_report'
+  end
+
   def has_messages?
     worker_reports.each do |wr|
       return true if !wr.messages.empty?
