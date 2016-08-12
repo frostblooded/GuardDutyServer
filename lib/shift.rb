@@ -5,7 +5,7 @@ class Shift
   attr_accessor :activities
   attr_accessor :site
 
-  def initialize(shift_start = 0, shift_end = 0, activities = [], site = nil)
+  def initialize(shift_start = 0, shift_end = 0, site = nil, activities = [])
     @start = shift_start
     @end = shift_end
     @activities = activities
