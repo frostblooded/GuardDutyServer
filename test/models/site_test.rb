@@ -79,4 +79,16 @@ class SiteTest < ActiveSupport::TestCase
       assert_equal @site, shift.site
     end
   end
+
+  test 'last shift only has workers from this site' do
+    @other_worker = create(:worker)
+    @other_activity = create_activity(:call, @other_worker, Time.parse('11:10'))
+
+    time = Time.parse(@site.settings(:shift).end) + 30.minutes
+
+    Timecop.freeze(time) do
+      shift = @site.last_shift
+      assert_not shift.activities.include? @other_activity
+    end
+  end
 end
