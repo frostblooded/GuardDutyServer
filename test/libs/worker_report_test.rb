@@ -30,6 +30,19 @@ class WorkerReportTest < ActiveSupport::TestCase
     assert_equal login_time, @worker_report.login_time.localtime
   end
 
+  test 'worker report returns correct login delay for already logged in worker' do
+    @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
+
+    assert_equal 0, @worker_report.login_delay
+  end
+
+  test 'worker report returns correct login delay for worker that logs in during shift' do
+    login_delay = 20
+    @worker_report.activities << create_activity(:login, @worker, @shift.start + login_delay.minutes)
+
+    assert_equal login_delay, @worker_report.login_delay
+  end
+
   test 'worker report generates correct messages for perfect worker' do
     @worker_report.activities << create_activity(:login, @worker, @shift.start - 5.minutes)
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)

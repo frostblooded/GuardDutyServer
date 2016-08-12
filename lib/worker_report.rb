@@ -19,6 +19,11 @@ class WorkerReport
     @activities.first.login? ? @activities.first.created_at : @shift.start
   end
 
+  # Returns the login delay in minutes
+  def login_delay
+    ((self.login_time - @shift.start) / 60).floor
+  end
+
   def generate_messages
     next_expected_call = Time.new
 
