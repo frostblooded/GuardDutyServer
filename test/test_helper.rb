@@ -1,10 +1,12 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'rails/test_help'
+require "minitest/rails/capybara"
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
-require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Included so that you don't need to add the 'FactoryGirl.' prefix
