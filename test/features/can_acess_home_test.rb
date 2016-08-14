@@ -13,4 +13,10 @@ class CanAcessHomeTest < Capybara::Rails::TestCase
   	assert_content page, "test"
     page.wont_have_content "Sing in as"
   end
+
+  test "testLinkContact" do
+    visit root_path
+    click_link "Contact"
+    assert_content page, "should insert"
+  end
 end
