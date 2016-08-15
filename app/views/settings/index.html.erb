@@ -21,6 +21,11 @@
 					</div>
 				</div>
 
+				<div class="email_time">
+					When do you want to receive the mail?
+					<input type="text" name="mail_time" id="mail_time" value="<%= @company.settings(:mail).time %>"/>
+				</div>
+
 				<div class="additional_email">
 					<span> Add your man </span>
 					<input type="email" name="add_email" id="add_email"/>
