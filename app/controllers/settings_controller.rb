@@ -3,9 +3,9 @@ class SettingsController < ApplicationController
     if params[:daily_mail] == "true"
       @daily_mail == true
     end
+    
     @company = current_company
   end
-
 
   def update
     @company = current_company
