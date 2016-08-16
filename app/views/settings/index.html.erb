@@ -9,45 +9,31 @@
 	<body>
 		<%= form_tag do %>
 			<div class="settings">
-				<div class="daily_mail">
+				<div class="email_wanted">
 					<span> Do you want daily report sent to your email? </span>
 					<div class="checkboxes">
 						<div class="first_radio">
-							<input id="daily_mail" type="radio" name="daily_mail" value="true" class="radio1"/>
-							<label for="daily_mail"> Yes, I would like to get daily report for my workers </label>
+							<input id="email_wanted" type="radio" name="email_wanted" value="true" class="radio1"/>
+							<label for="email_wanted"> Yes, I would like to get daily report for my workers </label>
 						</div>
 						<div class="second_radio">
-							<input id="daily_mail" type="radio" name="daily_mail" value="false" class="radio2"/>
-							<label for="daily_mail"> No, I dont want it </label>
+							<input id="email_wanted" type="radio" name="email_wanted" value="false" class="radio2"/>
+							<label for="email_wanted"> No, I dont want it </label>
 						</div>
 					</div>
 				</div>
 
 				<div class="email_time">
 					When do you want to receive the mail?
-					<input type="text" name="mail_time" id="mail_time" value="<%= @company.settings(:mail).time %>"/>
+					<input type="text" name="email_time" id="email_time" value="<%= @company.settings(:email).time %>"/>
 				</div>
 
-				<div class="additional_email">
-					<span> Add your man </span>
-					<input type="email" name="add_email" id="add_email"/>
-				</div>
 				<button type="Submit" value="update" class="submit_button"> Save changes </button>
 			</div>
-			
-			<script type="text/javascript">
-    			$('#timepicker1').timepicker();
-			</script>
-
-			<script type="text/javascript">
-    			$('#timepicker2').timepicker();
-			</script>
 		<% end %>
 
 		<div class ="change_password">
 			<%= link_to "Want to edit your email or credentials?", edit_company_registration_path %>
 		</div>
-
-		<%= @company.settings(:mail).additional %>
   	</body>
 </html>
