@@ -3,8 +3,8 @@ require 'test_helper'
 class CompanyHelperTest < ActiveSupport::TestCase
   def setup
     @company = create(:company)
-    @company.settings(:mail).time = '12:00'
-    @company.settings(:mail).daily = true
+    @company.settings(:email).time = '12:00'
+    @company.settings(:email).daily = true
   end
 
   def mail_is_sent(company)

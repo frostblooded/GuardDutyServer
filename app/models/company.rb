@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
 
   has_settings do |s|
-    s.key :mail, defaults: { daily: false, additional: '' , time: '12:00'}
+    s.key :email, defaults: { daily: false, time: '12:00'}
   end
   
   enum role: [ :logged_in, :logged_out ]  

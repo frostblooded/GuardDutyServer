@@ -9,10 +9,10 @@ class SettingsController < ApplicationController
 
   def update
     @company = current_company
-    @company.settings(:mail).additional = params[:add_email]
-    @company.settings(:mail).daily = params[:daily_mail] ? true : false
-    @company.settings(:mail).time = params[:mail_time]
-    @company.settings(:mail).save!
+    @company.settings(:email).additional = params[:add_email]
+    @company.settings(:email).daily = params[:daily_mail] ? true : false
+    @company.settings(:email).time = params[:mail_time]
+    @company.settings(:email).save!
 
     flash[:success] = "Settings saved"
     redirect_to settings_path

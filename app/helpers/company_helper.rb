@@ -8,11 +8,11 @@ module CompanyHelper
     # This is determined based on if the time at which the company has said that it should receive a mail
     # has come and by checking if the last time a mail was sent was today
     def should_send_report(company)
-      Time.parse(company.settings(:mail).time) < Time.now && Time.now.day != company.last_mail_sent_at.day
+      Time.parse(company.settings(:email).time) < Time.now && Time.now.day != company.last_mail_sent_at.day
     end
 
     def check_report_status(company)
-      if company.settings(:mail).daily && CompanyHelper.should_send_report(company)
+      if company.settings(:email).daily && CompanyHelper.should_send_report(company)
         company.send_report_email
         company.update(last_mail_sent_at: Time.now)
 
