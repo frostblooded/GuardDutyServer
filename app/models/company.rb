@@ -44,24 +44,4 @@ class Company < ActiveRecord::Base
   def send_report_mail_additional_email
     CompanyNotifier.additional_email(self).deliver_now
   end
-
-  # Tasks executed by cron job
-
-  # Returns if the time has come to send a mail
-  # This is determined based on if the time at which the company has said that it should receive a mail
-  # has come and by checking if the last time a mail was sent was today
-  def should_send_mail
-    Time.parse(settings(:mail).time) < Time.now && Time.now.day != last_mail_sent_at.day
-  end
-
-  def check_mail_status
-    if settings(:mail).daily && should_send_mail
-      send_report_mail
-      update(last_mail_sent_at: Time.now)
-
-      puts 'Sending mail to ' + self.inspect
-    else
-      puts 'Not sending mail...'
-    end
-  end
 end
