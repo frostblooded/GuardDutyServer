@@ -20,6 +20,10 @@ class WorkerReportTest < ActiveSupport::TestCase
     assert @worker_report.messages.empty?
   end
 
+  test 'has set proper partial path' do
+    assert_equal 'shared/worker_report', @worker_report.to_partial_path
+  end
+
   test 'returns correct login time for already logged in worker' do
     @worker_report.activities << create_activity(:call, @worker, @shift.start + 10.minutes)
 
