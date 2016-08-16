@@ -1,19 +1,19 @@
 module CompanyHelper
   module_function
     def check_mails_status
-      Company.all.each { |c| CompanyHelper.check_mail_status(c) }
+      Company.all.each { |c| CompanyHelper.check_report_status(c) }
     end
 
     # Returns if the time has come to send a mail
     # This is determined based on if the time at which the company has said that it should receive a mail
     # has come and by checking if the last time a mail was sent was today
-    def should_send_mail(company)
+    def should_send_report(company)
       Time.parse(company.settings(:mail).time) < Time.now && Time.now.day != company.last_mail_sent_at.day
     end
 
-    def check_mail_status(company)
-      if company.settings(:mail).daily && CompanyHelper.should_send_mail(company)
-        company.send_report_mail
+    def check_report_status(company)
+      if company.settings(:mail).daily && CompanyHelper.should_send_report(company)
+        company.send_report_email
         company.update(last_mail_sent_at: Time.now)
 
         puts 'Sending mail to ' + company.email

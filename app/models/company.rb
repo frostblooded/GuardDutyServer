@@ -37,7 +37,7 @@ class Company < ActiveRecord::Base
     false
   end
 
-  def send_report_mail
-    CompanyNotifier.sample_email(self).deliver_now
+  def send_report_email
+    CompanyNotifier.report_email(self).deliver_now
   end
 end

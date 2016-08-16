@@ -1,7 +1,7 @@
 class CompanyNotifier < ApplicationMailer
   default :from => 'attendancecheck1337@gmail.com'
 
-  def sample_email(company)
+  def report_email(company)
     @company = company
 
     # The reports are stored in a variable, so that a new report
