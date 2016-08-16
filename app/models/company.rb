@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
 
   has_settings do |s|
-    s.key :mail, defaults: { daily: '', additional: '' , time: ''}
+    s.key :mail, defaults: { daily: false, additional: '' , time: '12:00'}
   end
   
   enum role: [ :logged_in, :logged_out ]  
@@ -38,11 +38,11 @@ class Company < ActiveRecord::Base
   end
 
   def send_report_mail
-    CompanyNotifier.sample_email(self).deliver
+    CompanyNotifier.sample_email(self).deliver_now
   end
 
   def send_report_mail_additional_email
-    CompanyNotifier.additional_email(self).deliver
+    CompanyNotifier.additional_email(self).deliver_now
   end
 
   # Tasks executed by cron job
