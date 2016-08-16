@@ -32,7 +32,6 @@ end
 group :test do
   gem 'minitest-reporters'
   gem 'minitest-rails-capybara'
-  gem 'mini_backtrace'
   gem 'guard-minitest'
   gem 'simplecov',          '0.11.2', require: false
   gem 'factory_girl_rails', '4.7.0'
