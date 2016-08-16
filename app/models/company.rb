@@ -40,8 +40,4 @@ class Company < ActiveRecord::Base
   def send_report_mail
     CompanyNotifier.sample_email(self).deliver_now
   end
-
-  def send_report_mail_additional_email
-    CompanyNotifier.additional_email(self).deliver_now
-  end
 end

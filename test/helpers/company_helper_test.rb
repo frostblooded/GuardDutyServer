@@ -15,7 +15,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
   test 'mail is sent when it should be' do
     Timecop.freeze(Time.parse('13:00')) do
       @company.update(last_mail_sent_at: Time.now - 1.day)
-      CompanyHelper.check_mail_status(@company)
+      CompanyHelper.check_mails_status
       assert mail_is_sent(@company)
     end
   end
@@ -23,7 +23,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
   test 'mail isn\'t sent when it shouldn\'t be' do
     Timecop.freeze(Time.parse('13:00')) do
       @company.update(last_mail_sent_at: Time.now)
-      CompanyHelper.check_mail_status(@company)
+      CompanyHelper.check_mails_status
       assert_not mail_is_sent(@company)
     end
   end
