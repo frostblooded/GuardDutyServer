@@ -4,6 +4,10 @@ SimpleCov.start
 require 'rails/test_help'
 require "minitest/rails/capybara"
 
+# Make the progress of running tests (rake) a little prettier
+require "minitest/reporters"
+Minitest::Reporters.use!
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
