@@ -7,28 +7,19 @@
         <title>Settings</title>
     </head>
 	<body>
-		<%= form_tag do %>
+		<%= form_tag('/settings/', method: :update) do |f| %>
 			<div class="settings">
-				<div class="email_wanted">
-					<span> Do you want daily report sent to your email? </span>
-					<div class="checkboxes">
-						<div class="first_radio">
-							<input id="email_wanted" type="radio" name="email_wanted" value="true" class="radio1"/>
-							<label for="email_wanted"> Yes, I would like to get daily report for my workers </label>
-						</div>
-						<div class="second_radio">
-							<input id="email_wanted" type="radio" name="email_wanted" value="false" class="radio2"/>
-							<label for="email_wanted"> No, I dont want it </label>
-						</div>
-					</div>
+				<div class="field">
+					Do you want to a receive a report by email every day?
+					<%= check_box_tag :email_wanted, true, @company.settings(:email).wanted %>
 				</div>
 
-				<div class="email_time">
+				<div class="field">
 					When do you want to receive the mail?
-					<input type="text" name="email_time" id="email_time" value="<%= @company.settings(:email).time %>"/>
+					<%= text_field_tag :email_time, @company.settings(:email).time %>
 				</div>
 
-				<button type="Submit" value="update" class="submit_button"> Save changes </button>
+				<%= submit_tag %>
 			</div>
 		<% end %>
 
