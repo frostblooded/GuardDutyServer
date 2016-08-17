@@ -1,3 +1,4 @@
+# A controller the logged in company
 class SettingsController < ApplicationController
   def index
     @company = current_company

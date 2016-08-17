@@ -1,3 +1,4 @@
+# Represents the report for a single worker
 class WorkerReport
   attr_accessor :worker
   attr_accessor :activities
@@ -48,10 +49,25 @@ class WorkerReport
   end
 
   def next_call(last_call_time)
+    next_call_upper_range = last_call_time + @shift.call_interval.minutes
+    next_call_upper_range += ALLOWED_CALL_DELAY.minutes
+
     @activities.select do |a|
       a.created_at > last_call_time \
-      && a.created_at < last_call_time + @shift.call_interval.minutes + ALLOWED_CALL_DELAY.minutes
-    end.first 
+      && a.created_at < next_call_upper_range
+    end.first
+  end
+
+  def handle_call(call, last_call_time)
+    if call.nil?
+      add_unreceived_call(last_call_time + @shift.call_interval.minutes)
+      last_call_time += @shift.call_interval.minutes
+    else
+      add_unanswered_call(call.created_at) if call.time_left <= 0
+      last_call_time = call.created_at
+    end
+
+    last_call_time
   end
 
   def generate_messages
@@ -60,14 +76,7 @@ class WorkerReport
 
     while last_call_time + @shift.call_interval.minutes < @shift.end
       call = next_call(last_call_time)
-
-      if call.nil?
-        add_unreceived_call(last_call_time + @shift.call_interval.minutes)
-        last_call_time += @shift.call_interval.minutes
-      else
-        add_unanswered_call(call.created_at) if call.time_left <= 0
-        last_call_time = call.created_at
-      end
+      last_call_time = handle_call(call, last_call_time)
     end
   end
 

@@ -1,3 +1,4 @@
+# Represents the report for a single shift
 class ShiftReport
   attr_accessor :site
   attr_accessor :shift
@@ -14,9 +15,9 @@ class ShiftReport
     'shared/shift_report'
   end
 
-  def has_messages?
+  def messages?
     worker_reports.each do |wr|
-      return true if !wr.messages.empty?
+      return true unless wr.messages.empty?
     end
 
     false

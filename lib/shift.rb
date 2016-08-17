@@ -1,3 +1,4 @@
+# Used when generating a report for a site's last shift
 class Shift
   attr_accessor :start
   attr_accessor :end
