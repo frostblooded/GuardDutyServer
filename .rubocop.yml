@@ -3,3 +3,11 @@ AllCops:
     - bin/**
     - db/migrate/**
     - db/schema.rb
+    - config/**/*
+  TargetRubyVersion: 2.3
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  
+Rails:
+  Enabled: true
