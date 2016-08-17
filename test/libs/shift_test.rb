@@ -1,32 +1,32 @@
 require 'test_helper'
 
 class ShiftTest < ActiveSupport::TestCase
-  # rubocop:disable AbcSize
+  # Good worker - logged in before shift started
+  def make_good_worker_activities
+    [create_activity(:login, @workers[0], @shift.start - 5.minutes),
+     create_activity(:logout, @workers[0], @shift.end + 5.minutes)]
+  end
+
+  # Okay worker - logged in after shift started
+  def make_okay_worker_activities
+    [create_activity(:login, @workers[1], @shift.start + 5.minutes),
+     create_activity(:logout, @workers[1], @shift.end - 5.minutes)]
+  end
+
+  # Bad worker - only logged out
+  def make_inactive_worker_activities
+    create_activity(:logout, @workers[2], @shift.end - 5.minutes)
+  end
+
   def make_activities
     activities = []
-
-    # Worker 0 (good worker - logged in before shift started)
-    activities << create_activity(:login, @workers[0], @shift.start - 5.minutes)
-    activities << create_activity(:logout, @workers[0], @shift.end + 5.minutes)
-
-    # Worker 1 (okay worker - logged in after shift started)
-    activities << create_activity(:login, @workers[1], @shift.start + 5.minutes)
-    activities << create_activity(:logout, @workers[1], @shift.end - 5.minutes)
-
-    # Worker 2 (bad worker - only logged out)
-    activities << create_activity(:logout, @workers[2], @shift.end - 5.minutes)
-
-    activities
+    activities += make_good_worker_activities
+    activities += make_okay_worker_activities
+    activities << make_inactive_worker_activities
   end
 
   def make_workers
-    workers = []
-
-    3.times do
-      workers << create(:worker)
-    end
-
-    workers
+    Array.new(3) { create(:worker) }
   end
 
   def setup
