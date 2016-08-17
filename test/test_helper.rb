@@ -12,8 +12,8 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
 
-class ActiveSupport
-  module TestCase
+module ActiveSupport
+  class TestCase
     # Included so that you don't need to add the 'FactoryGirl.' prefix
     # when you use Factory Girl
     include FactoryGirl::Syntax::Methods
@@ -30,7 +30,7 @@ class ActiveSupport
     end
 
     def json_response
-      JSON.parse @response.body
+      ::JSON.parse @response.body
     end
 
     # Used to create activities easily when you want to set created_at
@@ -45,8 +45,8 @@ class ActiveSupport
   end
 end
 
-class ActionController
-  module TestCase
+module ActionController
+  class TestCase
     include Devise::Test::ControllerHelpers
   end
 end
