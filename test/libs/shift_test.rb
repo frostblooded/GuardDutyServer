@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ShiftTest < ActiveSupport::TestCase
+  # rubocop:disable AbcSize
   def make_activities
     activities = []
 
@@ -45,7 +46,7 @@ class ShiftTest < ActiveSupport::TestCase
 
   test 'returns correct call_interval' do
     site = Site.create(name: Faker::Name.name)
-    site.settings(:call).interval = "20"
+    site.settings(:call).interval = '20'
     shift = Shift.new
     shift.site = site
 
