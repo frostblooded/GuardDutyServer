@@ -13,7 +13,7 @@ class SiteController < ApplicationController
   def show
     @site = Site.find(params[:id])
     @company = current_company
-    @worker = @company.workers
+    @workers = @company.workers
     @attached_worker = @current_worker
   end
 
@@ -21,14 +21,10 @@ class SiteController < ApplicationController
     @site = Site.find(params[:id])
 
     @site.settings(:call).interval = params[:call_interval]
-    @site.settings(:call).save!
-
     @site.settings(:attached_worker).name = params[:attached_worker]
-    @site.settings(:attached_worker).save!
-    
     @site.settings(:shift).start = params[:shift_start]
     @site.settings(:shift).end = params[:shift_end ]
-    @site.settings(:shift).save!
+    @site.save!
 
     flash[:success] = "Settings saved"
     redirect_to current_site_path
@@ -51,8 +47,7 @@ class SiteController < ApplicationController
   end
 
 	private
-
-  def site_params
-    params.require(:site).permit(:name)
-  end
+    def site_params
+      params.require(:site).permit(:name)
+    end
 end

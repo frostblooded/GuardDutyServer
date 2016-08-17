@@ -5,10 +5,10 @@
   <% @site.each do |site| %>
     <li>
       <div class="workersInfo">
-		<%=link_to site_path(site) do %>
+		    <%=link_to site_path(site) do %>
         	<%= site.name %>
         <% end %>
-        <span>|</span> <%= link_to "delete", site, method: :delete,
+        | <%= link_to "delete", site, method: :delete,
                                       data: { confirm: "You sure?" } %>
       </div>
     </li>

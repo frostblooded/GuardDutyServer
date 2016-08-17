@@ -1,39 +1,33 @@
 <% provide(:title, @site.name) %>
 
 <div class="site_name">
-	<span><%= @site.name %></span>
+	<%= @site.name %>
 </div>  
 
 <div class="site_name">
-  <span><%= @site.settings(:attached_worker).name %></span>
+  <%= @site.settings(:attached_worker).name %>
 </div>
 
 <%= form_tag do %>
-  <div class="worker_attachment">
-    <span>Enter a worker you would want to attach </span>
-    <select class="form-control" name="attached_worker" id="attached_worker" value="<%= @site.settings(:attached_worker).name%>"/>
-      <% @worker.each do |worker| %>
-        <option><%= worker.name %></option>
-      <% end %>
-    </select>
+  <div class="field">
+    Which worker do you want to be on this site?
+    <%= select_tag 'attached_worker', options_from_collection_for_select(@workers, 'name', 'name') %>
   </div>
-  <div class="settings">
-    <div class="call_interval">
-      <span>Enter call interval</span>
-      <input id="call_interval" name="call_interval" min="5" max="60" type="number" value="<%= @site.settings(:call).interval %>"/>
-    </div>
-    <div class ="shift_start_end">
-      <span>Enter the start of the shift!</span>
-      <div class="input-group bootstrap-timepicker timepicker">
-        <input name="shift_start" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM" value="<%= @site.settings(:shift).start %>">
-      </div>
-      <div class ="shift_end">
-        <span>Enter the end of the shift!</span>
-        <div class="input-group bootstrap-timepicker timepicker">
-          <input name="shift_end" type="text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" id="24h" placeholder="Format: HH:MM" value="<%= @site.settings(:shift).end %>">
-        </div>
-        <button type="Submit" class="submit_button"> Save changes </button>
-      </div>
-    </div>
+
+  <div class="field">
+    Enter call interval
+    <%= text_field_tag :call_interval, @site.settings(:call).interval, min: 5, max: 60, type: :number %>
   </div>
+
+  <div class="field">
+    Enter the start of the shift!
+    <%= text_field_tag :shift_start, @site.settings(:shift).start, placeholder: 'format: HH:MM', pattern: '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
+  </div>
+
+  <div class="field">
+    Enter the end of the shift!
+    <%= text_field_tag :shift_end, @site.settings(:shift).end, placeholder: 'format: HH:MM', pattern: '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
+  </div>
+
+  <%= submit_tag %>
 <% end %>

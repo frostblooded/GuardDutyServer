@@ -44,7 +44,7 @@ class WorkerController < ApplicationController
     @worker = Worker.find(params[:id])
     @activities = @worker.activities
     @call_length = params[:call_length]
-    @company.settings(:mail).daily
+    @company.settings(:email).daily
 
     # Set classes for the HTML tags from here
     @activities.each do |a|
