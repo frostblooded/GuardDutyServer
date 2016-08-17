@@ -34,14 +34,6 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
-  #Exception Notifier
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "Dont get crazy",
-    :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
-    :exception_recipients => %w{ihzahariev@gmail.com}
-  }
-
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 

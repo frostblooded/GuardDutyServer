@@ -70,7 +70,7 @@ Rails.application.configure do
   :email => {
     :email_prefix => "Dont get crazy",
     :sender_address => %{"exception notifier" <attendancecheck1337@gmail.com>},
-    :exception_recipients => %w{ihzahariev@gmail.com}
+    :exception_recipients => %w{frostblooded@yahoo.com}
   }
 
   # Prepend all log lines with the following tags.
