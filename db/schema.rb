@@ -83,13 +83,6 @@ ActiveRecord::Schema.define(version: 20160817183151) do
 
   add_index "settings", ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
 
-  create_table "shift_worker_relations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "worker_id"
-    t.integer  "site_id"
-  end
-
   create_table "site_worker_relations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
