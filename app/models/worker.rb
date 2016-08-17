@@ -1,6 +1,10 @@
 # Represents a worker
 class Worker < ActiveRecord::Base
-  has_and_belongs_to_many :sites
+  # Apparently it is better to do this rather than making
+  # has_and_belongs_to_many relationships like this as stated here
+  has_many :site_worker_relations, dependent: :destroy
+  has_many :sites, through: :site_worker_relations, dependent: :destroy
+
   belongs_to :company
   has_many :activities, dependent: :destroy
 

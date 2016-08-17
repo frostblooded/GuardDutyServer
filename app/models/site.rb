@@ -4,7 +4,11 @@ class Site < ActiveRecord::Base
   # so this is used
   before_destroy { workers.each(&:destroy) }
 
-  has_and_belongs_to_many :workers
+  # Apparently it is better to do this rather than making
+  # has_and_belongs_to_many relationships like this as stated here
+  has_many :site_worker_relations, dependent: :destroy
+  has_many :workers, through: :site_worker_relations, dependent: :destroy
+
   has_many :routes, dependent: :destroy
   belongs_to :company
 
