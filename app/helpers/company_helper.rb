@@ -21,9 +21,7 @@ module CompanyHelper
       company.send_report_email
       company.update(last_mail_sent_at: Time.zone.now)
 
-      puts 'Sending mail to ' + company.email
-    else
-      puts 'Not sending mail...'
+      Rails.logger.info 'Sending mail to ' + company.email
     end
   end
 end
