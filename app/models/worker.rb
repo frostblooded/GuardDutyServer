@@ -1,3 +1,4 @@
+# Represents a worker
 class Worker < ActiveRecord::Base
   has_and_belongs_to_many :sites
   belongs_to :company
@@ -10,6 +11,6 @@ class Worker < ActiveRecord::Base
   before_save :lowercase_names
 
   def lowercase_names
-    self.name = self.name.downcase
+    self.name = name.downcase
   end
 end

@@ -1,3 +1,4 @@
+# A controller which handles workers' actions
 class WorkerController < ApplicationController
   def index
     if current_company
@@ -17,52 +18,36 @@ class WorkerController < ApplicationController
   def create
     @worker = current_company.workers.create(worker_params)
     if @worker.save
-      redirect_to workers_path, :notice => "Signed up!"
+      redirect_to workers_path, notice: 'Signed up!'
     else
-      render "new"
+      render 'new'
     end
   end
 
   def update
     @worker = Worker.find(params[:id])
-    if params[:call_length].present?
-      @worker.settings(:call).interval = params[:call_interval]
-      @worker.settings(:call).save!
 
-      flash[:success] = "Settings saved"
-      redirect_to worker_path
-
-    elsif @worker.update_attributes(worker_params)
-      redirect_to workers_path, :notice => "Changes saved!"
-    elsif 
+    if @worker.update_attributes(worker_params)
+      redirect_to workers_path, notice: 'Changes saved!'
+    else
       render 'edit'
     end
   end
 
   def show
-    @company = current_company 
+    @company = current_company
     @worker = Worker.find(params[:id])
     @activities = @worker.activities
     @call_length = params[:call_length]
     @company.settings(:email).daily
 
     # Set classes for the HTML tags from here
-    @activities.each do |a|
-      a.row_class = ""
-
-      if a.call?
-        a.row_class = (a.time_left != 0 ? "answered" : "unanswered") + "_call_activity"
-      elsif a.login?
-        a.row_class = "login_activity"
-      elsif a.logout?
-        a.row_class = "logout_activity"
-      end
-    end
+    @activities.each { |a| a.row_class = get_row_class(a) }
   end
 
   def destroy
     Worker.find(params[:id]).destroy
-    flash[:success] = "Worker deleted"
+    flash[:success] = 'Worker deleted'
     redirect_to workers_path
   end
 
@@ -70,5 +55,20 @@ class WorkerController < ApplicationController
 
   def worker_params
     params.require(:worker).permit(:name, :password, :password_confirmation)
+  end
+
+  def get_row_class(activity)
+    row_class = ''
+
+    if a.call?
+      row_class = (activity.time_left.nonzero? ? 'answered' : 'unanswered')
+      row_class += '_call_activity'
+    elsif activity.login?
+      row_class = 'login_activity'
+    elsif activity.logout?
+      row_class = 'logout_activity'
+    end
+
+    row_class
   end
 end

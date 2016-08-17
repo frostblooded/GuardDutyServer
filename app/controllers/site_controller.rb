@@ -1,14 +1,13 @@
+# A controller which handles sites' actions
 class SiteController < ApplicationController
   def new
-		@site = Site.new
-	end
+    @site = Site.new
+  end
 
-	def index
-    if current_company
-      @company = current_company
-      @site = @company.sites
-    end
-	end
+  def index
+    @company = current_company
+    @site = @company.sites
+  end
 
   def show
     @site = Site.find(params[:id])
@@ -19,35 +18,39 @@ class SiteController < ApplicationController
 
   def update
     @site = Site.find(params[:id])
-
-    @site.settings(:call).interval = params[:call_interval]
-    @site.settings(:attached_worker).name = params[:attached_worker]
-    @site.settings(:shift).start = params[:shift_start]
-    @site.settings(:shift).end = params[:shift_end ]
-    @site.save!
-
-    flash[:success] = "Settings saved"
+    save_settings
+    flash[:success] = 'Settings saved'
     redirect_to current_site_path
   end
 
   def create
     @company = current_company
-    @site = @company.sites.create(site_params) 
+    @site = @company.sites.create(site_params)
+
     if @site.save
-      redirect_to sites_path, :notice => "Site added!"
+      redirect_to sites_path, notice: 'Site added!'
     else
-      render "new"
+      render 'new'
     end
-  end	
+  end
 
   def destroy
     Site.find(params[:id]).destroy
-    flash[:success] = "Site destroyed"
+    flash[:success] = 'Site destroyed'
     redirect_to site_index_path
   end
 
-	private
-    def site_params
-      params.require(:site).permit(:name)
-    end
+  private
+
+  def site_params
+    params.require(:site).permit(:name)
+  end
+
+  def save_settings
+    @site.settings(:call).interval = params[:call_interval]
+    @site.settings(:attached_worker).name = params[:attached_worker]
+    @site.settings(:shift).start = params[:shift_start]
+    @site.settings(:shift).end = params[:shift_end]
+    @site.save!
+  end
 end

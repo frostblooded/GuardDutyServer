@@ -1,4 +1,5 @@
 module API
+  # Represents the companies' routes for the API
   class Companies < Grape::API
     helpers do
       # Returns the company based on the access_token parameter
@@ -15,7 +16,9 @@ module API
     resource :companies do
       route_param :company_id do
         before do
-          error!("inexistent company", 400) unless Company.exists? id: params["company_id"].to_i
+          unless Company.exists? id: params['company_id'].to_i
+            error!('inexistent company', 400)
+          end
         end
 
         resource :sites do
@@ -26,7 +29,9 @@ module API
 
           route_param :site_id do
             before do
-              error!("inexistent site", 400) unless Site.exists? id: params["site_id"].to_i
+              unless Site.exists? id: params['site_id'].to_i
+                error!('inexistent site', 400)
+              end
             end
 
             get :settings do
@@ -55,8 +60,8 @@ module API
                                    latitude: p['latitude'],
                                    index: index)
               end
-              
-              {success: true}
+
+              { success: true }
             end
           end
         end

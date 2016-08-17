@@ -1,3 +1,5 @@
+# Represents an activity, which is used to make a history feed
+# for a worker
 class Activity < ActiveRecord::Base
   belongs_to :worker
 

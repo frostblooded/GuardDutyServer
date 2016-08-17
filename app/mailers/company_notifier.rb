@@ -1,5 +1,6 @@
+# Manages the company notifier emails' actions
 class CompanyNotifier < ApplicationMailer
-  default :from => 'attendancecheck1337@gmail.com'
+  default from: 'attendancecheck1337@gmail.com'
 
   def report_email(company)
     @company = company
@@ -9,6 +10,6 @@ class CompanyNotifier < ApplicationMailer
     #  (through the last_shift methods of Site)
     @shift_reports = @company.sites.map { |site| site.last_shift.report }
 
-    mail(to: @company.email, subject: "Worker's report")
+    mail(to: @company.email, subject: 'Worker\'s report')
   end
 end

@@ -1,4 +1,5 @@
 module API
+  # Represents the access tokens' routes for the API
   class AccessTokens < Grape::API
     helpers do
       # Uses the request parameters do determine if the password is valid
@@ -14,7 +15,7 @@ module API
         params[:name] = params[:name].downcase
       end
     end
-    
+
     resource :access_tokens do
       # Set parameter requirements for login POST request
       params do
@@ -25,21 +26,23 @@ module API
       # Login company
       post '/' do
         downcase_params
-        
+
         # Return error if company with such name doesn't exist
-        error!("invalid company name", 400) unless params_company
+        error!('invalid company name', 400) unless params_company
 
         # Return error if the name/password combination isn't valid
-        error!("invalid company name/password combination", 401) unless valid_password?
+        unless valid_password?
+          error!('invalid company name/password combination', 401)
+        end
 
         # Generate API key
         company = Company.find_by(name: params[:name])
         company.api_key = ApiKey.create
-        
+
         # Return the generated token
-        {access_token: company.api_key.access_token,
-         company_id: company.id,
-         name: company.name}
+        { access_token: company.api_key.access_token,
+          company_id: company.id,
+          name: company.name }
       end
     end
   end

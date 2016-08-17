@@ -1,3 +1,4 @@
+# A controller that manages the website's static pages
 class StaticPageController < ApplicationController
   def home
   end
@@ -10,5 +11,4 @@ class StaticPageController < ApplicationController
 
   def contact
   end
-  
 end

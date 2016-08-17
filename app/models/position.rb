@@ -1,3 +1,4 @@
+# Represents a position
 class Position < ActiveRecord::Base
   belongs_to :route
 

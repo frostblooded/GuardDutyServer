@@ -1,4 +1,4 @@
-# A controller the logged in company
+# A controller that manages the settings of the logged in company
 class SettingsController < ApplicationController
   def index
     @company = current_company
@@ -10,7 +10,7 @@ class SettingsController < ApplicationController
     @company.settings(:email).time = params[:email_time]
     @company.settings(:email).save!
 
-    flash[:success] = "Settings saved"
+    flash[:success] = 'Settings saved'
     redirect_to settings_path
   end
 end
