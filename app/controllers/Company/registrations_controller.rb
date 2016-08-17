@@ -1,4 +1,4 @@
-module Company
+class Company
   # A controller which manages all actions for registering a company
   class RegistrationsController < Devise::RegistrationsController
     before_action :require_no_authentication, only: [:new, :create, :cancel]

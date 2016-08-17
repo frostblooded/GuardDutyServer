@@ -1,4 +1,4 @@
-module Company
+class Company
   # A controller which manages a company's sessions
   class SessionsController < Devise::SessionsController
     before_action :configure_sign_in_params

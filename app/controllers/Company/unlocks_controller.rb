@@ -1,4 +1,4 @@
-module Company
+class Company
   class UnlocksController < Devise::UnlocksController
     # GET /resource/unlock/new
     # def new
