@@ -1,14 +1,8 @@
 require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
-  def setup
-    @company = create(:company)
-    @site = @company.sites.first
-    @worker = @site.workers.first
-
-    @site.settings(:shift).start = '11:00'
-    @site.settings(:shift).end = '12:00'
-
+  # rubocop:disable AbcSize
+  def make_activities
     base_time = Time.parse(@site.settings(:shift).start)
     call_interval = 15
     @activities = []
@@ -18,7 +12,7 @@ class SiteTest < ActiveSupport::TestCase
 
       # Adds minutes to the time so that the first and the last
       # activities are not in the shift's time
-      activity.created_at = base_time - 5.minutes + call_interval.minutes*i
+      activity.created_at = base_time - 5.minutes + call_interval.minutes * i
       activity.updated_at = activity.created_at
       activity.save!
 
@@ -26,37 +20,53 @@ class SiteTest < ActiveSupport::TestCase
     end
   end
 
+  def setup
+    @company = create(:company)
+    @site = @company.sites.first
+    @worker = @site.workers.first
+
+    @site.settings(:shift).start = '11:00'
+    @site.settings(:shift).end = '12:00'
+    make_activities
+  end
+
   test 'position belongs to correct company' do
     assert_equal @company, @site.company
   end
 
-  test 'correctly returns last completed shift times when shift has just ended' do
+  test 'returns last shift times when shift has just ended' do
     time = Time.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ last_shift_times }
-      assert_equal shift_times[:start], Time.parse(@site.settings(:shift).start)
-      assert_equal shift_times[:end], Time.parse(@site.settings(:shift).end)
+      shift_times = @site.instance_eval { last_shift_times }
+      assert_equal shift_times[:start],
+                   Time.parse(@site.settings(:shift).start)
+      assert_equal shift_times[:end],
+                   Time.parse(@site.settings(:shift).end)
     end
   end
 
-  test 'correctly returns last completed shift times when a new shift has started and not ended' do
+  test 'returns last shift times when a new shift has started and not ended' do
     time = Time.parse(@site.settings(:shift).start) + 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ last_shift_times }
-      assert_equal shift_times[:start], (Time.parse(@site.settings(:shift).start) - 1.day)
-      assert_equal shift_times[:end], (Time.parse(@site.settings(:shift).end) - 1.day)
+      shift_times = @site.instance_eval { last_shift_times }
+      assert_equal shift_times[:start],
+                   (Time.parse(@site.settings(:shift).start) - 1.day)
+      assert_equal shift_times[:end],
+                   (Time.parse(@site.settings(:shift).end) - 1.day)
     end
   end
 
-  test 'correctly returns last completed shift times when a new shift is about to start' do
+  test 'returns last shift times when a new shift is about to start' do
     time = Time.parse(@site.settings(:shift).start) - 30.minutes
 
     Timecop.freeze(time) do
-      shift_times = @site.instance_eval{ last_shift_times }
-      assert_equal shift_times[:start], (Time.parse(@site.settings(:shift).start) - 1.day)
-      assert_equal shift_times[:end], (Time.parse(@site.settings(:shift).end) - 1.day)
+      shift_times = @site.instance_eval { last_shift_times }
+      assert_equal shift_times[:start],
+                   (Time.parse(@site.settings(:shift).start) - 1.day)
+      assert_equal shift_times[:end],
+                   (Time.parse(@site.settings(:shift).end) - 1.day)
     end
   end
 
