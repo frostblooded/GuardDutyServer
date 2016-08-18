@@ -36,7 +36,7 @@ FactoryGirl.define do
 
   factory :activity do
     created_at { Time.zone.now }
-    
+
     factory :call_activity do
       category :call
       time_left { rand(60) }
