@@ -3,9 +3,6 @@
     <%= link_to "AttendanceCheck", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   root_path %></li>
-        <li><%= link_to "Help",   help_path %></li>
-
         <% if company_signed_in? %>
           <li><%= link_to "Sites",  sites_path %></li>
           <li><%= link_to "Workers", workers_path %></li>
