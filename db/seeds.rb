@@ -1,14 +1,5 @@
-company = Company.create name: 'frostblooded',
-                         password: 'foobarrr',
-                         password_confirmation: 'foobarrr',
-                         email: Faker::Internet.free_email,
-                         confirmed_at: Time.zone.now
+require 'factory_girl_rails'
 
-5.times do
-  site = company.sites.create name: Faker::GameOfThrones.city
-
-  5.times do
-    site.workers.create(name: Faker::GameOfThrones.character,
-                        password: 'foobarrr')
-  end
-end
+# Creates a company with all kinds of other referenced things
+# and essentially creates all needed model entries
+FactoryGirl.create(:my_company)

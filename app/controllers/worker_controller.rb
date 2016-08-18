@@ -60,7 +60,7 @@ class WorkerController < ApplicationController
   def get_row_class(activity)
     row_class = ''
 
-    if a.call?
+    if activity.call?
       row_class = (activity.time_left.nonzero? ? 'answered' : 'unanswered')
       row_class += '_call_activity'
     elsif activity.login?

@@ -3,11 +3,8 @@ require 'test_helper'
 class WorkerTest < ActiveSupport::TestCase
   def setup
     @company = create(:company)
-    @worker = @company.workers.create name: 'Example LName',
-                                      password: 'Somethinglike',
-                                      password_confirmation: 'Somethinglike'
     @site = @company.sites.first
-    @worker.sites << @site
+    @worker.sites = @site.workers.first
   end
 
   test 'is valid' do

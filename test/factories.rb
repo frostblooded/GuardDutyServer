@@ -3,9 +3,16 @@ FactoryGirl.define do
     name { Faker::Company.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password(8) }
+    confirmed_at Time.zone.now
 
     after(:create) do |company|
       create_list(:site, 2, company: company)
+    end
+
+    factory :my_company do
+      name 'frostblooded'
+      email 'frostblooded@yahoo.com'
+      password 'foobarrr'
     end
   end
 
@@ -21,6 +28,35 @@ FactoryGirl.define do
   factory :worker do
     name { Faker::GameOfThrones.character }
     password { Faker::Internet.password(8) }
+
+    after(:create) do |worker|
+      create_list(:random_activity, 5, worker: worker)
+    end
+  end
+
+  factory :activity do
+    created_at { Time.zone.now }
+    
+    factory :call_activity do
+      category :call
+      time_left { rand(60) }
+    end
+
+    factory :login_activity do
+      category :login
+    end
+
+    factory :logout_activity do
+      category :logout
+    end
+
+    factory :random_activity do
+      category { [:call, :login, :logout].sample }
+
+      after(:create) do |activity|
+        activity.time_left = rand(60) if activity.call?
+      end
+    end
   end
 
   factory :route do
