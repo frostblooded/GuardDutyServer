@@ -52,6 +52,11 @@ module ActiveSupport
       activity.save
       activity
     end
+
+    def mail_is_sent?(company)
+      mail = ActionMailer::Base.deliveries.last
+      !mail.nil? && company.email == mail['to'].to_s
+    end
   end
 end
 
