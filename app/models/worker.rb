@@ -5,7 +5,6 @@ class Worker < ActiveRecord::Base
   has_many :site_worker_relations, dependent: :destroy
   has_many :sites, through: :site_worker_relations, dependent: :destroy
 
-  belongs_to :company
   has_many :activities, dependent: :destroy
 
   validates :name, presence: true,	length: { maximum: 40 }

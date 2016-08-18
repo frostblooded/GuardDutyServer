@@ -4,11 +4,7 @@ class WorkerTest < ActiveSupport::TestCase
   def setup
     @company = create(:company)
     @site = @company.sites.first
-    @worker.sites = @site.workers.first
-  end
-
-  test 'is valid' do
-    assert @worker.valid?
+    @worker = @site.workers.first
   end
 
   test 'name is present' do
@@ -33,10 +29,6 @@ class WorkerTest < ActiveSupport::TestCase
   test 'password has minimum length' do
     @worker.password = @worker.password_confirmation = 'a' * 7
     assert_not @worker.valid?
-  end
-
-  test 'belongs to correct company' do
-    assert_equal @company, @worker.company
   end
 
   test 'belongs to correct site' do
