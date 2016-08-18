@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CanClickHeaderLinks < Capybara::Rails::TestCase
+class CanClickFooterLinks < Capybara::Rails::TestCase
   test 'opens contact' do
     visit root_path
     click_link 'Contact'

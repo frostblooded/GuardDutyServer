@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CanClickHeaderLinks < Capybara::Rails::TestCase
+class CanClickHeaderLinksTest < Capybara::Rails::TestCase
   test 'opens signin' do
     visit root_path
     click_link 'Sign in'
@@ -39,5 +39,6 @@ class CanClickHeaderLinks < Capybara::Rails::TestCase
     visit root_path
     click_link 'Sign out'
     assert_equal root_path, current_path
+    assert page.has_content? 'Signed out successfully'
   end
 end
