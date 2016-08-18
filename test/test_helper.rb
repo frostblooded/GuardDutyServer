@@ -8,6 +8,10 @@ require 'minitest/rails/capybara'
 require 'minitest/reporters'
 Minitest::Reporters.use!
 
+# Used so you can sign in during tests
+include Warden::Test::Helpers
+Warden.test_mode!
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
@@ -21,6 +25,12 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml
     # for all tests in alphabetical order
     fixtures :all
+
+    # Reset Warden after every test
+    def after_teardown
+      super
+      Warden.test_reset!
+    end
 
     # Add more helper methods to be used by all tests here...
     def request_access_token
