@@ -1,10 +1,15 @@
 <% provide(:title, @worker.name) %>
 
-<div class="worker">
-	<p><%= @company.name %> </p>
-  <p><%= @worker.name %></p>
-  <p>Calls</p>
-</div>
+<h2><%= @worker.name %></h2>
+
+<h4>This worker's sites:</h4>
+
+<ul>
+  <% @worker.sites.each do |s| %>
+    <li><%= s.name %></li>
+  <% end %>
+</ul>
+
 <div class="wtable">
 	<table>
 		<tr>
