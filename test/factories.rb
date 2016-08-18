@@ -54,7 +54,7 @@ FactoryGirl.define do
       category { [:call, :login, :logout].sample }
 
       after(:create) do |activity|
-        activity.time_left = rand(60) if activity.call?
+        activity.update(time_left: rand(60)) if activity.call?
       end
     end
   end
