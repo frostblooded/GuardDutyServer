@@ -1,13 +1,8 @@
 require 'test_helper'
 
-class CanAccessAndSignUpTest < Capybara::Rails::TestCase
+class CanSignUpTest < Capybara::Rails::TestCase
   def setup
     @company = create(:company)
-  end
-
-  test 'can access sign up' do
-    visit new_company_registration_path
-    assert_content page, 'Password confirmation (8 characters minimum)'
   end
 
   test 'can sign up' do
@@ -22,7 +17,7 @@ class CanAccessAndSignUpTest < Capybara::Rails::TestCase
     assert_content page, 'A message with a confirmation link has been sent'
   end
 
-  test 'sign up shows error on empty fields' do
+  test 'shows error on empty fields' do
     visit new_company_registration_path
     click_button 'Sign up'
 
@@ -31,7 +26,7 @@ class CanAccessAndSignUpTest < Capybara::Rails::TestCase
     assert_content page, 'Email can\'t be blank'
   end
 
-  test 'sign up shows error on non-matching password fields' do
+  test 'shows error on non-matching password fields' do
     visit new_company_registration_path
 
     fill_in 'company_name', with: 'SomeRandomNameKappa'
@@ -43,7 +38,7 @@ class CanAccessAndSignUpTest < Capybara::Rails::TestCase
     assert_content page, 'Password confirmation doesn\'t match Password'
   end
 
-  test 'sign up shows error on non-unique name and email' do
+  test 'shows error on non-unique name and email' do
     visit new_company_registration_path
 
     fill_in 'company_name', with: @company.name

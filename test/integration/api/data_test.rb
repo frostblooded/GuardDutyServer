@@ -8,14 +8,14 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   # Data
-  test 'protected data forbids access when token is invalid' do
+  test 'forbids access when token is invalid' do
     get "/api/v1/companies/#{@company.id}/sites/#{@site.id}/workers",
         access_token: request_access_token + 'a'
 
     assert_equal '401', @response.code
   end
 
-  test 'protected data returns error when company doesn\'t exist' do
+  test 'returns error when company doesn\'t exist' do
     get '/api/v1/companies/-1/sites/',
         access_token: request_access_token
 
@@ -23,7 +23,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
     assert_equal 'inexistent company', json_response['error']
   end
 
-  test 'protected data returns error when site doesn\'t exist' do
+  test 'returns error when site doesn\'t exist' do
     get "/api/v1/companies/#{@company.id}/sites/-1/workers",
         access_token: request_access_token
 
