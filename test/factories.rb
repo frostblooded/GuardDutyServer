@@ -31,6 +31,7 @@ FactoryGirl.define do
 
     after(:create) do |worker|
       create_list(:random_activity, 5, worker: worker)
+      worker.update(company: worker.sites.first.company) unless worker.sites.empty?
     end
   end
 

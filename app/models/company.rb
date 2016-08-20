@@ -1,7 +1,7 @@
 # Represents a company
 class Company < ActiveRecord::Base
   has_many :sites, dependent: :destroy
-  has_many :workers, through: :sites, dependent: :destroy
+  has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
 
   has_settings do |s|

@@ -7,9 +7,8 @@ class RoutesController < ApplicationController
   def create
     @company = current_company
     @sites = Site.find(params[:site_id])
-    @route = @sites.routes.create(route_params)
 
-    if @route.save
+    if @sites.routes.create(route_params)
       redirect_to site_route_index_path, notice: 'Route added!'
     else
       render 'new'
