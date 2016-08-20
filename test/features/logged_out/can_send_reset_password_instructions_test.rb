@@ -13,6 +13,7 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
     assert_content page, 'You will receive an email with instructions' \
     ' on how to reset your password in a few minutes.'
     assert mail_is_sent?(@company)
+    assert_equal new_company_session_path, current_path
   end
 
   test 'returns error on nonexistent email' do
@@ -21,5 +22,6 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
 
     assert_content page, 'Email not found'
     assert_not mail_is_sent?(@company)
+    assert_equal company_password_path, current_path
   end
 end

@@ -17,7 +17,19 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       click_button 'Create new worker'
     end
 
-    assert workers_path, current_path
-    assert page, 'Worker added!'
+    assert_equal workers_path, current_path
+    assert_content page, 'Worker created!'
+  end
+
+  test 'creating new worker returns error on nonmatching passwords' do
+    assert_no_difference 'Worker.count' do
+      fill_in 'worker_name', with: @worker.name
+      fill_in 'worker_password', with: @worker.password
+      fill_in 'worker_password_confirmation', with: @worker.password + 'a'
+      click_button 'Create new worker'
+    end
+
+    assert_equal workers_path, current_path
+    assert_content page, 'Password confirmation doesn\'t match Password'
   end
 end

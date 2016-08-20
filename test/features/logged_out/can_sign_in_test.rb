@@ -16,6 +16,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     click_button 'Sign in'
 
     assert_content page, 'Signed in successfully'
+    assert_equal root_path, current_path
   end
 
   test 'shows error on non-matching name and password' do
@@ -24,6 +25,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     click_button 'Sign in'
 
     assert_content page, 'Invalid Name or password'
+    assert_equal new_company_session_path, current_path
   end
 
   test 'reset password instruction link opens reset password instructions' do

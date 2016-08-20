@@ -19,7 +19,7 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
 
   test 'site page link opens site page' do
     first(:link, @site.name).click
-    assert @site, current_path
+    assert_equal site_path(@site), current_path
   end
 
   test 'site delete link deletes site' do
@@ -29,6 +29,6 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
 
   test 'new site link opens new site' do
     click_link 'Create site'
-    assert new_site_path, current_path
+    assert_equal new_site_path, current_path
   end
 end

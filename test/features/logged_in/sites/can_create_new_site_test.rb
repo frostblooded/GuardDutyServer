@@ -13,7 +13,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
       click_button 'Create new site'
     end
 
-    assert sites_path, current_path
-    assert page, 'Site added!'
+    assert_equal sites_path, current_path
+    assert_content page, 'Site added!'
   end
 end
