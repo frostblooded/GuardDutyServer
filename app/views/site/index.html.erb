@@ -4,10 +4,8 @@
 <ul class="sites">
   <% @site.each do |site| %>
     <li class="site">
-	    <%=link_to site_path(site) do %>
-      	<%= site.name %>
-      <% end %>
-      | 
+	    <%=link_to site.name, site %>
+       | 
       <%= link_to "delete", site, method: :delete,
                                   data: { confirm: "You sure?" } %>
     </li>

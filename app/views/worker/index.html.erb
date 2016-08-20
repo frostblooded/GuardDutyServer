@@ -6,6 +6,7 @@
     <li>
       <div class="worker">
       	<%=link_to worker.name, worker %>
+        
         <span>|</span> <%= link_to "edit", edit_worker_path(worker)%>
         <span>|</span> <%= link_to "delete", worker, method: :delete,
                                       data: { confirm: "You sure?" } %>
