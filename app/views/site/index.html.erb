@@ -1,20 +1,19 @@
 <% provide(:title, 'Sites') %>
 
-<h1>List of your sites</h1>
+<h2>Your sites</h2>
 <ul class="sites">
   <% @site.each do |site| %>
-    <li>
-      <div class="workersInfo">
-		    <%=link_to site_path(site) do %>
-        	<%= site.name %>
-        <% end %>
-        | <%= link_to "delete", site, method: :delete,
-                                      data: { confirm: "You sure?" } %>
-      </div>
+    <li class="site">
+	    <%=link_to site_path(site) do %>
+      	<%= site.name %>
+      <% end %>
+      | 
+      <%= link_to "delete", site, method: :delete,
+                                  data: { confirm: "You sure?" } %>
     </li>
   <% end %>
 </ul>
 
-<div class = "button">
-  <%= link_to '<button type="button">Add new site</button>'.html_safe, new_site_path %>
-</div>
+<%= button_tag type: :button do %>
+  <%= link_to 'Create site', new_site_path %>
+<% end %>

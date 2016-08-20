@@ -1,10 +1,10 @@
 <% provide(:title, 'Workers') %>
 
-<h1>Your workers</h1>
+<h2>Your workers</h2>
 <ul class="workers">
   <% @worker.each do |worker| %>
     <li>
-      <div class="workersInfo">
+      <div class="worker">
       	<%=link_to worker_path(worker) do %>
           <%= worker.name %>
         <% end %>
@@ -16,9 +16,6 @@
   <% end %>
 </ul>
 
-<div class = "button">
-  <%= button_tag type: :button do %>
-    <%= link_to 'Add worker', workers_new_path %>
-  <% end %>
-</div>
-
+<%= button_tag type: :button do %>
+  <%= link_to 'Create worker', new_worker_path %>
+<% end %>
