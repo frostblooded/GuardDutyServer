@@ -13,7 +13,7 @@ class CanSignInTest < Capybara::Rails::TestCase
 
     fill_in 'company_name', with: @company.name
     fill_in 'company_password', with: @company_password
-    click_button 'Log in'
+    click_button 'Sign in'
 
     assert_content page, 'Signed in successfully'
   end
@@ -23,7 +23,7 @@ class CanSignInTest < Capybara::Rails::TestCase
 
     fill_in 'company_name', with: @company.name
     fill_in 'company_password', with: @company_password * 3
-    click_button 'Log in'
+    click_button 'Sign in'
 
     assert_content page, 'Invalid Name or password'
   end
