@@ -8,7 +8,7 @@
   <%= @site.settings(:attached_worker).name %>
 </div>
 
-<%= form_tag do %>
+<%= form_tag @site, method: :put do %>
   <div class="field">
     Which worker do you want to be on this site?
     <%= select_tag 'attached_worker', options_from_collection_for_select(@workers, 'name', 'name') %>

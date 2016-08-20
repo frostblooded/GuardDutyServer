@@ -20,7 +20,7 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
     save_settings
     flash[:success] = 'Settings saved'
-    redirect_to current_site_path
+    redirect_to site_path(@site)
   end
 
   def create
