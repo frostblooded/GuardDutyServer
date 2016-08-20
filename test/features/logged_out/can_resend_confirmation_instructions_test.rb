@@ -34,6 +34,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
     fill_in 'company_email', with: @company.email + 'a'
     click_button 'Resend confirmation instructions'
 
+    assert_not mail_is_sent?(@company)
     assert_content page, 'Email not found'
   end
 end
