@@ -21,6 +21,10 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     click_button 'Save Changes'
     assert_equal workers_path, current_path
     assert_text 'Changes saved'
+
+    @worker.reload
+    assert_equal @new_name, @worker.name
+    assert @worker.authenticate(new_password)
   end
 
   test 'worker edit shows error on nonmatching passwords' do
