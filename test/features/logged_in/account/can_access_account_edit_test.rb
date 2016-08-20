@@ -34,10 +34,24 @@ class CanAccessAccountEditTest < Capybara::Rails::TestCase
   end
 
   test 'returns error on nonmatching passwords' do
+    fill_in 'company_email', with: @new_email
+    fill_in 'company_password', with: @new_password
+    fill_in 'company_password_confirmation', with: @new_password + 'a'
+    fill_in 'company_current_password', with: @current_password
+    click_button 'Update'
 
+    assert_equal company_registration_path, current_path
+    assert_text 'Password confirmation doesn\'t match Password'
   end
 
   test 'shows error on invalid current password' do
-    
+    fill_in 'company_email', with: @new_email
+    fill_in 'company_password', with: @new_password
+    fill_in 'company_password_confirmation', with: @new_password
+    fill_in 'company_current_password', with: @current_password + 'a'
+    click_button 'Update'
+
+    assert_equal company_registration_path, current_path
+    assert_text 'Current password is invalid'
   end
 end
