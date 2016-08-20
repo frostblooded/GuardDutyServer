@@ -9,6 +9,10 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     visit site_path(@site)
   end
 
+  test 'shows correct site name' do
+    assert_text @site.name
+  end
+
   test 'site shows correct default site settings' do
     assert_equal @site.settings(:call).interval, find('#call_interval').value
     assert_equal @site.settings(:shift).start, find('#shift_start').value
