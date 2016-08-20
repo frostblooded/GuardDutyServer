@@ -1,5 +1,5 @@
 # A controller which handles workers' actions
-class WorkerController < ApplicationController
+class WorkersController < ApplicationController
   def index
     if current_company
       @company = current_company

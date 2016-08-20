@@ -1,5 +1,5 @@
 # A controller which handles routes' actions
-class RouteController < ApplicationController
+class RoutesController < ApplicationController
   def new
     @route = Route.new
   end

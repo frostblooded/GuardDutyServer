@@ -13,6 +13,10 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
       assert_content page, s.name
     end
 
-    assert_content page, 'Add new site'
+    assert_content page, 'Create site'
+  end
+
+  test 'site edit link opens site edit' do
+    
   end
 end

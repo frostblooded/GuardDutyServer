@@ -1,5 +1,5 @@
 # A controller that manages the website's static pages
-class StaticPageController < ApplicationController
+class StaticPagesController < ApplicationController
   def home
   end
 

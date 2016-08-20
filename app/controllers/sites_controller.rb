@@ -1,5 +1,5 @@
 # A controller which handles sites' actions
-class SiteController < ApplicationController
+class SitesController < ApplicationController
   def new
     @site = Site.new
   end
