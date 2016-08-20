@@ -18,7 +18,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_content page, 'Worker created!'
+    assert_text 'Worker created!'
   end
 
   test 'creating new worker returns error on nonmatching passwords' do
@@ -30,6 +30,6 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_content page, 'Password confirmation doesn\'t match Password'
+    assert_text 'Password confirmation doesn\'t match Password'
   end
 end

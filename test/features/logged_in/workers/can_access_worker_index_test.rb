@@ -11,10 +11,10 @@ class CanAccessWorkerIndexTest < Capybara::Rails::TestCase
 
   test 'shows correct workers' do
     @company.workers.each do |w|
-      assert_content page, w.name
+      assert_text w.name
     end
 
-    assert_content page, 'Create worker'
+    assert_text 'Create worker'
   end
 
   test 'worker page link opens worker page' do

@@ -14,16 +14,16 @@ class CanSignUpTest < Capybara::Rails::TestCase
     fill_in 'company_password_confirmation', with: 'foobarrr'
     click_button 'Sign up'
 
-    assert_content page, 'A message with a confirmation link has been sent'
+    assert_text 'A message with a confirmation link has been sent'
     assert_equal root_path, current_path
   end
 
   test 'shows error on empty fields' do
     click_button 'Sign up'
 
-    assert_content page, 'Password can\'t be blank'
-    assert_content page, 'Name can\'t be blank'
-    assert_content page, 'Email can\'t be blank'
+    assert_text 'Password can\'t be blank'
+    assert_text 'Name can\'t be blank'
+    assert_text 'Email can\'t be blank'
     assert_equal company_registration_path, current_path
   end
 
@@ -34,7 +34,7 @@ class CanSignUpTest < Capybara::Rails::TestCase
     fill_in 'company_password_confirmation', with: 'foobarrrr'
     click_button 'Sign up'
 
-    assert_content page, 'Password confirmation doesn\'t match Password'
+    assert_text 'Password confirmation doesn\'t match Password'
     assert_equal company_registration_path, current_path
   end
 
@@ -45,8 +45,8 @@ class CanSignUpTest < Capybara::Rails::TestCase
     fill_in 'company_password_confirmation', with: 'foobarrrr'
     click_button 'Sign up'
 
-    assert_content page, 'Name has already been taken'
-    assert_content page, 'Email has already been taken'
+    assert_text 'Name has already been taken'
+    assert_text 'Email has already been taken'
     assert_equal company_registration_path, current_path
   end
 end

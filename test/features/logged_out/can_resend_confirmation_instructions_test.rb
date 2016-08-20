@@ -14,7 +14,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
     click_button 'Resend confirmation instructions'
 
     assert mail_is_sent?(@company)
-    assert_content page, 'You will receive an email with instructions for' \
+    assert_text 'You will receive an email with instructions for' \
                          ' how to confirm your email address in a few minutes'
     assert_equal new_company_session_path, current_path
   end
@@ -26,7 +26,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
     click_button 'Resend confirmation instructions'
 
     assert_not mail_is_sent?(@company)
-    assert_content page, 'Email was already confirmed, please try signing in'
+    assert_text 'Email was already confirmed, please try signing in'
     assert_equal company_confirmation_path, current_path
   end
 
@@ -35,7 +35,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
     click_button 'Resend confirmation instructions'
 
     assert_not mail_is_sent?(@company)
-    assert_content page, 'Email not found'
+    assert_text 'Email not found'
     assert_equal company_confirmation_path, current_path
   end
 end

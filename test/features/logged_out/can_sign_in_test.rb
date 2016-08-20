@@ -15,7 +15,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     fill_in 'company_password', with: @company_password
     click_button 'Sign in'
 
-    assert_content page, 'Signed in successfully'
+    assert_text 'Signed in successfully'
     assert_equal root_path, current_path
   end
 
@@ -24,7 +24,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     fill_in 'company_password', with: @company_password * 3
     click_button 'Sign in'
 
-    assert_content page, 'Invalid Name or password'
+    assert_text 'Invalid Name or password'
     assert_equal new_company_session_path, current_path
   end
 

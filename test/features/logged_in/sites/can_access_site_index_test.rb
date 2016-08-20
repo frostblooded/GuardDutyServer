@@ -11,10 +11,10 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
 
   test 'shows correct sites' do
     @company.sites.each do |s|
-      assert_content page, s.name
+      assert_text s.name
     end
 
-    assert_content page, 'Create site'
+    assert_text 'Create site'
   end
 
   test 'site page link opens site page' do
