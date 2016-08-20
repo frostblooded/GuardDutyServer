@@ -1,11 +1,11 @@
-require "test_helper"
+require 'test_helper'
 
 class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
   def setup
     @company = create(:company)
   end
 
-  test "sends successfully" do
+  test 'sends successfully' do
     visit new_company_password_path
 
     fill_in 'company_email', with: @company.email
@@ -16,7 +16,7 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
     assert mail_is_sent?(@company)
   end
 
-  test "returns error on nonexistent email" do
+  test 'returns error on nonexistent email' do
     visit new_company_password_path
 
     fill_in 'company_email', with: @company.email + 'a'

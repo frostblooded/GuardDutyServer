@@ -18,7 +18,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     assert_content page, 'Signed in successfully'
   end
 
-  test 'sign in shows error on non-matching name and password' do
+  test 'shows error on non-matching name and password' do
     visit new_company_session_path
 
     fill_in 'company_name', with: @company.name

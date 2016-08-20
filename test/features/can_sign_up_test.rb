@@ -50,16 +50,4 @@ class CanSignUpTest < Capybara::Rails::TestCase
     assert_content page, 'Name has already been taken'
     assert_content page, 'Email has already been taken'
   end
-
-  test 'login link opens settings' do
-    visit new_company_registration_path
-    click_link 'Log in'
-    assert_equal new_company_session_path, current_path
-  end
-
-  test 'didn\'t receive mail instructions link opens settings' do
-    visit new_company_registration_path
-    click_link 'Didn\'t receive confirmation instructions?'
-    assert_equal new_company_confirmation_path, current_path
-  end
 end

@@ -34,7 +34,7 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
     assert_equal settings_path, current_path
   end
 
-  test 'signs out' do
+  test 'sign out signs the user out' do
     login_as create(:company)
     visit root_path
     click_link 'Sign out'
