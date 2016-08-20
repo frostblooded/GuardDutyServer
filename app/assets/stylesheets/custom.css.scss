@@ -3,64 +3,64 @@
 /* universial */
 
 body {
-  	padding-top: 60px;
+    padding-top: 60px;
 }
 
 section {
-  	overflow: auto;
+    overflow: auto;
 }
 
 textarea {
-  	resize: vertical;
+    resize: vertical;
 }
 
 
 .home {
-	div {
-		text-align: justify;
-	} 
-	h1, h2 {
-  		margin-bottom: 10px;
-  		text-align: center
-  	}
-  	p {
-  		padding-top: 30px;
-  		text-indent: 50px;
-  		font-size: 20px;
-  	}
+  div {
+    text-align: justify;
+  } 
+  h1, h2 {
+      margin-bottom: 10px;
+      text-align: center
+    }
+    p {
+      padding-top: 30px;
+      text-indent: 50px;
+      font-size: 20px;
+    }
 }
 
 /* header */
 
 #logo {
-	float: left;
-	margin-right: 10px;
-	font-size: 1.7em;
-	color: #fff;
-	letter-spacing: -1px;
-	padding-top: 9px;
-	font-weight: bold;
-	&:hover {
-  		color: #fff;
-  		text-decoration: none;
-	}
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+      color: #fff;
+      text-decoration: none;
+  }
 }
 
 /* footer */
 
 footer {
-  	margin-top: 45px;
-  	padding-top: 5px;
-  	border-top: 1px solid #eaeaea;
-  	color: #777;
-	ul {
-  		float: right;
-  		list-style: none;
-	}
-	ul li {
-  		float: left;
-  		margin-left: 15px;
-	}
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #777;
+  ul {
+      float: right;
+      list-style: none;
+  }
+  ul li {
+      float: left;
+      margin-left: 15px;
+  }
 }
 
 /* sidebar */
@@ -140,69 +140,12 @@ div.pass-hint {
         color: white;
     }
 
-    tr:hover {background-color: #f5f5f5}
+    tr:hover {
+      background-color: #f5f5f5;
+    }
 }
-
-.settings {
-  button{
-      height:20%; 
-      width:10%; 
-      margin: 0 auto;
-      margin-top: 10px;
-      position:relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-}
-
-.info_for_dailymail {
-  h3 {
-  display: inline;
-  }
-}
-
-/* Settings tab, change password */
-.change_password {
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px solid #eaeaea;
-}
-
-.call_length {
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px solid #eaeaea;
-}
-
-
-input[type='radio'] {
-  float: right;
-  margin-right: 750px;
-  width: 10px;
-  transform: scale(1.7);
-
-}
-input[type='radio'] + label {
-  width: 100px;
-  display: inline;
-}
-
-.first_radio {
-  padding-top: 10px;
-}
-
-.second_radio {
-  padding-top: 10px;
-}
-
-.shift_end {
-  padding-top: 10px;
-}
-
 
 /* calls */
-
 .answered_call_activity {
   background-color: rgba(51, 204, 51, 0.6);
 }
@@ -217,29 +160,4 @@ input[type='radio'] + label {
 
 .logout_activity {
   background-color: rgba(153, 102, 0, 0.6);
-}
-
-.create_site {
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 1px solid #eaeaea;
-}
-
-
-.name {
-  font-size: 200%;
-  text-align: center;
-  span {
-    font-size: 120%;
-    padding-bottom: 10px;
-  }
-}
-
-.site_name {
-  font-size: 200%;
-  text-align: center;
-  span {
-    font-size: 100%;
-    padding-bottom: 10px;
-  }
 }
