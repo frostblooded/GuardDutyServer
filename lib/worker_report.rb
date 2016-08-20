@@ -54,7 +54,8 @@ class WorkerReport
 
     @activities.select do |a|
       a.created_at > last_call_time \
-      && a.created_at < next_call_upper_range
+      && a.created_at < next_call_upper_range \
+      && a.call?
     end.first
   end
 
