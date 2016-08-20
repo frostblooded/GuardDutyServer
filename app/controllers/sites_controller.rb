@@ -24,10 +24,7 @@ class SitesController < ApplicationController
   end
 
   def create
-    @company = current_company
-    @site = @company.sites.create(site_params)
-
-    if @site.save
+    if current_company.sites.create(site_params)
       redirect_to sites_path, notice: 'Site added!'
     else
       render 'new'
