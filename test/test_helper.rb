@@ -57,6 +57,10 @@ module ActiveSupport
       mail = ActionMailer::Base.deliveries.last
       !mail.nil? && company.email == mail['to'].to_s
     end
+
+    def reload_page
+      visit current_path
+    end
   end
 end
 

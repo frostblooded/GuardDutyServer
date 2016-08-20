@@ -2,14 +2,14 @@ require 'test_helper'
 
 class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
   def setup
+    # Get not confirmed company
     @company = create(:company)
-
-    # Make company not confirmed
     @company.update(confirmed_at: nil)
+
+    visit new_company_confirmation_path
   end
 
   test 'sends successfully' do
-    visit new_company_confirmation_path
     fill_in 'company_email', with: @company.email
     click_button 'Resend confirmation instructions'
 
@@ -21,7 +21,6 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
   test 'returns error on confirmed email' do
     @company.update(confirmed_at: Time.zone.now)
 
-    visit new_company_confirmation_path
     fill_in 'company_email', with: @company.email
     click_button 'Resend confirmation instructions'
 
@@ -30,7 +29,6 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
   end
 
   test 'returns error on nonexistent email' do
-    visit new_company_confirmation_path
     fill_in 'company_email', with: @company.email + 'a'
     click_button 'Resend confirmation instructions'
 

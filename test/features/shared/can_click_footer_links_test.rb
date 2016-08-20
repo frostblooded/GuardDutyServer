@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CanClickFooterLinks < Capybara::Rails::TestCase
-  test 'contact opens contact' do
+  def setup
     visit root_path
+  end
+
+  test 'contact opens contact' do
     click_link 'Contact'
     assert_equal contact_path, current_path
   end
