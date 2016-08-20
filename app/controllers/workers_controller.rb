@@ -16,7 +16,9 @@ class WorkersController < ApplicationController
   end
 
   def create
-    @worker = current_company.workers.create(worker_params)
+    @worker = Worker.new(worker_params)
+    @worker.company = current_company
+
     if @worker.save
       redirect_to workers_path, notice: 'Signed up!'
     else
