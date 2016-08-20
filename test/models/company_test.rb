@@ -22,7 +22,7 @@ class CompanyTest < ActiveSupport::TestCase
   end
 
   test 'company name is downcase' do
-    assert @company.name == @company.name.downcase
+    assert @company.name.downcase, @company.name
   end
 
   test 'email is valid' do

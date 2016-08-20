@@ -18,7 +18,7 @@ class WorkerTest < ActiveSupport::TestCase
   end
 
   test 'names are downcase' do
-    assert @worker.name == @worker.name.downcase
+    assert @worker.name.downcase, @worker.name 
   end
 
   test 'password is present' do

@@ -20,7 +20,7 @@ class WorkersController < ApplicationController
     @worker.company = current_company
 
     if @worker.save
-      redirect_to workers_path, notice: 'Signed up!'
+      redirect_to workers_path, notice: 'Worker created!'
     else
       render 'new'
     end
