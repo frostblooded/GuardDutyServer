@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   root              'static_pages#home'
   get  'contact' => 'static_pages#contact'
+
+  # Makes settings work, because otherwise you
+  # can't make PATCH request on the index path
+  patch 'settings'     => 'settings#update'
 end
