@@ -18,7 +18,7 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
   end
 
   test 'site page link opens site page' do
-    click_link @site.name
+    first(:link, @site.name).click
     assert @site, current_path
   end
 
