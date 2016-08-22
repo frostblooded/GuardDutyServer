@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails',                     '4.2.2'
+gem 'sqlite3',                   '1.3.9'
 gem 'ledermann-rails-settings',  '2.4.2'
 gem 'exception_notification',    '4.2.1'
 gem 'devise',                    '4.2.0'
@@ -22,7 +23,6 @@ gem 'jbuilder',                  '2.2.3'
 gem 'sdoc',                      '0.4.0', group: :doc
 
 group :development, :test do
-  gem 'sqlite3',                 '1.3.9'
   gem 'byebug',                  '3.4.0'
   gem 'web-console',             '2.0.0.beta3'
   gem 'spring',                  '1.1.3'
@@ -37,6 +37,5 @@ end
 
 group :production do
   gem 'puma',                    '3.4.0'
-  gem 'pg',                      '0.17.1'
   gem 'rails_12factor',          '0.0.2'
 end
