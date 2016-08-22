@@ -162,7 +162,6 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
-    pg (0.17.1)
     pkg-config (1.1.7)
     puma (3.4.0)
     rack (1.6.4)
@@ -278,7 +277,6 @@ DEPENDENCIES
   ledermann-rails-settings (= 2.4.2)
   minitest-rails-capybara (= 2.1.2)
   minitest-reporters (= 1.1.11)
-  pg (= 0.17.1)
   puma (= 3.4.0)
   rails (= 4.2.2)
   rails_12factor (= 0.0.2)
@@ -292,6 +290,9 @@ DEPENDENCIES
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
   whenever (= 0.9.4)
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.12.5
