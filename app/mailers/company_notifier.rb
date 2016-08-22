@@ -1,7 +1,5 @@
 # Manages the company notifier emails' actions
 class CompanyNotifier < ApplicationMailer
-  default from: 'attendancecheck1337@gmail.com'
-
   def report_email(company)
     @company = company
 

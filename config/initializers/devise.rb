@@ -14,7 +14,7 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.case_insensitive_keys = [:email, :name]
 
-  config.mailer_sender = ENV["SENDGRID_USERNAME"]
+  config.mailer_sender = ENV["MAIL_SENDER"]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
