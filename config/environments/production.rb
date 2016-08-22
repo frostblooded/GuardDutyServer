@@ -28,9 +28,6 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
-  #Email sender
-  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'} 
-
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
@@ -53,19 +50,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => '37.157.182.179', port: '3000'}
 
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :domain => "gmail.com",
-    :authentication => 'plain',
-    :user_name => ENV["MAIL_SENDER"],
-    :password => "@zSumMnogoQk",
-    :enable_starttls_auto => true
-  }
-
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
@@ -77,10 +61,6 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
