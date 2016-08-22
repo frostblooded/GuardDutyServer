@@ -28,10 +28,20 @@ server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
 
 desc "Precompile assets"
 task :precompile_assets do
-  `rake assets:precompile RAILS_ENV=production`
+  on roles(:all) do
+    execute :rake, 'assets:precompile', 'RAILS_ENV=production'
+  end
+end
+
+desc "Migrate production database"
+task :migrate do
+  on roles(:all) do
+    execute :rake, 'db:migrate', 'RAILS_ENV="production"'
+  end
 end
 
 after "deploy:published", "precompile_assets"
+after "deploy:published", "migrate"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
