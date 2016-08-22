@@ -1,17 +1,37 @@
 # config valid only for current version of Capistrano
 lock '3.6.0'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'attendance_check'
+set :repo_url, 'git@bitbucket.org:frostblooded/attendancecheck-rails-app.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/home/deploy/attendance_check'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
+
+set :use_sudo, false
+
+set :rails_env, 'production'
+
+set :deploy_via, :copy
+
+set :ssh_options, { port: 6019 }
+
+set :keep_releases, 5
+
+server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
+
+desc "Precompile assets"
+task :precompile_assets do
+  `rake assets:precompile RAILS_ENV=production`
+end
+
+after "deploy:published", "precompile_assets"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
