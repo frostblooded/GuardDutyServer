@@ -26,22 +26,36 @@ set :keep_releases, 5
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
 
+desc 'run some rake db task'
+task :migrate do
+  on roles(:all) do
+    within "#{current_path}" do
+      execute :rake, "db:migrate", 'RAILS_ENV="production"'
+    end
+  end
+end
+
 desc "Precompile assets"
 task :precompile_assets do
   on roles(:all) do
-    execute :rake, 'assets:precompile', 'RAILS_ENV=production'
+    within "#{current_path}" do
+      execute :rake, "assets:precompile", 'RAILS_ENV="production"'
+    end
   end
 end
 
-desc "Migrate production database"
-task :migrate do
-  on roles(:all) do
-    execute :rake, 'db:migrate', 'RAILS_ENV="production"'
+desc "Run server"
+task :run_server do
+  on roles (:all) do
+    within "#{current_path}" do
+      execute :rails, '-b 0.0.0.0', '-e production', '-d'
+    end
   end
 end
 
-after "deploy:published", "precompile_assets"
-after "deploy:published", "migrate"
+after 'deploy:published', 'precompile_assets'
+after 'deploy:published', 'migrate'
+after 'deploy:published', 'run_server'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
