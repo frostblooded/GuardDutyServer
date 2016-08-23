@@ -9,7 +9,7 @@ set :repo_url, 'git@bitbucket.org:frostblooded/attendancecheck-rails-app.git'
 set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/deploy/attendance_check'
+set :deploy_to, '/var/www/'
 
 # Default value for :scm is :git
 set :scm, :git
@@ -23,6 +23,16 @@ set :deploy_via, :copy
 set :ssh_options, { port: 6019 }
 
 set :keep_releases, 5
+
+# Defaults to :db role
+set :migration_role, :db
+
+# Defaults to false
+# Skip migration if files in db/migrate were not modified
+set :conditionally_migrate, true
+
+# Defaults to [:web]
+set :assets_roles, [:web, :app]
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
 
@@ -53,9 +63,9 @@ task :run_server do
   end
 end
 
-after 'deploy:published', 'precompile_assets'
-after 'deploy:published', 'migrate'
-after 'deploy:published', 'run_server'
+# after 'deploy:published', 'precompile_assets'
+# after 'deploy:published', 'migrate'
+# after 'deploy:published', 'run_server'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
