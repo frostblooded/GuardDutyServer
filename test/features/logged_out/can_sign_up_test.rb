@@ -7,6 +7,7 @@ class CanSignUpTest < Capybara::Rails::TestCase
                                email: 'frostblooded@example.com'
     @password = 'foobarrr'
     @non_matching_password = @password + 'r'
+    @invalid_mail = 'efwefew@aefdf.'
 
     visit new_company_registration_path
   end
@@ -62,6 +63,20 @@ class CanSignUpTest < Capybara::Rails::TestCase
 
     assert_text 'Name has already been taken'
     assert_text 'Email has already been taken'
+    assert_equal company_registration_path, current_path
+  end
+
+  test 'shows error on nonvalid email' do
+    fill_in 'company_name', with: @new_company.name
+    fill_in 'company_email', with: @invalid_mail
+    fill_in 'company_password', with: @password
+    fill_in 'company_password_confirmation', with: @password
+
+    assert_no_difference 'Company.count' do
+      click_button 'Sign up'
+    end
+
+    assert_text 'Email is invalid'
     assert_equal company_registration_path, current_path
   end
 end

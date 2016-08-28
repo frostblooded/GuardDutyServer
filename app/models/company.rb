@@ -1,5 +1,7 @@
 # Represents a company
 class Company < ActiveRecord::Base
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
   has_many :sites, dependent: :destroy
   has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
@@ -17,7 +19,8 @@ class Company < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 50 },
                    uniqueness: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true,
+                    format: { with: VALID_EMAIL_REGEX }
 
   before_save :lowercase_name
   before_create :initialize_company
