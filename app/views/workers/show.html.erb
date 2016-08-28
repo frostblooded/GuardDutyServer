@@ -17,7 +17,7 @@
       <th>Time left</th>
 		</tr>
 
-    <% @activities.each do |a| %>
+    <% @worker.activities.each do |a| %>
       <tr class="<%= a.row_class %>">
         <td><%= a.created_at.localtime %></td>
         <td><%= a.category %></td>

@@ -1,10 +1,7 @@
 # A controller which handles workers' actions
 class WorkersController < ApplicationController
   def index
-    if current_company
-      @company = current_company
-      @worker = @company.workers
-    end
+    @workers = current_company.workers
   end
 
   def new
@@ -12,39 +9,37 @@ class WorkersController < ApplicationController
   end
 
   def edit
-    @worker = Worker.find(params[:id])
+    @worker = Worker.find params[:id]
   end
 
   def create
-    @worker = Worker.new(worker_params)
+    @worker = Worker.new worker_params
     @worker.company = current_company
 
     if @worker.save
-      redirect_to workers_path, notice: 'Worker created!'
+      flash[:success] = 'Worker created'
+      redirect_to workers_path
     else
       render 'new'
     end
   end
 
   def update
-    @worker = Worker.find(params[:id])
+    @worker = Worker.find params[:id]
 
     if @worker.update_attributes(worker_params)
-      redirect_to workers_path, notice: 'Changes saved!'
+      flash[:success] = 'Worker updated'
+      redirect_to workers_path
     else
       render 'edit'
     end
   end
 
   def show
-    @company = current_company
-    @worker = Worker.find(params[:id])
-    @activities = @worker.activities
-    @call_length = params[:call_length]
-    @company.settings(:email).daily
+    @worker = Worker.find params[:id]
 
     # Set classes for the HTML tags from here
-    @activities.each { |a| a.row_class = get_row_class(a) }
+    @worker.activities.each { |a| a.row_class = get_row_class(a) }
   end
 
   def destroy

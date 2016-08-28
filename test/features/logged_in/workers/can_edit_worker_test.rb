@@ -20,7 +20,7 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
 
     click_button 'Save Changes'
     assert_equal workers_path, current_path
-    assert_text 'Changes saved'
+    assert_text 'Worker updated'
 
     @worker.reload
     assert_equal @new_name, @worker.name

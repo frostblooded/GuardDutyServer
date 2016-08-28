@@ -18,7 +18,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_text 'Worker created!'
+    assert_text 'Worker created'
   end
 
   test 'creating new worker returns error on nonmatching passwords' do
