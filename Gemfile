@@ -22,13 +22,12 @@ gem 'turbolinks',                '2.3.0'
 gem 'jbuilder',                  '2.2.3'
 gem 'sdoc',                      '0.4.0', group: :doc
 gem 'capistrano-rvm',            '0.1.2'
-gem 'therubyracer',                       platforms: :ruby
 
 group :development, :test do
   gem 'byebug',                  '3.4.0'
   gem 'web-console',             '2.0.0.beta3'
   gem 'spring',                  '1.1.3'
-  gem 'capistrano'
+  gem 'capistrano',              '3.6.0'
 end
 
 group :test do
