@@ -5,20 +5,18 @@ class RoutesController < ApplicationController
   end
 
   def create
-    @company = current_company
-    @sites = Site.find(params[:site_id])
+    @site = Site.find(params[:site_id])
 
-    if @sites.routes.create(route_params)
-      redirect_to site_route_index_path, notice: 'Route added!'
+    if @site.routes.create(route_params)
+      flash[:success] = 'Route created'
+      redirect_to site_route_index_path
     else
       render 'new'
     end
   end
 
   def index
-    @company = current_company
-    @sites = Site.find(params[:site_id])
-    @route = @sites.routes
+    @routes = Site.find(params[:site_id]).routes
   end
 
   def route_params
