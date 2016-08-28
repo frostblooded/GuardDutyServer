@@ -16,8 +16,8 @@ class CompanyTest < ActiveSupport::TestCase
   end
 
   test 'company name is unique' do
-    duplicate_company = @company.dup
-    @company.save
+    duplicate_company = Company.new name: @company.name,
+                                    email: @company.email + 'a'
     assert_not duplicate_company.valid?
   end
 
@@ -25,9 +25,18 @@ class CompanyTest < ActiveSupport::TestCase
     assert @company.name.downcase, @company.name
   end
 
+  test 'email is unique' do
+    duplicate_company = Company.new name: @company.name + 'a',
+                                    email: @company.email
+    assert_not duplicate_company.valid?
+  end
+
   test 'email is valid' do
     @company.email = 'example@email.com'
     assert @company.valid?
+
+    @company.email = 'ewtwetwet@fwef.'
+    assert_not @company.valid?
   end
 
   test 'password is present' do
