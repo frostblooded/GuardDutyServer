@@ -38,7 +38,9 @@ class SitesController < ApplicationController
   end
 
   def create
-    if current_company.sites.create(site_params)
+    @site = current_company.sites.create(site_params)
+    
+    if @site.save
       flash[:success] = 'Site created'
       redirect_to sites_path
     else
