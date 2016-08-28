@@ -5,8 +5,7 @@ class SitesController < ApplicationController
   end
 
   def index
-    @company = current_company
-    @site = @company.sites
+    @sites = current_company.sites
   end
 
   def show
