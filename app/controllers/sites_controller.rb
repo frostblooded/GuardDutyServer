@@ -25,7 +25,7 @@ class SitesController < ApplicationController
       flash[:danger] += 'Invalid shift end format.'
     end
 
-    if @site.errors.empty?
+    if flash.empty?
       @site.settings(:call).interval = params[:call_interval]
       @site.settings(:shift).start = params[:shift_start]
       @site.settings(:shift).end = params[:shift_end]
