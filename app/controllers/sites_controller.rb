@@ -9,19 +9,31 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = Site.find(params[:id])
+    @site = Site.find params[:id]
     @workers = current_company.workers
   end
 
   def update
-    @site = Site.find(params[:id])
+    @site = Site.find params[:id]
+    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
 
-    @site.settings(:call).interval = params[:call_interval]
-    @site.settings(:shift).start = params[:shift_start]
-    @site.settings(:shift).end = params[:shift_end]
-    @site.save!
+    if !(params[:shift_start] =~ time_regex)
+      flash[:danger] = 'Invalid shift start format. '
+    end
 
-    flash[:success] = 'Settings saved'
+    if !(params[:shift_end] =~ time_regex)
+      flash[:danger] += 'Invalid shift end format.'
+    end
+
+    if @site.errors.empty?
+      @site.settings(:call).interval = params[:call_interval]
+      @site.settings(:shift).start = params[:shift_start]
+      @site.settings(:shift).end = params[:shift_end]
+      @site.save!
+
+      flash[:success] = 'Settings saved'
+    end
+
     redirect_to site_path(@site)
   end
 

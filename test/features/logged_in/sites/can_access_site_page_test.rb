@@ -10,6 +10,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     @new_shift_start = '20:00'
     @new_shift_end = '21:00'
 
+    @new_invalid_shift_start = '13@4t:'
+    @new_invalid_shift_end = '13@4t:'
+
     visit site_path(@site)
   end
 
@@ -36,5 +39,21 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_equal @new_call_interval, @site.settings(:call).interval
     assert_equal @new_shift_start, @site.settings(:shift).start
     assert_equal @new_shift_end, @site.settings(:shift).end
+  end
+
+  test 'site settings update returns error on invalid times' do
+    fill_in 'call_interval', with: @new_call_interval
+    fill_in 'shift_start', with: @new_invalid_shift_start
+    fill_in 'shift_end', with: @new_invalid_shift_end
+    click_button 'Save changes'
+
+    assert_equal site_path(@site), current_path
+    assert_text 'Invalid shift start format'
+    assert_text 'Invalid shift end format'
+
+    @site.reload
+    assert_equal @new_call_interval, @site.settings(:call).interval
+    assert_not_equal @new_shift_start, @site.settings(:shift).start
+    assert_not_equal @new_shift_end, @site.settings(:shift).end
   end
 end
