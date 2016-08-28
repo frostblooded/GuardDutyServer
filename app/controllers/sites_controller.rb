@@ -10,9 +10,7 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
-    @company = current_company
-    @workers = @company.workers
-    @attached_worker = @current_worker
+    @workers = current_company.workers
   end
 
   def update
