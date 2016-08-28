@@ -18,7 +18,6 @@ class Company < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 },
                    uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :password, confirmation: true
 
   before_save :lowercase_name
   before_create :initialize_company
