@@ -2,24 +2,33 @@ require 'test_helper'
 
 class CanSignUpTest < Capybara::Rails::TestCase
   def setup
-    @company = create(:company)
+    @existing_company = create(:company)
+    @new_company = Company.new name: 'frostblooded',
+                               email: 'frostblooded@example.com'
+    @password = 'foobarrr'
+    @non_matching_password = @password + 'r'
 
     visit new_company_registration_path
   end
 
   test 'can sign up' do
-    fill_in 'company_name', with: 'SomeRandomNameKappa'
-    fill_in 'company_email', with: 'somerandommail@example.org'
-    fill_in 'company_password', with: 'foobarrr'
-    fill_in 'company_password_confirmation', with: 'foobarrr'
-    click_button 'Sign up'
+    fill_in 'company_name', with: @new_company.name
+    fill_in 'company_email', with: @new_company.email
+    fill_in 'company_password', with: @password
+    fill_in 'company_password_confirmation', with: @password
+
+    assert_difference 'Company.count' do
+      click_button 'Sign up'
+    end
 
     assert_text 'A message with a confirmation link has been sent'
     assert_equal root_path, current_path
   end
 
   test 'shows error on empty fields' do
-    click_button 'Sign up'
+    assert_no_difference 'Company.count' do
+      click_button 'Sign up'
+    end
 
     assert_text 'Password can\'t be blank'
     assert_text 'Name can\'t be blank'
@@ -28,22 +37,28 @@ class CanSignUpTest < Capybara::Rails::TestCase
   end
 
   test 'shows error on non-matching password fields' do
-    fill_in 'company_name', with: 'SomeRandomNameKappa'
-    fill_in 'company_email', with: 'somerandommail@example.org'
-    fill_in 'company_password', with: 'foobarrr'
-    fill_in 'company_password_confirmation', with: 'foobarrrr'
-    click_button 'Sign up'
+    fill_in 'company_name', with: @new_company.name
+    fill_in 'company_email', with: @new_company.email
+    fill_in 'company_password', with: @password
+    fill_in 'company_password_confirmation', with: @non_matching_password
+
+    assert_no_difference 'Company.count' do
+      click_button 'Sign up'
+    end
 
     assert_text 'Password confirmation doesn\'t match Password'
     assert_equal company_registration_path, current_path
   end
 
   test 'shows error on non-unique name and email' do
-    fill_in 'company_name', with: @company.name
-    fill_in 'company_email', with: @company.email
-    fill_in 'company_password', with: 'foobarrr'
-    fill_in 'company_password_confirmation', with: 'foobarrrr'
-    click_button 'Sign up'
+    fill_in 'company_name', with: @existing_company.name
+    fill_in 'company_email', with: @existing_company.email
+    fill_in 'company_password', with: @password
+    fill_in 'company_password_confirmation', with: @password
+
+    assert_no_difference 'Company.count' do
+      click_button 'Sign up'
+    end
 
     assert_text 'Name has already been taken'
     assert_text 'Email has already been taken'
