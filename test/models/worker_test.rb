@@ -5,8 +5,6 @@ class WorkerTest < ActiveSupport::TestCase
     @company = create(:company)
     @site = @company.sites.first
     @worker = @site.workers.first
-
-    @other_company = create(:company)
   end
 
   test 'name is present' do
@@ -24,6 +22,7 @@ class WorkerTest < ActiveSupport::TestCase
   end
 
   test 'name is unique in company' do
+    @other_company = create(:company)
     @worker1 = Worker.new name: @worker.name,
                           password: 'foobarrr',
                           company: @company

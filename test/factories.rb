@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :site do
-    name { Faker::GameOfThrones.city }
+    name { Faker::Name.name }
 
     after(:create) do |site|
       create_list(:worker, 2, sites: [site])

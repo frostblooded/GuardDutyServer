@@ -103,4 +103,13 @@ class SiteTest < ActiveSupport::TestCase
       assert_not shift.activities.include? @other_activity
     end
   end
+
+  test 'name is unique in company' do
+    @other_company = create(:company)
+    @site1 = @company.sites.new name: @site.name
+    assert_not @site1.valid?
+
+    @site2 = @other_company.sites.new name: @site.name
+    assert @site2.valid?
+  end
 end

@@ -18,7 +18,9 @@ class Site < ActiveRecord::Base
     s.key :shift, defaults: { start: '12:00', end: '13:00' }
   end
 
-  validates :name, presence: true, length: { maximum: 40 }
+  validates :name, presence: true, length: { maximum: 40 },
+                   # Name should be unique in this company
+                   uniqueness: { scope: :company_id, message: 'not unique in company' }
 
   # Returns data about the last COMPLETED shift
   def last_shift
