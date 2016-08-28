@@ -5,12 +5,21 @@ class SettingsController < ApplicationController
   end
 
   def update
-    @company = current_company
-    @company.settings(:email).wanted = params[:email_wanted] ? true : false
-    @company.settings(:email).time = params[:email_time]
-    @company.settings(:email).save!
+    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
 
-    flash[:success] = 'Settings saved'
+    if !(params[:email_time] =~ time_regex)
+      flash[:danger] = 'Invalid email time format'
+    end
+
+    if flash.empty?
+      @company = current_company
+      @company.settings(:email).wanted = params[:email_wanted] ? true : false
+      @company.settings(:email).time = params[:email_time]
+      @company.settings(:email).save!
+
+      flash[:success] = 'Settings saved'
+    end
+
     redirect_to settings_path
   end
 end
