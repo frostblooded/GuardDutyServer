@@ -15,14 +15,20 @@ class SitesController < ApplicationController
 
   def update
     @site = Site.find(params[:id])
-    save_settings
+
+    @site.settings(:call).interval = params[:call_interval]
+    @site.settings(:shift).start = params[:shift_start]
+    @site.settings(:shift).end = params[:shift_end]
+    @site.save!
+
     flash[:success] = 'Settings saved'
     redirect_to site_path(@site)
   end
 
   def create
     if current_company.sites.create(site_params)
-      redirect_to sites_path, notice: 'Site added!'
+      flash[:success] = 'Site created'
+      redirect_to sites_path
     else
       render 'new'
     end
@@ -38,13 +44,5 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name)
-  end
-
-  def save_settings
-    @site.settings(:call).interval = params[:call_interval]
-    @site.settings(:attached_worker).name = params[:attached_worker]
-    @site.settings(:shift).start = params[:shift_start]
-    @site.settings(:shift).end = params[:shift_end]
-    @site.save!
   end
 end

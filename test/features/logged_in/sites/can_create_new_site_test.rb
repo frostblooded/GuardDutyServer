@@ -14,6 +14,6 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
     end
 
     assert_equal sites_path, current_path
-    assert_text 'Site added!'
+    assert_text 'Site created'
   end
 end
