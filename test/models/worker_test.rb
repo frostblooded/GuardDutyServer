@@ -5,6 +5,8 @@ class WorkerTest < ActiveSupport::TestCase
     @company = create(:company)
     @site = @company.sites.first
     @worker = @site.workers.first
+
+    @other_company = create(:company)
   end
 
   test 'name is present' do
@@ -19,6 +21,18 @@ class WorkerTest < ActiveSupport::TestCase
 
   test 'names are downcase' do
     assert @worker.name.downcase, @worker.name 
+  end
+
+  test 'name is unique in company' do
+    @worker1 = Worker.new name: @worker.name,
+                          password: 'foobarrr',
+                          company: @company
+    assert_not @worker1.valid?
+
+    @worker2 = Worker.new name: @worker.name,
+                          password: 'foobarrr',
+                          company: @other_company
+    assert @worker2.valid?
   end
 
   test 'password is present' do
