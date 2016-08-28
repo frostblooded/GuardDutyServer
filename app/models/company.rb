@@ -10,8 +10,6 @@ class Company < ActiveRecord::Base
     s.key :email, defaults: { wanted: false, time: '12:00' }
   end
 
-  enum role: [:logged_in, :logged_out]
-
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
