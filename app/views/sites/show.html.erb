@@ -36,8 +36,7 @@
 
   <div class="workers">
     <h4>Workers on this site</h4>
-    <%= javascript_tag "clear_workers()" %>
-
+    
     <% @site.workers.each do |w| %>
       <%# Call the js function for each worker %>
       <%= javascript_tag "create_worker_input('#{w.name}')" %>
