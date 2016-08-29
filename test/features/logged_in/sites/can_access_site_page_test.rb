@@ -52,7 +52,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_text 'Invalid shift end format'
 
     @site.reload
-    assert_equal @new_call_interval, @site.settings(:call).interval
+    assert_not_equal @new_call_interval, @site.settings(:call).interval
     assert_not_equal @new_shift_start, @site.settings(:shift).start
     assert_not_equal @new_shift_end, @site.settings(:shift).end
   end
