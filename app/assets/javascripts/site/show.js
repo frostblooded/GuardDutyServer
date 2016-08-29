@@ -1,8 +1,12 @@
 $(document).ready(create_new_worker_input);
 
+function clear_workers() {
+  $('.workers').empty();
+}
+
 function create_worker_input(worker_name) {
   var $worker = $('<div class="worker"></div>');
-  var $worker_input = $('<input class="worker-input" type="text" value="' + worker_name + '"/>');
+  var $worker_input = $('<input class="worker-input" type="text" name="workers[]" value="' + worker_name + '"/>');
   var $worker_remove = $('<input class="worker-remove" type="button" value="remove"/>');
 
   $worker_remove.click(function() {

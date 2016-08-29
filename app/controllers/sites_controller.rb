@@ -15,6 +15,8 @@ class SitesController < ApplicationController
 
   def update
     @site = Site.find params[:id]
+    update_workers @site
+
     time_regex = AttendanceCheckRailsapp::Application.config.time_regex
 
     if !(params[:shift_start] =~ time_regex)
@@ -58,5 +60,29 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name)
+  end
+
+  # Yes, it is pretty stupid to remove all workers
+  # and add again only the ones, which are passed
+  # in the parameters...
+  def update_workers(site)
+    flash[:danger] = ''
+    remove_workers site
+
+    params[:workers].each do |name|
+      worker = Worker.find_by name: name
+
+      unless worker
+        flash[:danger] += "Worker #{name} doesn't exist "
+      else
+        Worker.find_by(name: name).sites << site
+      end
+    end
+  end
+
+  def remove_workers(site)
+    site.site_worker_relations.each do |swr|
+      swr.destroy
+    end
   end
 end
