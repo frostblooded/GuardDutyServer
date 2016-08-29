@@ -1,5 +1,9 @@
 <% provide(:title, @site.name) %>
 
+<% content_for :head do %>
+  <%= javascript_include_tag 'test.js' %>
+<% end %>
+
 <div class="site_name">
 	<%= @site.name %>
 </div>  
