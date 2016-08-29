@@ -10,10 +10,6 @@ module API
       def params_company
         Company.find_by name: params[:name]
       end
-
-      def downcase_params
-        params[:name] = params[:name].downcase
-      end
     end
 
     resource :access_tokens do
@@ -25,8 +21,6 @@ module API
 
       # Login company
       post '/' do
-        downcase_params
-
         # Return error if company with such name doesn't exist
         error!('invalid company name', 400) unless params_company
 

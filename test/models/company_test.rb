@@ -21,10 +21,6 @@ class CompanyTest < ActiveSupport::TestCase
     assert_not duplicate_company.valid?
   end
 
-  test 'company name is downcase' do
-    assert @company.name.downcase, @company.name
-  end
-
   test 'email is unique' do
     duplicate_company = Company.new name: @company.name + 'a',
                                     email: @company.email

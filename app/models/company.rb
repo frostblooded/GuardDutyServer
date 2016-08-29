@@ -20,12 +20,7 @@ class Company < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true,
                     format: { with: VALID_EMAIL_REGEX }
 
-  before_save :lowercase_name
   before_create :initialize_company
-
-  def lowercase_name
-    @name = name.downcase
-  end
 
   def initialize_company
     @last_mail_sent_at = Time.zone.now

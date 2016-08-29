@@ -13,10 +13,4 @@ class Worker < ActiveRecord::Base
                    uniqueness: { scope: :company_id, message: 'not unique in company' }
   validates :password, presence: true, length: { minimum: 8 }
   has_secure_password
-
-  before_save :lowercase_names
-
-  def lowercase_names
-    self.name = name.downcase
-  end
 end

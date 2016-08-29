@@ -17,10 +17,6 @@ class WorkerTest < ActiveSupport::TestCase
     assert_not @worker.valid?
   end
 
-  test 'names are downcase' do
-    assert @worker.name.downcase, @worker.name 
-  end
-
   test 'name is unique in company' do
     @other_company = create(:company)
     @worker1 = Worker.new name: @worker.name,
