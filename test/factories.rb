@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :site do
-    sequence(:name) { |n| "site #{n}" }
+    sequence(:name) { |n| "Site #{n}" }
 
     after(:create) do |site|
       create_list(:worker, 2, sites: [site])
@@ -26,7 +26,7 @@ FactoryGirl.define do
   end
 
   factory :worker do
-    sequence(:name) { |n| "worker #{n}" }
+    sequence(:name) { |n| "Worker #{n}" }
     password { Faker::Internet.password(8) }
 
     after(:create) do |worker|
