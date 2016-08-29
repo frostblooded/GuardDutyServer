@@ -1,7 +1,7 @@
 <% provide(:title, @site.name) %>
 
 <% content_for :head do %>
-  <%= javascript_include_tag 'test.js' %>
+  <%= javascript_include_tag 'site/show.js' %>
 <% end %>
 
 <div class="site_name">
@@ -33,5 +33,11 @@
     <%= text_field_tag :shift_end, @site.settings(:shift).end, placeholder: 'format: HH:MM', pattern: '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
   </div>
 
+  <div class="workers">
+    <% @site.workers.each do |w| %>
+      <%# Call the js function for each worker %>
+      <%= javascript_tag "create_worker_input('#{w.name}')" %>
+    <% end %>
+  </div>
   <%= submit_tag %>
 <% end %>
