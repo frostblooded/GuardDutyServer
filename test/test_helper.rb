@@ -4,6 +4,9 @@ SimpleCov.start
 require 'rails/test_help'
 require 'minitest/rails/capybara'
 
+# Change the Capybara driver, so JS can be executed
+Capybara.javascript_driver = :poltergeist
+
 # Make the progress of running tests (rake) a little prettier
 require 'minitest/reporters'
 Minitest::Reporters.use!

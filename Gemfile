@@ -38,6 +38,7 @@ group :test do
   gem 'minitest-rails-capybara', '~> 3.0.0'
   gem 'simplecov',               '~> 0.11.2', require: false
   gem 'factory_girl_rails',      '~> 4.7.0'
+  gem 'poltergeist',             '~> 1.10.0'
 end
 
 group :production do
