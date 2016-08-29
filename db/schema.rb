@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817183151) do
+ActiveRecord::Schema.define(version: 20160829105348) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -26,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.integer  "company_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -46,11 +46,10 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "last_mail_sent_at"
+    t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
+    t.index ["name"], name: "index_companies_on_name", unique: true
+    t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
   end
-
-  add_index "companies", ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
-  add_index "companies", ["name"], name: "index_companies_on_name", unique: true
-  add_index "companies", ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
 
   create_table "positions", force: :cascade do |t|
     t.float    "latitude"
@@ -59,18 +58,16 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "route_id"
+    t.index ["route_id"], name: "index_positions_on_route_id"
   end
-
-  add_index "positions", ["route_id"], name: "index_positions_on_route_id"
 
   create_table "routes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_routes_on_site_id"
   end
-
-  add_index "routes", ["site_id"], name: "index_routes_on_site_id"
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",         null: false
@@ -79,9 +76,8 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.string   "target_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
   end
-
-  add_index "settings", ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
 
   create_table "site_worker_relations", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -95,9 +91,8 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "company_id"
+    t.index ["company_id"], name: "index_sites_on_company_id"
   end
-
-  add_index "sites", ["company_id"], name: "index_sites_on_company_id"
 
   create_table "workers", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -105,8 +100,7 @@ ActiveRecord::Schema.define(version: 20160817183151) do
     t.string   "password_digest"
     t.string   "name"
     t.integer  "company_id"
+    t.index ["company_id"], name: "index_workers_on_company_id"
   end
-
-  add_index "workers", ["company_id"], name: "index_workers_on_company_id"
 
 end
