@@ -15,19 +15,11 @@ class SitesController < ApplicationController
 
   def update
     @site = Site.find params[:id]
-    update_workers @site
+    @errors = []
+    update_workers
+    validate_times_format
 
-    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
-
-    if !(params[:shift_start] =~ time_regex)
-      flash[:danger] = 'Invalid shift start format. '
-    end
-
-    if !(params[:shift_end] =~ time_regex)
-      flash[:danger] += 'Invalid shift end format.'
-    end
-
-    if flash.empty?
+    if @errors.empty?
       @site.settings(:call).interval = params[:call_interval]
       @site.settings(:shift).start = params[:shift_start]
       @site.settings(:shift).end = params[:shift_end]
@@ -36,6 +28,7 @@ class SitesController < ApplicationController
       flash[:success] = 'Settings saved'
     end
 
+    flash[:danger] = @errors.join(', ') unless @errors.empty?
     redirect_to site_path(@site)
   end
 
@@ -62,26 +55,39 @@ class SitesController < ApplicationController
     params.require(:site).permit(:name)
   end
 
+  def validate_times_format
+    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
+
+    if !(params[:shift_start] =~ time_regex)
+      @errors << 'Invalid shift start format'
+    end
+
+    if !(params[:shift_end] =~ time_regex)
+      @errors << 'Invalid shift end format'
+    end
+  end
+
   # Yes, it is pretty stupid to remove all workers
   # and add again only the ones, which are passed
   # in the parameters...
-  def update_workers(site)
-    flash[:danger] = ''
-    remove_workers site
+  def update_workers
+    if params[:workers]
+      remove_workers
 
-    params[:workers].each do |name|
-      worker = Worker.find_by name: name
+      params[:workers].each do |name|
+        worker = Worker.find_by name: name
 
-      unless worker
-        flash[:danger] += "Worker #{name} doesn't exist "
-      else
-        Worker.find_by(name: name).sites << site
+        unless worker
+          @errors << "Worker #{name} doesn't exist"
+        else
+          Worker.find_by(name: name).sites << @site
+        end
       end
     end
   end
 
-  def remove_workers(site)
-    site.site_worker_relations.each do |swr|
+  def remove_workers
+    @site.site_worker_relations.each do |swr|
       swr.destroy
     end
   end
