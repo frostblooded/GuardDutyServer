@@ -11,8 +11,8 @@ class ApiCallTest < ActionDispatch::IntegrationTest
   test 'responds to call' do
     assert_difference 'Activity.count', 1 do
       post "/api/v1/sites/#{@site.id}/workers/#{@worker.id}/calls",
-           access_token: request_access_token,
-           time_left: 59
+           params: { access_token: request_access_token,
+                     time_left: 59 }
     end
 
     assert_equal '201', @response.code
@@ -22,8 +22,8 @@ class ApiCallTest < ActionDispatch::IntegrationTest
   test 'responding to call to unexisting worker throws error' do
     assert_no_difference 'Activity.count' do
       post "/api/v1/sites/#{@site.id}/workers/-1/calls",
-           access_token: request_access_token,
-           time_left: 59
+           params: { access_token: request_access_token,
+                     time_left: 59 }
     end
 
     assert_equal '400', @response.code
@@ -33,8 +33,8 @@ class ApiCallTest < ActionDispatch::IntegrationTest
   test 'responding to call to unexisting site throws error' do
     assert_no_difference 'Activity.count' do
       post "/api/v1/sites/-1/workers/#{@worker.id}/calls",
-           access_token: request_access_token,
-           time_left: 59
+           params: { access_token: request_access_token,
+                     time_left: 59 }
     end
 
     assert_equal '400', @response.code

@@ -34,8 +34,8 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
     def request_access_token
-      post '/api/v1/access_tokens', name: @company.name,
-                                    password: @company.password
+      post '/api/v1/access_tokens', params: { name: @company.name,
+                                              password: @company.password }
       json_response['access_token']
     end
 
