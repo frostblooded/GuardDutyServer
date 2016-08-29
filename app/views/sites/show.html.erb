@@ -39,7 +39,7 @@
     
     <% @site.workers.each do |w| %>
       <%# Call the js function for each worker %>
-      <%= javascript_tag "create_worker_input('#{w.name}')" %>
+      <%= javascript_tag "create_worker_input('#{w.name}');" %>
     <% end %>
   </div>
   <%= submit_tag %>

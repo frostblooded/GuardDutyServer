@@ -39,6 +39,7 @@ group :test do
   gem 'simplecov',               '~> 0.11.2', require: false
   gem 'factory_girl_rails',      '~> 4.7.0'
   gem 'poltergeist',             '~> 1.10.0'
+  gem 'phantomjs',               '~> 2.1.1.0', require: 'phantomjs/poltergeist'
 end
 
 group :production do

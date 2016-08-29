@@ -24,6 +24,24 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_equal @site.settings(:call).interval, find('#call_interval').value
     assert_equal @site.settings(:shift).start, find('#shift_start').value
     assert_equal @site.settings(:shift).end, find('#shift_end').value
+
+    puts page.body
+    within '.workers' do
+      @site.workers.each do |w|
+        found = false
+
+        puts page.all(:css, '.worker-input').inspect
+        page.all(:css, '.worker-input').each do |worker_input|
+          puts worker_input.value
+          if worker_input.value == w.name
+            found = true
+            break
+          end
+        end
+
+        assert_equal true, found
+      end
+    end
   end
 
   test 'site settings get updated correctly' do

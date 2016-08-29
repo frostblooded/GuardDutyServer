@@ -5,7 +5,11 @@ require 'rails/test_help'
 require 'minitest/rails/capybara'
 
 # Change the Capybara driver, so JS can be executed
-Capybara.javascript_driver = :poltergeist
+require 'capybara/poltergeist'
+Capybara.default_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, { js_errors: true, phantomjs: Phantomjs.path })
+end
 
 # Make the progress of running tests (rake) a little prettier
 require 'minitest/reporters'
