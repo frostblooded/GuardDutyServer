@@ -11,7 +11,7 @@ class ApiKeyTest < ActiveSupport::TestCase
   end
 
   test 'token has valid length' do
-    assert_equal 32, @company.api_key.access_token.length
+    assert_equal 24, @company.api_key.access_token.length
   end
 
   test 'setting company API key removes old one' do
