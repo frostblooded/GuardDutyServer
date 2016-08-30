@@ -26,17 +26,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_equal @site.settings(:shift).end, find('#shift_end').value
 
     within '.workers' do
+      worker_inputs = page.all(:css, '.worker-input').map &:value
       @site.workers.each do |w|
-        found = false
-
-        page.all(:css, '.worker-input').each do |worker_input|
-          if worker_input.value == w.name
-            found = true
-            break
-          end
-        end
-
-        assert_equal true, found
+        assert worker_inputs.include? w.name
       end
     end
   end
