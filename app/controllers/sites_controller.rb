@@ -75,12 +75,12 @@ class SitesController < ApplicationController
       remove_workers
 
       params[:workers].each do |name|
-        worker = Worker.find_by name: name
+        worker = @site.company.workers.find_by name: name
 
         unless worker
-          @errors << "Worker #{name} doesn't exist"
+          @errors << "Worker #{name} doesn't exist in this company"
         else
-          Worker.find_by(name: name).sites << @site
+          worker.sites << @site
         end
       end
     end
