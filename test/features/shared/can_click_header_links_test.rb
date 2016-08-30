@@ -5,38 +5,29 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
     visit root_path
   end
 
-  test 'signin link opens signin' do
-    click_link 'Sign in'
-    assert_equal new_company_session_path, current_path
+  test 'has correct links when logged out' do
+    within '.navbar' do
+      assert_text 'Sign in'
+      assert_text 'Sign up'
+      assert_no_text 'Sites'
+      assert_no_text 'Workers'
+      assert_no_text 'Settings'
+      assert_no_text 'Sign out'
+    end
   end
 
-  test 'signup link opens signup' do
-    click_link 'Sign up'
-    assert_equal new_company_registration_path, current_path
-  end
-
-  test 'sites link opens sites' do
+  test 'has correct links when logged in' do
     login_as create(:company)
     reload_page
 
-    click_link 'Sites'
-    assert_equal sites_path, current_path
-  end
-
-  test 'workers link opens workers' do
-    login_as create(:company)
-    reload_page
-
-    click_link 'Workers'
-    assert_equal workers_path, current_path
-  end
-
-  test 'settings link opens settings' do
-    login_as create(:company)
-    reload_page
-
-    click_link 'Settings'
-    assert_equal settings_path, current_path
+    within '.navbar' do
+      assert_no_text 'Sign in'
+      assert_no_text 'Sign up'
+      assert_text 'Sites'
+      assert_text 'Workers'
+      assert_text 'Settings'
+      assert_text 'Sign out'
+    end
   end
 
   test 'sign out signs the user out' do
@@ -44,7 +35,6 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
     reload_page
 
     click_link 'Sign out'
-    assert_equal root_path, current_path
-    assert page.has_content? 'Signed out successfully'
+    assert_text 'Signed out successfully'
   end
 end

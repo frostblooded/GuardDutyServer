@@ -17,23 +17,14 @@ class CanAccessWorkerIndexTest < Capybara::Rails::TestCase
     assert_text 'Create worker'
   end
 
-  test 'worker page link opens worker page' do
-    first(:link, @worker.name).click
-    assert_equal worker_path(@worker), current_path
-  end
-
-  test 'worker edit link opens edit worker page' do
-    first(:link, 'edit').click
-    assert_equal edit_worker_path(@worker), current_path
-  end
-
   test 'worker delete link deletes worker' do
     first(:link, 'delete').click
     assert_not Worker.exists? @worker.id
   end
 
-  test 'new worker link opens new worker' do
-    click_link 'Create worker'
-    assert_equal new_worker_path, current_path
+  test 'has correct links' do
+    assert_text @worker.name
+    assert_text 'edit'
+    assert_text 'Create worker'
   end
 end

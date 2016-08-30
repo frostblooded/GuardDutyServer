@@ -5,8 +5,9 @@ class CanClickFooterLinks < Capybara::Rails::TestCase
     visit root_path
   end
 
-  test 'contact opens contact' do
-    click_link 'Contact'
-    assert_equal contact_path, current_path
+  test 'has correct links' do
+    within '.footer' do
+      assert_text 'Contact'
+    end
   end
 end

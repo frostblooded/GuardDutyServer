@@ -28,13 +28,8 @@ class CanSignInTest < Capybara::Rails::TestCase
     assert_equal new_company_session_path, current_path
   end
 
-  test 'reset password instruction link opens reset password instructions' do
-    click_link 'Forgot your password?'
-    assert_equal new_company_password_path, current_path
-  end
-
-  test 'resend mail confirmation link opens resend mail confirmation' do
-    click_link 'Didn\'t receive confirmation instructions?'
-    assert_equal new_company_confirmation_path, current_path
+  test 'has correct links' do
+    assert_text 'Forgot your password?'
+    assert_text 'Didn\'t receive confirmation instructions?'
   end
 end
