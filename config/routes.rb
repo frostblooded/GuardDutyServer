@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   
   # Add Devise routes for Company
   devise_for :companies
-  resources :workers
+
+  resources :workers do
+    get :autocomplete_worker_name, on: :collection
+  end
+
   resources :settings
 
   resources :sites do

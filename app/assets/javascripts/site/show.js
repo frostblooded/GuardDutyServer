@@ -16,7 +16,7 @@ function create_worker_input(worker_name) {
 
 function create_new_worker_input() {
   var $new_worker = $('<div class="new-worker"></div>');
-  var $worker_input = $('<input class="worker-input" type="text"/>');
+  var $worker_input = $('<input class="worker-input" type="text" data-autocomplete="../workers/autocomplete_worker_name"/>');
   var $worker_add = $('<input class="worker-add" type="button" value="add"/>');
 
   $worker_add.click(function() {

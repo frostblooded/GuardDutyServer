@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20160829105348) do
   create_table "settings", force: :cascade do |t|
     t.string   "var",         null: false
     t.text     "value"
-    t.integer  "target_id",   null: false
     t.string   "target_type", null: false
+    t.integer  "target_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true

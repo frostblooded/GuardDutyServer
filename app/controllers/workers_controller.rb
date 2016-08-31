@@ -1,5 +1,19 @@
 # A controller which handles workers' actions
 class WorkersController < ApplicationController
+  autocomplete :worker, :name, full: true, scope: [:company]
+
+  def autocomplete_worker_name
+    workers = Worker.where('name LIKE ? AND company_id=?', "#{params['term']}%", current_company.id)
+
+    result = workers.map do |worker|
+      { id: worker.id,
+        label: worker.name,
+        value: worker.name }
+    end
+
+    render json: result
+  end
+
   def index
     @workers = current_company.workers
   end
