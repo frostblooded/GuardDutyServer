@@ -33,7 +33,7 @@
   </div>
 
   <div class="new-worker">
-    <%= autocomplete_field_tag 'worker_name', '', autocomplete_worker_name_workers_path(@site), { class: 'new-worker-input', fields: { site_name: '#site_name' } } %>
+    <%= autocomplete_field_tag 'worker_name', '', autocomplete_worker_name_workers_path(@site), { class: 'new-worker-input', fields: { site_name: '#site_name' }, 'data-auto-focus' => true } %>
     <input class="new-worker-add" type="button" value="add"/>
   </div>
 
