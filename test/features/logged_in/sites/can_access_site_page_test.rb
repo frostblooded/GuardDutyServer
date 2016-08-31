@@ -73,7 +73,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     worker = @site2.workers.first
 
     within '.new-worker' do
-      find('.worker-input').set worker.name
+      find('.new-worker-input').set worker.name
       click_button 'add'
     end
 
@@ -97,7 +97,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
                         password: 'foobarrr'
 
     within '.new-worker' do
-      find('.worker-input').set worker.name
+      find('.new-worker-input').set worker.name
       click_button 'add'
     end
 
@@ -111,7 +111,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     worker = @other_site.workers.first
 
     within '.new-worker' do
-      find('.worker-input').set worker.name
+      find('.new-worker-input').set worker.name
       click_button 'add'
     end
 
