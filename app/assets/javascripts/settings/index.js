@@ -2,7 +2,7 @@ $(document).ready(initialize_new_email_form);
 
 function create_email_input(email) {
   var $email = $('<div class="email"></div>');
-  var $email_input = $('<input class="email-input" type="text" name="report_receivers[]" value="' + email + '"/>');
+  var $email_input = $('<input class="email-input" type="text" name="recipients[]" value="' + email + '"/>');
   var $email_remove = $('<input class="email-remove" type="button" value="remove"/>');
 
   $email_remove.click(function() {

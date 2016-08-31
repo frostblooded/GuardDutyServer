@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
 
     if flash.empty?
       @company = current_company
-      @company.settings(:email).report_receivers = params[:report_receivers]
+      @company.settings(:email).recipients = params[:recipients]
       @company.settings(:email).wanted = params[:email_wanted] ? true : false
       @company.settings(:email).time = params[:email_time]
       @company.settings(:email).save!

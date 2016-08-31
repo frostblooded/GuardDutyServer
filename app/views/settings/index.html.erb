@@ -26,7 +26,7 @@
       <div class="emails">
         <h4>Emails to report to:</h4>
         
-        <% @company.settings(:email).report_receivers.each do |email| %>
+        <% @company.settings(:email).recipients.each do |email| %>
           <%# Call the js function for each worker %>
           <%= javascript_tag "create_email_input('#{email}');" %>
         <% end %>
