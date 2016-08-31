@@ -6,19 +6,10 @@
 <% end %>
 
 <div class="site_name">
-	<%= @site.name %>
+	<h2><%= @site.name %></h2>
 </div>  
 
-<div class="attached_worker">
-  <%= @site.settings(:attached_worker).name %>
-</div>
-
 <%= form_tag @site, method: :put do %>
-  <div class="field">
-    Which worker do you want to be on this site?
-    <%= select_tag 'attached_worker', options_from_collection_for_select(@workers, 'name', 'name') %>
-  </div>
-
   <div class="field">
     Enter call interval
     <%= text_field_tag :call_interval, @site.settings(:call).interval, min: 5, max: 60, type: :number %>
