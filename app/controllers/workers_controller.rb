@@ -1,9 +1,13 @@
 # A controller which handles workers' actions
 class WorkersController < ApplicationController
-  autocomplete :worker, :name, full: true, scope: [:company]
+  autocomplete :worker, :name, full: true
 
   def autocomplete_worker_name
+    site = Site.find params[:format]
     workers = Worker.where('name LIKE ? AND company_id=?', "#{params['term']}%", current_company.id)
+
+    # Remove workers which already belong to this site
+    workers -= site.workers
 
     result = workers.map do |worker|
       { id: worker.id,

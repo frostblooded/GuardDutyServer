@@ -5,9 +5,7 @@
   <%= stylesheet_link_tag 'site/show.css' %>
 <% end %>
 
-<div class="site_name">
-	<h2><%= @site.name %></h2>
-</div>  
+<h2 id="site_name"><%= @site.name %></h2>
 
 <%= form_tag @site, method: :put do %>
   <div class="field">
@@ -33,5 +31,11 @@
       <%= javascript_tag "create_worker_input('#{w.name}');" %>
     <% end %>
   </div>
+
+  <div class="new-worker">
+    <%= autocomplete_field_tag 'worker_name', '', autocomplete_worker_name_workers_path(@site), { class: 'new-worker-input', fields: { site_name: '#site_name' } } %>
+    <input class="new-worker-add" type="button" value="add"/>
+  </div>
+
   <%= submit_tag %>
 <% end %>

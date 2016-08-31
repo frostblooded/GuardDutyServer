@@ -1,4 +1,4 @@
-$(document).ready(create_new_worker_input);
+$(document).ready(initialize_new_worker_form);
 
 function create_worker_input(worker_name) {
   var $worker = $('<div class="worker"></div>');
@@ -14,20 +14,11 @@ function create_worker_input(worker_name) {
   $('.workers').append($worker);
 }
 
-function create_new_worker_input() {
-  var $new_worker = $('<div class="new-worker"></div>');
-  var $worker_input = $('<input class="worker-input" type="text" data-autocomplete="../workers/autocomplete_worker_name"/>');
-  var $worker_add = $('<input class="worker-add" type="button" value="add"/>');
-
-  $worker_add.click(function() {
-    create_worker_input($worker_input.val());
-
-    // Create new new worker input
-    $(this).parent().remove();
-    create_new_worker_input();
+function initialize_new_worker_form() {
+  $('.new-worker-add').click(function() {
+    $input = $('.new-worker-input');
+    
+    create_worker_input($input.val());
+    $input.val('');
   });
-
-  $new_worker.append($worker_input);
-  $new_worker.append($worker_add);
-  $('.workers').append($new_worker);
 }

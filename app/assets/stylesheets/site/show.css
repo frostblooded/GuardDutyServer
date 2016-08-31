@@ -1,7 +1,7 @@
-.worker-input {
+.worker-input, .new-worker-input {
 	width: 70%;
 }
 
-.worker-remove, .worker-add {
-	width: 30%;
+.worker-remove, .new-worker-add {
+	width: 25%;
 }
