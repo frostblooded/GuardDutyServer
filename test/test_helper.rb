@@ -52,6 +52,7 @@ module ActiveSupport
     def after_teardown
       super
       Warden.test_reset!
+      ActionMailer::Base.deliveries = []
     end
 
     # Add more helper methods to be used by all tests here...
@@ -75,9 +76,20 @@ module ActiveSupport
       activity
     end
 
-    def mail_is_sent?(company)
-      mail = ActionMailer::Base.deliveries.last
-      !mail.nil? && company.email == mail['to'].to_s
+    def mail_is_sent?(email)
+      mail = ActionMailer::Base.deliveries.first
+      !mail.nil? && email == mail['to'].to_s
+    end
+
+    def mails_are_sent?(emails)
+      return false if ActionMailer::Base.deliveries.nil?
+      delivered_to_emails = ActionMailer::Base.deliveries.map { |d| d['to'].to_s }
+
+      emails.each do |email|
+        return false unless delivered_to_emails.include? email
+      end
+
+      true
     end
 
     def reload_page

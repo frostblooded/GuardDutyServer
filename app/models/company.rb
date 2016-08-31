@@ -37,6 +37,8 @@ class Company < ActiveRecord::Base
   end
 
   def send_report_email
-    CompanyNotifier.report_email(self).deliver_now
+    settings(:email).recipients.each do |r|
+      CompanyNotifier.report_email(self, r).deliver_now
+    end
   end
 end

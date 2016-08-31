@@ -12,7 +12,7 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
 
     assert_text 'You will receive an email with instructions' \
     ' on how to reset your password in a few minutes.'
-    assert mail_is_sent?(@company)
+    assert mail_is_sent?(@company.email)
     assert_equal new_company_session_path, current_path
   end
 
@@ -21,7 +21,7 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
     click_button 'Send me reset password instructions'
 
     assert_text 'Email not found'
-    assert_not mail_is_sent?(@company)
+    assert_not mail_is_sent?(@company.email)
     assert_equal company_password_path, current_path
   end
 end

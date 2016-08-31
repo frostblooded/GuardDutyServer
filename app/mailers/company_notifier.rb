@@ -1,6 +1,6 @@
 # Manages the company notifier emails' actions
 class CompanyNotifier < ApplicationMailer
-  def report_email(company)
+  def report_email(company, email = company.email)
     @company = company
 
     # The reports are stored in a variable, so that a new report
@@ -8,6 +8,6 @@ class CompanyNotifier < ApplicationMailer
     #  (through the last_shift methods of Site)
     @shift_reports = @company.sites.map { |site| site.last_shift.report }
 
-    mail(to: @company.email, subject: 'Worker\'s report')
+    mail(to: email, subject: 'Worker\'s report')
   end
 end
