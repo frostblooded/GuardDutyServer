@@ -1,0 +1,7 @@
+.email-input, .new-email-input {
+	width: 70%;
+}
+
+.email-remove, .new-email-add {
+	width: 25%;
+}

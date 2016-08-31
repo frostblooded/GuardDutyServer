@@ -7,7 +7,7 @@ class Company < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
 
   has_settings do |s|
-    s.key :email, defaults: { wanted: false, time: '12:00' }
+    s.key :email, defaults: { wanted: false, time: '12:00', report_receivers: [] }
   end
 
   # Include default devise modules. Others available are:
