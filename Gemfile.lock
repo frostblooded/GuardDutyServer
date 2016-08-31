@@ -209,6 +209,8 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-jquery-autocomplete (1.0.3)
+      rails (>= 3.2)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -311,6 +313,7 @@ DEPENDENCIES
   poltergeist (~> 1.10.0)
   puma (~> 3.4.0)
   rails (~> 5.0.0.1)
+  rails-jquery-autocomplete (~> 1.0.3)
   rails_12factor (~> 0.0.2)
   sass-rails (~> 5.0.6)
   sdoc (~> 0.4.0)
