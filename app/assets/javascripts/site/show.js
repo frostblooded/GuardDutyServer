@@ -14,11 +14,26 @@ function create_worker_input(worker_name) {
   $('.workers').append($worker);
 }
 
-function initialize_new_worker_form() {
-  $('.new-worker-add').click(function() {
-    $input = $('.new-worker-input');
-    
+function add_worker() {
+  $input = $('.new-worker-input');
+
+  if($input.val().length > 0) {
     create_worker_input($input.val());
     $input.val('');
+  }
+  else {
+    alert('Field is empty, please enter a worker name first')
+  }
+}
+
+function initialize_new_worker_form() {
+  $new_worker_button = $('.new-worker-add');
+
+  $new_worker_button.click(add_worker);
+  $('.new-worker-input').keypress(function(e) {
+    if(e.which == 13) {
+      $new_worker_button.click();
+      return false;
+    }
   });
 }
