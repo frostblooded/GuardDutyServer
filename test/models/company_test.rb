@@ -15,6 +15,10 @@ class CompanyTest < ActiveSupport::TestCase
     assert_not @company.valid?
   end
 
+  test 'company has its email as recipient by default' do
+    assert @company.settings(:email).recipients.include? @company.email
+  end
+
   test 'company name is unique' do
     duplicate_company = Company.new name: @company.name,
                                     email: @company.email + 'a'

@@ -24,6 +24,7 @@ class Company < ActiveRecord::Base
 
   def initialize_company
     @last_mail_sent_at = Time.zone.now
+    settings(:email).recipients << self.email
   end
 
   # Documentation says email_required? and email_changed?
