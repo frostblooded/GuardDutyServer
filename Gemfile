@@ -18,6 +18,7 @@ gem 'sass-rails',                '~> 5.0.6'
 gem 'coffee-rails',              '~> 4.2.1'
 gem 'jquery-rails',              '~> 4.2.1'
 gem 'capistrano-rvm',            '~> 0.1.2'
+gem 'jquery-ui-rails',           '~> 5.0.5'
 gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 group :development, :test do
