@@ -10,6 +10,9 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     @new_email_time = '13:00'
     @new_invalid_email_time = '13?23REtre'
 
+    @company.settings(:email).recipients = ['ivan@example.com', 'petkan@example.com']
+    @added_email = 'frostblooded@example.com'
+
     login_as @company
     
     visit settings_path
@@ -42,5 +45,30 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
 
     @company.reload
     assert_not_equal @new_email_time, @company.settings(:email).time
+  end
+
+  test 'adding emails works' do
+    within '.new-email' do
+      find('.new-email-input').set @added_email
+      find('.new-email-add').click
+    end
+
+    click_button 'Save changes'
+
+    @company.reload
+    assert @company.settings(:email).recipients.include? @added_email
+  end
+
+  test 'removing emails works' do
+    email = @company.settings(:email).recipients.first
+
+    within '.emails' do
+      first('.email-remove').click
+    end
+
+    click_button 'Save changes'
+
+    @company.reload
+    assert_not @company.settings(:email).recipients.include? @email
   end
 end
