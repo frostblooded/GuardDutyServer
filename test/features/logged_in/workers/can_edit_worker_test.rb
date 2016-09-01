@@ -38,4 +38,12 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     assert_equal worker_path(@worker), current_path
     assert_text 'Password confirmation doesn\'t match Password'
   end
+
+  test 'shows error on empty form' do
+    click_button 'Save Changes'
+
+    assert_equal worker_path(@worker), current_path
+    assert_text 'Password can\'t be blank'
+    assert_text 'Password is too short (minimum is 8 characters)'
+  end
 end

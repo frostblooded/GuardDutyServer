@@ -54,4 +54,11 @@ class CanAccessAccountEditTest < Capybara::Rails::TestCase
     assert_equal company_registration_path, current_path
     assert_text 'Current password is invalid'
   end
+
+  test 'shows error on empty form' do
+    click_button 'Update'
+
+    assert_equal company_registration_path, current_path
+    assert_text 'Current password can\'t be blank'
+  end
 end

@@ -16,12 +16,19 @@ class CanSendResetPasswordInstructionsTest < Capybara::Rails::TestCase
     assert_equal new_company_session_path, current_path
   end
 
-  test 'returns error on nonexistent email' do
+  test 'shows error on nonexistent email' do
     fill_in 'company_email', with: @company.email + 'a'
     click_button 'Send me reset password instructions'
 
     assert_text 'Email not found'
     assert_not mail_is_sent?(@company.email)
     assert_equal company_password_path, current_path
+  end
+
+  test 'shows error in empty form' do
+    click_button 'Send me reset password instructions'
+
+    assert_equal company_password_path, current_path
+    assert_text 'Email can\'t be blank'
   end
 end

@@ -34,6 +34,7 @@ class CanSignUpTest < Capybara::Rails::TestCase
     assert_text 'Password can\'t be blank'
     assert_text 'Name can\'t be blank'
     assert_text 'Email can\'t be blank'
+    assert_text 'Email is invalid'
     assert_equal company_registration_path, current_path
   end
 

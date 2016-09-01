@@ -21,7 +21,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
     assert_text 'Site created'
   end
 
-  test 'creating new site returns error when name isn\'t unique in company' do
+  test 'shows error when name isn\'t unique in company' do
     @other_company = create(:company)
 
     # Not unique in company
@@ -43,5 +43,14 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
 
     assert_equal sites_path, current_path
     assert_text 'Site created'
+  end
+
+  test 'shows error on empty form' do
+    assert_no_difference 'Site.count' do
+      click_button 'Create new site'
+    end
+
+    assert_equal sites_path, current_path
+    assert_text 'Name can\'t be blank'
   end
 end

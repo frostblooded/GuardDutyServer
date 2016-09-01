@@ -22,7 +22,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     assert_text 'Worker created'
   end
 
-  test 'creating new worker returns error on nonmatching passwords' do
+  test 'shows error on nonmatching passwords' do
     assert_no_difference 'Worker.count' do
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
@@ -34,7 +34,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     assert_text 'Password confirmation doesn\'t match Password'
   end
 
-  test 'creating new worker returns error when name isn\'t unique in company' do
+  test 'shows error when name isn\'t unique in company' do
     @other_company = create(:company)
 
     # Not unique in company
@@ -62,5 +62,16 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
 
     assert_equal workers_path, current_path
     assert_text 'Worker created'
+  end
+
+  test 'shows error on empty form' do
+    assert_no_difference 'Worker.count' do
+      click_button 'Create new worker'
+    end
+
+    assert_equal workers_path, current_path
+    assert_text 'Name can\'t be blank'
+    assert_text 'Password can\'t be blank'
+    assert_text 'Password is too short (minimum is 8 characters)'
   end
 end
