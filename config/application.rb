@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module AttendanceCheckRailsapp
   class Application < Rails::Application
     config.time_regex = /([01]?[0-9]|2[0-3]):[0-5][0-9]/
+    config.email_regex = /\A\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*\z/
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
