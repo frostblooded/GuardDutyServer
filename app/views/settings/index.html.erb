@@ -5,41 +5,32 @@
   <%= stylesheet_link_tag 'settings/index.css' %>
 <% end %>
 
-<!DOCTYPE html>
-<html>
-  <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <title>Settings</title>
-  </head>
-	<body>
-		<%= form_tag('/settings/', method: :patch) do %>
-			<div class="field">
-				Do you want to a receive a report by email every day?
-				<%= check_box_tag :email_wanted, true, @company.settings(:email).wanted %>
-			</div>
+<%= form_tag('/settings/', method: :patch) do %>
+	<div class="field">
+		Do you want to a receive a report by email every day?
+		<%= check_box_tag :email_wanted, true, @company.settings(:email).wanted %>
+	</div>
 
-			<div class="field">
-				When do you want to receive the mail?
-				<%= text_field_tag :email_time, @company.settings(:email).time, placeholder: 'format: HH:MM', pattern: '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
-			</div>
+	<div class="field">
+		When do you want to receive the mail?
+		<%= text_field_tag :email_time, @company.settings(:email).time, placeholder: 'format: HH:MM', pattern: '([01]?[0-9]|2[0-3]):[0-5][0-9]' %>
+	</div>
 
-      <div class="emails">
-        <h4>Emails to report to:</h4>
-        
-        <% @company.settings(:email).recipients.each do |email| %>
-          <%# Call the js function for each worker %>
-          <%= javascript_tag "create_email_input('#{email}');" %>
-        <% end %>
-      </div>
+  <div class="emails">
+    <h4>Emails to report to:</h4>
+    
+    <% @company.settings(:email).recipients.each do |email| %>
+      <%# Call the js function for each worker %>
+      <%= javascript_tag "create_email_input('#{email}');" %>
+    <% end %>
+  </div>
 
-      <div class="new-email">
-        <input class="new-email-input" type="text"/>
-        <input class="new-email-add" type="button" value="add"/>
-      </div>
+  <div class="new-email">
+    <input class="new-email-input" type="text"/>
+    <input class="new-email-add" type="button" value="add"/>
+  </div>
 
-			<%= submit_tag %>
-		<% end %>
+	<%= submit_tag %>
+<% end %>
 
-		<%= link_to "Want to edit your email or credentials?", edit_company_registration_path %>
-	</body>
-</html>
+<%= link_to "Want to edit your email or credentials?", edit_company_registration_path %>
