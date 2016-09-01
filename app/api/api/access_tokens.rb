@@ -30,7 +30,7 @@ module API
         end
 
         # Generate API key
-        company = Company.find_by(name: params[:name])
+        company = params_company
         company.api_key = ApiKey.create
 
         # Return the generated token
