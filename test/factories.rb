@@ -14,6 +14,12 @@ FactoryGirl.define do
       email 'frostblooded@yahoo.com'
       password 'foobarrr'
     end
+
+	factory :toni_company do
+      name 'toni'
+      email 'amind@abv.bg'
+      password '12345678'
+    end
   end
 
   factory :site do

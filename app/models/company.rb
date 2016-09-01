@@ -25,7 +25,7 @@ class Company < ActiveRecord::Base
     settings(:email).recipients << self.email
   end
 
-  # Documentation says email_required? and email_changed?
+  # Devise documentation says email_required? and email_changed?
   # should be implemented as follows:
   def email_required?
     false

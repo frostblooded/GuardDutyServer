@@ -13,7 +13,6 @@ class Site < ActiveRecord::Base
   belongs_to :company
 
   has_settings do |s|
-    s.key :attached_worker, defaults: { name: '' }
     s.key :call, defaults: { interval: '15' }
     s.key :shift, defaults: { start: '12:00', end: '13:00' }
   end
