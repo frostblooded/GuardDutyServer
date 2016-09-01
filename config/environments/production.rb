@@ -1,4 +1,4 @@
-Rails.application.routes.default_url_options[:host] = 'domain.com'
+Rails.application.routes.default_url_options[:host] = 'http://37.157.182.179/'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
