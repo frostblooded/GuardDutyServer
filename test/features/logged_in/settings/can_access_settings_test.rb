@@ -12,6 +12,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
 
     @company.settings(:email).recipients = ['ivan@example.com', 'petkan@example.com']
     @added_email = 'frostblooded@example.com'
+    @invalid_email = 'rgergreg@wefwef.'
 
     login_as @company
     
@@ -70,5 +71,21 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
 
     @company.reload
     assert_not @company.settings(:email).recipients.include? @email
+  end
+
+  test 'adding invalid email shows error but saves valid ones' do
+    within '.new-email' do
+      find('.new-email-input').set @invalid_email
+      find('.new-email-add').click
+      find('.new-email-input').set @added_email
+      find('.new-email-add').click
+    end
+
+    click_button 'Save changes'
+    assert_text "The email \"#{@invalid_email}\" is invalid"
+
+    @company.reload
+    assert_not @company.settings(:email).recipients.include? @invalid_email
+    assert @company.settings(:email).recipients.include? @added_email
   end
 end
