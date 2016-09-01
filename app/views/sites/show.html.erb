@@ -15,12 +15,12 @@
 
   <div class="field">
     Enter the start of the shift!
-    <%= text_field_tag :shift_start, @site.settings(:shift).start, placeholder: 'format: HH:MM', pattern: Rails.application.config.time_regex.source %>
+    <%= time_field_tag :shift_start, @site.settings(:shift).start %>
   </div>
 
   <div class="field">
     Enter the end of the shift!
-    <%= text_field_tag :shift_end, @site.settings(:shift).end, placeholder: 'format: HH:MM', pattern: Rails.application.config.time_regex.source %>
+    <%= time_field_tag :shift_end, @site.settings(:shift).end %>
   </div>
 
   <div class="workers">

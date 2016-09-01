@@ -13,7 +13,7 @@
 
 	<div class="field">
 		When do you want to receive the mail?
-		<%= text_field_tag :email_time, @company.settings(:email).time, placeholder: 'format: HH:MM', pattern: Rails.application.config.time_regex.source %>
+		<%= time_field_tag :email_time, @company.settings(:email).time %>
 	</div>
 
   <div class="emails">
