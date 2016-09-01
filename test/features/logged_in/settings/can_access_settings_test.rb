@@ -37,17 +37,6 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     assert_equal @new_email_wanted, @company.settings(:email).wanted
   end
 
-  test 'returns error on invalid email time format' do
-    fill_in 'email_time', with: @new_invalid_email_time
-    click_button 'Save changes'
-
-    assert_equal settings_path, current_path
-    assert_text 'Invalid email time format'
-
-    @company.reload
-    assert_not_equal @new_email_time, @company.settings(:email).time
-  end
-
   test 'adding emails works' do
     within '.new-email' do
       find('.new-email-input').set @added_email

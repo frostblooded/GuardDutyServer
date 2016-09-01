@@ -6,7 +6,6 @@ class SettingsController < ApplicationController
 
   def update
     @errors = []
-    validate_email_time
     save_recipients
 
     if @errors.empty?
@@ -19,14 +18,6 @@ class SettingsController < ApplicationController
 
     flash[:danger] = @errors.join ', ' unless @errors.empty?
     redirect_to settings_path
-  end
-
-  def validate_email_time
-    time_regex = Rails.application.config.time_regex
-
-    if !(params[:email_time] =~ time_regex)
-      @errors << 'Invalid email time format'
-    end
   end
 
   def save_recipients

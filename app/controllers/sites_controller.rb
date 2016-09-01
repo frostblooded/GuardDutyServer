@@ -17,7 +17,6 @@ class SitesController < ApplicationController
     @site = Site.find params[:id]
     @errors = []
     update_workers
-    validate_times_format
 
     if @errors.empty?
       @site.settings(:call).interval = params[:call_interval]
@@ -53,18 +52,6 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name)
-  end
-
-  def validate_times_format
-    time_regex = Rails.application.config.time_regex
-
-    if !(params[:shift_start] =~ time_regex)
-      @errors << 'Invalid shift start format'
-    end
-
-    if !(params[:shift_end] =~ time_regex)
-      @errors << 'Invalid shift end format'
-    end
   end
 
   # Yes, it is pretty stupid to remove all workers
