@@ -27,7 +27,7 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     assert @worker.authenticate(new_password)
   end
 
-  test 'worker edit shows error on nonmatching passwords' do
+  test 'shows error on nonmatching passwords' do
     new_password = 'foobarrr'
 
     fill_in 'worker_name', with: @new_name
@@ -39,11 +39,12 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     assert_text 'Password confirmation doesn\'t match Password'
   end
 
-  test 'shows error on empty form' do
-    click_button 'Save Changes'
+  test 'shows error on too short password' do
+    fill_in 'worker_password', with: 'a' * 7
+    fill_in 'worker_password_confirmation', with: 'a' * 7
 
+    click_button 'Save Changes'
     assert_equal worker_path(@worker), current_path
-    assert_text 'Password can\'t be blank'
     assert_text 'Password is too short (minimum is 8 characters)'
   end
 end

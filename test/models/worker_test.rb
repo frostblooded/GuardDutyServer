@@ -31,7 +31,7 @@ class WorkerTest < ActiveSupport::TestCase
   end
 
   test 'password is present' do
-    @worker.password = @worker.password_confirmation = ' ' * 8
+    @worker.password = @worker.password_confirmation = nil
     assert_not @worker.valid?
   end
 
