@@ -42,7 +42,6 @@ group :test do
   gem 'factory_girl_rails',      '~> 4.7.0'
   gem 'poltergeist',             '~> 1.10.0'
   gem 'phantomjs',               '~> 2.1.1.0', require: 'phantomjs/poltergeist'
-  gem 'selenium-webdriver',      '~> 2.53.4'
 end
 
 group :production do
