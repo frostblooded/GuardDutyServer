@@ -56,7 +56,7 @@ class SitesController < ApplicationController
   end
 
   def validate_times_format
-    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
+    time_regex = Rails.application.config.time_regex
 
     if !(params[:shift_start] =~ time_regex)
       @errors << 'Invalid shift start format'

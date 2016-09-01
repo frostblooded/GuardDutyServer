@@ -21,7 +21,7 @@ class SettingsController < ApplicationController
   end
 
   def validate_email_time
-    time_regex = AttendanceCheckRailsapp::Application.config.time_regex
+    time_regex = Rails.application.config.time_regex
 
     if !(params[:email_time] =~ time_regex)
       flash[:danger] = 'Invalid email time format'
