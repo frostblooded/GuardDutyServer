@@ -3,7 +3,7 @@ module API
   # and requires an API key to be accessed
   class ProtectedData < Grape::API
     # Before every request
-    before_validation { restrict_access }
+    before { restrict_access }
 
     helpers do
       # Get API key based on access token parameter
@@ -15,6 +15,10 @@ module API
       def restrict_access
         # Return error if the API key doesn't exist
         error!('invalid token', 401) unless api_key
+      end
+
+      def current_user
+        api_key.company
       end
     end
 

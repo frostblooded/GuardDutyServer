@@ -11,6 +11,7 @@ module API
       route_param :id do
         before do
           error!('inexsitent worker', 400) unless Worker.exists? params[:id]
+          authorize! :manage, params_worker
         end
 
         params do

@@ -1,10 +1,21 @@
 module API
   # Represents the sites' routes for the API
   class Sites < Grape::API
+    helpers do
+      def params_site
+        Site.find params[:site_id]
+      end
+
+      def params_worker
+        Worker.find params[:worker_id]
+      end
+    end
+
     resource :sites do
       route_param :site_id do
         before do
           error!('inexsitent site', 400) unless Site.exists? params[:site_id]
+          authorize! :manage, params_site
         end
 
         resource :workers do
@@ -13,6 +24,8 @@ module API
               unless Worker.exists? params[:worker_id]
                 error!('inexsitent worker', 400)
               end
+
+              authorize! :manage, params_worker
             end
 
             params do

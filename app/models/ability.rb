@@ -11,5 +11,10 @@ class Ability
     can :manage, Site do |site|
       site.company == company
     end
+
+    can :create, Route
+    can :manage, Route do |route|
+      route.site.company == company
+    end
   end
 end

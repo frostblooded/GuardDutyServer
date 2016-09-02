@@ -32,6 +32,8 @@ module API
               unless Site.exists? id: params['site_id'].to_i
                 error!('inexistent site', 400)
               end
+
+              authorize! :manage, params_site
             end
 
             get :settings do
@@ -53,6 +55,8 @@ module API
 
             # Create a new route
             post :routes do
+              authorize! :manage, Route
+              
               r = params_site.routes.create(name: 'test route')
 
               params['positions'].each_with_index do |p, index|
