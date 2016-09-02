@@ -38,9 +38,9 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   end
 
   test 'adding emails works' do
-    within '.new-email' do
-      find('.new-email-input').set @added_email
-      find('.new-email-add').click
+    within '#new-email' do
+      find('#new-email-input').set @added_email
+      find('#new-email-add').click
     end
 
     click_button 'Save changes'
@@ -52,7 +52,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   test 'removing emails works' do
     email = @company.settings(:email).recipients.first
 
-    within '.emails' do
+    within '#emails' do
       first('.email-remove').click
     end
 
@@ -63,11 +63,11 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   end
 
   test 'adding invalid email shows error but saves valid ones' do
-    within '.new-email' do
-      find('.new-email-input').set @invalid_email
-      find('.new-email-add').click
-      find('.new-email-input').set @added_email
-      find('.new-email-add').click
+    within '#new-email' do
+      find('#new-email-input').set @invalid_email
+      find('#new-email-add').click
+      find('#new-email-input').set @added_email
+      find('#new-email-add').click
     end
 
     click_button 'Save changes'

@@ -23,7 +23,7 @@
   <div class="form-group">
     <%= label_tag :emails, 'Emails to report to:'%>
 
-    <div class="input-group">
+    <div class="input-group" id="new-email">
       <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
 
       <span class="input-group-btn">
@@ -32,16 +32,13 @@
 
     </div>
 
-    
     <br />
     
     <div id="emails">
-      
       <% @company.settings(:email).recipients.each do |email| %>
         <%# Call the js function for each worker %>
         <%= javascript_tag "create_email_input('#{email}');" %>
       <% end %>
-
     </div>
   </div>
 
