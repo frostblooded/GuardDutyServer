@@ -1,29 +1,29 @@
 <% provide(:title, 'Settings') %>
 
 <% content_for :head do %>
-	<%= javascript_include_tag 'settings/index.js' %>
-	<%= stylesheet_link_tag 'settings/index.css' %>
+  <%= javascript_include_tag 'settings/index.js' %>
+  <%= stylesheet_link_tag 'settings/index.css' %>
 <% end %>
 
 <h2>
-	Settings
+  Settings
 </h2>
 
 <%= form_tag('/settings/', method: :patch) do %>
-	<div class="form-group">
-		<%= label_tag :email_wanted, 'Do you want to recieve daily reports?'%>
-		<%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>
-	</div>
+  <div class="form-group">
+    <%= label_tag :email_wanted, 'Do you want to recieve daily reports?'%>
+    <%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>
+  </div>
 
-	<div class="form-group">
-		<%= label_tag :email_time, 'When do you want to receive the mail?' %>
-		<%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control' %>
-	</div>
+  <div class="form-group">
+    <%= label_tag :email_time, 'When do you want to receive the mail?' %>
+    <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control' %>
+  </div>
 
-	<div class="form-group">
-		<%= label_tag :emails, 'Emails to report to:'%>
+  <div class="form-group">
+    <%= label_tag :emails, 'Emails to report to:'%>
 
-		<div class="input-group">
+    <div class="input-group" id="new-email">
       <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
 
       <span class="input-group-btn">
@@ -32,20 +32,17 @@
 
     </div>
 
-		
-		<br />
-		
-		<div id="emails">
-			
-			<% @company.settings(:email).recipients.each do |email| %>
-				<%# Call the js function for each worker %>
-				<%= javascript_tag "create_email_input('#{email}');" %>
-			<% end %>
+    <br />
+    
+    <div id="emails">
+      <% @company.settings(:email).recipients.each do |email| %>
+        <%# Call the js function for each worker %>
+        <%= javascript_tag "create_email_input('#{email}');" %>
+      <% end %>
+    </div>
+  </div>
 
-		</div>
-	</div>
-
-	<%= submit_tag "Save changes", class: 'btn btn-primary' %>
+  <%= submit_tag "Save changes", class: 'btn btn-primary' %>
 <% end %>
 
 <hr />

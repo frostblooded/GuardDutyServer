@@ -11,6 +11,7 @@ module API
       route_param :id do
         before do
           error!('inexsitent worker', 400) unless Worker.exists? params[:id]
+          authorize! :manage, params_worker
         end
 
         params do
@@ -22,12 +23,12 @@ module API
             error!('Invalid worker/password combination', 400)
           end
 
-          Activity.create(category: :login, worker_id: params[:id])
+          Activity.create!(category: :login, worker_id: params[:id])
           { success: true }
         end
 
         post '/logout' do
-          Activity.create(category: :logout, worker_id: params[:id])
+          Activity.create!(category: :logout, worker_id: params[:id])
           { success: true }
         end
       end

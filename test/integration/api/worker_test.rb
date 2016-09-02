@@ -3,14 +3,17 @@ require 'test_helper'
 class ApiWorkerTest < ActionDispatch::IntegrationTest
   def setup
     @company = create(:company)
-    @worker = create(:worker)
+    @worker = @company.workers.first
+
+    @worker_password = 'foobarrr'
+    @worker.update(password: @worker_password)
   end
 
   # Login worker
   test 'worker login' do
     assert_difference 'Activity.count', 1 do
       post "/api/v1/workers/#{@worker.id}/login",
-           params: { password: @worker.password,
+           params: { password: @worker_password,
                      access_token: request_access_token }
     end
 
@@ -21,7 +24,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
   test 'worker login return error on invalid worker' do
     assert_no_difference 'Activity.count' do
       post '/api/v1/workers/-1/login',
-           params: { password: @worker.password,
+           params: { password: @worker_password,
                      access_token: request_access_token }
     end
 
@@ -32,7 +35,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
   test 'worker login return error on invalid combination' do
     assert_no_difference 'Activity.count' do
       post "/api/v1/workers/#{@worker.id}/login",
-           params: { password: @worker.password + 'a',
+           params: { password: @worker_password + 'a',
                      access_token: request_access_token }
     end
 

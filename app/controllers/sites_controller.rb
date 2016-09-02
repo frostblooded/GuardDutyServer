@@ -1,7 +1,8 @@
 # A controller which handles sites' actions
 class SitesController < ApplicationController
+  load_and_authorize_resource
+
   def new
-    @site = Site.new
   end
 
   def index
@@ -9,12 +10,10 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = Site.find params[:id]
     @workers = current_company.workers
   end
 
   def update
-    @site = Site.find params[:id]
     @errors = []
     update_workers
 
@@ -32,7 +31,7 @@ class SitesController < ApplicationController
   end
 
   def create
-    @site = current_company.sites.create(site_params)
+    @site.company = current_company
     
     if @site.save
       flash[:success] = 'Site created'
@@ -43,7 +42,7 @@ class SitesController < ApplicationController
   end
 
   def destroy
-    Site.find(params[:id]).destroy
+    @site.destroy
     flash[:success] = 'Site deleted'
     redirect_to sites_path
   end

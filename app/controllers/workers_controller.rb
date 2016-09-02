@@ -1,5 +1,7 @@
 # A controller which handles workers' actions
 class WorkersController < ApplicationController
+  load_and_authorize_resource
+
   autocomplete :worker, :name, full: true
 
   def autocomplete_worker_name
@@ -23,15 +25,12 @@ class WorkersController < ApplicationController
   end
 
   def new
-    @worker = Worker.new
   end
 
   def edit
-    @worker = Worker.find params[:id]
   end
 
   def create
-    @worker = Worker.new worker_params
     @worker.company = current_company
 
     if @worker.save
@@ -43,8 +42,6 @@ class WorkersController < ApplicationController
   end
 
   def update
-    @worker = Worker.find params[:id]
-
     if @worker.update_attributes(worker_params)
       flash[:success] = 'Worker updated'
       redirect_to workers_path
@@ -54,14 +51,13 @@ class WorkersController < ApplicationController
   end
 
   def show
-    @worker = Worker.find params[:id]
-
     # Set classes for the HTML tags from here
     @worker.activities.each { |a| a.row_class = get_row_class(a) }
   end
 
   def destroy
-    Worker.find(params[:id]).destroy
+    @worker = Worker.find(params[:id])
+    @worker.destroy
     flash[:success] = 'Worker deleted'
     redirect_to workers_path
   end
