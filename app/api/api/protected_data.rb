@@ -5,6 +5,10 @@ module API
     # Before every request
     before { restrict_access }
 
+    rescue_from ::CanCan::AccessDenied do
+      error!('Access forbidden', 403)
+    end
+
     helpers do
       # Get API key based on access token parameter
       def api_key
