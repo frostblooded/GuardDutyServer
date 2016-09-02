@@ -20,6 +20,7 @@ gem 'jquery-rails',              '~> 4.2.1'
 gem 'capistrano-rvm',            '~> 0.1.2'
 gem 'jquery-ui-rails',           '~> 5.0.5'
 gem 'rails-jquery-autocomplete', '~> 1.0.3'
+gem 'cancancan',                 '~> 1.15.0'
 
 group :development, :test do
   gem 'byebug',                  '~> 3.4.0'
