@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApiAccessTokenTest < ActionDispatch::IntegrationTest
+class AbilitiesTest < ActionDispatch::IntegrationTest
   def setup
     @company = create(:company)
     @other_company = create(:company)
