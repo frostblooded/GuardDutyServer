@@ -1,7 +1,8 @@
-.email-input, .new-email-input {
-	width: 70%;
+
+input[type=checkbox].css-checkbox {
+	margin-left:5px;
 }
 
-.email-remove, .new-email-add {
-	width: 25%;
+.report-email{
+	margin-top: 10px;
 }

@@ -2,9 +2,13 @@
 @import "bootstrap";
 /* universial */
 
+
+
+
 body {
     padding-top: 60px;
 }
+
 
 section {
     overflow: auto;
@@ -14,7 +18,7 @@ textarea {
     resize: vertical;
 }
 
-
+/*
 .home {
   div {
     text-align: justify;
@@ -28,7 +32,7 @@ textarea {
       text-indent: 50px;
       font-size: 20px;
     }
-}
+}*/
 
 /* header */
 
@@ -48,43 +52,28 @@ textarea {
 
 /* footer */
 
-footer {
-    margin-top: 45px;
-    padding-top: 5px;
-    border-top: 1px solid #eaeaea;
-    color: #777;
-  ul {
-      float: right;
-      list-style: none;
-  }
-  ul li {
-      float: left;
-      margin-left: 15px;
-  }
-}
-
 /* sidebar */
 
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+/*input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
-}
-
+}*/
+/*
 input {
   height: auto !important;
-}
+}*/
 
-.row {
+/*.row {
   h1 {
     text-align: center;
     font-weight: bold;
     font-size: 40px;
   }
-}
+}*/
 
 #error_explanation {
   color: red;
