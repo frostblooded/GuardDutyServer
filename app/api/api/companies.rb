@@ -57,10 +57,10 @@ module API
             post :routes do
               authorize! :manage, Route
               
-              r = params_site.routes.create(name: 'test route')
+              r = params_site.routes.create!(name: 'test route')
 
               params['positions'].each_with_index do |p, index|
-                r.positions.create(longitude: p['longitude'],
+                r.positions.create!(longitude: p['longitude'],
                                    latitude: p['latitude'],
                                    index: index)
               end

@@ -33,7 +33,7 @@ module API
             end
 
             post '/calls' do
-              Activity.create(category: :call,
+              Activity.create!(category: :call,
                               time_left: params[:time_left],
                               worker_id: params[:worker_id])
 

@@ -31,7 +31,7 @@ module API
 
         # Generate API key
         company = params_company
-        company.api_key = ApiKey.create
+        company.api_key = ApiKey.create!
 
         # Return the generated token
         { access_token: company.api_key.access_token,
