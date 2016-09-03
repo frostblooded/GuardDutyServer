@@ -1,9 +1,18 @@
 $(document).ready(initialize_new_email_form);
 
 function create_email_input(email) {
-  var $email = $('<div class="report-email input-group"></div>');
+  var $email = $('<div class="report-email input-group form-group"></div>');
   var $email_input = $('<input class="form-control" type="text" name="recipients[]" value="' + email + '"/>');
-  var $email_remove = $('<span class="input-group-btn"><button class="btn btn-danger email-remove"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></span>');
+  var $email_remove = $('<span class="input-group-btn">' +
+    '<button class="btn btn-danger email-remove"  data-toggle="tooltip"'+
+    ' data-placement="right" title="Remove email">'+
+      '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
+      '</span>'+
+    '</button>'+
+  '</span>');
+
+
+
   $email_remove.click(function() {
     $(this).parent().remove();
   });
@@ -36,3 +45,7 @@ function initialize_new_email_form() {
     }
   });
 }
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
