@@ -1,6 +1,11 @@
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'hover/hover-min.css' %>
+<% end %>
+
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "AttendanceCheck", root_path, id: "logo" %>
+    <%= link_to "AttendanceCheck", root_path, id: "logo", class: 'hvr-buzz-out' %>
     <nav>
       <ul class="nav navbar-nav navbar-right main-nav">
         <% if company_signed_in? %>

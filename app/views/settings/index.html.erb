@@ -15,42 +15,45 @@
     <%= label_tag :email_wanted, 'Do you want to recieve daily reports?'%>
     <%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>
   </div>
-
-  <div class="form-group row">
-    <%= label_tag :email_time, 'When do you want to receive the mail?' %>
-    <div class ="input-group">
-      <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
-      <span class="input-group-addon" id="add-time">
-        <span class="glyphicon glyphicon-time"></span>
-      </span>
+  <div id="email-settings">
+    <div class="form-group row">
+      <%= label_tag :email_time, 'When do you want to receive the mail?' %>
+      <div class ="input-group">
+        <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
+        <span class="input-group-addon" id="add-time">
+          <span class="glyphicon glyphicon-time"></span>
+        </span>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group row">
-    <%= label_tag :emails, 'Emails to report to:'%>
+    <div class="form-group row">
+      <%= label_tag :emails, 'Emails to report to:'%>
 
-    <div class="input-group" id="new-email">
-      <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
+      <div class="input-group" id="new-email">
+        <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
 
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" id="new-email-add" data-toggle="tooltip" data-placement="right" title="Add email">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </span>
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" id="new-email-add" data-toggle="tooltip" data-placement="right" title="Add email">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
 
+      </div>
     </div>
-  </div>
 
-  <div id="emails" class="row">
-      <% @company.settings(:email).recipients.each do |email| %>
-        <%# Call the js function for each worker %>
-        <%= javascript_tag "create_email_input('#{email}');" %>
-      <% end %>
-  </div>
+    <div id="emails" class="row">
+        <% @company.settings(:email).recipients.each do |email| %>
+          <%# Call the js function for each worker %>
+          <%= javascript_tag "create_email_input('#{email}');" %> 
+          <!-- TODO: Tell niki bug when no emails -->
+        <% end %>
+    </div>
+  </div>    
 
-  <%= submit_tag "Save changes", class: 'btn btn-primary col-md-4 col-md-offset-4 row hvr-push' %>
+  <%= submit_tag "Save changes", class: 'btn btn-primary hvr-shrink
+              col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4 row' %>
 
-  <hr class="col-md-12"/>
+  <hr class="col-md-12 col-xs-12"/>
   <%= link_to "Want to edit your email or credentials?", edit_company_registration_path, class:'row' %>
 <% end %>
 

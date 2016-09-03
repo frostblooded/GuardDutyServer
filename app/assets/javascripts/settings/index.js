@@ -1,4 +1,16 @@
-$(document).ready(initialize_new_email_form);
+$(document).ready(function(){
+
+  initialize_new_email_form();
+
+  $('[data-toggle="tooltip"]').tooltip();
+
+  update_email_inputs($('#email_wanted').is(':checked'))
+
+  $('#email_wanted').on('click', function() {
+    update_email_inputs($(this).is(':checked'))
+  });
+
+});
 
 function create_email_input(email) {
   var $email = $('<div class="report-email input-group form-group"></div>');
@@ -9,12 +21,14 @@ function create_email_input(email) {
       '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
       '</span>'+
     '</button>'+
-  '</span>');
+  '</span>'); // TODO: Find a way to get this into a template
 
 
 
   $email_remove.click(function() {
-    $(this).parent().remove();
+    if(is_email_checked()) {
+      $(this).parent().remove();
+    }
   });
 
   $email.append($email_input);
@@ -46,6 +60,10 @@ function initialize_new_email_form() {
   });
 }
 
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-});
+function update_email_inputs(enabled) {
+  $('#email-settings :input').prop('disabled', !enabled);
+}
+
+function is_email_checked() {
+  return $("#email_wanted").is(':checked');
+}
