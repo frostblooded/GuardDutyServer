@@ -28,10 +28,8 @@
           </td>
 
           <td>
-            <%= link_to site, method: :delete, data: { confirm: "You sure?" } do %>
-              <button class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
+            <%= button_to site, method: :delete, data: { confirm: "You sure?" }, class: 'site-delete btn btn-danger' do %>
+              <span class="glyphicon glyphicon-trash"></span>
             <% end %>
           </td>
         </tr>

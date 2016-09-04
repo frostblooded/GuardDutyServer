@@ -29,17 +29,13 @@
           </td>
           
           <td>
-            <%= link_to edit_worker_path(worker) do %>
-              <button class="btn btn-default">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
+            <%= button_to edit_worker_path(worker), method: :get, class: 'btn btn-default' do %>
+              <span class="glyphicon glyphicon-pencil"></span>
             <% end %>
           </td>
           <td>
-            <%= link_to worker, method: :delete, data: { confirm: "You sure?" } do %>
-              <button class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
+            <%= button_to worker, method: :delete, data: { confirm: "You sure?" }, class: 'worker-delete btn btn-danger' do %>
+              <span class="glyphicon glyphicon-trash"></span>
             <% end %>
           </td>
         </tr>
