@@ -23,11 +23,13 @@ class SettingsController < ApplicationController
   def save_recipients
     current_company.settings(:email).recipients = []
 
-    params[:recipients].uniq.each do |r|
-      unless r =~ Rails.application.config.email_regex
-        @errors << "The email \"#{r}\" is invalid" 
-      else
-        current_company.settings(:email).recipients << r
+    if params[:recipients]
+      params[:recipients].uniq.each do |r|
+        unless r =~ Rails.application.config.email_regex
+          @errors << "The email \"#{r}\" is invalid" 
+        else
+          current_company.settings(:email).recipients << r
+        end
       end
     end
 
