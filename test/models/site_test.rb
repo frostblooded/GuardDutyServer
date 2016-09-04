@@ -38,9 +38,6 @@ class SiteTest < ActiveSupport::TestCase
 
     @site.settings(:shift).start = '11:00'
     @site.settings(:shift).end = '12:00'
-    
-    make_worker_activities
-    make_other_worker_activities
   end
 
   test 'position belongs to correct company' do
@@ -84,6 +81,9 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test 'correctly returns last shift' do
+    make_worker_activities
+    make_other_worker_activities
+    
     time = Time.zone.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do
