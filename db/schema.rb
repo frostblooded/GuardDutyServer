@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829105348) do
+ActiveRecord::Schema.define(version: 20160904144321) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20160829105348) do
     t.integer  "worker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "site_id"
+    t.index ["site_id"], name: "index_activities_on_site_id"
   end
 
   create_table "api_keys", force: :cascade do |t|

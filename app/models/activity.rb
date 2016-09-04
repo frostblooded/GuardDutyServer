@@ -9,4 +9,5 @@ class Activity < ActiveRecord::Base
   attr_accessor :row_class
 
   validates :time_left, numericality: true, allow_nil: true
+  validates :site, presence: true
 end
