@@ -10,6 +10,14 @@ $(document).ready(function(){
     update_email_inputs($(this).is(':checked'))
   });
 
+  $('.custom-time-picker').datetimepicker({
+    format: 'LT'
+  });
+
+  $('.time-picker-input').click(function(){
+    $(this).parent().data("DateTimePicker").show();
+  });
+
 });
 
 function create_email_input(email) {

@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datetimepicker";
 /* universial */
 
 /*Toni's css*/
@@ -36,8 +37,19 @@ html, body {
 
 .main-nav li {
   font-size: 1.2em;
+  font-weight: bold;
 }
 
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  text-decoration: none;
+}
 /*end of Toni's css*/
 
 
@@ -73,19 +85,6 @@ textarea {
 
 /* header */
 
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
-      color: #fff;
-      text-decoration: none;
-  }
-}
 
 /* footer */
 

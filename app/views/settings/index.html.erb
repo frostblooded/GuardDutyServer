@@ -18,11 +18,15 @@
   <div id="email-settings">
     <div class="form-group row">
       <%= label_tag :email_time, 'When do you want to receive the mail?' %>
-      <div class ="input-group">
-        <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
+      <div class ="input-group custom-time-picker">
+
+        <%= text_field_tag :email_time, @company.settings(:email).time,
+         class:'form-control time-picker-input' %>
+
         <span class="input-group-addon" id="add-time">
           <span class="glyphicon glyphicon-time"></span>
         </span>
+
       </div>
     </div>
 
@@ -43,9 +47,7 @@
 
     <div id="emails" class="row">
         <% @company.settings(:email).recipients.each do |email| %>
-          <%# Call the js function for each worker %>
           <%= javascript_tag "create_email_input('#{email}');" %> 
-          <!-- TODO: Tell niki bug when no emails -->
         <% end %>
     </div>
   </div>    

@@ -50,6 +50,8 @@ GEM
     bcrypt (3.1.11)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    bootstrap3-datetimepicker-rails (4.17.37)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (3.4.2)
       columnize (~> 0.8)
@@ -171,6 +173,8 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     mustermann19 (0.4.4)
@@ -291,6 +295,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0.0)
+  bootstrap3-datetimepicker-rails (~> 4.17.0)
   byebug (~> 3.4.0)
   cancancan (~> 1.15.0)
   capistrano (~> 3.6.1)
@@ -309,6 +314,7 @@ DEPENDENCIES
   ledermann-rails-settings (~> 2.4.2)
   minitest-rails-capybara (~> 3.0.0)
   minitest-reporters (~> 1.1.11)
+  momentjs-rails (>= 2.9.0)
   phantomjs (~> 2.1.1.0)
   poltergeist (~> 1.10.0)
   puma (~> 3.4.0)
