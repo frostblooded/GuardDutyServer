@@ -7,12 +7,12 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
 
   test 'has correct links when logged out' do
     within '.navbar' do
-      assert_text 'Sign in'
-      assert_text 'Sign up'
-      assert_no_text 'Sites'
-      assert_no_text 'Workers'
-      assert_no_text 'Settings'
-      assert_no_text 'Sign out'
+      has_link? 'Sign in'
+      has_link? 'Sign up'
+      has_no_link? '#sites-nav'
+      has_no_link? '#worker-nav'
+      has_no_link? '#settings-nav'
+      has_no_link? 'Sign out'
     end
   end
 
@@ -21,12 +21,12 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
     reload_page
 
     within '.navbar' do
-      assert_no_text 'Sign in'
-      assert_no_text 'Sign up'
-      assert_text 'Sites'
-      assert_text 'Workers'
-      assert_text 'Settings'
-      assert_text 'Sign out'
+      has_no_link? 'Sign in'
+      has_no_link? 'Sign up'
+      has_link? '#sites-nav'
+      has_link? '#worker-nav'
+      has_link? '#settings-nav'
+      has_link? 'Sign out'
     end
   end
 
