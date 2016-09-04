@@ -2,16 +2,21 @@
 
 <h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_for(resource, 
+                      as: resource_name,
+                      url: password_path(resource_name),
+                      html: { method: :post, class:"col-md-6" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="form-group row">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class:'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "Reset password", class: 'btn btn-primary
+                                        col-md-4 col-md-offset-4 col-xs-4
+                                        col-xs-offset-4 row' %>
   </div>
 <% end %>
 
