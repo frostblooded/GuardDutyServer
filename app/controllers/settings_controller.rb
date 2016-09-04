@@ -21,7 +21,7 @@ class SettingsController < ApplicationController
   end
 
   def save_recipients
-    current_company.settings(:email).recipients = []
+    current_company.settings(:email).recipients = [] if params[:email_wanted]
 
     if params[:recipients]
       params[:recipients].uniq.each do |r|
