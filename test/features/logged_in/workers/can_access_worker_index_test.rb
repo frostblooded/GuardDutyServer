@@ -18,13 +18,13 @@ class CanAccessWorkerIndexTest < Capybara::Rails::TestCase
   end
 
   test 'worker delete link deletes worker' do
-    first(:link, 'delete').click
+    first('.worker-delete').click
     assert_not Worker.exists? @worker.id
   end
 
   test 'has correct links' do
     assert_text @worker.name
-    assert_text 'edit'
+    assert has_css?('.worker-edit')
     assert_text 'Create worker'
   end
 end

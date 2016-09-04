@@ -18,6 +18,7 @@
   <div id="email-settings">
     <div class="form-group row">
       <%= label_tag :email_time, 'When do you want to receive the mail?' %>
+      
       <div class ="input-group">
         <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
         <span class="input-group-addon" id="add-time">

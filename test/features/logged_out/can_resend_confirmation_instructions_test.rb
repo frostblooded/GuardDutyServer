@@ -11,7 +11,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
 
   test 'sends successfully' do
     fill_in 'company_email', with: @company.email
-    click_button 'Resend confirmation instructions'
+    click_button 'Resend'
 
     assert mail_is_sent?(@company.email)
     assert_text 'You will receive an email with instructions for' \
@@ -23,7 +23,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
     @company.update(confirmed_at: Time.zone.now)
 
     fill_in 'company_email', with: @company.email
-    click_button 'Resend confirmation instructions'
+    click_button 'Resend'
 
     assert_not mail_is_sent?(@company.email)
     assert_text 'Email was already confirmed, please try signing in'
@@ -32,7 +32,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
 
   test 'shows error on nonexistent email' do
     fill_in 'company_email', with: @company.email + 'a'
-    click_button 'Resend confirmation instructions'
+    click_button 'Resend'
 
     assert_not mail_is_sent?(@company.email)
     assert_text 'Email not found'
@@ -40,7 +40,7 @@ class CanResendConfirmationInstructionsTest < Capybara::Rails::TestCase
   end
 
   test 'shows error in empty form' do
-    click_button 'Resend confirmation instructions'
+    click_button 'Resend'
 
     assert_equal company_confirmation_path, current_path
     assert_text 'Email can\'t be blank'

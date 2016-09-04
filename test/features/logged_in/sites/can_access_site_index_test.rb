@@ -18,7 +18,7 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
   end
 
   test 'site delete link deletes site' do
-    first(:link, 'delete').click
+    first('.site-delete').click
     assert_not Site.exists? @site.id
     assert_text 'Site deleted'
   end
