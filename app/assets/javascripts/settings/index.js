@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
   initialize_new_email_form();
 
   $('[data-toggle="tooltip"]').tooltip();
@@ -9,7 +8,6 @@ $(document).ready(function(){
   $('#email_wanted').on('click', function() {
     update_email_inputs($(this).is(':checked'))
   });
-
 });
 
 function create_email_input(email) {
@@ -22,8 +20,6 @@ function create_email_input(email) {
       '</span>'+
     '</button>'+
   '</span>'); // TODO: Find a way to get this into a template
-
-
 
   $email_remove.click(function() {
     if(is_email_checked()) {
