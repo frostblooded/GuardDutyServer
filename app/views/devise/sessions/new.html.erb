@@ -4,7 +4,7 @@
 <%= form_for(resource,
                         as: resource_name,
                         url: session_path(resource_name),
-                        :html => {:class => "col-md-6"}) do |f| %>
+                        :html => {:class => "col-md-4"}) do |f| %>
 
   <div class="form-group row">
     <%= f.label :Name %><br />
@@ -18,15 +18,13 @@
 
   <% if devise_mapping.rememberable? -%>
     <div class="form-group row">
-      <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
+      <%= f.check_box :remember_me %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Sign in", class: 'btn btn-primary
-                                        col-md-4 col-md-offset-4 col-xs-4
-                                        col-xs-offset-4 row' %>
+    <%= f.submit "Sign in", class: 'btn btn-primary center-block row' %>
   </div>
 
   <hr class="col-md-12 col-xs-12"/>
