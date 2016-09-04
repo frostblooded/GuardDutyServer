@@ -11,7 +11,6 @@ class Site < ActiveRecord::Base
 
   has_many :routes, dependent: :destroy
   belongs_to :company
-  belongs_to :site
 
   has_settings do |s|
     s.key :call, defaults: { interval: '15' }
@@ -29,7 +28,7 @@ class Site < ActiveRecord::Base
 
     workers.each do |w|
       shift.activities += w.activities.where 'created_at >= :shift_start
-        AND created_at <= :shift_end AND site_id = :site', 
+        AND created_at <= :shift_end AND site_id = :site_id', 
                                              shift_start: shift.start,
                                              shift_end: shift.end,
                                              site_id: self.id

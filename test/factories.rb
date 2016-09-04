@@ -26,7 +26,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Site #{n}" }
 
     after(:create) do |site|
-      create_list(:worker, 2, sites: [site])
+      create_list(:worker, 3, sites: [site])
       create_list(:route, 2, site: site)
     end
   end
@@ -36,7 +36,7 @@ FactoryGirl.define do
     password { Faker::Internet.password(8) }
 
     after(:create) do |worker|
-      create_list(:random_activity, 5, worker: worker)
+      create_list(:random_activity, 5, worker: worker, site: worker.sites.first)
       worker.update(company: worker.sites.first.company) unless worker.sites.empty?
     end
   end

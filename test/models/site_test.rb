@@ -8,15 +8,8 @@ class SiteTest < ActiveSupport::TestCase
     @activities = []
 
     6.times do |i|
-      activity = @worker.activities.create(category: :call)
-
-      # Adds minutes to the time so that the first and the last
-      # activities are not in the shift's time
-      activity.created_at = base_time - 5.minutes + call_interval.minutes * i
-      activity.updated_at = activity.created_at
-      activity.save!
-
-      @activities << activity
+      creation_time = base_time - 5.minutes + call_interval.minutes * i
+      @activities << create_activity(:call, @worker, @site, creation_time)
     end
   end
 
@@ -91,9 +84,11 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test 'last shift only has workers from this site' do
-    @other_worker = create(:worker)
+    @other_site = create(:site)
+    @other_worker = @other_site.workers.first
     @other_activity = create_activity(:call,
                                       @other_worker,
+                                      @site,
                                       Time.zone.parse('11:10'))
 
     time = Time.zone.parse(@site.settings(:shift).end) + 30.minutes

@@ -67,12 +67,12 @@ module ActiveSupport
     end
 
     # Used to create activities easily when you want to set created_at
-    def create_activity(category, worker, created_at, time_left = 60)
-      activity = Activity.create(category: category,
-                                 worker: worker,
-                                 time_left: time_left)
-      activity.created_at = created_at
-      activity.save
+    def create_activity(category, worker, site, created_at, time_left = 60)
+      activity = Activity.create!(category: category,
+                                  worker: worker,
+                                  site: site,
+                                  time_left: time_left)
+      activity.update(created_at: created_at, updated_at: created_at)
       activity
     end
 
