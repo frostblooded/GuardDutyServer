@@ -25,7 +25,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
 
   test 'cannot login other comapnies\' worker' do
     assert_no_difference 'Activity.count' do
-      post "/api/v1/workers/#{@other_worker.id}/login",
+      post "/api/v1/sites/#{@other_site.id}/workers/#{@other_worker.id}/login",
            params: { password: @worker_password,
                      access_token: request_access_token }
     end
@@ -36,7 +36,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
 
   test 'cannot logout other comapnies\' worker' do
     assert_no_difference 'Activity.count' do
-      post "/api/v1/workers/#{@other_worker.id}/logout",
+      post "/api/v1/sites/#{@other_site.id}/workers/#{@other_worker.id}/logout",
            params: { access_token: request_access_token }
     end
 

@@ -2,32 +2,42 @@ require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
   # rubocop:disable AbcSize
-  def make_activities
+  def make_worker_activities
     base_time = Time.zone.parse(@site.settings(:shift).start)
     call_interval = 15
     @activities = []
 
     6.times do |i|
-      activity = @worker.activities.create(category: :call)
+      creation_time = base_time - 5.minutes + call_interval.minutes * i
+      @activities << create_activity(:call, @worker, @site, creation_time)
+    end
+  end
 
-      # Adds minutes to the time so that the first and the last
-      # activities are not in the shift's time
-      activity.created_at = base_time - 5.minutes + call_interval.minutes * i
-      activity.updated_at = activity.created_at
-      activity.save!
+  # The point of this is to make sure that, although the other worker
+  # can work on this site, the shift report doesn\'t return
+  # the other worker's activities, if they weren't made for this site,
+  # but were made for another site, to which the other worker also belongs
+  def make_other_worker_activities
+    base_time = Time.zone.parse(@site.settings(:shift).start)
+    call_interval = 15
+    @other_activities = []
 
-      @activities << activity
+    6.times do |i|
+      creation_time = base_time - 5.minutes + call_interval.minutes * i
+      @other_activities << create_activity(:call, @other_worker, @other_site, creation_time)
     end
   end
 
   def setup
     @company = create(:company)
     @site = @company.sites.first
+    @other_site = @company.sites.second
+
     @worker = @site.workers.first
+    @other_worker = @site.workers.second
 
     @site.settings(:shift).start = '11:00'
     @site.settings(:shift).end = '12:00'
-    make_activities
   end
 
   test 'position belongs to correct company' do
@@ -71,6 +81,9 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test 'correctly returns last shift' do
+    make_worker_activities
+    make_other_worker_activities
+    
     time = Time.zone.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do
@@ -84,6 +97,9 @@ class SiteTest < ActiveSupport::TestCase
       assert shift.activities.include?(@activities[4])
       assert_not shift.activities.include?(@activities[5])
 
+      # Make sure the other worker's activities are not present here
+      @other_activities.each { |a| assert_not shift.activities.include? a }
+
       assert_equal Time.zone.parse(@site.settings(:shift).start), shift.start
       assert_equal Time.zone.parse(@site.settings(:shift).end), shift.end
       assert_equal @site, shift.site
@@ -91,9 +107,11 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test 'last shift only has workers from this site' do
-    @other_worker = create(:worker)
+    @other_site = create(:site)
+    @other_worker = @other_site.workers.first
     @other_activity = create_activity(:call,
                                       @other_worker,
+                                      @site,
                                       Time.zone.parse('11:10'))
 
     time = Time.zone.parse(@site.settings(:shift).end) + 30.minutes

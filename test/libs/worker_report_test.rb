@@ -3,13 +3,13 @@ require 'test_helper'
 # rubocop:disable ClassLength
 class WorkerReportTest < ActiveSupport::TestCase
   def setup
-    @worker = create(:worker)
+    @site = create(:site)
+    @site.settings(:call).interval = '15'
 
-    site = create(:site)
-    site.settings(:call).interval = '15'
+    @worker = @site.workers.first
 
     @shift = Shift.new(Time.zone.parse('11:00'), Time.zone.parse('12:00'))
-    @shift.site = site
+    @shift.site = @site
 
     @worker_report = WorkerReport.new(@worker, [], @shift)
   end
@@ -28,6 +28,7 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'returns correct login time for already logged in worker' do
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 10.minutes)
 
     assert_equal @shift.start, @worker_report.login_time.localtime
@@ -37,6 +38,7 @@ class WorkerReportTest < ActiveSupport::TestCase
     login_time = @shift.start + 5.minutes
     @worker_report.activities << create_activity(:login,
                                                  @worker,
+                                                 @site,
                                                  login_time)
 
     assert_equal login_time, @worker_report.login_time.localtime
@@ -45,6 +47,7 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'returns correct login delay for already logged in worker' do
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 10.minutes)
 
     assert_equal 0, @worker_report.login_delay
@@ -54,7 +57,10 @@ class WorkerReportTest < ActiveSupport::TestCase
     login_delay = 20
     login_time = @shift.start + login_delay.minutes
 
-    @worker_report.activities << create_activity(:login, @worker, login_time)
+    @worker_report.activities << create_activity(:login, 
+                                                 @worker,
+                                                 @site,
+                                                 login_time)
 
     assert_equal login_delay, @worker_report.login_delay
   end
@@ -62,22 +68,27 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'generates correct messages for perfect worker' do
     @worker_report.activities << create_activity(:login,
                                                  @worker,
+                                                 @site,
                                                  @shift.start - 5.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 10.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 40.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 25.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 55.minutes)
 
     @worker_report.generate_messages
@@ -90,22 +101,27 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'generates correct messages for perfect worker with unsynced calls' do
     @worker_report.activities << create_activity(:login,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 5.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 11.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 26.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 41.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 56.minutes)
 
     @worker_report.generate_messages
@@ -116,18 +132,21 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'generates correct messages for 2 missing calls' do
     @worker_report.activities << create_activity(:login,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 5.minutes)
 
     # Missing call 20 minutes after shift has started
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 35.minutes)
 
     # Missing call 50 minutes after shift has started
 
     @worker_report.activities << create_activity(:logout,
                                                  @worker,
+                                                 @site,
                                                  @shift.end - 5.minutes)
 
     @worker_report.generate_messages
@@ -142,14 +161,17 @@ class WorkerReportTest < ActiveSupport::TestCase
   test 'generates correct messages for late login and unanswered calls' do
     @worker_report.activities << create_activity(:login,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 20.minutes)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 35.minutes, 0)
 
     @worker_report.activities << create_activity(:call,
                                                  @worker,
+                                                 @site,
                                                  @shift.start + 50.minutes, 0)
 
     @worker_report.generate_messages

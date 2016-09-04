@@ -3,19 +3,19 @@ require 'test_helper'
 class ShiftTest < ActiveSupport::TestCase
   # Good worker - logged in before shift started
   def make_good_worker_activities
-    [create_activity(:login, @workers[0], @shift.start - 5.minutes),
-     create_activity(:logout, @workers[0], @shift.end + 5.minutes)]
+    [create_activity(:login, @workers[0], @site, @shift.start - 5.minutes),
+     create_activity(:logout, @workers[0], @site, @shift.end + 5.minutes)]
   end
 
   # Okay worker - logged in after shift started
   def make_okay_worker_activities
-    [create_activity(:login, @workers[1], @shift.start + 5.minutes),
-     create_activity(:logout, @workers[1], @shift.end - 5.minutes)]
+    [create_activity(:login, @workers[1], @site, @shift.start + 5.minutes),
+     create_activity(:logout, @workers[1], @site, @shift.end - 5.minutes)]
   end
 
   # Bad worker - only logged out
   def make_inactive_worker_activities
-    create_activity(:logout, @workers[2], @shift.end - 5.minutes)
+    create_activity(:logout, @workers[2], @site, @shift.end - 5.minutes)
   end
 
   def make_activities
@@ -26,10 +26,11 @@ class ShiftTest < ActiveSupport::TestCase
   end
 
   def make_workers
-    Array.new(3) { create(:worker) }
+    @site.workers.to_a
   end
 
   def setup
+    @site = create(:site)
     @workers = make_workers
 
     @shift = Shift.new(Time.zone.parse('11:00'), Time.zone.parse('12:00'))

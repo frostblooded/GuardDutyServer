@@ -28,8 +28,10 @@ class Site < ActiveRecord::Base
 
     workers.each do |w|
       shift.activities += w.activities.where 'created_at >= :shift_start
-        AND created_at <= :shift_end', shift_start: shift.start,
-                                       shift_end: shift.end
+        AND created_at <= :shift_end AND site_id = :site_id', 
+                                             shift_start: shift.start,
+                                             shift_end: shift.end,
+                                             site_id: self.id
     end
 
     shift

@@ -34,9 +34,28 @@ module API
 
             post '/calls' do
               Activity.create!(category: :call,
-                              time_left: params[:time_left],
-                              worker_id: params[:worker_id])
+                               time_left: params[:time_left],
+                               site: params_site,
+                               worker: params_worker)
 
+              { success: true }
+            end
+
+            params do
+              requires :password, type: String
+            end
+
+            post '/login' do
+              unless params_worker.authenticate(params[:password])
+                error!('Invalid worker/password combination', 400)
+              end
+
+              Activity.create!(category: :login, worker: params_worker, site: params_site)
+              { success: true }
+            end
+
+            post '/logout' do
+              Activity.create!(category: :logout, worker: params_worker, site: params_site)
               { success: true }
             end
           end
