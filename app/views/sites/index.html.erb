@@ -1,30 +1,22 @@
 <% provide(:title, 'Sites') %>
 
 <h2>Your sites</h2>
-<!-- <ul class="sites">
-  <% @sites.each do |site| %>
-    <li class="site">
-      <%=link_to site.name, site %>
-       | 
-      <%= link_to "delete", site, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-    </li>
-  <% end %>
-</ul> -->
+
+<br />
 
 <%= link_to 'Create site', new_site_path, class:'btn btn-primary pull-left' %>
 
 <div class="clearfix"></div>
 
 <br />
-<br />
+
+<h3>Manage your sites</h3>
 
 <div class="col-md-6">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Site name</th>
-        <th>Manage</th>
+        <th>Site</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -32,11 +24,7 @@
       <% @sites.each do |site| %>
         <tr>
           <td>
-            <%= site.name %>
-          </td>
-
-          <td>
-            <%=link_to "Manage", site, class:"btn btn-default" %>
+            <%=link_to site.name, site, class:"btn btn-default" %>
           </td>
 
           <td>

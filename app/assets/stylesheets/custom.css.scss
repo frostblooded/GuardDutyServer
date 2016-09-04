@@ -50,6 +50,19 @@ html, body {
   font-weight: bold;
   text-decoration: none;
 }
+
+#sites-icon {
+  background:url('building_icon.png') no-repeat top left;
+  display: inline-block;
+  height: 20px;
+  width: 24px;
+}
+
+#sites-link:hover #sites-icon{
+  background:url('building_icon-selected.png') no-repeat top left;
+}
+
+
 /*end of Toni's css*/
 
 

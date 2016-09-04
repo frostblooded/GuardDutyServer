@@ -5,8 +5,8 @@
       <ul class="nav navbar-nav navbar-right main-nav">
         <% if company_signed_in? %>
           <li>
-            <%= link_to sites_path do %>
-              <span class="glyphicon glyphicon-home"></span>
+            <%= link_to sites_path, id:'sites-link' do %>
+              <span id='sites-icon'></span>
             <% end %>
           </li>
           <li>
