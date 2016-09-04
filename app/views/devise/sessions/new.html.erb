@@ -1,10 +1,10 @@
 <% provide(:title, 'Sign in') %>
-<h2>Sign in</h2>
 
+  <h2 class="page-header">Sign in</h2>
 <%= form_for(resource,
                         as: resource_name,
                         url: session_path(resource_name),
-                        :html => {:class => "col-md-4"}) do |f| %>
+                        :html => {:class => "col-md-offset-4 col-md-4"}) do |f| %>
 
   <div class="form-group row">
     <%= f.label :Name %><br />

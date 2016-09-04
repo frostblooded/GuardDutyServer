@@ -1,8 +1,8 @@
 <% provide(:title, 'Edit worker') %>
 
-<h2>Edit worker</h2>
+<h2 class="page-header">Edit worker</h2>
 
-<div class="col-md-4">
+<div class="col-md-offset-4 col-md-4">
   <%= form_for(@worker) do |f| %>
     <%= render 'shared/errors', errors: @worker.errors %>
 

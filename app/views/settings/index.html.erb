@@ -6,11 +6,11 @@
   <%= stylesheet_link_tag 'hover/hover-min.css' %>
 <% end %>
 
-<h2>
+<h2 class="page-header">
   Settings
 </h2>
 
-<%= form_tag('/settings/', method: :patch, class:'col-md-4') do %>
+<%= form_tag('/settings/', method: :patch, class:'col-md-offset-4 col-md-4') do %>
   <div class="form-group row">
     <%= label_tag :email_wanted, 'Do you want to recieve daily reports?'%>
     <%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>

@@ -1,11 +1,11 @@
 <% provide(:title, 'Resend email confirmation') %>
 
-<h2>Resend confirmation instructions</h2>
+<h2 class="page-header">Resend confirmation instructions</h2>
 
 <%= form_for(resource, 
                         as: resource_name,
                         url: confirmation_path(resource_name),
-                        html: { method: :post, class:"col-md-4" }) do |f| %>
+                        html: { method: :post, class:"col-md-offset-4 col-md-4" }) do |f| %>
 
   <%= devise_error_messages! %>
 
