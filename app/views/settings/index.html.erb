@@ -18,15 +18,11 @@
   <div id="email-settings">
     <div class="form-group row">
       <%= label_tag :email_time, 'When do you want to receive the mail?' %>
-      <div class ="input-group custom-time-picker">
-
-        <%= text_field_tag :email_time, @company.settings(:email).time,
-         class:'form-control time-picker-input' %>
-
+      <div class ="input-group">
+        <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
         <span class="input-group-addon" id="add-time">
           <span class="glyphicon glyphicon-time"></span>
         </span>
-
       </div>
     </div>
 
@@ -52,9 +48,9 @@
     </div>
   </div>    
 
-  <%= submit_tag "Save changes", class: 'btn btn-primary hvr-shrink
-                                         col-md-4 col-md-offset-4 col-xs-4
-                                         col-xs-offset-4 row' %>
+  <%= submit_tag "Save changes", class: 'btn btn-primary
+                                        col-md-4 col-md-offset-4 col-xs-4
+                                        col-xs-offset-4 row' %>
 
   <hr class="col-md-12 col-xs-12"/>
   
