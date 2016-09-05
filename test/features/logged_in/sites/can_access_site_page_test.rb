@@ -104,4 +104,21 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_not @site.workers.include? worker
     assert_text "Worker #{worker.name} doesn't exist in this company"
   end
+
+  test 'settings update returns error when trying to add a worker several times' do
+    worker = @other_site.workers.first
+
+    within '.new-worker' do
+      find('#new-worker-input').set worker.name
+      find('#new-worker-add').click
+
+      find('#new-worker-input').set worker.name
+      find('#new-worker-add').click
+    end
+
+    click_button 'Save changes'
+
+    assert_not @site.workers.include? worker
+    assert_text "Worker '#{worker.name}' was added several times", count: 1
+  end
 end

@@ -59,8 +59,9 @@ class SitesController < ApplicationController
   def update_workers
     if params[:workers]
       remove_workers
+      check_duplicate_workers
 
-      params[:workers].each do |name|
+      params[:workers].uniq.each do |name|
         worker = @site.company.workers.find_by name: name
 
         unless worker
@@ -69,6 +70,15 @@ class SitesController < ApplicationController
           worker.sites << @site
         end
       end
+    end
+  end
+
+  def check_duplicate_workers
+    duplicates = params[:workers].select { |w| w if params[:workers].count(w) > 1 }
+    duplicates.uniq!
+
+    duplicates.each do |d|
+      @errors << "Worker '#{d}' was added several times"
     end
   end
 
