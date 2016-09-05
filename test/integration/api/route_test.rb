@@ -8,7 +8,7 @@ class ApiRouteTest < ActionDispatch::IntegrationTest
 
   # Route creation
   test 'creating route requires parameters' do
-    post "/api/v1/companies/#{@company.id}/sites/#{@site.id}/routes",
+    post "/api/v1/sites/#{@site.id}/routes",
          params: { access_token: request_access_token }
 
     assert_equal '500', @response.code
@@ -17,7 +17,7 @@ class ApiRouteTest < ActionDispatch::IntegrationTest
 
   test 'creates route' do
     data = [{ latitude: 42, longitude: 42 }]
-    post "/api/v1/companies/#{@company.id}/sites/#{@site.id}/routes",
+    post "/api/v1/sites/#{@site.id}/routes",
          params: { positions: data,
                    access_token: request_access_token }
 
@@ -25,21 +25,10 @@ class ApiRouteTest < ActionDispatch::IntegrationTest
     assert_equal true, json_response['success']
   end
 
-  test 'route creation returns error if the company doesn\'t exist' do
-    data = [{ latitude: 42, longitude: 42 }]
-
-    post "/api/v1/companies/-1/sites/#{@site.id}/routes",
-         params: { positions: data,
-                   access_token: request_access_token }
-
-    assert_equal '400', @response.code
-    assert_equal 'inexistent company', json_response['error']
-  end
-
   test 'route creation returns error if the site doesn\'t exist' do
     data = [{ latitude: 42, longitude: 42 }]
 
-    post "/api/v1/companies/#{@company.id}/sites/-1/routes",
+    post "/api/v1/sites/-1/routes",
          params: { positions: data,
                    access_token: request_access_token }
 

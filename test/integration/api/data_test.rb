@@ -9,22 +9,14 @@ class ApiDataTest < ActionDispatch::IntegrationTest
 
   # Data
   test 'forbids access when token is invalid' do
-    get "/api/v1/companies/#{@company.id}/sites/#{@site.id}/workers",
+    get "/api/v1/sites/#{@site.id}/workers",
         params: { access_token: request_access_token + 'a' }
 
     assert_equal '401', @response.code
   end
 
-  test 'returns error when company doesn\'t exist' do
-    get '/api/v1/companies/-1/sites/',
-        params: { access_token: request_access_token }
-
-    assert_equal '400', @response.code
-    assert_equal 'inexistent company', json_response['error']
-  end
-
   test 'returns error when site doesn\'t exist' do
-    get "/api/v1/companies/#{@company.id}/sites/-1/workers",
+    get "/api/v1/sites/-1/workers",
         params: { access_token: request_access_token }
 
     assert_equal '400', @response.code
@@ -32,7 +24,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns sites' do
-    get "/api/v1/companies/#{@company.id}/sites/",
+    get "/api/v1/sites/",
         params: { access_token: request_access_token }
 
     assert_equal '200', @response.code
@@ -40,7 +32,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns workers' do
-    get "/api/v1/companies/#{@company.id}/sites/#{@site.id}/workers",
+    get "/api/v1/sites/#{@site.id}/workers",
         params: { access_token: request_access_token }
 
     assert_equal '200', @response.code
@@ -48,7 +40,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns site settings' do
-    get "/api/v1/companies/#{@company.id}/sites/#{@site.id}/settings",
+    get "/api/v1/sites/#{@site.id}/settings",
         params: { access_token: request_access_token }
 
     assert_equal '200', @response.code

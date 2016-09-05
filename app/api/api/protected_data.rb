@@ -21,12 +21,16 @@ module API
         error!('invalid token', 401) unless api_key
       end
 
+      # Used by the grape-cancan gem
       def current_user
+        current_company
+      end
+
+      def current_company
         api_key.company
       end
     end
 
     mount API::Sites
-    mount API::Companies
   end
 end

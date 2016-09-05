@@ -30,7 +30,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '400', @response.code
-    assert_equal 'inexsitent worker', json_response['error']
+    assert_equal 'inexistent worker', json_response['error']
   end
 
   test 'worker login return error on invalid combination' do
@@ -62,6 +62,6 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '400', @response.code
-    assert_equal 'inexsitent worker', json_response['error']
+    assert_equal 'inexistent worker', json_response['error']
   end
 end

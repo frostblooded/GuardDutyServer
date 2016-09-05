@@ -45,7 +45,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot get other companies\' site\'s settings' do
-    get "/api/v1/companies/#{@other_company.id}/sites/#{@other_site.id}/settings",
+    get "/api/v1/sites/#{@other_site.id}/settings",
          params: { access_token: request_access_token }
 
     assert_equal '403', @response.code
@@ -53,7 +53,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot get other companies\' site\'s workers' do
-    get "/api/v1/companies/#{@other_company.id}/sites/#{@other_site.id}/workers",
+    get "/api/v1/sites/#{@other_site.id}/workers",
          params: { access_token: request_access_token }
 
     assert_equal '403', @response.code
@@ -62,7 +62,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
 
   test 'cannot create routes for other companies\' sites' do
     data = [{ latitude: 42, longitude: 42 }]
-    post "/api/v1/companies/#{@other_company.id}/sites/#{@other_site.id}/routes",
+    post "/api/v1/sites/#{@other_site.id}/routes",
          params: { positions: data,
                    access_token: request_access_token }
 

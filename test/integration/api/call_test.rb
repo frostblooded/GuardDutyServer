@@ -27,7 +27,7 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '400', @response.code
-    assert_equal 'inexsitent worker', json_response['error']
+    assert_equal 'inexistent worker', json_response['error']
   end
 
   test 'creatign call for unexisting site throws error' do
@@ -38,6 +38,6 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '400', @response.code
-    assert_equal 'inexsitent site', json_response['error']
+    assert_equal 'inexistent site', json_response['error']
   end
 end

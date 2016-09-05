@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
-  # rubocop:disable AbcSize
   def make_worker_activities
     base_time = Time.zone.parse(@site.settings(:shift).start)
     call_interval = 15
