@@ -14,13 +14,11 @@ module API
       end
 
       resource :access_tokens do
-        # Set parameter requirements for login POST request
+        # Acquire access token
         params do
           requires :name, type: String
           requires :password, type: String
         end
-
-        # Login company
         post '/' do
           # Return error if company with such name doesn't exist
           error!('invalid company name', 400) unless params_company

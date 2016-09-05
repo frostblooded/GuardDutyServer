@@ -21,7 +21,6 @@ module API
           params do
             requires :time_left, type: Integer
           end
-
           post '/calls' do
             Activity.create!(category: :call,
                              time_left: params[:time_left],
@@ -35,7 +34,6 @@ module API
           params do
             requires :password, type: String
           end
-
           post '/login' do
             unless params_worker.authenticate(params[:password])
               error!('Invalid worker/password combination', 400)

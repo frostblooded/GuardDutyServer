@@ -2,11 +2,10 @@ module API
   module V1
     # Represents the sites' routes for the API
     class Routes < Grape::API
+      # Create a new route
       params do
         requires :positions
       end
-
-      # Create a new route
       post :routes do
         authorize! :manage, Route
 
