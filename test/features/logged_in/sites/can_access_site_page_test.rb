@@ -54,26 +54,30 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
   end
 
   test 'adding workers works' do
-    worker = @site2.workers.first
+    @site.workers.each do |w|
+      within '.new-worker' do
+        find('#new-worker-input').set w.name
+        find('#new-worker-add').click
+      end
 
-    within '.new-worker' do
-      find('#new-worker-input').set worker.name
-      find('#new-worker-add').click
+      click_button 'Save changes'
+
+      @site.reload
+      assert @site.workers.include? w
     end
-
-    click_button 'Save changes'
-    assert @site.workers.include? worker
   end
 
   test 'removing workers' do
-    worker = @site.workers.first
+    @site.workers.each do |w|
+      within '#workers' do
+        first('.worker-remove').click
+      end
 
-    within '#workers' do
-      first('.worker-remove').click
+      click_button 'Save changes'
+
+      @site.reload
+      assert_not @site.workers.include? w
     end
-
-    click_button 'Save changes'
-    assert_not @site.workers.include? worker
   end
 
   test 'settings update returns error when trying to add nonexistent worker' do
@@ -106,19 +110,17 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
   end
 
   test 'settings update returns error when trying to add a worker several times' do
-    worker = @other_site.workers.first
+    worker = @site.workers.first
 
     within '.new-worker' do
-      find('#new-worker-input').set worker.name
-      find('#new-worker-add').click
-
       find('#new-worker-input').set worker.name
       find('#new-worker-add').click
     end
 
     click_button 'Save changes'
 
-    assert_not @site.workers.include? worker
+    @site.reload
+    assert @site.workers.include? worker
     assert_text "Worker '#{worker.name}' was added several times", count: 1
   end
 end
