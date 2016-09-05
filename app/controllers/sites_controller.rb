@@ -58,6 +58,8 @@ class SitesController < ApplicationController
       remove_workers
       check_duplicate_workers
       add_workers
+    else
+      remove_all_workers
     end
   end
 
@@ -76,6 +78,10 @@ class SitesController < ApplicationController
         swr.destroy
       end
     end
+  end
+
+  def remove_all_workers
+    @site.site_worker_relations.each { |swr| swr.destroy }
   end
 
   def add_workers
