@@ -30,7 +30,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_equal @site.settings(:shift).start, find('#shift_start').value
     assert_equal @site.settings(:shift).end, find('#shift_end').value
 
-    within '.workers' do
+    within '#workers' do
       worker_inputs = page.all('.worker-input').map &:value
       @site.workers.each do |w|
         assert worker_inputs.include? w.name
@@ -57,8 +57,8 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     worker = @site2.workers.first
 
     within '.new-worker' do
-      find('.new-worker-input').set worker.name
-      click_button 'add'
+      find('#new-worker-input').set worker.name
+      find('#new-worker-add').click
     end
 
     click_button 'Save changes'
@@ -68,7 +68,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
   test 'removing workers' do
     worker = @site.workers.first
 
-    within '.workers' do
+    within '#workers' do
       first('.worker-remove').click
     end
 
@@ -81,8 +81,8 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
                         password: 'foobarrr'
 
     within '.new-worker' do
-      find('.new-worker-input').set worker.name
-      click_button 'add'
+      find('#new-worker-input').set worker.name
+      find('#new-worker-add').click
     end
 
     click_button 'Save changes'
@@ -95,8 +95,8 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     worker = @other_site.workers.first
 
     within '.new-worker' do
-      find('.new-worker-input').set worker.name
-      click_button 'add'
+      find('#new-worker-input').set worker.name
+      find('#new-worker-add').click
     end
 
     click_button 'Save changes'
