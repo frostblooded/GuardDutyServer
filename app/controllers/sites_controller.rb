@@ -77,4 +77,30 @@ class SitesController < ApplicationController
       swr.destroy
     end
   end
+
+  def add_worker
+    if params[:worker_name]
+      worker = @site.company.workers.find_by name: name
+
+      if worker
+        worker.sites << @site
+      else
+        @errors << "Worker #{name} doesn't exist in this company"
+      end
+    end
+  end
+
+  def remove_worker
+    if params[:worker_name]
+      worker = @site.company.workers.find_by name: name
+      relation = @site.site_worker_relations.find_by worker: worker
+
+      if relation
+        relation.destroy
+      else
+        @errors << "Worker #{name} is not working on this site"
+      end
+    end
+  end
+
 end

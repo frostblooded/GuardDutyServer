@@ -1,9 +1,19 @@
-$(document).ready(initialize_new_worker_form);
+$(document).ready(function(){
+  initialize_new_worker_form();
+
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
 function create_worker_input(worker_name) {
-  var $worker = $('<div class="worker"></div>');
-  var $worker_input = $('<input class="worker-input" type="text" name="workers[]" value="' + worker_name + '"/>');
-  var $worker_remove = $('<input class="worker-remove" type="button" value="remove"/>');
+  var $worker = $('<div class="worker input-group form-group"></div>');
+  var $worker_input = $('<input class="worker-input form-control" type="text" name="workers[]" value="' + worker_name + '"/>');
+  var $worker_remove = $('<span class="input-group-btn">' +
+    '<button class="btn btn-danger worker-remove"  data-toggle="tooltip"'+
+    ' data-placement="right" title="Remove worker">'+
+      '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
+      '</span>'+
+    '</button>'+
+  '</span>'); // TODO: Find a way to get this into a template
 
   $worker_remove.click(function() {
     $(this).parent().remove();
@@ -11,11 +21,11 @@ function create_worker_input(worker_name) {
 
   $worker.append($worker_input);
   $worker.append($worker_remove);
-  $('.workers').append($worker);
+  $('#workers').append($worker);
 }
 
 function add_worker() {
-  $input = $('.new-worker-input');
+  $input = $('#new-worker-input');
 
   if($input.val().length > 0) {
     create_worker_input($input.val());
@@ -27,10 +37,10 @@ function add_worker() {
 }
 
 function initialize_new_worker_form() {
-  $new_worker_button = $('.new-worker-add');
+  $new_worker_button = $('#new-worker-add');
 
   $new_worker_button.click(add_worker);
-  $('.new-worker-input').keypress(function(e) {
+  $('#new-worker-input').keypress(function(e) {
     if(e.which == 13) {
       $new_worker_button.click();
       return false;
