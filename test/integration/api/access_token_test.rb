@@ -36,9 +36,11 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
   end
 
   test 'access token getting returns error on invalid password combination' do
+    invalid_password = @company.password + 'a'
+
     assert_no_difference 'ApiKey.count' do
       post '/api/v1/access_tokens', params: { name: @company.name,
-                                              password: @company.password + 'a' }
+                                              password: invalid_password }
     end
 
     assert_equal '401', @response.code

@@ -16,7 +16,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns error when site doesn\'t exist' do
-    get "/api/v1/sites/-1/workers",
+    get '/api/v1/sites/-1/workers',
         params: { access_token: request_access_token }
 
     assert_equal '400', @response.code
@@ -24,7 +24,7 @@ class ApiDataTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns sites' do
-    get "/api/v1/sites/",
+    get '/api/v1/sites/',
         params: { access_token: request_access_token }
 
     assert_equal '200', @response.code

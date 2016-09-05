@@ -46,7 +46,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
 
   test 'cannot get other companies\' site\'s settings' do
     get "/api/v1/sites/#{@other_site.id}/settings",
-         params: { access_token: request_access_token }
+        params: { access_token: request_access_token }
 
     assert_equal '403', @response.code
     assert_equal 'Access forbidden', json_response['error']
@@ -54,7 +54,7 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
 
   test 'cannot get other companies\' site\'s workers' do
     get "/api/v1/sites/#{@other_site.id}/workers",
-         params: { access_token: request_access_token }
+        params: { access_token: request_access_token }
 
     assert_equal '403', @response.code
     assert_equal 'Access forbidden', json_response['error']

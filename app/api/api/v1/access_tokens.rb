@@ -1,4 +1,4 @@
-module API
+module API::V1
   # Represents the access tokens' routes for the API
   class AccessTokens < Grape::API
     helpers do

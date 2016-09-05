@@ -1,13 +1,9 @@
-module API
+module API::V1
   # Has some common functions and filters for all data which is protected
   # and requires an API key to be accessed
   class ProtectedData < Grape::API
     # Before every request
     before { restrict_access }
-
-    rescue_from ::CanCan::AccessDenied do
-      error!('Access forbidden', 403)
-    end
 
     helpers do
       # Get API key based on access token parameter
@@ -31,6 +27,6 @@ module API
       end
     end
 
-    mount API::Sites
+    mount API::V1::Sites
   end
 end
