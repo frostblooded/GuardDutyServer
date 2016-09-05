@@ -13,8 +13,6 @@ Rails.application.routes.draw do
 
   resources :sites do
     resources :routes
-    put 'add_worker', on: :member
-    put 'remove_worker', on: :member
   end
 
   root              'static_pages#home'
