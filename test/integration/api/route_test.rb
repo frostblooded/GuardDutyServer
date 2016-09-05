@@ -28,7 +28,7 @@ class ApiRouteTest < ActionDispatch::IntegrationTest
   test 'route creation returns error if the site doesn\'t exist' do
     data = [{ latitude: 42, longitude: 42 }]
 
-    post "/api/v1/sites/-1/routes",
+    post '/api/v1/sites/-1/routes',
          params: { positions: data,
                    access_token: request_access_token }
 

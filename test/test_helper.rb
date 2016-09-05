@@ -8,7 +8,8 @@ require 'minitest/rails/capybara'
 require 'capybara/poltergeist'
 Capybara.default_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, { js_errors: true, phantomjs: Phantomjs.path })
+  Capybara::Poltergeist::Driver.new(app, js_errors: true,
+                                         phantomjs: Phantomjs.path)
 end
 
 # Make the progress of running tests (rake) a little prettier
@@ -25,6 +26,9 @@ require File.expand_path('../../config/environment', __FILE__)
 
 # Be able to use login_as without locking
 # the database
+# Disable rubocop checks for this code as it is
+# copied from the internet and very important
+# rubocop:disable all
 class ActiveRecord::Base
   mattr_accessor :shared_connection
   @@shared_connection = nil
@@ -83,7 +87,10 @@ module ActiveSupport
 
     def mails_are_sent?(emails)
       return false if ActionMailer::Base.deliveries.nil?
-      delivered_to_emails = ActionMailer::Base.deliveries.map { |d| d['to'].to_s }
+
+      delivered_to_emails = ActionMailer::Base.deliveries.map do |d|
+        d['to'].to_s
+      end
 
       emails.each do |email|
         return false unless delivered_to_emails.include? email

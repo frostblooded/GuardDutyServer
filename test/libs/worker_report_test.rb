@@ -57,7 +57,7 @@ class WorkerReportTest < ActiveSupport::TestCase
     login_delay = 20
     login_time = @shift.start + login_delay.minutes
 
-    @worker_report.activities << create_activity(:login, 
+    @worker_report.activities << create_activity(:login,
                                                  @worker,
                                                  @site,
                                                  login_time)

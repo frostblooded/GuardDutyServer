@@ -10,13 +10,15 @@ class Worker < ActiveRecord::Base
 
   validates :name, presence: true,	length: { maximum: 40 },
                    # Name should be unique in this company
-                   uniqueness: { scope: :company_id, message: 'not unique in company' }
-  validates :password, presence: true, length: { minimum: 8 }, if: :password_changed?
+                   uniqueness: { scope: :company_id,
+                                 message: 'not unique in company' }
+  validates :password, presence: true, length: { minimum: 8 },
+                       if: :password_changed?
   has_secure_password
 
   private
 
   def password_changed?
-    !@password.blank? or password_digest.blank?
+    !@password.blank? || password_digest.blank?
   end
 end

@@ -1,26 +1,31 @@
 require 'test_helper'
 
 class CanAccessSettingsTest < Capybara::Rails::TestCase
-  def setup
-    @company = create(:company)
-    @company.settings(:email).time = '12:00'
-    @company.settings(:email).wanted = true
-
+  def initialize_email_variables
     @new_email_wanted = false
     @new_email_time = '13:00'
     @new_invalid_email_time = '13?23REtre'
 
-    @company.settings(:email).recipients = ['ivan@example.com', 'petkan@example.com']
+    @company.settings(:email).recipients = ['ivan@example.com',
+                                            'petkan@example.com']
     @added_email = 'frostblooded@example.com'
     @invalid_email = 'rgergreg@wefwef.'
+  end
+
+  def setup
+    @company = create(:company)
+    @company.settings(:email).time = '12:00'
+    @company.settings(:email).wanted = true
+    initialize_email_variables
 
     login_as @company
-    
     visit settings_path
   end
 
   test 'shows correct default values' do
-    assert_equal @company.settings(:email).wanted, find('#email_wanted').checked?
+    assert_equal @company.settings(:email).wanted,
+                 find('#email_wanted').checked?
+
     assert_equal @company.settings(:email).time, find('#email_time').value
   end
 
@@ -59,8 +64,6 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   end
 
   test 'removing emails works' do
-    email = @company.settings(:email).recipients.first
-
     within '#emails' do
       first('.email-remove').click
     end

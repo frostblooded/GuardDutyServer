@@ -1,11 +1,11 @@
-require "test_helper"
+require 'test_helper'
 
 class CanAccessWorkerIndexTest < Capybara::Rails::TestCase
   def setup
     @company = create(:company)
     @worker = @company.workers.first
     login_as @company
-    
+
     visit workers_path
   end
 

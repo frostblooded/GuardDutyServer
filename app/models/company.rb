@@ -22,7 +22,7 @@ class Company < ActiveRecord::Base
 
   def initialize_company
     @last_mail_sent_at = Time.zone.now
-    settings(:email).recipients << self.email
+    settings(:email).recipients << email
   end
 
   # Devise documentation says email_required? and email_changed?

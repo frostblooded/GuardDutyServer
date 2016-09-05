@@ -9,10 +9,7 @@ class SettingsController < ApplicationController
     save_recipients
 
     if @errors.empty?
-      current_company.settings(:email).wanted = params[:email_wanted] ? true : false
-      current_company.settings(:email).time = params[:email_time]
-      current_company.settings(:email).save!
-
+      update_settings
       flash[:success] = 'Settings saved'
     end
 
@@ -20,19 +17,27 @@ class SettingsController < ApplicationController
     redirect_to settings_path
   end
 
+  def update_settings
+    current_company.settings(:email).wanted = params[:email_wanted].present?
+    current_company.settings(:email).time = params[:email_time]
+    current_company.settings(:email).save!
+  end
+
   def save_recipients
     current_company.settings(:email).recipients = [] if params[:email_wanted]
 
     if params[:recipients]
-      params[:recipients].uniq.each do |r|
-        unless r =~ Rails.application.config.email_regex
-          @errors << "The email \"#{r}\" is invalid" 
-        else
-          current_company.settings(:email).recipients << r
-        end
-      end
+      params[:recipients].uniq.each { |r| handle_recipient r }
     end
 
     current_company.save!
+  end
+
+  def handle_recipient(recipient)
+    if !(recipient =~ Rails.application.config.email_regex)
+      @errors << "The email \"#{recipient}\" is invalid"
+    else
+      current_company.settings(:email).recipients << recipient
+    end
   end
 end

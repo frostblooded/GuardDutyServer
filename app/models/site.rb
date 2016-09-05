@@ -19,7 +19,8 @@ class Site < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company
-                   uniqueness: { scope: :company_id, message: 'not unique in company' }
+                   uniqueness: { scope: :company_id,
+                                 message: 'not unique in company' }
 
   # Returns data about the last COMPLETED shift
   def last_shift
@@ -28,10 +29,10 @@ class Site < ActiveRecord::Base
 
     workers.each do |w|
       shift.activities += w.activities.where 'created_at >= :shift_start
-        AND created_at <= :shift_end AND site_id = :site_id', 
+        AND created_at <= :shift_end AND site_id = :site_id',
                                              shift_start: shift.start,
                                              shift_end: shift.end,
-                                             site_id: self.id
+                                             site_id: id
     end
 
     shift

@@ -5,7 +5,7 @@ class CanAccessSiteIndexTest < Capybara::Rails::TestCase
     @company = create(:company)
     @site = @company.sites.first
     login_as @company
-    
+
     visit sites_path
   end
 

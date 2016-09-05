@@ -23,7 +23,8 @@ class SiteTest < ActiveSupport::TestCase
 
     6.times do |i|
       creation_time = base_time - 5.minutes + call_interval.minutes * i
-      @other_activities << create_activity(:call, @other_worker, @other_site, creation_time)
+      @other_activities << create_activity(:call, @other_worker,
+                                           @other_site, creation_time)
     end
   end
 
@@ -82,7 +83,7 @@ class SiteTest < ActiveSupport::TestCase
   test 'correctly returns last shift' do
     make_worker_activities
     make_other_worker_activities
-    
+
     time = Time.zone.parse(@site.settings(:shift).end) + 30.minutes
 
     Timecop.freeze(time) do

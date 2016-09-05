@@ -1,6 +1,15 @@
-require "test_helper"
+require 'test_helper'
 
 class CanAccessSitePageTest < Capybara::Rails::TestCase
+  def initialize_new_values
+    @new_call_interval = '20'
+    @new_shift_start = '20:00'
+    @new_shift_end = '21:00'
+
+    @new_invalid_shift_start = '13@4t:'
+    @new_invalid_shift_end = '13@4t:'
+  end
+
   def setup
     @company = create(:company)
     @other_company = create(:company)
@@ -9,15 +18,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     @site2 = @company.sites.last
     @other_site = @other_company.sites.first
 
+    initialize_new_values
+
     login_as @company
-
-    @new_call_interval = '20'
-    @new_shift_start = '20:00'
-    @new_shift_end = '21:00'
-
-    @new_invalid_shift_start = '13@4t:'
-    @new_invalid_shift_end = '13@4t:'
-
     visit site_path(@site)
   end
 
@@ -31,7 +34,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_equal @site.settings(:shift).end, find('#shift_end').value
 
     within '#workers' do
-      worker_inputs = page.all('.worker-input').map &:value
+      worker_inputs = page.all('.worker-input').map(&:value)
       @site.workers.each do |w|
         assert worker_inputs.include? w.name
       end
@@ -95,7 +98,8 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_text "Worker #{worker.name} doesn't exist in this company"
   end
 
-  test 'settings update returns error when trying to add worker of other company' do
+  test 'settings update returns error when trying to add worker \
+        of other company' do
     worker = @other_site.workers.first
 
     within '.new-worker' do
@@ -109,7 +113,7 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_text "Worker #{worker.name} doesn't exist in this company"
   end
 
-  test 'settings update returns error when trying to add a worker several times' do
+  test 'settings update returns error when trying to add a worker twice' do
     worker = @site.workers.first
 
     within '.new-worker' do

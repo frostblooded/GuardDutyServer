@@ -5,7 +5,8 @@ class CompanyHelperTest < ActiveSupport::TestCase
     @company = create(:company)
     @company.settings(:email).time = '12:00'
     @company.settings(:email).daily = true
-    @company.settings(:email).recipients = ['frostblooded@example.org', 'ivan@example.org']
+    @company.settings(:email).recipients = ['frostblooded@example.org',
+                                            'ivan@example.org']
   end
 
   test 'mail is sent when it should be' do

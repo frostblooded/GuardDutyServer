@@ -6,7 +6,8 @@ class WorkersController < ApplicationController
 
   def autocomplete_worker_name
     site = Site.find params[:format]
-    workers = Worker.where('name LIKE ? AND company_id=?', "#{params['term']}%", current_company.id)
+    workers = Worker.where('name LIKE ? AND company_id=?',
+                           "#{params['term']}%", current_company.id)
 
     # Remove workers which already belong to this site
     workers -= site.workers

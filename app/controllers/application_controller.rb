@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
 
   # Tell CanCan that current_company is used instead of current_user
-  alias_method :current_user, :current_company
+  alias current_user current_company
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

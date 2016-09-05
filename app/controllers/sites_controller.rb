@@ -18,11 +18,7 @@ class SitesController < ApplicationController
     update_workers
 
     if @errors.empty?
-      @site.settings(:call).interval = params[:call_interval]
-      @site.settings(:shift).start = params[:shift_start]
-      @site.settings(:shift).end = params[:shift_end]
-      @site.save!
-
+      update_settings
       flash[:success] = 'Settings saved'
     end
 
@@ -30,9 +26,16 @@ class SitesController < ApplicationController
     redirect_to site_path(@site)
   end
 
+  def update_settings
+    @site.settings(:call).interval = params[:call_interval]
+    @site.settings(:shift).start = params[:shift_start]
+    @site.settings(:shift).end = params[:shift_end]
+    @site.save!
+  end
+
   def create
     @site.company = current_company
-    
+
     if @site.save
       flash[:success] = 'Site created'
       redirect_to sites_path
@@ -64,7 +67,10 @@ class SitesController < ApplicationController
   end
 
   def check_duplicate_workers
-    duplicates = params[:workers].select { |w| w if params[:workers].count(w) > 1 }
+    duplicates = params[:workers].select do |w|
+      w if params[:workers].count(w) > 1
+    end
+
     duplicates.uniq!
 
     duplicates.each do |d|
@@ -74,14 +80,12 @@ class SitesController < ApplicationController
 
   def remove_workers
     @site.site_worker_relations.each do |swr|
-      unless params[:workers].include? swr.worker.name
-        swr.destroy
-      end
+      swr.destroy unless params[:workers].include? swr.worker.name
     end
   end
 
   def remove_all_workers
-    @site.site_worker_relations.each { |swr| swr.destroy }
+    @site.site_worker_relations.each(&:destroy)
   end
 
   def add_workers
