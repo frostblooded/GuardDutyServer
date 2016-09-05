@@ -53,23 +53,11 @@ class SitesController < ApplicationController
     params.require(:site).permit(:name)
   end
 
-  # Yes, it is pretty stupid to remove all workers
-  # and add again only the ones, which are passed
-  # in the parameters...
   def update_workers
     if params[:workers]
       remove_workers
       check_duplicate_workers
-
-      params[:workers].uniq.each do |name|
-        worker = @site.company.workers.find_by name: name
-
-        unless worker
-          @errors << "Worker #{name} doesn't exist in this company"
-        else
-          worker.sites << @site
-        end
-      end
+      add_workers
     end
   end
 
@@ -84,7 +72,21 @@ class SitesController < ApplicationController
 
   def remove_workers
     @site.site_worker_relations.each do |swr|
-      swr.destroy
+      unless params[:workers].include? swr.worker.name
+        swr.destroy
+      end
+    end
+  end
+
+  def add_workers
+    params[:workers].uniq.each do |name|
+      worker = @site.company.workers.find_by name: name
+
+      if !worker
+        @errors << "Worker #{name} doesn't exist in this company"
+      elsif !@site.workers.include? worker
+        @site.workers << worker
+      end
     end
   end
 end
