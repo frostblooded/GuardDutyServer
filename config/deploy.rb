@@ -1,18 +1,18 @@
 # config valid only for current version of Capistrano
-lock '3.6.0'
+lock '3.6.1'
 
 set :application, 'attendance_check'
 set :repo_url, 'git@bitbucket.org:frostblooded/attendancecheck-rails-app.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, 'master'
+# set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/var/www/'
+# set :deploy_to, '/var/www/'
 
 # Default value for :scm is :git
-set :scm, :git
+# set :scm, :git
 
 set :use_sudo, false
 
@@ -22,10 +22,9 @@ set :deploy_via, :copy
 
 set :ssh_options, { port: 6019 }
 
-set :keep_releases, 5
-
 # Defaults to :db role
-set :migration_role, :db
+# Set role to app as recommended by Capistrano README
+set :migration_role, :app
 
 # Defaults to false
 # Skip migration if files in db/migrate were not modified
@@ -36,7 +35,7 @@ set :assets_roles, [:web, :app]
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
 
-desc 'run some rake db task'
+desc 'Migrate database'
 task :migrate do
   on roles(:all) do
     within "#{current_path}" do
@@ -87,4 +86,4 @@ end
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5

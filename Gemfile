@@ -25,10 +25,15 @@ gem 'grape-cancan',                       '~> 0.0.2'
 gem 'momentjs-rails',                     '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails',    '~> 4.17.0'
 
+# Needed by production environment
+gem 'uglifier',                           '~> 3.0.2'
+
 group :development, :test do
   gem 'byebug',                  '~> 3.4.0'
   gem 'spring',                  '~> 1.1.3'
   gem 'capistrano',              '~> 3.6.1'
+  gem 'capistrano-rails',        '~> 1.1.7'
+  gem 'rubocop',                 '~> 0.42.0'
 end
 
 group :doc do
@@ -50,5 +55,4 @@ end
 
 group :production do
   gem 'puma',                    '~> 3.4.0'
-  gem 'rails_12factor',          '~> 0.0.2'
 end
