@@ -1,30 +1,45 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "AttendanceCheck", root_path, id: "logo" %>
-    <nav>
+<nav class="navbar navbar-inverse" id="main-nav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-nav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "AttendanceCheck", root_path, id: "logo" %>
+    </div>
+
+    <div class="collapse navbar-collapse" id="collapse-nav">
       <ul class="nav navbar-nav navbar-right main-nav">
         <% if company_signed_in? %>
-          <li>
+          <li class="inline-nav-item">
             <%= link_to sites_path, id: 'sites-nav' do %>
               <span id='sites-icon'></span>
             <% end %>
           </li>
-          <li>
+          <li class="inline-nav-item">
             <%= link_to workers_path, id: 'workers-nav' do %>
               <span class="glyphicon glyphicon-user"></span>
             <% end %>
           </li>
-          <li>
+          <li class="inline-nav-item">
             <%= link_to settings_path, id: 'settings-nav' do %>
               <span class="glyphicon glyphicon-cog"></span>
             <% end %>
           </li>
-          <li><%= link_to "Sign out", destroy_company_session_path, method: :delete %></li>
+          <li class="inline-nav-item">
+            <%= link_to "Sign out", destroy_company_session_path, method: :delete %>
+          </li>
         <% else %>
-          <li><%= link_to "Sign up", new_company_registration_path %></li> 
-          <li><%= link_to "Sign in", new_company_session_path %></li>
+          <li class="inline-nav-item">
+            <%= link_to "Sign up", new_company_registration_path %>
+          </li>
+          <li class="inline-nav-item">
+            <%= link_to "Sign in", new_company_session_path %>
+          </li>
         <% end %>
       </ul>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
