@@ -35,24 +35,6 @@ set :assets_roles, [:web, :app]
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
 
-desc 'Migrate database'
-task :migrate do
-  on roles(:all) do
-    within "#{current_path}" do
-      execute :rake, "db:migrate", 'RAILS_ENV="production"'
-    end
-  end
-end
-
-desc "Precompile assets"
-task :precompile_assets do
-  on roles(:all) do
-    within "#{current_path}" do
-      execute :rake, "assets:precompile", 'RAILS_ENV="production"'
-    end
-  end
-end
-
 desc "Run server"
 task :run_server do
   on roles (:all) do
@@ -62,8 +44,6 @@ task :run_server do
   end
 end
 
-# after 'deploy:published', 'precompile_assets'
-# after 'deploy:published', 'migrate'
 # after 'deploy:published', 'run_server'
 
 # Default value for :format is :airbrussh.
