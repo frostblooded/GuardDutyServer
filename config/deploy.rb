@@ -20,3 +20,4 @@ set :migration_role, :app
 set :assets_roles, [:web, :app]
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
+

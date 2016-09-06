@@ -33,6 +33,8 @@ group :development, :test do
   gem 'spring',                  '~> 1.1.3'
   gem 'capistrano',              '~> 3.6.1'
   gem 'capistrano-rails',        '~> 1.1.7'
+  gem 'capistrano-faster-assets','~> 1.0.2'
+  gem 'capistrano-passenger',    '~> 0.2.0'
   gem 'rubocop',                 '~> 0.42.0'
 end
 
