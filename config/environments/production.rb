@@ -50,7 +50,7 @@ Rails.application.configure do
   config.log_level = :warn
   #RAILS_DEFAULT_LOGGER = Logger.new('log/production.log')
 
-  config.action_mailer.default_url_options = { :host => '37.157.182.179', port: '3000'}
+  config.action_mailer.default_url_options = { host: '37.157.182.179' }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
