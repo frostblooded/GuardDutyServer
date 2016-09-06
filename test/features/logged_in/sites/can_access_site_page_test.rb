@@ -63,7 +63,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
         find('#new-worker-add').click
       end
 
-      click_button 'Save changes'
+      # Button is pressed like this, because, otherwise,
+      # it shows an error because of the fixed footer
+      find('input[type="submit"]').trigger('click')
 
       @site.reload
       assert @site.workers.include? w

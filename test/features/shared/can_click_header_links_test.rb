@@ -6,7 +6,7 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
   end
 
   test 'has correct links when logged out' do
-    within '.navbar' do
+    within '#main-nav' do
       has_link? 'Sign in'
       has_link? 'Sign up'
       has_no_link? '#sites-nav'
@@ -20,7 +20,7 @@ class CanClickHeaderLinksTest < Capybara::Rails::TestCase
     login_as create(:company)
     reload_page
 
-    within '.navbar' do
+    within '#main-nav' do
       has_no_link? 'Sign in'
       has_no_link? 'Sign up'
       has_link? '#sites-nav'
