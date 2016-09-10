@@ -15,5 +15,3 @@
 //= require bootstrap
 //= require jquery-ui
 //= require autocomplete-rails
-//= require moment
-//= require bootstrap-datetimepicker
