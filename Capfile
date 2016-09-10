@@ -19,6 +19,9 @@ require 'capistrano/deploy'
 # Require everything (bundler, rails/assets and rails/migrations)
 require 'capistrano/rails'
 
+# Require some additional db tasks
+require 'capistrano/rails/db'
+
 # Make assets be precompiled only if changed
 require 'capistrano/faster_assets'
 

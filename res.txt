@@ -1,0 +1,1173 @@
+(Backtrace restricted to imported tasks)
+cap aborted!
+SSHKit::Runner::ExecuteError: Exception while executing as deploy@37.157.182.179: Exception while executing as deploy@37.157.182.179: rake exit status: 1
+rake stdout: == 20160306173852 CreateDevices: migrating ====================================
+-- create_table(:devices, {})
+   -> 0.2571s
+== 20160306173852 CreateDevices: migrated (0.2572s) ===========================
+
+== 20160314224437 DeviseCreateCompanies: migrating ============================
+-- create_table(:companies, {})
+   -> 0.3361s
+-- add_index(:companies, :email, {:unique=>true})
+   -> 0.2681s
+-- add_index(:companies, :reset_password_token, {:unique=>true})
+   -> 0.2430s
+== 20160314224437 DeviseCreateCompanies: migrated (0.8476s) ===================
+
+== 20160314224724 AddCompanyNameToCompanies: migrating ========================
+-- add_column(:companies, :name, :string)
+   -> 0.6972s
+== 20160314224724 AddCompanyNameToCompanies: migrated (0.6973s) ===============
+
+== 20160319110950 RemoveUnnecessaryIndex: migrating ===========================
+-- index_name(:companies, {:name=>"index_companies_on_email"})
+   -> 0.0000s
+-- index_name_exists?(:companies, "index_companies_on_email", true)
+   -> 0.0006s
+-- remove_index(:companies, {:name=>"index_companies_on_email"})
+   -> 0.1501s
+== 20160319110950 RemoveUnnecessaryIndex: migrated (0.1510s) ==================
+
+== 20160324204735 CreateWorkers: migrating ====================================
+-- create_table(:workers, {})
+   -> 0.3601s
+== 20160324204735 CreateWorkers: migrated (0.3602s) ===========================
+
+== 20160327133622 AddPasswordDigestToWorkers: migrating =======================
+-- add_column(:workers, :password_digest, :string)
+   -> 0.4463s
+== 20160327133622 AddPasswordDigestToWorkers: migrated (0.4464s) ==============
+
+== 20160403122800 AddIndexCompanyNameToCompanies: migrating ===================
+-- add_index(:companies, :name, {:unique=>true})
+   -> 0.2010s
+== 20160403122800 AddIndexCompanyNameToCompanies: migrated (0.2011s) ==========
+
+== 20160410060420 AddCompanyReferenceToWorker: migrating ======================
+-- add_reference(:workers, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7459s
+== 20160410060420 AddCompanyReferenceToWorker: migrated (1.7461s) =============
+
+== 20160416170045 CreateApiKeys: migrating ====================================
+-- create_table(:api_keys, {})
+   -> 0.3207s
+== 20160416170045 CreateApiKeys: migrated (0.3208s) ===========================
+
+== 20160417164806 RailsSettingsMigration: migrating ===========================
+-- create_table(:settings, {})
+   -> 0.3359s
+-- add_index(:settings, [:target_type, :target_id, :var], {:unique=>true})
+   -> 0.2598s
+== 20160417164806 RailsSettingsMigration: migrated (0.5960s) ==================
+
+== 20160418091701 AddExpirationDateToApiKeys: migrating =======================
+-- add_column(:api_keys, :expires_on, :datetime)
+   -> 0.5538s
+== 20160418091701 AddExpirationDateToApiKeys: migrated (0.5539s) ==============
+
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrating ==================
+-- remove_column(:api_keys, :expires_on)
+   -> 0.4868s
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrated (0.4869s) =========
+
+== 20160426072109 ChangeDevicesTokenName: migrating ===========================
+-- rename_column(:devices, :token, :gcm_token)
+   -> 0.1430s
+== 20160426072109 ChangeDevicesTokenName: migrated (0.1431s) ==================
+
+== 20160430064544 AddWorkerIdToDevices: migrating =============================
+-- add_reference(:devices, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.7625s
+== 20160430064544 AddWorkerIdToDevices: migrated (1.7626s) ====================
+
+== 20160501063008 CreateCalls: migrating ======================================
+-- create_table(:calls, {})
+   -> 0.3601s
+-- add_reference(:calls, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.6379s
+== 20160501063008 CreateCalls: migrated (1.9983s) =============================
+
+== 20160503173224 AddConfirmableEmailToCompanies: migrating ===================
+-- add_column(:companies, :confirmation_token, :string)
+   -> 0.6802s
+-- add_column(:companies, :confirmed_at, :datetime)
+   -> 0.7227s
+-- add_column(:companies, :confirmation_sent_at, :datetime)
+   -> 0.5724s
+-- add_index(:companies, :confirmation_token, {:unique=>true})
+   -> 0.3345s
+== 20160503173224 AddConfirmableEmailToCompanies: migrated (2.3102s) ==========
+
+== 20160511060012 CreateSites: migrating ======================================
+-- create_table(:sites, {})
+   -> 0.2609s
+-- add_reference(:sites, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7461s
+== 20160511060012 CreateSites: migrated (2.0072s) =============================
+
+== 20160511060448 ChangeCompanyAndWorkerReferences: migrating =================
+-- add_reference(:workers, :site, {:index=>true, :foreign_key=>true})
+   -> 1.7630s
+-- remove_reference(:workers, :company, {:index=>true})
+rake stderr: rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+ActiveRecord::StatementInvalid: Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+SSHKit::Runner::ExecuteError: Exception while executing as deploy@37.157.182.179: rake exit status: 1
+rake stdout: == 20160306173852 CreateDevices: migrating ====================================
+-- create_table(:devices, {})
+   -> 0.2571s
+== 20160306173852 CreateDevices: migrated (0.2572s) ===========================
+
+== 20160314224437 DeviseCreateCompanies: migrating ============================
+-- create_table(:companies, {})
+   -> 0.3361s
+-- add_index(:companies, :email, {:unique=>true})
+   -> 0.2681s
+-- add_index(:companies, :reset_password_token, {:unique=>true})
+   -> 0.2430s
+== 20160314224437 DeviseCreateCompanies: migrated (0.8476s) ===================
+
+== 20160314224724 AddCompanyNameToCompanies: migrating ========================
+-- add_column(:companies, :name, :string)
+   -> 0.6972s
+== 20160314224724 AddCompanyNameToCompanies: migrated (0.6973s) ===============
+
+== 20160319110950 RemoveUnnecessaryIndex: migrating ===========================
+-- index_name(:companies, {:name=>"index_companies_on_email"})
+   -> 0.0000s
+-- index_name_exists?(:companies, "index_companies_on_email", true)
+   -> 0.0006s
+-- remove_index(:companies, {:name=>"index_companies_on_email"})
+   -> 0.1501s
+== 20160319110950 RemoveUnnecessaryIndex: migrated (0.1510s) ==================
+
+== 20160324204735 CreateWorkers: migrating ====================================
+-- create_table(:workers, {})
+   -> 0.3601s
+== 20160324204735 CreateWorkers: migrated (0.3602s) ===========================
+
+== 20160327133622 AddPasswordDigestToWorkers: migrating =======================
+-- add_column(:workers, :password_digest, :string)
+   -> 0.4463s
+== 20160327133622 AddPasswordDigestToWorkers: migrated (0.4464s) ==============
+
+== 20160403122800 AddIndexCompanyNameToCompanies: migrating ===================
+-- add_index(:companies, :name, {:unique=>true})
+   -> 0.2010s
+== 20160403122800 AddIndexCompanyNameToCompanies: migrated (0.2011s) ==========
+
+== 20160410060420 AddCompanyReferenceToWorker: migrating ======================
+-- add_reference(:workers, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7459s
+== 20160410060420 AddCompanyReferenceToWorker: migrated (1.7461s) =============
+
+== 20160416170045 CreateApiKeys: migrating ====================================
+-- create_table(:api_keys, {})
+   -> 0.3207s
+== 20160416170045 CreateApiKeys: migrated (0.3208s) ===========================
+
+== 20160417164806 RailsSettingsMigration: migrating ===========================
+-- create_table(:settings, {})
+   -> 0.3359s
+-- add_index(:settings, [:target_type, :target_id, :var], {:unique=>true})
+   -> 0.2598s
+== 20160417164806 RailsSettingsMigration: migrated (0.5960s) ==================
+
+== 20160418091701 AddExpirationDateToApiKeys: migrating =======================
+-- add_column(:api_keys, :expires_on, :datetime)
+   -> 0.5538s
+== 20160418091701 AddExpirationDateToApiKeys: migrated (0.5539s) ==============
+
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrating ==================
+-- remove_column(:api_keys, :expires_on)
+   -> 0.4868s
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrated (0.4869s) =========
+
+== 20160426072109 ChangeDevicesTokenName: migrating ===========================
+-- rename_column(:devices, :token, :gcm_token)
+   -> 0.1430s
+== 20160426072109 ChangeDevicesTokenName: migrated (0.1431s) ==================
+
+== 20160430064544 AddWorkerIdToDevices: migrating =============================
+-- add_reference(:devices, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.7625s
+== 20160430064544 AddWorkerIdToDevices: migrated (1.7626s) ====================
+
+== 20160501063008 CreateCalls: migrating ======================================
+-- create_table(:calls, {})
+   -> 0.3601s
+-- add_reference(:calls, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.6379s
+== 20160501063008 CreateCalls: migrated (1.9983s) =============================
+
+== 20160503173224 AddConfirmableEmailToCompanies: migrating ===================
+-- add_column(:companies, :confirmation_token, :string)
+   -> 0.6802s
+-- add_column(:companies, :confirmed_at, :datetime)
+   -> 0.7227s
+-- add_column(:companies, :confirmation_sent_at, :datetime)
+   -> 0.5724s
+-- add_index(:companies, :confirmation_token, {:unique=>true})
+   -> 0.3345s
+== 20160503173224 AddConfirmableEmailToCompanies: migrated (2.3102s) ==========
+
+== 20160511060012 CreateSites: migrating ======================================
+-- create_table(:sites, {})
+   -> 0.2609s
+-- add_reference(:sites, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7461s
+== 20160511060012 CreateSites: migrated (2.0072s) =============================
+
+== 20160511060448 ChangeCompanyAndWorkerReferences: migrating =================
+-- add_reference(:workers, :site, {:index=>true, :foreign_key=>true})
+   -> 1.7630s
+-- remove_reference(:workers, :company, {:index=>true})
+rake stderr: rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+ActiveRecord::StatementInvalid: Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+SSHKit::Command::Failed: rake exit status: 1
+rake stdout: == 20160306173852 CreateDevices: migrating ====================================
+-- create_table(:devices, {})
+   -> 0.2571s
+== 20160306173852 CreateDevices: migrated (0.2572s) ===========================
+
+== 20160314224437 DeviseCreateCompanies: migrating ============================
+-- create_table(:companies, {})
+   -> 0.3361s
+-- add_index(:companies, :email, {:unique=>true})
+   -> 0.2681s
+-- add_index(:companies, :reset_password_token, {:unique=>true})
+   -> 0.2430s
+== 20160314224437 DeviseCreateCompanies: migrated (0.8476s) ===================
+
+== 20160314224724 AddCompanyNameToCompanies: migrating ========================
+-- add_column(:companies, :name, :string)
+   -> 0.6972s
+== 20160314224724 AddCompanyNameToCompanies: migrated (0.6973s) ===============
+
+== 20160319110950 RemoveUnnecessaryIndex: migrating ===========================
+-- index_name(:companies, {:name=>"index_companies_on_email"})
+   -> 0.0000s
+-- index_name_exists?(:companies, "index_companies_on_email", true)
+   -> 0.0006s
+-- remove_index(:companies, {:name=>"index_companies_on_email"})
+   -> 0.1501s
+== 20160319110950 RemoveUnnecessaryIndex: migrated (0.1510s) ==================
+
+== 20160324204735 CreateWorkers: migrating ====================================
+-- create_table(:workers, {})
+   -> 0.3601s
+== 20160324204735 CreateWorkers: migrated (0.3602s) ===========================
+
+== 20160327133622 AddPasswordDigestToWorkers: migrating =======================
+-- add_column(:workers, :password_digest, :string)
+   -> 0.4463s
+== 20160327133622 AddPasswordDigestToWorkers: migrated (0.4464s) ==============
+
+== 20160403122800 AddIndexCompanyNameToCompanies: migrating ===================
+-- add_index(:companies, :name, {:unique=>true})
+   -> 0.2010s
+== 20160403122800 AddIndexCompanyNameToCompanies: migrated (0.2011s) ==========
+
+== 20160410060420 AddCompanyReferenceToWorker: migrating ======================
+-- add_reference(:workers, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7459s
+== 20160410060420 AddCompanyReferenceToWorker: migrated (1.7461s) =============
+
+== 20160416170045 CreateApiKeys: migrating ====================================
+-- create_table(:api_keys, {})
+   -> 0.3207s
+== 20160416170045 CreateApiKeys: migrated (0.3208s) ===========================
+
+== 20160417164806 RailsSettingsMigration: migrating ===========================
+-- create_table(:settings, {})
+   -> 0.3359s
+-- add_index(:settings, [:target_type, :target_id, :var], {:unique=>true})
+   -> 0.2598s
+== 20160417164806 RailsSettingsMigration: migrated (0.5960s) ==================
+
+== 20160418091701 AddExpirationDateToApiKeys: migrating =======================
+-- add_column(:api_keys, :expires_on, :datetime)
+   -> 0.5538s
+== 20160418091701 AddExpirationDateToApiKeys: migrated (0.5539s) ==============
+
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrating ==================
+-- remove_column(:api_keys, :expires_on)
+   -> 0.4868s
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrated (0.4869s) =========
+
+== 20160426072109 ChangeDevicesTokenName: migrating ===========================
+-- rename_column(:devices, :token, :gcm_token)
+   -> 0.1430s
+== 20160426072109 ChangeDevicesTokenName: migrated (0.1431s) ==================
+
+== 20160430064544 AddWorkerIdToDevices: migrating =============================
+-- add_reference(:devices, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.7625s
+== 20160430064544 AddWorkerIdToDevices: migrated (1.7626s) ====================
+
+== 20160501063008 CreateCalls: migrating ======================================
+-- create_table(:calls, {})
+   -> 0.3601s
+-- add_reference(:calls, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.6379s
+== 20160501063008 CreateCalls: migrated (1.9983s) =============================
+
+== 20160503173224 AddConfirmableEmailToCompanies: migrating ===================
+-- add_column(:companies, :confirmation_token, :string)
+   -> 0.6802s
+-- add_column(:companies, :confirmed_at, :datetime)
+   -> 0.7227s
+-- add_column(:companies, :confirmation_sent_at, :datetime)
+   -> 0.5724s
+-- add_index(:companies, :confirmation_token, {:unique=>true})
+   -> 0.3345s
+== 20160503173224 AddConfirmableEmailToCompanies: migrated (2.3102s) ==========
+
+== 20160511060012 CreateSites: migrating ======================================
+-- create_table(:sites, {})
+   -> 0.2609s
+-- add_reference(:sites, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7461s
+== 20160511060012 CreateSites: migrated (2.0072s) =============================
+
+== 20160511060448 ChangeCompanyAndWorkerReferences: migrating =================
+-- add_reference(:workers, :site, {:index=>true, :foreign_key=>true})
+   -> 1.7630s
+-- remove_reference(:workers, :company, {:index=>true})
+rake stderr: rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+ActiveRecord::StatementInvalid: Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+Tasks: TOP => deploy:migrate
+(See full trace by running task with --trace)
+The deploy has failed with an error: Exception while executing as deploy@37.157.182.179: Exception while executing as deploy@37.157.182.179: rake exit status: 1
+rake stdout: == 20160306173852 CreateDevices: migrating ====================================
+-- create_table(:devices, {})
+   -> 0.2571s
+== 20160306173852 CreateDevices: migrated (0.2572s) ===========================
+
+== 20160314224437 DeviseCreateCompanies: migrating ============================
+-- create_table(:companies, {})
+   -> 0.3361s
+-- add_index(:companies, :email, {:unique=>true})
+   -> 0.2681s
+-- add_index(:companies, :reset_password_token, {:unique=>true})
+   -> 0.2430s
+== 20160314224437 DeviseCreateCompanies: migrated (0.8476s) ===================
+
+== 20160314224724 AddCompanyNameToCompanies: migrating ========================
+-- add_column(:companies, :name, :string)
+   -> 0.6972s
+== 20160314224724 AddCompanyNameToCompanies: migrated (0.6973s) ===============
+
+== 20160319110950 RemoveUnnecessaryIndex: migrating ===========================
+-- index_name(:companies, {:name=>"index_companies_on_email"})
+   -> 0.0000s
+-- index_name_exists?(:companies, "index_companies_on_email", true)
+   -> 0.0006s
+-- remove_index(:companies, {:name=>"index_companies_on_email"})
+   -> 0.1501s
+== 20160319110950 RemoveUnnecessaryIndex: migrated (0.1510s) ==================
+
+== 20160324204735 CreateWorkers: migrating ====================================
+-- create_table(:workers, {})
+   -> 0.3601s
+== 20160324204735 CreateWorkers: migrated (0.3602s) ===========================
+
+== 20160327133622 AddPasswordDigestToWorkers: migrating =======================
+-- add_column(:workers, :password_digest, :string)
+   -> 0.4463s
+== 20160327133622 AddPasswordDigestToWorkers: migrated (0.4464s) ==============
+
+== 20160403122800 AddIndexCompanyNameToCompanies: migrating ===================
+-- add_index(:companies, :name, {:unique=>true})
+   -> 0.2010s
+== 20160403122800 AddIndexCompanyNameToCompanies: migrated (0.2011s) ==========
+
+== 20160410060420 AddCompanyReferenceToWorker: migrating ======================
+-- add_reference(:workers, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7459s
+== 20160410060420 AddCompanyReferenceToWorker: migrated (1.7461s) =============
+
+== 20160416170045 CreateApiKeys: migrating ====================================
+-- create_table(:api_keys, {})
+   -> 0.3207s
+== 20160416170045 CreateApiKeys: migrated (0.3208s) ===========================
+
+== 20160417164806 RailsSettingsMigration: migrating ===========================
+-- create_table(:settings, {})
+   -> 0.3359s
+-- add_index(:settings, [:target_type, :target_id, :var], {:unique=>true})
+   -> 0.2598s
+== 20160417164806 RailsSettingsMigration: migrated (0.5960s) ==================
+
+== 20160418091701 AddExpirationDateToApiKeys: migrating =======================
+-- add_column(:api_keys, :expires_on, :datetime)
+   -> 0.5538s
+== 20160418091701 AddExpirationDateToApiKeys: migrated (0.5539s) ==============
+
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrating ==================
+-- remove_column(:api_keys, :expires_on)
+   -> 0.4868s
+== 20160424151226 RemoveExpirationDateFromApiKeys: migrated (0.4869s) =========
+
+== 20160426072109 ChangeDevicesTokenName: migrating ===========================
+-- rename_column(:devices, :token, :gcm_token)
+   -> 0.1430s
+== 20160426072109 ChangeDevicesTokenName: migrated (0.1431s) ==================
+
+== 20160430064544 AddWorkerIdToDevices: migrating =============================
+-- add_reference(:devices, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.7625s
+== 20160430064544 AddWorkerIdToDevices: migrated (1.7626s) ====================
+
+== 20160501063008 CreateCalls: migrating ======================================
+-- create_table(:calls, {})
+   -> 0.3601s
+-- add_reference(:calls, :worker, {:index=>true, :foreign_key=>true})
+   -> 1.6379s
+== 20160501063008 CreateCalls: migrated (1.9983s) =============================
+
+== 20160503173224 AddConfirmableEmailToCompanies: migrating ===================
+-- add_column(:companies, :confirmation_token, :string)
+   -> 0.6802s
+-- add_column(:companies, :confirmed_at, :datetime)
+   -> 0.7227s
+-- add_column(:companies, :confirmation_sent_at, :datetime)
+   -> 0.5724s
+-- add_index(:companies, :confirmation_token, {:unique=>true})
+   -> 0.3345s
+== 20160503173224 AddConfirmableEmailToCompanies: migrated (2.3102s) ==========
+
+== 20160511060012 CreateSites: migrating ======================================
+-- create_table(:sites, {})
+   -> 0.2609s
+-- add_reference(:sites, :company, {:index=>true, :foreign_key=>true})
+   -> 1.7461s
+== 20160511060012 CreateSites: migrated (2.0072s) =============================
+
+== 20160511060448 ChangeCompanyAndWorkerReferences: migrating =================
+-- add_reference(:workers, :site, {:index=>true, :foreign_key=>true})
+   -> 1.7630s
+-- remove_reference(:workers, :company, {:index=>true})
+rake stderr: rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+ActiveRecord::StatementInvalid: Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint: ALTER TABLE `workers` DROP `company_id`
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Mysql2::Error: Cannot drop index 'index_workers_on_company_id': needed in a foreign key constraint
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `_query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:107:in `block in query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `handle_interrupt'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/mysql2-0.4.4/lib/mysql2/client.rb:106:in `query'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `block in execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:566:in `block in log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_adapter.rb:560:in `log'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:218:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/mysql/database_statements.rb:46:in `execute'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:569:in `remove_column'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/schema_statements.rb:856:in `remove_reference'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:845:in `block in method_missing'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `block in say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:814:in `say_with_time'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:834:in `method_missing'
+/var/www/attendance_check/releases/20160910144011/db/migrate/20160511060448_change_company_and_worker_references.rb:4:in `change'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:788:in `exec_migration'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:772:in `block (2 levels) in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:771:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:770:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration/compatibility.rb:121:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:950:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1211:in `block in execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1281:in `ddl_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1210:in `execute_migration_in_transaction'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1183:in `block in migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `each'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1182:in `migrate_without_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `block in migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1298:in `with_advisory_lock'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1131:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:1005:in `up'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/migration.rb:983:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/tasks/database_tasks.rb:161:in `migrate'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+
+** DEPLOY FAILED
+** Refer to log/capistrano.log for details. Here are the last 20 lines:
+
+
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/activerecord-5.0.0.1/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+
+/var/www/attendance_check/shared/bundle/ruby/2.3.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `load'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:63:in `kernel_load'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli/exec.rb:24:in `run'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:304:in `exec'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/cli.rb:11:in `start'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:27:in `block in <top (required)>'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/gems/bundler-1.12.5/exe/bundle:19:in `<top (required)>'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `load'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/bundle:23:in `<main>'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+
+/home/deploy/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+
+ DEBUG [0aef322c] 	Tasks: TOP => db:migrate
+
+(See full trace by running task with --trace)
+

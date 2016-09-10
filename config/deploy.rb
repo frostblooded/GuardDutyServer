@@ -16,7 +16,12 @@ set :ssh_options, { port: 6019 }
 # Set role to app as recommended by Capistrano README
 set :migration_role, :app
 
+set :conditionally_migrate, true
+
 # Defaults to [:web]
 set :assets_roles, [:web, :app]
+
+# Create database
+before 'deploy:migrate', 'deploy:db:create'
 
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev db), primary: true
