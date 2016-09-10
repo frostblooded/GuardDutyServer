@@ -51,4 +51,5 @@ end
 group :production do
   gem 'puma',                    '~> 3.4.0'
   gem 'uglifier',                '~> 3.0.2'
+  gem 'rack-throttle',           '~> 0.4.0'
 end
