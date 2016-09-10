@@ -22,6 +22,9 @@ require 'capistrano/rails'
 # Make assets be precompiled only if changed
 require 'capistrano/faster_assets'
 
+# Update crontab on deploy
+require 'whenever/capistrano'
+
 require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
