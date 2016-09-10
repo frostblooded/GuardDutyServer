@@ -19,6 +19,4 @@ set :migration_role, :app
 # Defaults to [:web]
 set :assets_roles, [:web, :app]
 
-set :whenever_command, 'bundle exec whenever'
-
-server '37.157.182.179', user: 'deploy', roles: %w(app web dev), primary: true
+server '37.157.182.179', user: 'deploy', roles: %w(app web dev db), primary: true
