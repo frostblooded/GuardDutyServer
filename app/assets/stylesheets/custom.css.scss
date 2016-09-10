@@ -60,14 +60,14 @@ html, body {
 }
 
 #sites-icon {
-  background:url('building_icon.png') no-repeat top left;
+  background-image: asset-data-url("building_icon.png");
   display: inline-block;
   height: 20px;
   width: 24px;
 }
 
-#sites-nav:hover #sites-icon{
-  background:url('building_icon-selected.png') no-repeat top left;
+#sites-nav:hover #sites-icon {
+  background-image: asset-data-url("building_icon-selected.png");
 }
 
 .alert-notice {
