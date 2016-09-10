@@ -5,6 +5,6 @@ class CreateSitesWorkers < ActiveRecord::Migration
       t.integer :worker_id
     end
 
-    remove_reference :workers, :site
+    remove_reference :workers, :site, foreign_key: true
   end
 end
