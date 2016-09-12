@@ -35,7 +35,7 @@ class WorkersController < ApplicationController
     @worker.company = current_company
 
     if @worker.save
-      flash[:success] = 'Worker created'
+      flash[:success] = t '.success'
       redirect_to workers_path
     else
       render 'new'
@@ -44,7 +44,7 @@ class WorkersController < ApplicationController
 
   def update
     if @worker.update_attributes(worker_params)
-      flash[:success] = 'Worker updated'
+      flash[:success] = t '.success'
       redirect_to workers_path
     else
       render 'edit'
@@ -59,7 +59,7 @@ class WorkersController < ApplicationController
   def destroy
     @worker = Worker.find(params[:id])
     @worker.destroy
-    flash[:success] = 'Worker deleted'
+    flash[:success] = t '.success'
     redirect_to workers_path
   end
 

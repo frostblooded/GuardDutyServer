@@ -1,2 +1,25 @@
 en:
   empty_field: 'field is empty, please enter an email first'
+  routes:
+    create:
+      success: 'Route created'
+  settings:
+    update:
+      success: 'Settings updated'
+      email_invalid: "The email '%{recipient}' is invalid"
+  sites:
+    update:
+      success: 'Site settings updated'
+      duplicate_worker: "Worker '%{worker}' was added several times"
+      inexistent_worker: "Worker '%{worker}' doesn't exist in this company"
+    create:
+      success: 'Site created'
+    destroy:
+      success: 'Site deleted'
+  workers:
+    create:
+      success: 'Worker created'
+    update:
+      success: 'Worker updated'
+    destroy:
+      success: 'Worker deleted'

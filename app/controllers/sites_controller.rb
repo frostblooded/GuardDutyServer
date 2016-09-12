@@ -19,7 +19,7 @@ class SitesController < ApplicationController
 
     if @errors.empty?
       update_settings
-      flash[:success] = 'Settings saved'
+      flash[:success] = t '.success'
     end
 
     flash[:danger] = @errors.join(', ') unless @errors.empty?
@@ -37,7 +37,7 @@ class SitesController < ApplicationController
     @site.company = current_company
 
     if @site.save
-      flash[:success] = 'Site created'
+      flash[:success] = t '.success'
       redirect_to sites_path
     else
       render 'new'
@@ -46,7 +46,7 @@ class SitesController < ApplicationController
 
   def destroy
     @site.destroy
-    flash[:success] = 'Site deleted'
+    flash[:success] = t '.success'
     redirect_to sites_path
   end
 
@@ -74,7 +74,7 @@ class SitesController < ApplicationController
     duplicates.uniq!
 
     duplicates.each do |d|
-      @errors << "Worker '#{d}' was added several times"
+      @errors << t('.duplicate_worker', worker: d)
     end
   end
 
@@ -93,7 +93,7 @@ class SitesController < ApplicationController
       worker = @site.company.workers.find_by name: name
 
       if !worker
-        @errors << "Worker #{name} doesn't exist in this company"
+        @errors << t('.inexistent_worker', worker: name)
       elsif !@site.workers.include? worker
         @site.workers << worker
       end
