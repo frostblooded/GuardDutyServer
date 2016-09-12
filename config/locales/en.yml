@@ -13,7 +13,7 @@ en:
     update:
       success: "Site settings updated"
       duplicate_worker: "Worker \"%{worker}\" was added several times"
-      inexistent_worker: "Worker \"%{worker}\" doesn"t exist in this company"
+      inexistent_worker: "Worker \"%{worker}\" doesn't exist in this company"
     create:
       success: "Site created"
     destroy:
