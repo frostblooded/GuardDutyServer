@@ -1,5 +1,7 @@
 en:
   empty_field: 'field is empty, please enter an email first'
+  name:
+    not_unique: 'not unique in company'
   routes:
     create:
       success: 'Route created'
@@ -23,3 +25,5 @@ en:
       success: 'Worker updated'
     destroy:
       success: 'Worker deleted'
+  report:
+    subject: 'Workers\' report'

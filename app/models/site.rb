@@ -20,7 +20,7 @@ class Site < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company
                    uniqueness: { scope: :company_id,
-                                 message: 'not unique in company' }
+                                 message: t 'name.not_unique' }
 
   # Returns data about the last COMPLETED shift
   def last_shift
