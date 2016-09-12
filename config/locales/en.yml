@@ -1,5 +1,10 @@
 en:
-  empty_field: "field is empty, please enter an email first"
+  sign_out: "Sign out"
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  app:
+    name: "Attendance Check"
+  empty_field: "field is empty, please enter something first"
   name:
     not_unique: "not unique in company"
   routes:
@@ -30,3 +35,6 @@ en:
     introduction: "Hello, %{company_name}. This is your report for today."
     workers_title: "Workers that showed up today to work:"
     sites_title: "Last completed shifts for all of your sites:"
+  static_pages:
+    contact:
+      title: 'Contacts'

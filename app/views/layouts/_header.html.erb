@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "AttendanceCheck", root_path, id: "logo" %>
+      <%= link_to t('app.name'), root_path, id: "logo" %>
     </div>
 
     <div class="collapse navbar-collapse" id="collapse-nav">
@@ -29,14 +29,14 @@
             <% end %>
           </li>
           <li class="inline-nav-item">
-            <%= link_to "Sign out", destroy_company_session_path, method: :delete %>
+            <%= link_to t('sign_out'), destroy_company_session_path, method: :delete %>
           </li>
         <% else %>
           <li class="inline-nav-item">
-            <%= link_to "Sign up", new_company_registration_path %>
+            <%= link_to t('sign_up'), new_company_registration_path %>
           </li>
           <li class="inline-nav-item">
-            <%= link_to "Sign in", new_company_session_path %>
+            <%= link_to t('sign_in'), new_company_session_path %>
           </li>
         <% end %>
       </ul>
