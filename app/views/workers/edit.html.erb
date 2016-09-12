@@ -1,6 +1,6 @@
-<% provide(:title, 'Edit worker') %>
+<% provide(:title, t('.title')) %>
 
-<h2 class="page-header">Edit worker</h2>
+<h2 class="page-header"><%= t('.header') %></h2>
 
 <div class="col-md-offset-4 col-md-4">
   <%= form_for(@worker) do |f| %>
@@ -17,6 +17,6 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
 
-    <%= f.submit "Save Changes", class: 'btn btn-primary center-block row' %>
+    <%= f.submit t('.submit'), class: 'btn btn-primary center-block row' %>
   <% end %>
 </div>

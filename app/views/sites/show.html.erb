@@ -15,12 +15,12 @@
   </div>
 
   <div class="form-group row col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">
-    <%= label_tag :shift_start%>
+    <%= label_tag :shift_start %>
     <%= time_field_tag :shift_start, @site.settings(:shift).start, class:'form-control' %>
   </div>
 
   <div class="form-group row col-md-4 col-xs-4 pull-right">
-    <%= label_tag :shift_end%>
+    <%= label_tag :shift_end %>
     <%= time_field_tag :shift_end, @site.settings(:shift).end, class:'form-control' %>
   </div>
 

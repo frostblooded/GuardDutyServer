@@ -1,7 +1,7 @@
 <% provide(:title, @worker.name) %>
 
 <h2><%= @worker.name %></h2>
-<h4>This worker's sites:</h4>
+<h4><%= t '.worker_sites' %></h4>
 
 <ul id="sites">
   <% @worker.sites.each do |s| %>
@@ -12,9 +12,9 @@
 <div class="wtable">
 	<table>
 		<tr>
-      <th>Timestamp</th>
-      <th>Category</th>
-      <th>Time left</th>
+      <th><%= t '.timestamp' %></th>
+      <th><%= t '.category' %></th>
+      <th><%= t '.time_left' %></th>
 		</tr>
 
     <% @worker.activities.each do |a| %>

@@ -1,6 +1,11 @@
 en:
   site: "Site"
+  worker: "Worker"
+  edit: "Edit"
   delete: "Delete"
+  timestamp: "Timestamp"
+  category: "Category"
+  time_left: 
   confirmation: "You sure?"
   sign_out: "Sign out"
   sign_in: "Sign in"
@@ -51,6 +56,23 @@ en:
       title: "Create route"
       submit: "Create new route"
   workers:
+    edit:
+      title: "Edit worker"
+      header: "Edit worker"
+      submit: "Save changes"
+    index:
+      title: "Workers"
+      header: "Workers' activity"
+      create_worker: "Create worker"
+    new:
+      title: "Create worker"
+      header: "Create worker"
+      submit: "Create new worker"
+    show:
+      worker_sites: "The sites, to which this worker belongs:"
+      timestamp: "Timestamp"
+      category: "Category"
+      time_left: "Time left"
     create:
       success: "Worker created"
     update:
