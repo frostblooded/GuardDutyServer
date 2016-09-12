@@ -79,6 +79,10 @@ en:
       success: "Worker updated"
     destroy:
       success: "Worker deleted"
+  worker_report:
+    late_login: "logged in %{minutes} minutes too late'"
+    unreceived_call: "unreceived call"
+    unanswered_call: "didn\'t answer call"
   report:
     subject: "Workers' report"
     introduction: "Hello, %{company_name}. This is your report for today."
