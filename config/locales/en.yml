@@ -11,6 +11,14 @@ en:
     create:
       success: "Route created"
   settings:
+    index:
+      title: "Settings"
+      header: "Your settings"
+      email_wanted_label: "Do you want to recieve daily reports?"
+      email_time_label: "When do you want to receive the mail?"
+      recipients_label: "Emails to report to:"
+      submit: "Save changes"
+      edit_credentials: "Want to edit your email or credentials?"
     update:
       success: "Settings updated"
       email_invalid: "The email \"%{recipient}\" is invalid"
@@ -23,6 +31,11 @@ en:
       success: "Site created"
     destroy:
       success: "Site deleted"
+  routes:
+    header: "Manage your routes"
+    new:
+      title: "Create route"
+      submit: "Create new route"
   workers:
     create:
       success: "Worker created"

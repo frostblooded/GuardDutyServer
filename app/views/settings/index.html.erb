@@ -1,22 +1,20 @@
-<% provide(:title, 'Settings') %>
+<% provide(:title, t('.title')) %>
 
 <% content_for :head do %>
   <%= javascript_include_tag 'settings/index.js' %>
   <%= stylesheet_link_tag 'hover/hover-min.css' %>
 <% end %>
 
-<h2 class="page-header">
-  Settings
-</h2>
+<h2 class="page-header"><%= t '.header' %></h2>
 
 <%= form_tag('/settings/', method: :patch, class:'col-md-offset-4 col-md-4') do %>
   <div class="form-group row">
-    <%= label_tag :email_wanted, 'Do you want to recieve daily reports?'%>
+    <%= label_tag :email_wanted, t('.email_wanted_label') %>
     <%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>
   </div>
   <div id="email-settings">
     <div class="form-group row">
-      <%= label_tag :email_time, 'When do you want to receive the mail?' %>
+      <%= label_tag :email_time, t('.email_time_label') %>
       
       <div class ="input-group">
         <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
@@ -27,7 +25,7 @@
     </div>
 
     <div class="form-group row">
-      <%= label_tag :emails, 'Emails to report to:'%>
+      <%= label_tag :emails, t('.recipients_label') %>
 
       <div class="input-group" id="new-email">
         <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
@@ -44,14 +42,13 @@
         <% @company.settings(:email).recipients.each do |email| %>
           <%= javascript_tag "create_email_input('#{email}');" %> 
         <% end %>
-
     </div>
   </div>    
 
-  <%= submit_tag "Save changes", class: 'btn btn-primary center-block row' %>
+  <%= submit_tag t('.submit'), class: 'btn btn-primary center-block row' %>
 
   <hr class="col-md-12 col-xs-12"/>
   
-  <%= link_to "Want to edit your email or credentials?", edit_company_registration_path, class:'row' %>
+  <%= link_to t('.edit_credentials'), edit_company_registration_path, class:'row' %>
 <% end %>
 

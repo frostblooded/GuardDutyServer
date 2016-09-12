@@ -1,12 +1,12 @@
-<% provide(:title, 'Create route') %>
+<% provide(:title, t('.title')) %>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for @route, url: site_route_index_path do |f| %>
+    <%= form_for @route, url: site_routes_path do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
     
-      <%= f.submit "Create new route", class: "btn btn-primary" %>
+      <%= f.submit t('.submit'), class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
