@@ -41,7 +41,7 @@ function add_email() {
     $input.val('');
   }
   else {
-    alert('Field is empty, please enter an email first')
+    alert('<%= I18n.t("empty_field") %>')
   }
 }
 
