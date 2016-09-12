@@ -27,3 +27,6 @@ en:
       success: 'Worker deleted'
   report:
     subject: 'Workers\' report'
+    introduction: 'Hello, %{company_name}. This is your report for today.'
+    workers_title: 'Workers that showed up today to work:'
+    sites_title: 'Last completed shifts for all of your sites:'
