@@ -1,4 +1,7 @@
 en:
+  site: "Site"
+  delete: "Delete"
+  confirmation: "You sure?"
   sign_out: "Sign out"
   sign_in: "Sign in"
   sign_up: "Sign up"
@@ -23,6 +26,17 @@ en:
       success: "Settings updated"
       email_invalid: "The email \"%{recipient}\" is invalid"
   sites:
+    index:
+      title: "Sites"
+      header: "Manage your sites"
+      create_site: "Create site"
+    new:
+      title: "Create site"
+      header: "Create site"
+      submit: "Create new site"
+    show:
+      workers_header: "Workers on this site"
+      submit: "Save changes"
     update:
       success: "Site settings updated"
       duplicate_worker: "Worker \"%{worker}\" was added several times"
@@ -50,4 +64,8 @@ en:
     sites_title: "Last completed shifts for all of your sites:"
   static_pages:
     contact:
-      title: 'Contacts'
+      title: "Contacts"
+      header: "Contacts"
+      content: "You can contact us with feedback on nikolay_danailov@yahoo.com"
+    home:
+      content: "Attendance Check is a platform, which helps you reliably control the dpresence and attendance of your workers when they are most needed."

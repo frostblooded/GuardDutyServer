@@ -1,6 +1,6 @@
-<% provide(:title, 'Create site') %>
+<% provide(:title, t('.title')) %>
 
-<h2 class="page-header">Create site</h2>
+<h2 class="page-header"><%= t '.header' %></h2>
 
 <div class="col-md-offset-4 col-md-4">
   <%= form_for(@site) do |f| %>
@@ -11,6 +11,6 @@
       <%= f.text_field :name, class: 'form-control', autofocus: true %>
     </div>
   
-    <%= f.submit "Create new site", class: "btn btn-primary center-block row" %>
+    <%= f.submit t('.submit'), class: "btn btn-primary center-block row" %>
   <% end %>
 </div>
