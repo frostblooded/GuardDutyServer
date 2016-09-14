@@ -8,7 +8,7 @@ class RoutesController < ApplicationController
     @site = Site.find(params[:site_id])
 
     if @site.routes.create(route_params)
-      flash[:success] = 'Route created'
+      flash[:success] = t '.success'
       redirect_to site_route_index_path
     else
       render 'new'

@@ -5,6 +5,7 @@ require 'rails/test_help'
 require 'minitest/rails/capybara'
 
 # Change the Capybara driver, so JS can be executed
+# PhantomJs needs to be installed separately
 require 'capybara/poltergeist'
 Capybara.default_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|

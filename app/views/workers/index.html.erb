@@ -1,26 +1,22 @@
-<% provide(:title, 'Workers') %>
+<% provide(:title, t('.title')) %>
 
-<h2 class="page-header">Workers activity</h2>
-
-
+<h2 class="page-header"><%= t '.header' %></h2>
 
 <div class="col-md-offset-2 col-md-8">
-  <%= link_to 'Create worker', new_worker_path, class:'btn btn-primary col-md-offset-4 col-md-4
-                                                                      col-xs-offset-4 col-xs-4' %>
+  <%= link_to t('.create_worker'), new_worker_path, class:'btn btn-primary col-md-offset-4 col-md-4
+                                                           col-xs-offset-4 col-xs-4' %>
   <table class="table table-hover">
     <thead>
       <tr>  
-        <th>Worker</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th><%= t 'worker' %></th>
+        <th><%= t 'edit' %></th>
+        <th><%= t 'delete' %></th>
       </tr>
     </thead>
     <tbody>
       <% @workers.each do |worker| %>
         <tr>
-          <td>
-            <%=link_to worker.name, worker, class:"btn btn-default" %>
-          </td>
+          <td><%=link_to worker.name, worker, class:"btn btn-default" %></td>
           
           <td>
             <%= button_to edit_worker_path(worker), method: :get, class: 'worker-edit btn btn-default' do %>
@@ -28,7 +24,7 @@
             <% end %>
           </td>
           <td>
-            <%= button_to worker, method: :delete, data: { confirm: "You sure?" }, class: 'worker-delete btn btn-danger' do %>
+            <%= button_to worker, method: :delete, data: { confirm: t('confirmation') }, class: 'worker-delete btn btn-danger' do %>
               <span class="glyphicon glyphicon-trash"></span>
             <% end %>
           </td>

@@ -11,7 +11,7 @@ class Worker < ActiveRecord::Base
   validates :name, presence: true,	length: { maximum: 40 },
                    # Name should be unique in this company
                    uniqueness: { scope: :company_id,
-                                 message: 'not unique in company' }
+                                 message: I18n.t('name.not_unique') }
   validates :password, presence: true, length: { minimum: 8 },
                        if: :password_changed?
   has_secure_password

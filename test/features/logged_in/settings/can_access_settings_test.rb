@@ -34,7 +34,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     click_button 'Save changes'
 
     assert_equal settings_path, current_path
-    assert_text 'Settings saved'
+    assert_text 'Settings updated'
 
     @company.reload
     assert_equal @new_email_time, @company.settings(:email).time
@@ -45,7 +45,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     click_button 'Save changes'
 
     assert_equal settings_path, current_path
-    assert_text 'Settings saved'
+    assert_text 'Settings updated'
 
     @company.reload
     assert_equal @new_email_wanted, @company.settings(:email).wanted
@@ -83,7 +83,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     end
 
     click_button 'Save changes'
-    assert_text "The email \"#{@invalid_email}\" is invalid"
+    assert_text "The email '#{@invalid_email}' is invalid"
 
     @company.reload
     assert_not @company.settings(:email).recipients.include? @invalid_email

@@ -18,7 +18,7 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     fill_in 'worker_password', with: new_password
     fill_in 'worker_password_confirmation', with: new_password
 
-    click_button 'Save Changes'
+    click_button 'Save changes'
     assert_equal workers_path, current_path
     assert_text 'Worker updated'
 
@@ -34,7 +34,7 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     fill_in 'worker_password', with: new_password
     fill_in 'worker_password_confirmation', with: new_password + 'a'
 
-    click_button 'Save Changes'
+    click_button 'Save changes'
     assert_equal worker_path(@worker), current_path
     assert_text 'Password confirmation doesn\'t match Password'
   end
@@ -43,7 +43,7 @@ class CanEditWorkerTest < Capybara::Rails::TestCase
     fill_in 'worker_password', with: 'a' * 7
     fill_in 'worker_password_confirmation', with: 'a' * 7
 
-    click_button 'Save Changes'
+    click_button 'Save changes'
     assert_equal worker_path(@worker), current_path
     assert_text 'Password is too short (minimum is 8 characters)'
   end

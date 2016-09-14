@@ -24,7 +24,7 @@ class CanSignInTest < Capybara::Rails::TestCase
     fill_in 'company_password', with: @company_password * 3
     click_button 'Sign in'
 
-    assert_text 'Invalid Name or password'
+    assert_text 'Invalid name or password'
     assert_equal new_company_session_path, current_path
   end
 

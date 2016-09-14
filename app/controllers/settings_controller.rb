@@ -10,7 +10,7 @@ class SettingsController < ApplicationController
 
     if @errors.empty?
       update_settings
-      flash[:success] = 'Settings saved'
+      flash[:success] = t '.success'
     end
 
     flash[:danger] = @errors.join ', ' unless @errors.empty?
@@ -35,7 +35,7 @@ class SettingsController < ApplicationController
 
   def handle_recipient(recipient)
     if !(recipient =~ Rails.application.config.email_regex)
-      @errors << "The email \"#{recipient}\" is invalid"
+      @errors << t('.email_invalid', recipient: recipient)
     else
       current_company.settings(:email).recipients << recipient
     end

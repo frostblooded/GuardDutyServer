@@ -2,6 +2,9 @@ Rails.application.routes.default_url_options[:host] = 'http://37.157.182.179/'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Don't allow more than 60 request from the same IP per minute
+  config.middleware.use Rack::Throttle::Minute, max: 60
+
   # Code is not reloaded between requests.
   config.cache_classes = true 
 
@@ -47,10 +50,10 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :info
-  RAILS_DEFAULT_LOGGER = Logger.new('log/production.log')
+  config.log_level = :warn
+  #RAILS_DEFAULT_LOGGER = Logger.new('log/production.log')
 
-  config.action_mailer.default_url_options = { :host => '37.157.182.179', port: '3000'}
+  config.action_mailer.default_url_options = { host: '37.157.182.179' }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]

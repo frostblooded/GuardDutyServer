@@ -8,6 +8,6 @@ class CompanyNotifier < ApplicationMailer
     #  (through the last_shift methods of Site)
     @shift_reports = @company.sites.map { |site| site.last_shift.report }
 
-    mail(to: email, subject: 'Worker\'s report')
+    mail(to: email, subject: t('report.subject'))
   end
 end

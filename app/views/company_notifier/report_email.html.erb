@@ -5,8 +5,8 @@
   </head>
   <body>
     <div class ="email_content">
-      <h1>Hello, <%= @company.name %>. This is your report for today. </h1>
-      The workers who showed up today to work are:
+      <h1><%= t 'report.introuction', company_name: @company.name %></h1>
+      <%= t 'report.workers_title' %>
 
       <div class="workers">
         <% @shift_reports.each do |report| %>
@@ -22,7 +22,7 @@
       </div>
 
       <br>
-      The last completed shifts for all of your sites are included below: 
+      <%= t 'report.sites_title' %> 
       <br>
 
       <div class="report">

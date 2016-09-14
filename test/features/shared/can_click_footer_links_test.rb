@@ -6,7 +6,7 @@ class CanClickFooterLinks < Capybara::Rails::TestCase
   end
 
   test 'has correct links' do
-    within '.footer' do
+    within '#footer-nav' do
       assert_text 'Contact'
     end
   end
