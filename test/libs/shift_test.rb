@@ -33,7 +33,7 @@ class ShiftTest < ActiveSupport::TestCase
     @site = create(:site)
     @workers = make_workers
 
-    @shift = Shift.new(Time.zone.parse('11:00'), Time.zone.parse('12:00'))
+    @shift = Shift.new(Time.zone.parse('11:00'), Time.zone.parse('12:00'))    exf
     @shift.site = create(:site)
     @shift.activities = make_activities
   end

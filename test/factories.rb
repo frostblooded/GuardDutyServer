@@ -16,8 +16,8 @@ FactoryGirl.define do
     end
 
     factory :toni_company do
-      name 'toni'
-      email 'amind@abv.bg'
+      name 'toni2'
+      email 'amindov@abv.bg'
       password '12345678'
     end
   end
