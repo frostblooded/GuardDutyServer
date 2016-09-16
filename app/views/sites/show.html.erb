@@ -34,7 +34,8 @@
     <div class="new-worker input-group form-group" >
       <%= autocomplete_field_tag 'worker_name',
                                  '',
-                                 autocomplete_worker_name_workers_path(@site),
+                                 # Pass the locale to the path
+                                 autocomplete_worker_name_workers_path(I18n.default_locale, @site),
                                  { class: 'form-control',
                                    id:'new-worker-input',
                                    'data-auto-focus' => true } %>
