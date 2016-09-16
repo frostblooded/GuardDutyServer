@@ -15,7 +15,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create Worker'
+      click_button 'Create worker'
     end
 
     assert_equal workers_path, current_path
@@ -27,7 +27,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password + 'a'
-      click_button 'Create Worker'
+      click_button 'Create worker'
     end
 
     assert_equal workers_path, current_path
@@ -44,7 +44,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create Worker'
+      click_button 'Create worker'
     end
 
     assert_equal workers_path, current_path
@@ -57,7 +57,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create Worker'
+      click_button 'Create worker'
     end
 
     assert_equal workers_path, current_path
@@ -66,7 +66,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
 
   test 'shows error on empty form' do
     assert_no_difference 'Worker.count' do
-      click_button 'Create Worker'
+      click_button 'Create worker'
     end
 
     assert_equal workers_path, current_path

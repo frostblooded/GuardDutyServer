@@ -22,9 +22,6 @@ en:
     index:
       title: "Settings"
       header: "Your settings"
-      email_wanted_label: "Do you want to recieve daily reports?"
-      email_time_label: "When do you want to receive the mail?"
-      recipients_label: "Emails to report to:"
       submit: "Save changes"
       edit_credentials: "Want to edit your email or credentials?"
     update:
@@ -91,3 +88,31 @@ en:
       content: "You can contact us with feedback on nikolay_danailov@yahoo.com"
     home:
       content: "Attendance Check is a platform, which helps you reliably control the dpresence and attendance of your workers when they are most needed."
+  helpers:
+    submit:
+      worker:
+        create: "Create worker"
+        update: "Update worker"
+      site:
+        create: "Create site"
+        show: "Save changes"
+      route:
+        create: "Create route"
+      settings:
+        update: "Save changes"
+    label:
+      worker:
+        name: "Worker name"
+        password: "Worker password"
+        password_confirmation: "Confirm worker password"
+      site:
+        name: "Site name"
+        call_interval: "Call interval"
+        shift_start: "Shift start"
+        shift_end: "Shift end"
+      route:
+        name: "Route name"
+      settings:
+        email_wanted: "Do you want to recieve daily reports?"
+        email_time: "When do you want to receive the mail?"
+        emails: "Emails to report to:"
