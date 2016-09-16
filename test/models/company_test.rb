@@ -17,6 +17,7 @@ class CompanyTest < ActiveSupport::TestCase
 
   test 'company has its email as recipient by default' do
     assert @company.settings(:email).recipients.include? @company.email
+    assert 1, @company.settings(:email).recipients.count
   end
 
   test 'company name is unique' do
