@@ -12,6 +12,9 @@
 
     <div class="collapse navbar-collapse" id="collapse-nav">
       <ul class="nav navbar-nav navbar-right main-nav">
+        <%= link_to_unless_current 'English', locale: 'en' %> |
+        <%= link_to_unless_current 'Български', locale: 'bg' %>
+
         <% if company_signed_in? %>
           <li class="inline-nav-item">
             <%= link_to sites_path, id: 'sites-nav' do %>
