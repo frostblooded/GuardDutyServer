@@ -1,0 +1,117 @@
+bg:
+  site: "Обект"
+  worker: "Работник"
+  edit: "Редактирай"
+  delete: "Изтрий"
+  confirmation: "Сигурен ли си?"
+  sign_out: "Излез"
+  sign_in: "Влез"
+  sign_up: "Регистрирай се"
+  app:
+    name: "Attendance Check"
+  empty_field: "полето е празно, моля въведете нещо първо"
+  name:
+    not_unique: "не е уникално в тази компания"
+  routes:
+    create:
+      success: "Обход създаден"
+  settings:
+    index:
+      title: "Настройки"
+      header: "Твоите настройки"
+      submit: "Запази промените"
+      edit_credentials: "Искаш ли да промениш email-а или паролата си?"
+    update:
+      success: "Настройките са обновени"
+      email_invalid: "Email-а '%{recipient}' е невалиден"
+  sites:
+    index:
+      title: "Обекти"
+      header: "Управлявай обектите си"
+      create_site: "Създай обект"
+    new:
+      title: "Създай обект"
+      header: "Създай обект"
+    show:
+      workers_header: "Работници на този обект"
+      submit: "Запази промените"
+    update:
+      success: "Настройките на обекта са запазени"
+      duplicate_worker: "Работникът '%{worker}' е добавен няколко пъти"
+      inexistent_worker: "Работникът '%{worker}' не съществува в тази компания"
+    create:
+      success: "Обектът е създаден"
+    destroy:
+      success: "Обектът е изтрит"
+  routes:
+    header: "Управлявай обходите си"
+    new:
+      title: "Създай обход"
+  workers:
+    edit:
+      title: "Редактирай работник"
+      header: "Редактирай работник"
+    index:
+      title: "Работници"
+      header: "Активност на работниците"
+      create_worker: "Създай работник"
+    new:
+      title: "Създай работник"
+      header: "Създай работник"
+    show:
+      worker_sites: "Обектите, на които принадлежи този работник:"
+      timestamp: "Време"
+      category: "Категория"
+      time_left: "Оставащо време"
+    create:
+      success: "Работникът е създаден"
+    update:
+      success: "Работникът е обновен"
+    destroy:
+      success: "Работникът е изтрит"
+  worker_report:
+    late_login: "е влязъл %{minutes} минути по-късно'"
+    unreceived_call: "неполучено обаждане"
+    unanswered_call: "неотговорено обаждане"
+  report:
+    subject: "Доклад за работниците"
+    introduction: "Здравей, %{company_name}. Това е докладът ти за днес."
+    workers_title: "Работниците, които се появиха на работа днес:"
+    sites_title: "Последните завършени смени на твоите обекти:"
+  static_pages:
+    contact:
+      title: "Контакти"
+      header: "Контакти"
+      content: "Можеш да се свържеш с нас на nikolay_danailov@yahoo.com"
+    home:
+      content: "Attendance Check е платформа, която ти помага да управляваш работниците си и присъствието им."
+  helpers:
+    submit:
+      worker:
+        create: "Създай работник"
+        update: "Обнови работник"
+      site:
+        create: "Създай обект"
+        show: "Запази промените"
+      route:
+        create: "Създай обход"
+      settings:
+        update: "Запази промените"
+    label:
+      worker:
+        name: "Име на работника"
+        password: "Парола на работника"
+        password_confirmation: "Потвърди паролата на работника"
+        new_password: "Новата парола на работника"
+        new_password_confirmation: "Повтори новата парола на работника"
+      site:
+        name: "Име на обекта"
+        call_interval: "Интервал между обажданията"
+        shift_start: "Начало на смяна"
+        shift_end: "Край на смяна"
+      route:
+        name: "Име на обход"
+      settings:
+        email_wanted: "Искаш ли да получаваш доклад всеки ден?"
+        email_time: "Кога искаш да получаваш доклад?"
+        emails: "Email-и, на които да се докладва:"

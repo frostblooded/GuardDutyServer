@@ -3,9 +3,6 @@ en:
   worker: "Worker"
   edit: "Edit"
   delete: "Delete"
-  timestamp: "Timestamp"
-  category: "Category"
-  time_left: 
   confirmation: "You sure?"
   sign_out: "Sign out"
   sign_in: "Sign in"
@@ -87,7 +84,7 @@ en:
       header: "Contacts"
       content: "You can contact us with feedback on nikolay_danailov@yahoo.com"
     home:
-      content: "Attendance Check is a platform, which helps you reliably control the dpresence and attendance of your workers when they are most needed."
+      content: "Attendance Check is a platform, which helps you reliably control the presence and attendance of your workers."
   helpers:
     submit:
       worker:
@@ -105,6 +102,8 @@ en:
         name: "Worker name"
         password: "Worker password"
         password_confirmation: "Confirm worker password"
+        new_password: "Worker's new password"
+        new_password_confirmation: "Confirm worker's new password"
       site:
         name: "Site name"
         call_interval: "Call interval"
