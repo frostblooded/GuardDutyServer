@@ -14,7 +14,7 @@ class Shift
   end
 
   def call_interval
-    @site.settings(:call).interval.to_i
+    @site.call_interval.to_i
   end
 
   # Returns the workers, which participated in the shift

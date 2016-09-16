@@ -29,9 +29,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
   end
 
   test 'shows correct default site settings' do
-    assert_equal @site.settings(:call).interval, find('#call_interval').value
-    assert_equal @site.settings(:shift).start, find('#shift_start').value
-    assert_equal @site.settings(:shift).end, find('#shift_end').value
+    assert_equal @site.call_interval, find('#call_interval').value
+    assert_equal @site.shift_start, find('#shift_start').value
+    assert_equal @site.shift_end, find('#shift_end').value
 
     within '#workers' do
       worker_inputs = page.all('.worker-input').map(&:value)
@@ -51,9 +51,9 @@ class CanAccessSitePageTest < Capybara::Rails::TestCase
     assert_text 'Site settings updated'
 
     @site.reload
-    assert_equal @new_call_interval, @site.settings(:call).interval
-    assert_equal @new_shift_start, @site.settings(:shift).start
-    assert_equal @new_shift_end, @site.settings(:shift).end
+    assert_equal @new_call_interval, @site.call_interval
+    assert_equal @new_shift_start, @site.shift_start
+    assert_equal @new_shift_end, @site.shift_end
   end
 
   test 'adding workers works' do

@@ -27,9 +27,9 @@ module API
           end
 
           get :settings do
-            { shift_start: params_site.settings(:shift).start,
-              shift_end: params_site.settings(:shift).end,
-              call_interval: params_site.settings(:call).interval }
+            { shift_start: params_site.shift_start,
+              shift_end: params_site.shift_end,
+              call_interval: params_site.call_interval }
           end
 
           mount Routes

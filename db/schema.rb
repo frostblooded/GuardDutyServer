@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916192922) do
+ActiveRecord::Schema.define(version: 20160916203247) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160916192922) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "company_id"
+    t.text     "settings"
     t.index ["company_id"], name: "index_sites_on_company_id"
   end
 

@@ -12,15 +12,20 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  # has_settings do |s|
-  #   s.key :call, defaults: { interval: '15' }
-  #   s.key :shift, defaults: { start: '12:00', end: '13:00' }
-  # end
+  store :settings, accessors: [ :call_interval, :shift_start, :shift_end ], coder: JSON
 
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company
                    uniqueness: { scope: :company_id,
                                  message: I18n.t('name.not_unique') }
+
+  before_create :initialize_site
+
+  def initialize_site
+    self.call_interval = '15'
+    self.shift_start = '12:00'
+    self.shift_end = '13:00'
+  end
 
   # Returns data about the last COMPLETED shift
   def last_shift
@@ -48,13 +53,13 @@ class Site < ActiveRecord::Base
   end
 
   def last_shift_start(shift_end)
-    shift_start = Time.zone.parse settings(:shift).start
+    shift_start = Time.zone.parse self.shift_start
     shift_start -= 1.day while shift_start > shift_end
     shift_start
   end
 
   def last_shift_end
-    shift_end = Time.zone.parse settings(:shift).end
+    shift_end = Time.zone.parse self.shift_end
     shift_end -= 1.day while shift_end > Time.zone.now
     shift_end
   end

@@ -6,10 +6,6 @@ class Company < ActiveRecord::Base
 
   store :settings, accessors: [ :recipients, :email_wanted, :email_time ], coder: JSON
 
-  # has_settings do |s|
-  #   s.key :email, defaults: { wanted: false, time: '12:00' }
-  # end
-
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -10,18 +10,18 @@
 <%= form_tag @site, method: :put, class:'col-md-offset-3 col-md-6' do %>
   <div class="form-group row col-md-3 pull-left">
     <%= label_tag t('.call_interval') %>
-    <%= text_field_tag :call_interval, @site.settings(:call).interval, min: 5, max: 60,
+    <%= text_field_tag :call_interval, @site.call_interval, min: 5, max: 60,
                        type: :number, class:'form-control' %>
   </div>
 
   <div class="form-group row col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">
     <%= label_tag t('.shift_start') %>
-    <%= time_field_tag :shift_start, @site.settings(:shift).start, class:'form-control' %>
+    <%= time_field_tag :shift_start, @site.shift_start, class:'form-control' %>
   </div>
 
   <div class="form-group row col-md-4 col-xs-4 pull-right">
     <%= label_tag t('.shift_end') %>
-    <%= time_field_tag :shift_end, @site.settings(:shift).end, class:'form-control' %>
+    <%= time_field_tag :shift_end, @site.shift_end, class:'form-control' %>
   </div>
 
   <div class="clearfix"></div>

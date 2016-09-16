@@ -4,7 +4,7 @@ require 'test_helper'
 class WorkerReportTest < ActiveSupport::TestCase
   def setup
     @site = create(:site)
-    @site.settings(:call).interval = '15'
+    @site.call_interval = '15'
 
     @worker = @site.workers.first
 
