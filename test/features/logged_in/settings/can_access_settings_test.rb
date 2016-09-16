@@ -6,16 +6,16 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     @new_email_time = '13:00'
     @new_invalid_email_time = '13?23REtre'
 
-    @company.settings(:email).recipients = ['ivan@example.com',
-                                            'petkan@example.com']
+    @company.recipients = ['ivan@example.com',
+                           'petkan@example.com']
     @added_email = 'frostblooded@example.com'
     @invalid_email = 'rgergreg@wefwef.'
   end
 
   def setup
     @company = create(:company)
-    @company.settings(:email).time = '12:00'
-    @company.settings(:email).wanted = true
+    @company.email_time = '12:00'
+    @company.email_wanted = true
     initialize_email_variables
 
     login_as @company
@@ -23,10 +23,10 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   end
 
   test 'shows correct default values' do
-    assert_equal @company.settings(:email).wanted,
+    assert_equal @company.email_wanted,
                  find('#email_wanted').checked?
 
-    assert_equal @company.settings(:email).time, find('#email_time').value
+    assert_equal @company.email_time, find('#email_time').value
   end
 
   test 'correctly updates email time' do
@@ -37,7 +37,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     assert_text 'Settings updated'
 
     @company.reload
-    assert_equal @new_email_time, @company.settings(:email).time
+    assert_equal @new_email_time, @company.email_time
   end
 
   test 'correctly updates email wanted' do
@@ -48,7 +48,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     assert_text 'Settings updated'
 
     @company.reload
-    assert_equal @new_email_wanted, @company.settings(:email).wanted
+    assert_equal @new_email_wanted, @company.email_wanted
   end
 
   test 'adding emails works' do
@@ -60,7 +60,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     click_button 'Save changes'
 
     @company.reload
-    assert @company.settings(:email).recipients.include? @added_email
+    assert @company.recipients.include? @added_email
   end
 
   test 'removing emails works' do
@@ -71,7 +71,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     click_button 'Save changes'
 
     @company.reload
-    assert_not @company.settings(:email).recipients.include? @email
+    assert_not @company.recipients.include? @email
   end
 
   test 'adding invalid email shows error but saves valid ones' do
@@ -86,7 +86,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
     assert_text "The email '#{@invalid_email}' is invalid"
 
     @company.reload
-    assert_not @company.settings(:email).recipients.include? @invalid_email
-    assert @company.settings(:email).recipients.include? @added_email
+    assert_not @company.recipients.include? @invalid_email
+    assert @company.recipients.include? @added_email
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904144321) do
+ActiveRecord::Schema.define(version: 20160916192922) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160904144321) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "last_mail_sent_at"
+    t.text     "settings"
     t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
     t.index ["name"], name: "index_companies_on_name", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true

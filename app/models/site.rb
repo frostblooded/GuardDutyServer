@@ -12,10 +12,10 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  has_settings do |s|
-    s.key :call, defaults: { interval: '15' }
-    s.key :shift, defaults: { start: '12:00', end: '13:00' }
-  end
+  # has_settings do |s|
+  #   s.key :call, defaults: { interval: '15' }
+  #   s.key :shift, defaults: { start: '12:00', end: '13:00' }
+  # end
 
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company

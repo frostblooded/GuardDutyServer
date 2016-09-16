@@ -3,9 +3,9 @@ require 'test_helper'
 class CompanyHelperTest < ActiveSupport::TestCase
   def setup
     @company = create(:company)
-    @company.settings(:email).time = '12:00'
-    @company.settings(:email).daily = true
-    @company.settings(:email).recipients = ['frostblooded@example.org',
+    @company.email_time = '12:00'
+    @company.email_wanted = true
+    @company.recipients = ['frostblooded@example.org',
                                             'ivan@example.org']
   end
 
@@ -13,7 +13,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
     Timecop.freeze(Time.zone.parse('13:00')) do
       @company.update(last_mail_sent_at: Time.zone.now - 1.day)
       CompanyHelper.check_mails_status
-      assert mail_is_sent?(@company.settings(:email).recipients.first)
+      assert mail_is_sent?(@company.recipients.first)
     end
   end
 
@@ -21,7 +21,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
     Timecop.freeze(Time.zone.parse('13:00')) do
       @company.update(last_mail_sent_at: Time.zone.now)
       CompanyHelper.check_mails_status
-      assert_not mail_is_sent?(@company.settings(:email).recipients.first)
+      assert_not mail_is_sent?(@company.recipients.first)
     end
   end
 
@@ -29,7 +29,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
     Timecop.freeze(Time.zone.parse('13:00')) do
       @company.update(last_mail_sent_at: Time.zone.now - 1.day)
       CompanyHelper.check_mails_status
-      assert mails_are_sent?(@company.settings(:email).recipients)
+      assert mails_are_sent?(@company.recipients)
     end
   end
 end
