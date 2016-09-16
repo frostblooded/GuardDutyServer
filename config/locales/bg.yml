@@ -40,6 +40,9 @@ bg:
     index:
       title: "Настройки"
       header: "Твоите настройки"
+      email_wanted: "Искаш ли да получаваш доклади всеки ден?"
+      email_time: "Кога искаш да получаваш докалада?"
+      emails: "Email-и, на които да бъде докладвано:"
       submit: "Запази промените"
       edit_credentials: "Искаш ли да промениш email-а или паролата си?"
     update:
@@ -55,6 +58,9 @@ bg:
       header: "Създай обект"
     show:
       workers_header: "Работници на този обект"
+      call_interval: "Интервал между обаждания"
+      shift_start: "Начало на смяната"
+      shift_end: "Край на смяната"
       submit: "Запази промените"
     update:
       success: "Настройките на обекта са запазени"
@@ -106,33 +112,3 @@ bg:
       content: "Можеш да се свържеш с нас на nikolay_danailov@yahoo.com"
     home:
       content: "Attendance Check е платформа, която ти помага да управляваш работниците си и присъствието им."
-  helpers:
-    submit:
-      worker:
-        create: "Създай работник"
-        update: "Обнови работник"
-      site:
-        create: "Създай обект"
-        show: "Запази промените"
-      route:
-        create: "Създай обход"
-      settings:
-        update: "Запази промените"
-    label:
-      worker:
-        name: "Име на работника"
-        password: "Парола на работника"
-        password_confirmation: "Потвърди паролата на работника"
-        new_password: "Новата парола на работника"
-        new_password_confirmation: "Повтори новата парола на работника"
-      site:
-        name: "Име на обекта"
-        call_interval: "Интервал между обажданията"
-        shift_start: "Начало на смяна"
-        shift_end: "Край на смяна"
-      route:
-        name: "Име на обход"
-      settings:
-        email_wanted: "Искаш ли да получаваш доклад всеки ден?"
-        email_time: "Кога искаш да получаваш доклад?"
-        emails: "Email-и, на които да се докладва:"

@@ -11,6 +11,7 @@ en:
         name: "Name"
         password: "Password"
         password_confirmation: "Password confirmation"
+        current_password: "Current password"
       worker:
         name: "Name"
         password: "Password"
@@ -39,6 +40,9 @@ en:
     index:
       title: "Settings"
       header: "Your settings"
+      email_wanted: "Do you want to recieve daily reports?"
+      email_time: "When do you want to receive the mail?"
+      emails: "Emails to report to:"
       submit: "Save changes"
       edit_credentials: "Want to edit your email or credentials?"
     update:
@@ -54,6 +58,9 @@ en:
       header: "Create site"
     show:
       workers_header: "Workers on this site"
+      call_interval: "Call interval"
+      shift_start: "Shift start"
+      shift_end: "Shift end"
       submit: "Save changes"
     update:
       success: "Site settings updated"
@@ -105,33 +112,3 @@ en:
       content: "You can contact us with feedback on nikolay_danailov@yahoo.com"
     home:
       content: "Attendance Check is a platform, which helps you reliably control the presence and attendance of your workers."
-  helpers:
-    submit:
-      worker:
-        create: "Create worker"
-        update: "Update worker"
-      site:
-        create: "Create site"
-        show: "Save changes"
-      route:
-        create: "Create route"
-      settings:
-        update: "Save changes"
-    label:
-      worker:
-        name: "Worker name"
-        password: "Worker password"
-        password_confirmation: "Confirm worker password"
-        new_password: "Worker's new password"
-        new_password_confirmation: "Confirm worker's new password"
-      site:
-        name: "Site name"
-        call_interval: "Call interval"
-        shift_start: "Shift start"
-        shift_end: "Shift end"
-      route:
-        name: "Route name"
-      settings:
-        email_wanted: "Do you want to recieve daily reports?"
-        email_time: "When do you want to receive the mail?"
-        emails: "Emails to report to:"
