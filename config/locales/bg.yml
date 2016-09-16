@@ -1,4 +1,25 @@
 bg:
+  activerecord:
+    models:
+      company: "Компания"
+      worker: "Работник"
+      site: "Обект"
+      route: "Обход"
+    attributes:
+      company:
+        email: "Email"
+        name: "Име"
+        password: "Парола"
+        password_confirmation: "Потвърждение на парола"
+        current_password: "Текуща парола"
+      worker:
+        name: "Име"
+        password: "Парола"
+        password_confirmation: "Потвърждение на парола"
+      site:
+        name: "Име"
+      route:
+        name: "Име"
   site: "Обект"
   worker: "Работник"
   edit: "Редактирай"

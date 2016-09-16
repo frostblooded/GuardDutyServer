@@ -1,4 +1,24 @@
 en:
+  activerecord:
+    models:
+      company: "Company"
+      worker: "Worker"
+      site: "Site"
+      route: "Route"
+    attributes:
+      company:
+        email: "Email"
+        name: "Name"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      worker:
+        name: "Name"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      site:
+        name: "Name"
+      route:
+        name: "Name"
   site: "Site"
   worker: "Worker"
   edit: "Edit"
