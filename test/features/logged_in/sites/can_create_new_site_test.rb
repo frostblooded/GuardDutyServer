@@ -14,7 +14,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
   test 'can create new site' do
     assert_difference 'Site.count' do
       fill_in 'site_name', with: @new_site_name
-      click_button 'Create new site'
+      click_button 'Create Site'
     end
 
     assert_equal sites_path, current_path
@@ -27,7 +27,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
     # Not unique in company
     assert_no_difference 'Site.count' do
       fill_in 'site_name', with: @site.name
-      click_button 'Create new site'
+      click_button 'Create Site'
     end
 
     assert_equal sites_path, current_path
@@ -38,7 +38,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
 
     assert_difference 'Site.count' do
       fill_in 'site_name', with: @site.name
-      click_button 'Create new site'
+      click_button 'Create Site'
     end
 
     assert_equal sites_path, current_path
@@ -47,7 +47,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
 
   test 'shows error on empty form' do
     assert_no_difference 'Site.count' do
-      click_button 'Create new site'
+      click_button 'Create Site'
     end
 
     assert_equal sites_path, current_path

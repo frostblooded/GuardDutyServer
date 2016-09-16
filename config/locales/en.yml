@@ -38,7 +38,6 @@ en:
     new:
       title: "Create site"
       header: "Create site"
-      submit: "Create new site"
     show:
       workers_header: "Workers on this site"
       submit: "Save changes"
@@ -54,12 +53,10 @@ en:
     header: "Manage your routes"
     new:
       title: "Create route"
-      submit: "Create new route"
   workers:
     edit:
       title: "Edit worker"
       header: "Edit worker"
-      submit: "Save changes"
     index:
       title: "Workers"
       header: "Workers' activity"
@@ -67,7 +64,6 @@ en:
     new:
       title: "Create worker"
       header: "Create worker"
-      submit: "Create new worker"
     show:
       worker_sites: "The sites, to which this worker belongs:"
       timestamp: "Timestamp"
