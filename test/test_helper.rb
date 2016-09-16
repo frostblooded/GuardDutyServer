@@ -39,6 +39,9 @@ class ActiveRecord::Base
   end
 end
 
+# Set default url options for tests separately as needed
+Rails.application.default_url_options = { locale: I18n.locale }
+
 # Forces all threads to share the same connection. This works on
 # Capybara because it starts the web server in a thread.
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
