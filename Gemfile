@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails',                              '~> 5.0.0.1'
-gem 'ledermann-rails-settings',           '~> 2.4.2'
 gem 'exception_notification',             '~> 4.2.1'
 gem 'devise',                             '~> 4.2.0'
 gem 'devise-i18n',                        '~> 1.1.0'
