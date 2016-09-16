@@ -1,10 +1,10 @@
 bg:
   activerecord:
     models:
-      company: "Компания"
-      worker: "Работник"
-      site: "Обект"
-      route: "Обход"
+      company: "компания"
+      worker: "работник"
+      site: "обект"
+      route: "обход"
     attributes:
       company:
         email: "Email"

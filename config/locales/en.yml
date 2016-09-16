@@ -1,10 +1,10 @@
 en:
   activerecord:
     models:
-      company: "Company"
-      worker: "Worker"
-      site: "Site"
-      route: "Route"
+      company: "company"
+      worker: "worker"
+      site: "site"
+      route: "route"
     attributes:
       company:
         email: "Email"
