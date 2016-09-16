@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916203247) do
+ActiveRecord::Schema.define(version: 20160916204942) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -70,16 +70,6 @@ ActiveRecord::Schema.define(version: 20160916203247) do
     t.datetime "updated_at", null: false
     t.integer  "site_id"
     t.index ["site_id"], name: "index_routes_on_site_id"
-  end
-
-  create_table "settings", force: :cascade do |t|
-    t.string   "var",         null: false
-    t.text     "value"
-    t.string   "target_type", null: false
-    t.integer  "target_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
   end
 
   create_table "site_worker_relations", force: :cascade do |t|
