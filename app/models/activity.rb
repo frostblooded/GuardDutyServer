@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   # Used for showing the activity in the worker page
   attr_accessor :row_class
 
-  validates :time_left, numericality: true, allow_nil: true
+  validates :time_left, numericality: true, presence: true, if: :call?
   validates :site, presence: true
   validates :worker, presence: true
 end
