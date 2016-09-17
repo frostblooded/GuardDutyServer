@@ -12,6 +12,7 @@ bg:
         password: "Парола"
         password_confirmation: "Потвърждение на парола"
         current_password: "Текуща парола"
+        remember_me: "Запомни ме"
       worker:
         name: "Име"
         password: "Парола"
