@@ -1,26 +1,4 @@
 en:
-  activerecord:
-    models:
-      company: "company"
-      worker: "worker"
-      site: "site"
-      route: "route"
-    attributes:
-      company:
-        email: "email"
-        name: "name"
-        password: "password"
-        password_confirmation: "password confirmation"
-        current_password: "current password"
-        remember_me: "remember me"
-      worker:
-        name: "name"
-        password: "password"
-        password_confirmation: "password confirmation"
-      site:
-        name: "name"
-      route:
-        name: "name"
   site: "Site"
   worker: "Worker"
   edit: "Edit"
