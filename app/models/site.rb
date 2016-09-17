@@ -12,7 +12,8 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  store :settings, accessors: [ :call_interval, :shift_start, :shift_end ], coder: JSON
+  store :settings, accessors: [:call_interval, :shift_start, :shift_end],
+                   coder: JSON
 
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company

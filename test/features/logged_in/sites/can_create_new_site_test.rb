@@ -31,7 +31,7 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
     end
 
     assert_equal sites_path, current_path
-    assert_text 'Name not unique in company'
+    assert_text 'name not unique in company'
 
     # Unique in company
     login_as @other_company
@@ -51,6 +51,6 @@ class CanCreateNewSiteTest < Capybara::Rails::TestCase
     end
 
     assert_equal sites_path, current_path
-    assert_text 'Name can\'t be blank'
+    assert_text 'name can\'t be blank'
   end
 end

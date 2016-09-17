@@ -31,7 +31,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_text 'Password confirmation doesn\'t match Password'
+    assert_text 'password confirmation doesn\'t match password'
   end
 
   test 'shows error when name isn\'t unique in company' do
@@ -48,7 +48,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_text 'Name not unique in company'
+    assert_text 'name not unique in company'
 
     # Unique in company
     @worker.update(company: @other_company)
@@ -70,8 +70,8 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
     end
 
     assert_equal workers_path, current_path
-    assert_text 'Name can\'t be blank'
-    assert_text 'Password can\'t be blank'
-    assert_text 'Password is too short (minimum is 8 characters)'
+    assert_text 'name can\'t be blank'
+    assert_text 'password can\'t be blank'
+    assert_text 'password is too short (minimum is 8 characters)'
   end
 end

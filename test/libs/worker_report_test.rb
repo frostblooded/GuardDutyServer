@@ -187,9 +187,10 @@ class WorkerReportTest < ActiveSupport::TestCase
   end
 
   test 'generated messages are correct' do
-    unreceived_call = WorkerReport.format_unreceived_call(@shift.start + 50.minutes)
-    unanswered_call = WorkerReport.format_unanswered_call(@shift.start + 50.minutes)
-    late_login = WorkerReport.format_late_login(20, @shift.start + 50.minutes)
+    activity_time = @shift.start + 50.minutes
+    unreceived_call = WorkerReport.format_unreceived_call(activity_time)
+    unanswered_call = WorkerReport.format_unanswered_call(activity_time)
+    late_login = WorkerReport.format_late_login(20, activity_time)
 
     assert unreceived_call.include? 'unreceived call'
     assert unanswered_call.include? 'didn\'t answer call'

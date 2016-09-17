@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   # Override the default url options to allow locale settings
   # in the url
-  def default_url_options(options = {})
+  def default_url_options(_options = {})
     { locale: I18n.locale }
   end
 end

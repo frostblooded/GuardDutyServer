@@ -94,8 +94,8 @@ class SitesController < ApplicationController
 
       if !worker
         @errors << t('.inexistent_worker', worker: name)
-      elsif !@site.workers.include? worker
-        @site.workers << worker
+      else
+        @site.workers << worker unless @site.workers.include? worker
       end
     end
   end

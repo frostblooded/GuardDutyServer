@@ -4,7 +4,8 @@ class Company < ActiveRecord::Base
   has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
 
-  store :settings, accessors: [ :recipients, :email_wanted, :email_time ], coder: JSON
+  store :settings, accessors: [:recipients, :email_wanted, :email_time],
+                   coder: JSON
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
@@ -36,7 +37,7 @@ class Company < ActiveRecord::Base
   end
 
   def send_report_email
-    self.recipients.each do |r|
+    recipients.each do |r|
       CompanyNotifier.report_email(self, r).deliver_now
     end
   end

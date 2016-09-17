@@ -31,14 +31,14 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console',             '~> 3.3.1'
-  gem 'capistrano',              '~> 3.6.1'
-  gem 'capistrano-rvm',          '~> 0.1.2'
-  gem 'capistrano-rails',        '~> 1.1.7'
-  gem 'capistrano-rails-db',     '~> 0.0.2'
-  gem 'capistrano-faster-assets','~> 1.0.2'
-  gem 'capistrano-passenger',    '~> 0.2.0'
-  gem 'rubocop',                 '~> 0.42.0'
+  gem 'web-console',              '~> 3.3.1'
+  gem 'capistrano',               '~> 3.6.1'
+  gem 'capistrano-rvm',           '~> 0.1.2'
+  gem 'capistrano-rails',         '~> 1.1.7'
+  gem 'capistrano-rails-db',      '~> 0.0.2'
+  gem 'capistrano-faster-assets', '~> 1.0.2'
+  gem 'capistrano-passenger',     '~> 0.2.0'
+  gem 'rubocop',                  '~> 0.42.0'
 end
 
 group :test do
