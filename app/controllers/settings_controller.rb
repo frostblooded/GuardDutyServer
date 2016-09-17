@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
 
   def update_settings
     current_company.email_wanted = params[:email_wanted].present?
-    current_company.email_time = params[:email_time]
+    current_company.email_time = params[:email_time] if params[:email_time]
     current_company.save!
   end
 
