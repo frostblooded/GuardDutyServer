@@ -1,0 +1,21 @@
+en:
+  devise:
+    confirmations:
+      new:
+        title: Resend confirmation instructions
+    passwords:
+      edit:
+        title: Change your password
+      new:
+        title: Send password reset instructions
+    registrations:
+      edit:
+        title: Edit account
+      new:
+        title: Sign up
+    sessions:
+      new:
+        title: Sign in
+    unlocks:
+      new:
+        title: Resend unlock instructions
