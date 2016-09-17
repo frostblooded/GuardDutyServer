@@ -23,6 +23,9 @@ module AttendanceCheckRailsapp
     # config.i18n.default_locale = :de
     config.i18n.available_locales = [:en, :bg]
 
+    # i18n-js requires this
+    config.assets.initialize_on_precompile = true
+
     # Adding 'api' folder to application files for the API
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]

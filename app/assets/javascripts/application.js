@@ -15,3 +15,5 @@
 //= require bootstrap
 //= require jquery-ui
 //= require autocomplete-rails
+//= require i18n
+//= require i18n/translations
