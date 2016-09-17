@@ -1,8 +1,5 @@
 $(document).ready(function(){
   initialize_new_email_form();
-
-  $('[data-toggle="tooltip"]').tooltip();
-
   update_email_inputs($('#email_wanted').is(':checked'))
 
   $('#email_wanted').on('click', function() {
@@ -15,8 +12,7 @@ function create_email_input(email) {
   var $email = $('<div class="report-email input-group form-group"></div>');
   var $email_input = $('<input class="form-control" type="text" name="recipients[]" value="' + email + '"/>');
   var $email_remove = $('<span class="input-group-btn">' +
-    '<button class="btn btn-danger email-remove"  data-toggle="tooltip"'+
-    ' data-placement="right" title="' + I18n.t('settings.index.email_remove_tooltip') +'">'+
+    '<button class="btn btn-danger email-remove">'+
       '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
       '</span>'+
     '</button>'+
