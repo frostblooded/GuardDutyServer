@@ -1,23 +1,23 @@
 bg:
   activerecord:
     models:
-      company: "компания"
-      worker: "работник"
-      site: "обект"
-      route: "обход"
+      company: компания
+      worker: работник
+      site: обект
+      route: обход
     attributes:
       company:
-        email: "email"
-        name: "име"
-        password: "парола"
-        password_confirmation: "потвърждение на парола"
-        current_password: "текуща парола"
-        remember_me: "запомни ме"
+        email: email
+        name: име
+        password: парола
+        password_confirmation: потвърждение на парола
+        current_password: текуща парола
+        remember_me: запомни ме
       worker:
-        name: "име"
-        password: "парола"
-        password_confirmation: "потвърждение на парола"
+        name: име
+        password: парола
+        password_confirmation: потвърждение на парола
       site:
-        name: "име"
+        name: име
       route:
-        name: "име"
+        name: име
