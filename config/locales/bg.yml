@@ -7,20 +7,20 @@ bg:
       route: "обход"
     attributes:
       company:
-        email: "Email"
-        name: "Име"
-        password: "Парола"
-        password_confirmation: "Потвърждение на парола"
-        current_password: "Текуща парола"
-        remember_me: "Запомни ме"
+        email: "email"
+        name: "име"
+        password: "парола"
+        password_confirmation: "потвърждение на парола"
+        current_password: "текуща парола"
+        remember_me: "запомни ме"
       worker:
-        name: "Име"
-        password: "Парола"
-        password_confirmation: "Потвърждение на парола"
+        name: "име"
+        password: "парола"
+        password_confirmation: "потвърждение на парола"
       site:
-        name: "Име"
+        name: "име"
       route:
-        name: "Име"
+        name: "име"
   site: "Обект"
   worker: "Работник"
   edit: "Редактирай"
