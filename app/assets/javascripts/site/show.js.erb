@@ -9,7 +9,7 @@ function create_worker_input(worker_name) {
   var $worker_input = $('<input class="worker-input form-control" type="text" name="workers[]" value="' + worker_name + '"/>');
   var $worker_remove = $('<span class="input-group-btn">' +
     '<button class="btn btn-danger worker-remove"  data-toggle="tooltip"'+
-    ' data-placement="right" title="Remove worker">'+
+    ' data-placement="right" title="' + I18n.t('sites.show.worker_remove_tooltip') + '">'+
       '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
       '</span>'+
     '</button>'+

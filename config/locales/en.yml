@@ -45,6 +45,8 @@ en:
       emails: "Emails to report to:"
       submit: "Save changes"
       edit_credentials: "Want to edit your email or credentials?"
+      email_add_tooltip: "Add email"
+      email_remove_tooltip: "Remove email"
     update:
       success: "Settings updated"
       email_invalid: "The email '%{recipient}' is invalid"
@@ -62,6 +64,8 @@ en:
       shift_start: "Shift start"
       shift_end: "Shift end"
       submit: "Save changes"
+      worker_add_tooltip: "Add worker"
+      worker_remove_tooltip: "Remove worker"
     update:
       success: "Site settings updated"
       duplicate_worker: "Worker '%{worker}' was added several times"

@@ -45,6 +45,8 @@ bg:
       emails: "Email-и, на които да бъде докладвано:"
       submit: "Запази промените"
       edit_credentials: "Искаш ли да промениш email-а или паролата си?"
+      email_add_tooltip: "Добави email"
+      email_remove_tooltip: "Премахни email"
     update:
       success: "Настройките са обновени"
       email_invalid: "Email-а '%{recipient}' е невалиден"
@@ -62,6 +64,8 @@ bg:
       shift_start: "Начало на смяната"
       shift_end: "Край на смяната"
       submit: "Запази промените"
+      worker_add_tooltip: "Добави работник"
+      worker_remove_tooltip: "Премахни работник"
     update:
       success: "Настройките на обекта са запазени"
       duplicate_worker: "Работникът '%{worker}' е добавен няколко пъти"

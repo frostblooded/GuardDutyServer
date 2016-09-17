@@ -16,7 +16,7 @@ function create_email_input(email) {
   var $email_input = $('<input class="form-control" type="text" name="recipients[]" value="' + email + '"/>');
   var $email_remove = $('<span class="input-group-btn">' +
     '<button class="btn btn-danger email-remove"  data-toggle="tooltip"'+
-    ' data-placement="right" title="Remove email">'+
+    ' data-placement="right" title="' + I18n.t('settings.index.email_remove_tooltip') +'">'+
       '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
       '</span>'+
     '</button>'+
