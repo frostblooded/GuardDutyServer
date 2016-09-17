@@ -10,7 +10,9 @@ bg:
         title: Забравена парола?
     registrations:
       edit:
-        title: Промени компанията си
+        # Here 'page_title' is used instead of 'title'
+        # because 'title' already exists, but doesn't work
+        page_title: Промени компанията си
       new:
         title: Регистрация
     sessions:

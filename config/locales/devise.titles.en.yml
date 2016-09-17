@@ -10,7 +10,9 @@ en:
         title: Send password reset instructions
     registrations:
       edit:
-        title: Edit account
+        # Here 'page_title' is used instead of 'title'
+        # because 'title' already exists, but doesn't work
+        page_title: Edit account
       new:
         title: Sign up
     sessions:
