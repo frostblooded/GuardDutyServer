@@ -19,6 +19,8 @@ gem 'jquery-ui-rails',                    '~> 5.0.5'
 gem 'rails-jquery-autocomplete',          '~> 1.0.3'
 gem 'cancancan',                          '~> 1.15.0'
 gem 'grape-cancan',                       '~> 0.0.2'
+gem 'premailer-rails',                    '~> 1.9.4'
+gem 'nokogiri',                           '~> 1.6.8'
 
 # Needed by production environment
 

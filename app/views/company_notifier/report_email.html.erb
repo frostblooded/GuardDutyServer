@@ -2,32 +2,32 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  	<%= stylesheet_link_tag 'company_notifier/report_email.css' %>
   </head>
   <body>
     <div class ="email_content">
-      <h1><%= t 'report.introuction', company_name: @company.name %></h1>
-      <%= t 'report.workers_title' %>
-
-      <div class="workers">
-        <% @shift_reports.each do |report| %>
-          <div class="site_workers">
-            <% unless report.shift.workers.empty? %>
-              <%= report.shift.site.name %>: 
-              <% report.shift.workers.each do |worker| %>
-                <%= worker.name %>,
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
+	  <div id="email-header">
+        <h3><%= t 'report.introduction', company_name: @company.name %></h3>
+        <h4><%= t 'report.sub_introduction' %></h4>
       </div>
 
-      <br>
-      <%= t 'report.sites_title' %> 
-      <br>
+	  <hr />
 
-      <div class="report">
+      <div id="shift-reports-div">
         <%= render @shift_reports %>
       </div>
+	  <hr />
     </div>
+	<script>
+	  var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		acc[i].onclick = function(){
+		  this.classList.toggle("active");
+		  this.nextElementSibling.classList.toggle("show");
+		}
+	  }
+	</script>
   </body>
 </html>

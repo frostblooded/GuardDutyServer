@@ -85,9 +85,8 @@ en:
     unanswered_call: "didn\'t answer call"
   report:
     subject: "Workers' report"
-    introduction: "Hello, %{company_name}. This is your report for today."
-    workers_title: "Workers that showed up today to work:"
-    sites_title: "Last completed shifts for all of your sites:"
+    introduction: "Hello, %{company_name}"
+    sub_introduction: "This is your report for today"
   static_pages:
     contact:
       title: "Contacts"

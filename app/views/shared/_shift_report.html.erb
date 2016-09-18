@@ -1,8 +1,8 @@
-<% if shift_report.messages? %>
-  <div class="shift_report">
+<div class="email-panel">
+  <div class="email-panel-header">
     <%= shift_report.shift.site.name %>
-    <ul>
-      <%= render shift_report.worker_reports %>
-    </ul>
   </div>
-<% end %>
+  <div class="workers">
+    <%= render shift_report.worker_reports %>
+  </div>
+</div>
