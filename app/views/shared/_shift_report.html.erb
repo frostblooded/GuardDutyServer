@@ -1,8 +1,12 @@
 <div class="email-panel">
   <div class="email-panel-header">
-    <%= shift_report.shift.site.name %>
+	Report for  
+	<%= shift_report.shift.site.name %>
+	for
+    <%= shift_report.shift.start.to_date %>
   </div>
   <div class="workers">
     <%= render shift_report.worker_reports %>
   </div>
 </div>
+

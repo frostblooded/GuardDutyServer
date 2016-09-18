@@ -1,10 +1,11 @@
-<button class="accordion"><%= worker_report.worker.name %></button>
-<div class="panel">
-  <ul>
+<div class="worker-panel">
+		<div class="worker-panel-header">
+      <%= worker_report.worker.name %>
+    </div>
+  <ul class="worker-messages">
     <% worker_report.messages.each do |message| %>
-      <li><%= message %></li>
+      <li class="worker-message"><%= message %></li>
     <% end %>
   </ul>
 </div>
-
 
