@@ -2,10 +2,11 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails',                              '~> 5.0.0.1'
-gem 'ledermann-rails-settings',           '~> 2.4.2'
 gem 'exception_notification',             '~> 4.2.1'
 gem 'devise',                             '~> 4.2.0'
 gem 'devise-i18n',                        '~> 1.1.0'
+gem 'rails-i18n',                         '~> 5.0.0'
+gem 'i18n-js',                            '~> 2.1.2'
 gem 'figaro',                             '~> 1.1.1'
 gem 'bcrypt',                             '~> 3.1.7'
 gem 'whenever',                           '~> 0.9.4'
@@ -32,14 +33,14 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console',             '~> 3.3.1'
-  gem 'capistrano',              '~> 3.6.1'
-  gem 'capistrano-rvm',          '~> 0.1.2'
-  gem 'capistrano-rails',        '~> 1.1.7'
-  gem 'capistrano-rails-db',     '~> 0.0.2'
-  gem 'capistrano-faster-assets','~> 1.0.2'
-  gem 'capistrano-passenger',    '~> 0.2.0'
-  gem 'rubocop',                 '~> 0.42.0'
+  gem 'web-console',              '~> 3.3.1'
+  gem 'capistrano',               '~> 3.6.1'
+  gem 'capistrano-rvm',           '~> 0.1.2'
+  gem 'capistrano-rails',         '~> 1.1.7'
+  gem 'capistrano-rails-db',      '~> 0.0.2'
+  gem 'capistrano-faster-assets', '~> 1.0.2'
+  gem 'capistrano-passenger',     '~> 0.2.0'
+  gem 'rubocop',                  '~> 0.42.0'
 end
 
 group :test do

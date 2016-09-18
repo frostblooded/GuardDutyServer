@@ -7,17 +7,17 @@
 
 <h2 class="page-header"><%= t '.header' %></h2>
 
-<%= form_tag('/settings/', method: :patch, class:'col-md-offset-4 col-md-4') do %>
+<%= form_tag('', method: :patch, class:'col-md-offset-4 col-md-4') do %>
   <div class="form-group row">
-    <%= label_tag :email_wanted, t('.email_wanted_label') %>
-    <%= check_box_tag :email_wanted, true, @company.settings(:email).wanted, class:'css-checkbox' %>
+    <%= label_tag t('.email_wanted') %>
+    <%= check_box_tag :email_wanted, true, @company.email_wanted, class:'css-checkbox' %>
   </div>
   <div id="email-settings">
     <div class="form-group row">
-      <%= label_tag :email_time, t('.email_time_label') %>
+      <%= label_tag t('.email_time') %>
       
       <div class ="input-group">
-        <%= time_field_tag :email_time, @company.settings(:email).time, class:'form-control', aria_describedby: "add-time" %>
+        <%= time_field_tag :email_time, @company.email_time, class:'form-control', aria_describedby: "add-time" %>
         <span class="input-group-addon" id="add-time">
           <span class="glyphicon glyphicon-time"></span>
         </span>
@@ -25,13 +25,13 @@
     </div>
 
     <div class="form-group row">
-      <%= label_tag :emails, t('.recipients_label') %>
+      <%= label_tag t('.emails') %>
 
       <div class="input-group" id="new-email">
         <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
 
         <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button" id="new-email-add" data-toggle="tooltip" data-placement="right" title="Add email">
+          <button class="btn btn-secondary" type="button" id="new-email-add">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </span>
@@ -39,7 +39,7 @@
     </div>
 
     <div id="emails" class="row">
-        <% @company.settings(:email).recipients.each do |email| %>
+        <% @company.recipients.each do |email| %>
           <%= javascript_tag "create_email_input('#{email}');" %> 
         <% end %>
     </div>

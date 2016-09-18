@@ -4,9 +4,8 @@ class Company < ActiveRecord::Base
   has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
 
-  has_settings do |s|
-    s.key :email, defaults: { wanted: false, time: '12:00', recipients: [] }
-  end
+  store :settings, accessors: [:recipients, :email_wanted, :email_time],
+                   coder: JSON
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
@@ -22,7 +21,9 @@ class Company < ActiveRecord::Base
 
   def initialize_company
     @last_mail_sent_at = Time.zone.now
-    settings(:email).recipients << email
+    self.recipients = [email]
+    self.email_wanted = false
+    self.email_time = '12:00'
   end
 
   # Devise documentation says email_required? and email_changed?
@@ -36,7 +37,7 @@ class Company < ActiveRecord::Base
   end
 
   def send_report_email
-    settings(:email).recipients.each do |r|
+    recipients.each do |r|
       CompanyNotifier.report_email(self, r).deliver_now
     end
   end

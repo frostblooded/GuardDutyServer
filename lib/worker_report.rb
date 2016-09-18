@@ -86,7 +86,8 @@ class WorkerReport
   end
 
   def self.format_late_login(minutes, time)
-    format_time(time) + ': ' + I18n.t('worker_report.late_login', minutes: minutes.to_s)
+    format_time(time) + ': ' + I18n.t('worker_report.late_login',
+                                      minutes: minutes.to_s)
   end
 
   def self.format_unreceived_call(time)

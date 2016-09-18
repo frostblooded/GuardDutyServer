@@ -1,0 +1,23 @@
+bg:
+  devise:
+    confirmations:
+      new:
+        title: Повторно изпращане на инструкции за потвърждаване
+    passwords:
+      edit:
+        title: Промени паролата си
+      new:
+        title: Забравена парола?
+    registrations:
+      edit:
+        # Here 'page_title' is used instead of 'title'
+        # because 'title' already exists, but doesn't work
+        page_title: Промени компанията си
+      new:
+        title: Регистрация
+    sessions:
+      new:
+        title: Вход
+    unlocks:
+      new:
+        title: Изпрати наново писмо за отключване на компанията

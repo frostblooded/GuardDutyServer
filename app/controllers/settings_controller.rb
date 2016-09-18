@@ -18,13 +18,13 @@ class SettingsController < ApplicationController
   end
 
   def update_settings
-    current_company.settings(:email).wanted = params[:email_wanted].present?
-    current_company.settings(:email).time = params[:email_time]
-    current_company.settings(:email).save!
+    current_company.email_wanted = params[:email_wanted].present?
+    current_company.email_time = params[:email_time] if params[:email_time]
+    current_company.save!
   end
 
   def save_recipients
-    current_company.settings(:email).recipients = [] if params[:email_wanted]
+    current_company.recipients = [] if params[:email_wanted]
 
     if params[:recipients]
       params[:recipients].uniq.each { |r| handle_recipient r }
@@ -37,7 +37,7 @@ class SettingsController < ApplicationController
     if !(recipient =~ Rails.application.config.email_regex)
       @errors << t('.email_invalid', recipient: recipient)
     else
-      current_company.settings(:email).recipients << recipient
+      current_company.recipients << recipient
     end
   end
 end

@@ -47,11 +47,11 @@ class ShiftTest < ActiveSupport::TestCase
 
   test 'returns correct call_interval' do
     site = Site.create(name: Faker::Name.name)
-    site.settings(:call).interval = '20'
+    site.call_interval = '20'
     shift = Shift.new
     shift.site = site
 
-    assert_equal site.settings(:call).interval.to_i, shift.call_interval
+    assert_equal site.call_interval.to_i, shift.call_interval
   end
 
   test 'returns correct workers' do

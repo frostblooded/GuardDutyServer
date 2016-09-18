@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904144321) do
+ActiveRecord::Schema.define(version: 20160916204942) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160904144321) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "last_mail_sent_at"
+    t.text     "settings"
     t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
     t.index ["name"], name: "index_companies_on_name", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
@@ -71,16 +72,6 @@ ActiveRecord::Schema.define(version: 20160904144321) do
     t.index ["site_id"], name: "index_routes_on_site_id"
   end
 
-  create_table "settings", force: :cascade do |t|
-    t.string   "var",         null: false
-    t.text     "value"
-    t.string   "target_type", null: false
-    t.integer  "target_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
-  end
-
   create_table "site_worker_relations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -93,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160904144321) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "company_id"
+    t.text     "settings"
     t.index ["company_id"], name: "index_sites_on_company_id"
   end
 

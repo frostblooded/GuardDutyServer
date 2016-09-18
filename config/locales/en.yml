@@ -1,96 +1,96 @@
 en:
-  site: "Site"
-  worker: "Worker"
-  edit: "Edit"
-  delete: "Delete"
-  timestamp: "Timestamp"
-  category: "Category"
-  time_left: 
-  confirmation: "You sure?"
-  sign_out: "Sign out"
-  sign_in: "Sign in"
-  sign_up: "Sign up"
+  site: Site
+  worker: Worker
+  edit: Edit
+  delete: Delete
+  confirmation: You sure?
+  sign_out: Sign out
+  sign_in: Sign in
+  sign_up: Sign up
   app:
-    name: "Attendance Check"
-  empty_field: "field is empty, please enter something first"
+    name: Attendance Check
+  empty_field: field is empty, please enter something first
   name:
-    not_unique: "not unique in company"
+    not_unique: not unique in company
   routes:
     create:
-      success: "Route created"
+      success: Route created
   settings:
     index:
-      title: "Settings"
-      header: "Your settings"
-      email_wanted_label: "Do you want to recieve daily reports?"
-      email_time_label: "When do you want to receive the mail?"
-      recipients_label: "Emails to report to:"
-      submit: "Save changes"
-      edit_credentials: "Want to edit your email or credentials?"
+      title: Settings
+      header: Your settings
+      email_wanted: Do you want to recieve daily reports?
+      email_time: When do you want to receive the mail?
+      emails: Emails to report to
+      submit: Save changes
+      edit_credentials: Want to edit your email or credentials?
+      email_add_tooltip: Add email
+      email_remove_tooltip: Remove email
     update:
-      success: "Settings updated"
-      email_invalid: "The email '%{recipient}' is invalid"
+      success: Settings updated
+      email_invalid: The email '%{recipient}' is invalid
   sites:
     index:
-      title: "Sites"
-      header: "Manage your sites"
-      create_site: "Create site"
+      title: Sites
+      header: Manage your sites
+      create_site: Create site
     new:
-      title: "Create site"
-      header: "Create site"
-      submit: "Create new site"
+      title: Create site
+      header: Create site
     show:
-      workers_header: "Workers on this site"
-      submit: "Save changes"
+      workers_header: Workers on this site
+      call_interval: Call interval
+      shift_start: Shift start
+      shift_end: Shift end
+      submit: Save changes
+      worker_add_tooltip: Add worker
+      worker_remove_tooltip: Remove worker
     update:
-      success: "Site settings updated"
-      duplicate_worker: "Worker '%{worker}' was added several times"
-      inexistent_worker: "Worker '%{worker}' doesn't exist in this company"
+      success: Site settings updated
+      duplicate_worker: Worker '%{worker}' was added several times
+      inexistent_worker: Worker '%{worker}' doesn't exist in this company
     create:
-      success: "Site created"
+      success: Site created
     destroy:
-      success: "Site deleted"
+      success: Site deleted
   routes:
-    header: "Manage your routes"
+    header: Manage your routes
     new:
-      title: "Create route"
-      submit: "Create new route"
+      title: Create route
   workers:
     edit:
-      title: "Edit worker"
-      header: "Edit worker"
-      submit: "Save changes"
+      title: Edit worker
+      header: Edit worker
     index:
-      title: "Workers"
-      header: "Workers' activity"
-      create_worker: "Create worker"
+      title: Workers
+      header: Workers' activity
+      create_worker: Create worker
     new:
-      title: "Create worker"
-      header: "Create worker"
-      submit: "Create new worker"
+      title: Create worker
+      header: Create worker
     show:
-      worker_sites: "The sites, to which this worker belongs:"
-      timestamp: "Timestamp"
-      category: "Category"
-      time_left: "Time left"
+      worker_sites: The sites, to which this worker belongs
+      timestamp: Timestamp
+      category: Category
+      time_left: Time left
     create:
-      success: "Worker created"
+      success: Worker created
     update:
-      success: "Worker updated"
+      success: Worker updated
     destroy:
-      success: "Worker deleted"
+      success: Worker deleted
   worker_report:
-    late_login: "logged in %{minutes} minutes too late'"
-    unreceived_call: "unreceived call"
-    unanswered_call: "didn\'t answer call"
+    late_login: logged in %{minutes} minutes too late
+    unreceived_call: unreceived call
+    unanswered_call: didn't answer call
   report:
     subject: "Workers' report"
     introduction: "Hello, %{company_name}"
     sub_introduction: "This is your report for today"
   static_pages:
     contact:
-      title: "Contacts"
-      header: "Contacts"
-      content: "You can contact us with feedback on nikolay_danailov@yahoo.com"
+      title: Contacts
+      header: Contacts
+      content: You can contact us with feedback on nikolay_danailov@yahoo.com
     home:
-      content: "Attendance Check is a platform, which helps you reliably control the dpresence and attendance of your workers when they are most needed."
+      content: Attendance Check is a platform, which helps you reliably control the presence and attendance of your workers.

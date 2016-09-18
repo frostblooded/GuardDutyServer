@@ -27,9 +27,9 @@ class SitesController < ApplicationController
   end
 
   def update_settings
-    @site.settings(:call).interval = params[:call_interval]
-    @site.settings(:shift).start = params[:shift_start]
-    @site.settings(:shift).end = params[:shift_end]
+    @site.call_interval = params[:call_interval]
+    @site.shift_start = params[:shift_start]
+    @site.shift_end = params[:shift_end]
     @site.save!
   end
 
@@ -94,8 +94,8 @@ class SitesController < ApplicationController
 
       if !worker
         @errors << t('.inexistent_worker', worker: name)
-      elsif !@site.workers.include? worker
-        @site.workers << worker
+      else
+        @site.workers << worker unless @site.workers.include? worker
       end
     end
   end

@@ -1,15 +1,12 @@
 $(document).ready(function(){
   initialize_new_worker_form();
-
-  $('[data-toggle="tooltip"]').tooltip();
 });
 
 function create_worker_input(worker_name) {
   var $worker = $('<div class="worker input-group form-group"></div>');
   var $worker_input = $('<input class="worker-input form-control" type="text" name="workers[]" value="' + worker_name + '"/>');
   var $worker_remove = $('<span class="input-group-btn">' +
-    '<button class="btn btn-danger worker-remove"  data-toggle="tooltip"'+
-    ' data-placement="right" title="Remove worker">'+
+    '<button class="btn btn-danger worker-remove">'+
       '<span class="glyphicon glyphicon-trash" aria-hidden="true">'+
       '</span>'+
     '</button>'+
@@ -32,7 +29,7 @@ function add_worker() {
     $input.val('');
   }
   else {
-    alert('<%= I18n.t("empty_field") %>')
+    alert(I18n.t("empty_field"));
   }
 }
 

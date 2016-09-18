@@ -41,7 +41,7 @@ class CanAccessAccountEditTest < Capybara::Rails::TestCase
     click_button 'Update'
 
     assert_equal company_registration_path, current_path
-    assert_text 'Password confirmation doesn\'t match Password'
+    assert_text 'password confirmation doesn\'t match password'
   end
 
   test 'shows error on invalid current password' do
@@ -52,13 +52,13 @@ class CanAccessAccountEditTest < Capybara::Rails::TestCase
     click_button 'Update'
 
     assert_equal company_registration_path, current_path
-    assert_text 'Current password is invalid'
+    assert_text 'current password is invalid'
   end
 
   test 'shows error on empty form' do
     click_button 'Update'
 
     assert_equal company_registration_path, current_path
-    assert_text 'Current password can\'t be blank'
+    assert_text 'current password can\'t be blank'
   end
 end

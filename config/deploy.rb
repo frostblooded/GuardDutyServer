@@ -4,11 +4,7 @@ lock '3.6.1'
 set :application, 'attendance_check'
 set :repo_url, 'git@bitbucket.org:frostblooded/attendancecheck-rails-app.git'
 
-set :use_sudo, false
-
 set :rails_env, 'production'
-
-set :deploy_via, :copy
 
 set :ssh_options, { port: 6019 }
 

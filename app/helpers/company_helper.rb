@@ -11,12 +11,12 @@ module CompanyHelper
   # has said that it should receive a mail has come and by checking
   # if the last time a mail was sent was today
   def should_send_report(company)
-    Time.zone.parse(company.settings(:email).time) < Time.zone.now \
+    Time.zone.parse(company.email_time) < Time.zone.now \
     && Time.zone.now.day != company.last_mail_sent_at.day
   end
 
   def check_report_status(company)
-    if company.settings(:email).daily \
+    if company.email_wanted \
       && CompanyHelper.should_send_report(company)
       company.send_report_email
       company.update(last_mail_sent_at: Time.zone.now)

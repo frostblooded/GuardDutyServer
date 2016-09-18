@@ -36,7 +36,8 @@ FactoryGirl.define do
     password { Faker::Internet.password(8) }
 
     after(:create) do |worker|
-      create_list(:random_activity, 5, worker: worker, site: worker.sites.first)
+      create_list(:random_activity, 5, worker: worker,
+                                       site: worker.sites.first)
 
       unless worker.sites.empty?
         worker.update(company: worker.sites.first.company)
@@ -63,8 +64,8 @@ FactoryGirl.define do
     factory :random_activity do
       category { [:call, :login, :logout].sample }
 
-      after(:create) do |activity|
-        activity.update(time_left: rand(60)) if activity.call?
+      before(:create) do |activity|
+        activity.time_left = rand(60) if activity.call?
       end
     end
   end

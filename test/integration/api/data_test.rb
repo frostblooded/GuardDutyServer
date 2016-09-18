@@ -44,8 +44,8 @@ class ApiDataTest < ActionDispatch::IntegrationTest
         params: { access_token: request_access_token }
 
     assert_equal '200', @response.code
-    assert_equal @site.settings(:shift).start, json_response['shift_start']
-    assert_equal @site.settings(:shift).end, json_response['shift_end']
-    assert_equal @site.settings(:call).interval, json_response['call_interval']
+    assert_equal @site.shift_start, json_response['shift_start']
+    assert_equal @site.shift_end, json_response['shift_end']
+    assert_equal @site.call_interval, json_response['call_interval']
   end
 end
