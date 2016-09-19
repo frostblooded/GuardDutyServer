@@ -6,17 +6,18 @@
   </head>
   <body>
     <div class ="email_content">
-	  <div id="email-header">
+      <div id="email-header">
         <h3><%= t 'report.introduction', company_name: @company.name %></h3>
         <h4><%= t 'report.sub_introduction' %></h4>
       </div>
 
-	  <hr />
+      <hr />
 
       <div id="shift-reports-div">
         <%= render @shift_reports %>
       </div>
-	  <hr />
+      
+      <hr />
     </div>
   </body>
 </html>
