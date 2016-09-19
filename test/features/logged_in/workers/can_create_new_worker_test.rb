@@ -15,7 +15,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create worker'
+      click_button 'Create Worker'
     end
 
     assert_equal workers_path, current_path
@@ -27,11 +27,11 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password + 'a'
-      click_button 'Create worker'
+      click_button 'Create Worker'
     end
 
     assert_equal workers_path, current_path
-    assert_text 'password confirmation doesn\'t match password'
+    assert_text 'Password confirmation doesn\'t match Password'
   end
 
   test 'shows error when name isn\'t unique in company' do
@@ -44,11 +44,11 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create worker'
+      click_button 'Create Worker'
     end
 
     assert_equal workers_path, current_path
-    assert_text 'name not unique in company'
+    assert_text 'Name not unique in company'
 
     # Unique in company
     @worker.update(company: @other_company)
@@ -57,7 +57,7 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
       fill_in 'worker_name', with: @worker.name
       fill_in 'worker_password', with: @worker.password
       fill_in 'worker_password_confirmation', with: @worker.password
-      click_button 'Create worker'
+      click_button 'Create Worker'
     end
 
     assert_equal workers_path, current_path
@@ -66,12 +66,12 @@ class CanCreateNewWorkerTest < Capybara::Rails::TestCase
 
   test 'shows error on empty form' do
     assert_no_difference 'Worker.count' do
-      click_button 'Create worker'
+      click_button 'Create Worker'
     end
 
     assert_equal workers_path, current_path
-    assert_text 'name can\'t be blank'
-    assert_text 'password can\'t be blank'
-    assert_text 'password is too short (minimum is 8 characters)'
+    assert_text 'Name can\'t be blank'
+    assert_text 'Password can\'t be blank'
+    assert_text 'Password is too short (minimum is 8 characters)'
   end
 end

@@ -31,10 +31,10 @@ class CanSignUpTest < Capybara::Rails::TestCase
       click_button 'Sign up'
     end
 
-    assert_text 'password can\'t be blank'
-    assert_text 'name can\'t be blank'
-    assert_text 'email can\'t be blank'
-    assert_text 'email is invalid'
+    assert_text 'Password can\'t be blank'
+    assert_text 'Name can\'t be blank'
+    assert_text 'Email can\'t be blank'
+    assert_text 'Email is invalid'
     assert_equal company_registration_path, current_path
   end
 
@@ -48,7 +48,7 @@ class CanSignUpTest < Capybara::Rails::TestCase
       click_button 'Sign up'
     end
 
-    assert_text 'password confirmation doesn\'t match password'
+    assert_text 'Password confirmation doesn\'t match Password'
     assert_equal company_registration_path, current_path
   end
 
@@ -62,8 +62,8 @@ class CanSignUpTest < Capybara::Rails::TestCase
       click_button 'Sign up'
     end
 
-    assert_text 'name has already been taken'
-    assert_text 'email has already been taken'
+    assert_text 'Name has already been taken'
+    assert_text 'Email has already been taken'
     assert_equal company_registration_path, current_path
   end
 
@@ -77,7 +77,7 @@ class CanSignUpTest < Capybara::Rails::TestCase
       click_button 'Sign up'
     end
 
-    assert_text 'email is invalid'
+    assert_text 'Email is invalid'
     assert_equal company_registration_path, current_path
   end
 end
