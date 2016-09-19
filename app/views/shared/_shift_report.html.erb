@@ -1,10 +1,11 @@
-<div class="email-panel">
-  <div class="email-panel-header">
-	<%= shift_report.shift.site.name %>
-    (<%= shift_report.shift.start.strftime("%d %B, %Y") %>)
+<% if shift_report.messages? %>
+  <div class="email-panel">
+    <div class="email-panel-header">
+  	<%= shift_report.shift.site.name %>
+      (<%= shift_report.shift.start.strftime("%d %B, %Y") %>)
+    </div>
+    <div class="workers">
+      <%= render shift_report.worker_reports %>
+    </div>
   </div>
-  <div class="workers">
-    <%= render shift_report.worker_reports %>
-  </div>
-</div>
-
+<% end %>

@@ -13,9 +13,13 @@
 
       <hr />
 
-      <div id="shift-reports-div">
-        <%= render @shift_reports %>
-      </div>
+      <% if @shift_reports.any? { |r| r.messages? } %>
+        <div id="shift-reports-div">
+          <%= render @shift_reports %>
+        </div>
+      <% else %>
+        <h3>No messages</h3>
+      <% end %>
       
       <hr />
     </div>
