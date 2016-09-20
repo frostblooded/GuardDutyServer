@@ -82,6 +82,7 @@ en:
     unreceived_call: unreceived call
     unanswered_call: didn't answer call
   report:
+    no_messages: No messages
     subject: "Workers' report"
     introduction: "Hello, %{company_name}"
     sub_introduction: "This is your report for today"

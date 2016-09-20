@@ -82,6 +82,7 @@ bg:
     unreceived_call: неполучено обаждане
     unanswered_call: неотговорено обаждане
   report:
+    no_messages: Няма съобщения 
     subject: Доклад за работниците
     introduction: Здравей, %{company_name}. Това е докладът ти за днес.
     workers_title: Работниците, които се появиха на работа днес
