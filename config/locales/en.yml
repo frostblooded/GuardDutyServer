@@ -80,7 +80,7 @@ en:
   worker_report:
     late_login: logged in %{minutes} minutes too late
     unreceived_call: unreceived call
-    unanswered_call: didn't answer call
+    unanswered_call: unanswered call
   report:
     no_messages: No messages
     subject: "Workers' report"
