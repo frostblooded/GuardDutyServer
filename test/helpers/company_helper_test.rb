@@ -7,6 +7,7 @@ class CompanyHelperTest < ActiveSupport::TestCase
     @company.email_wanted = true
     @company.recipients = ['frostblooded@example.org',
                            'ivan@example.org']
+    @company.save!
   end
 
   test 'mail is sent when it should be' do
