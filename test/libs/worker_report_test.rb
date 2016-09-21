@@ -193,7 +193,7 @@ class WorkerReportTest < ActiveSupport::TestCase
     late_login = WorkerReport.format_late_login(20, activity_time)
 
     assert unreceived_call.include? 'unreceived call'
-    assert unanswered_call.include? 'didn\'t answer call'
+    assert unanswered_call.include? 'unanswered call'
     assert late_login.include? 'logged in 20 minutes too late'
   end
 end
