@@ -96,11 +96,7 @@ module ActiveSupport
         d['to'].to_s
       end
 
-      emails.each do |email|
-        return false unless delivered_to_emails.include? email
-      end
-
-      true
+      emails.all? { |email| delivered_to_emails.include? email }
     end
 
     def reload_page
