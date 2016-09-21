@@ -12,15 +12,16 @@ class Site < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   belongs_to :company
 
-  store :settings, accessors: [:call_interval, :shift_start, :shift_end],
-                   coder: JSON
-
   validates :name, presence: true, length: { maximum: 40 },
                    # Name should be unique in this company
                    uniqueness: { scope: :company_id,
                                  message: I18n.t('name.not_unique') }
 
-  before_create :initialize_site
+  validates :call_interval, presence: true
+  validates :shift_start, presence: true, format: { with: Rails.application.config.time_regex }
+  validates :shift_end, presence: true, format: { with: Rails.application.config.time_regex }
+
+  before_validation :initialize_site, on: :create
 
   def initialize_site
     self.call_interval = '15'

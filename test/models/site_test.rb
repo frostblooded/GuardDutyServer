@@ -44,6 +44,36 @@ class SiteTest < ActiveSupport::TestCase
     assert_equal @company, @site.company
   end
 
+  test 'call interval is valid' do
+    @site.call_interval = '15'
+    assert @site.valid?
+
+    @site.call_interval = nil
+    assert_not @site.valid?
+  end
+
+  test 'shift start is valid' do
+    @site.shift_start = '12:00'
+    assert @site.valid?
+
+    @site.shift_start = '1a:3e'
+    assert_not @site.valid?
+
+    @site.shift_start = nil
+    assert_not @site.valid?
+  end
+
+  test 'shift end is valid' do
+    @site.shift_end = '13:00'
+    assert @site.valid?
+
+    @site.shift_start = '1a:3e'
+    assert_not @site.valid?
+
+    @site.shift_end = nil
+    assert_not @site.valid?
+  end
+
   test 'returns last shift times when shift has just ended' do
     time = Time.zone.parse(@site.shift_end) + 30.minutes
 

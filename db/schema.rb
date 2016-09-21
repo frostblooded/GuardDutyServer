@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921134018) do
+ActiveRecord::Schema.define(version: 20160921160234) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -83,10 +83,12 @@ ActiveRecord::Schema.define(version: 20160921134018) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "company_id"
-    t.text     "settings"
+    t.string   "call_interval"
+    t.string   "shift_start"
+    t.string   "shift_end"
     t.index ["company_id"], name: "index_sites_on_company_id"
   end
 
