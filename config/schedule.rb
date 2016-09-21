@@ -4,6 +4,6 @@
 
 set :output, { error: 'error.log', standard: 'cron.log' }
 
-every 1.minute do
+every 10.minutes do
   runner 'CompanyHelper.check_mails_status'
 end
