@@ -44,4 +44,31 @@ class CompanyTest < ActiveSupport::TestCase
     @company.password = '   '
     assert_not @company.valid?
   end
+
+  test 'recipients is valid' do
+    @company.recipients = []
+    assert @company.valid?
+
+    @company.recipients = nil
+    assert_not @company.valid?
+  end
+
+  test 'email_wanted is valid' do
+    @company.email_wanted = true
+    assert @company.valid?
+
+    @company.email_wanted = nil
+    assert_not @company.valid?
+  end
+
+  test 'email_time is valid' do
+    @company.email_time = '12:30'
+    assert @company.valid?
+
+    @company.email_time = '1e:3a'
+    assert_not @company.valid?
+
+    @company.email_time = nil
+    assert_not @company.valid?
+  end
 end

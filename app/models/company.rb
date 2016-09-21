@@ -4,8 +4,9 @@ class Company < ActiveRecord::Base
   has_many :workers, dependent: :destroy
   has_one :api_key, dependent: :destroy
 
-  store :settings, accessors: [:recipients, :email_wanted, :email_time],
-                   coder: JSON
+  # Use JSON for storing recipients, because  I couldn't get the database
+  # to store an array otherwise
+  store :settings, accessors: [:recipients], coder: JSON
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
@@ -16,11 +17,15 @@ class Company < ActiveRecord::Base
                    uniqueness: true
   validates :email, presence: true, uniqueness: true,
                     format: { with: Rails.application.config.email_regex }
+  validate :recipients_is_not_nil
+  # Validate email_wanted is boolean
+  validates :email_wanted, inclusion: { in: [ true, false ] }
+  validates :email_time, presence: true, format: { with: Rails.application.config.time_regex }
 
-  before_create :initialize_company
+  before_validation :initialize_company, on: :create
 
   def initialize_company
-    @last_mail_sent_at = Time.zone.now
+    self.last_mail_sent_at = Time.zone.now
     self.recipients = [email]
     self.email_wanted = false
     self.email_time = '12:00'
@@ -41,4 +46,9 @@ class Company < ActiveRecord::Base
       CompanyNotifier.report_email(self, r).deliver_now
     end
   end
+
+  private
+    def recipients_is_not_nil
+      errors.add :recipients, 'can not be nil' if recipients.nil? 
+    end
 end
