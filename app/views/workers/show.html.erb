@@ -1,28 +1,24 @@
 <% provide(:title, @worker.name) %>
 
-<h2><%= @worker.name %></h2>
-<h4><%= t '.worker_sites' %></h4>
+<h2 class="page-header"><%= @worker.name %></h2>
+<div class="col-md-8 col-md-offset-2">
+	<h4><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
+		
+	<div class="wtable">
+		<table>
+			<tr>
+				<th><%= t '.timestamp' %></th>
+				<th><%= t '.category' %></th>
+				<th><%= t '.time_left' %></th>
+			</tr>
 
-<ul id="sites">
-  <% @worker.sites.each do |s| %>
-    <li><%= s.name %></li>
-  <% end %>
-</ul>
-
-<div class="wtable">
-	<table>
-		<tr>
-      <th><%= t '.timestamp' %></th>
-      <th><%= t '.category' %></th>
-      <th><%= t '.time_left' %></th>
-		</tr>
-
-    <% @worker.activities.each do |a| %>
-      <tr class="<%= a.row_class %>">
-        <td><%= a.created_at.localtime %></td>
-        <td><%= a.category %></td>
-        <td><%= a.time_left %></td>
-      </tr>
-    <% end %>
-	</table>
+			<% @worker.activities.each do |a| %>
+				<tr class="<%= a.row_class %>">
+					<td><%= a.created_at.localtime %></td>
+					<td><%= a.category %></td>
+					<td><%= a.time_left %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
 </div>
