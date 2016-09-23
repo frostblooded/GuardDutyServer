@@ -4,6 +4,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password(8) }
     confirmed_at Time.zone.now
+    locale I18n.default_locale
 
     after(:create) do |company|
       create_list(:site, 2, company: company)
