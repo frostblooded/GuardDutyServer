@@ -84,9 +84,8 @@ bg:
   report:
     no_messages: Няма съобщения 
     subject: Доклад за работниците
-    introduction: Здравей, %{company_name}. Това е докладът ти за днес.
-    workers_title: Работниците, които се появиха на работа днес
-    sites_title: Последните завършени смени на твоите обекти
+    introduction: Здравей, %{company_name}.
+    sub_introduction: Това е докладът ти за днес.
   static_pages:
     contact:
       title: Контакти
