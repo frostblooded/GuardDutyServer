@@ -20,4 +20,7 @@ set :assets_roles, [:web, :app]
 # Create database
 before 'deploy:migrate', 'deploy:db:create'
 
+# Upload figaro YML to server before asset compiling
+before 'deploy:updated', 'figaro_yml:setup'
+
 server '37.157.182.179', user: 'deploy', roles: %w(app web dev db), primary: true
