@@ -1,2 +1,8 @@
-Hi <%= @company.name %>
-Sample mail sent using smtp. 
+<%= t 'report.introduction', company_name: @company.name %>
+<%= t 'report.sub_introduction' %>
+
+<% if @shift_reports.any? &:messages? %>
+<%= render @shift_reports %>
+<% else %>
+<%= t 'report.no_messages' %>
+<% end %>

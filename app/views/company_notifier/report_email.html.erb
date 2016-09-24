@@ -13,7 +13,7 @@
 
       <hr />
 
-      <% if @shift_reports.any? { |r| r.messages? } %>
+      <% if @shift_reports.any? &:messages? %>
         <div id="shift-reports-div">
           <%= render @shift_reports %>
         </div>
