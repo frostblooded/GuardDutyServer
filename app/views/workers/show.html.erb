@@ -2,7 +2,7 @@
 
 <h2 class="page-header"><%= @worker.name %></h2>
 <div class="col-md-8 col-md-offset-2">
-	<h4><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
+	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
 		
 	<div class="wtable">
 		<table>
