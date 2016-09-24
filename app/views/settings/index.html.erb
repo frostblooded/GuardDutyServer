@@ -12,6 +12,10 @@
     <%= label_tag t('.email_wanted') %>
     <%= check_box_tag :email_wanted, true, @company.email_wanted, class:'css-checkbox' %>
   </div>
+  <div class="form-group row">
+    <%= label_tag t('.report_locale') %>
+    <%= select_tag 'report_locale', options_for_select(I18n.available_locales, @company.report_locale) %>
+  </div>
   <div id="email-settings">
     <div class="form-group row">
       <%= label_tag t('.email_time') %>
@@ -51,4 +55,3 @@
   
   <%= link_to t('.edit_credentials'), edit_company_registration_path, class:'row' %>
 <% end %>
-

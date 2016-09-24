@@ -17,6 +17,7 @@ en:
     index:
       title: Settings
       header: Your settings
+      report_locale: Choose language for report
       email_wanted: Do you want to recieve daily reports?
       email_time: When do you want to receive the mail?
       emails: Emails to report to

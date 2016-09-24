@@ -36,13 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    if params[:locale].present?
-      # Set company locale, so that it can be used
-      # for when report needs to be send
-      current_company.update!(locale: params[:locale]) if current_company
-
-      I18n.locale = params[:locale]
-    end
+    I18n.locale = params[:locale] if params[:locale].present?
   end
 
   # Override the default url options to allow locale settings

@@ -8,7 +8,7 @@ class CompanyNotifier < ApplicationMailer
     #  (through the last_shift methods of Site)
     @shift_reports = @company.sites.map { |site| site.last_shift.report }
 
-    I18n.with_locale(company.locale) do
+    I18n.with_locale(company.report_locale) do
       mail to: email, subject: t('report.subject')
     end
   end

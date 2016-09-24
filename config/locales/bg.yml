@@ -7,7 +7,7 @@ bg:
   sign_up: Регистрирай се
   app:
     name: Attendance Check
-  empty_field: полето е празно, моля въведете нещо първо
+  empty_field: полето е празно, моля въведи нещо първо
   name:
     not_unique: не е уникално в тази компания
   routes:
@@ -17,6 +17,7 @@ bg:
     index:
       title: Настройки
       header: Твоите настройки
+      report_locale: Избери език за доклада
       email_wanted: Искаш ли да получаваш доклади всеки ден?
       email_time: Кога искаш да получаваш докалада?
       emails: Email-и, на които да бъде докладвано

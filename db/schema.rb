@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923165633) do
+ActiveRecord::Schema.define(version: 20160924101851) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160923165633) do
     t.text     "settings"
     t.string   "email_time"
     t.boolean  "email_wanted"
-    t.string   "locale",                 default: "en"
+    t.string   "report_locale",          default: "en"
     t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
     t.index ["name"], name: "index_companies_on_name", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
