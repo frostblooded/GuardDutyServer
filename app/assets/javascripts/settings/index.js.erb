@@ -5,7 +5,6 @@ $(document).ready(function(){
   $('#email_wanted').on('click', function() {
     update_email_inputs($(this).is(':checked'))
   });
-
 });
 
 function create_email_input(email) {
@@ -19,7 +18,7 @@ function create_email_input(email) {
   '</span>'); // TODO: Find a way to get this into a template
 
   $email_remove.click(function() {
-    if(is_email_checked()) {
+    if(is_email_wanted()) {
       $(this).parent().remove();
     }
   });
@@ -57,6 +56,6 @@ function update_email_inputs(enabled) {
   $('#email-settings :input').prop('disabled', !enabled);
 }
 
-function is_email_checked() {
+function is_email_wanted() {
   return $("#email_wanted").is(':checked');
 }
