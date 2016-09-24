@@ -28,7 +28,7 @@ class CanAccessSettingsTest < Capybara::Rails::TestCase
   test 'shows correct default values' do
     locales = find('#report_locale').all('option').collect(&:text)
     assert_equal I18n.available_locales.map(&:to_s), locales
-    
+
     assert_equal @company.email_wanted,
                  find('#email_wanted').checked?
 

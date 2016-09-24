@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop:disable ClassLength
 class SiteTest < ActiveSupport::TestCase
   def make_worker_activities
     base_time = Time.zone.parse(@site.shift_start)

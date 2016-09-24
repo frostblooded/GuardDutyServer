@@ -19,8 +19,9 @@ class Company < ActiveRecord::Base
                     format: { with: Rails.application.config.email_regex }
   validate :recipients_is_not_nil
   # Validate email_wanted is boolean
-  validates :email_wanted, inclusion: { in: [ true, false ] }
-  validates :email_time, presence: true, format: { with: Rails.application.config.time_regex }
+  validates :email_wanted, inclusion: { in: [true, false] }
+  validates :email_time, presence: true,
+                         format: { with: Rails.application.config.time_regex }
 
   before_validation :initialize_company, on: :create
 
@@ -48,7 +49,8 @@ class Company < ActiveRecord::Base
   end
 
   private
-    def recipients_is_not_nil
-      errors.add :recipients, 'can not be nil' if recipients.nil? 
-    end
+
+  def recipients_is_not_nil
+    errors.add :recipients, 'can not be nil' if recipients.nil?
+  end
 end

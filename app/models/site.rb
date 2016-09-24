@@ -18,8 +18,10 @@ class Site < ActiveRecord::Base
                                  message: I18n.t('name.not_unique') }
 
   validates :call_interval, presence: true
-  validates :shift_start, presence: true, format: { with: Rails.application.config.time_regex }
-  validates :shift_end, presence: true, format: { with: Rails.application.config.time_regex }
+  validates :shift_start, presence: true,
+                          format: { with: Rails.application.config.time_regex }
+  validates :shift_end, presence: true,
+                        format: { with: Rails.application.config.time_regex }
 
   before_validation :initialize_site, on: :create
 

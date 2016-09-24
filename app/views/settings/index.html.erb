@@ -12,42 +12,42 @@
     <%= label_tag t('.email_wanted') %>
     <%= check_box_tag :email_wanted, true, @company.email_wanted, class:'css-checkbox' %>
   </div>
+
   <div class="form-group row">
     <%= label_tag t('.report_locale') %>
     <%= select_tag 'report_locale', options_for_select(I18n.available_locales, @company.report_locale) %>
   </div>
-  <div id="email-settings">
-    <div class="form-group row">
-      <%= label_tag t('.email_time') %>
-      
-      <div class ="input-group">
-        <%= time_field_tag :email_time, @company.email_time, class:'form-control', aria_describedby: "add-time" %>
-        <span class="input-group-addon" id="add-time">
-          <span class="glyphicon glyphicon-time"></span>
-        </span>
-      </div>
+
+  <div class="form-group row">
+    <%= label_tag t('.email_time') %>
+    
+    <div class ="input-group">
+      <%= time_field_tag :email_time, @company.email_time, class:'form-control', aria_describedby: "add-time" %>
+      <span class="input-group-addon" id="add-time">
+        <span class="glyphicon glyphicon-time"></span>
+      </span>
     </div>
+  </div>
 
-    <div class="form-group row">
-      <%= label_tag t('.emails') %>
+  <div class="form-group row">
+    <%= label_tag t('.emails') %>
 
-      <div class="input-group" id="new-email">
-        <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
+    <div class="input-group" id="new-email">
+      <input class="form-control" type="text" id='new-email-input' placeholder="example@example.org"/>
 
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button" id="new-email-add">
-            <span class="glyphicon glyphicon-plus"></span>
-          </button>
-        </span>
-      </div>
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" id="new-email-add">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </span>
     </div>
+  </div>
 
-    <div id="emails" class="row">
-        <% @company.recipients.each do |email| %>
-          <%= javascript_tag "create_email_input('#{email}');" %> 
-        <% end %>
-    </div>
-  </div>    
+  <div id="emails" class="row">
+      <% @company.recipients.each do |email| %>
+        <%= javascript_tag "create_email_input('#{email}');" %> 
+      <% end %>
+  </div>
 
   <%= submit_tag t('.submit'), class: 'btn btn-primary center-block row' %>
 
