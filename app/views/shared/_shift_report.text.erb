@@ -1,4 +1,4 @@
 <% if shift_report.messages? %>
-<%= shift_report.shift.site.name %> (<%= shift_report.shift.start.strftime("%d %B, %Y") %>)
+<%= shift_report.shift.site.name %> (<%= l(shift_report.shift.start, format: "%d %B, %Y") %>)
 <%= render shift_report.worker_reports %>
 <% end %>
