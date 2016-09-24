@@ -40,6 +40,7 @@ group :development do
   gem 'capistrano-rails-db',      '~> 0.0.2'
   gem 'capistrano-faster-assets', '~> 1.0.2'
   gem 'capistrano-passenger',     '~> 0.2.0'
+  gem 'capistrano-figaro-yml',    '~> 1.0.4'
   gem 'rubocop',                  '~> 0.42.0'
 end
 

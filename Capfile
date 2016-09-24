@@ -28,6 +28,9 @@ require 'capistrano/faster_assets'
 # Update crontab on deploy
 require 'whenever/capistrano'
 
+# Copy Figaro secrets file to server
+require 'capistrano/figaro_yml'
+
 require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
