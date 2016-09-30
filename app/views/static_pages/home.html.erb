@@ -1,4 +1,7 @@
 <div class="home">
   <h1 class="home page-header">Attendance Check</h1>
   <p><%= t '.content' %></p>
+
+  <%= button_to t('devise.sessions.new.sign_in'), new_company_session_path, class: 'btn' %>
+  <%= button_to t('devise.registrations.new.sign_up'), new_company_registration_path, class: 'btn' %>
 </div>
