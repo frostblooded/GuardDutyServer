@@ -8,4 +8,9 @@ class CanAcessHomeTest < Capybara::Rails::TestCase
   test 'can visit root' do
     assert_content page, 'Attendance Check'
   end
+
+  test 'has correct buttons' do
+    assert_link 'Sign in'
+    assert_link 'Sign up'
+  end
 end

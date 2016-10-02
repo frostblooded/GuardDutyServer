@@ -4,7 +4,7 @@
   <p><%= t '.content' %></p>
 
   <div id="sign-buttons">
-    <%= button_to t('devise.sessions.new.sign_in'), new_company_session_path, class: 'btn btn-default' %>
-    <%= button_to t('devise.registrations.new.sign_up'), new_company_registration_path, class: 'btn btn-primary' %>
+    <%= link_to t('devise.sessions.new.sign_in'), new_company_session_path, class: 'btn btn-default' %>
+    <%= link_to t('devise.registrations.new.sign_up'), new_company_registration_path, class: 'btn btn-primary' %>
   </div>
 </div>
