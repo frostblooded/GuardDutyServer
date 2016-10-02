@@ -96,6 +96,28 @@ html, body {
   padding: 2em;
 }
 
+.flag {
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 0px;
+  overflow: hidden;
+  padding-top: 25px;
+  width: 25px;
+  opacity: 0.4;
+}
+
+.flag.active {
+	opacity: 1.0;
+}
+
+.bg {
+  background-image: asset-data-url("bg.png");
+}
+
+.en {
+  background-image: asset-data-url("en.png");
+}
+
 /*end of Toni's css*/
 
 
