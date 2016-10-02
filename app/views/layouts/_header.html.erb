@@ -13,11 +13,12 @@
     <div class="collapse navbar-collapse" id="collapse-nav">
       <ul class="nav navbar-nav navbar-right main-nav">
         <%= link_to_unless_current("", {locale: 'en'}, :class=>"flag en") do %>
-		  <span class="flag en active"></span>
-		<% end %>
-		<%= link_to_unless_current("", {locale: 'bg'}, :class=>"flag bg") do %>
-		  <span class="flag bg active"></span>
-		<% end %>
+          <span class="flag en active"></span>
+        <% end %>
+        
+        <%= link_to_unless_current("", {locale: 'bg'}, :class=>"flag bg") do %>
+          <span class="flag bg active"></span>
+        <% end %>
 
         <% if company_signed_in? %>
           <li class="inline-nav-item">
