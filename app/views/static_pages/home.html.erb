@@ -3,8 +3,10 @@
   <h1 class="home page-header">Attendance Check</h1>
   <p><%= t '.content' %></p>
 
-  <div id="sign-buttons">
-    <%= link_to t('devise.sessions.new.sign_in'), new_company_session_path, class: 'btn btn-default' %>
-    <%= link_to t('devise.registrations.new.sign_up'), new_company_registration_path, class: 'btn btn-primary' %>
-  </div>
+  <% unless company_signed_in? %>
+    <div id="sign-buttons">
+      <%= link_to t('devise.sessions.new.sign_in'), new_company_session_path, class: 'btn btn-default' %>
+      <%= link_to t('devise.registrations.new.sign_up'), new_company_registration_path, class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 </div>
