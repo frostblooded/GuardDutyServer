@@ -1,5 +1,4 @@
-#sign-buttons > form{
-  display: inline;
+#sign-buttons > a{
   margin-left: 30px;
   margin-right: 30px;
 }
