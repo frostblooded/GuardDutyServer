@@ -9,8 +9,13 @@ class CanAcessHomeTest < Capybara::Rails::TestCase
     assert_content page, 'Attendance Check'
   end
 
-  test 'has correct buttons' do
+  test 'has sign buttons when not logged in' do
     assert_link 'Sign in'
     assert_link 'Sign up'
+
+    login_as create(:company)
+    reload_page
+    assert_no_link 'Sign in'
+    assert_no_link 'Sign up'
   end
 end
