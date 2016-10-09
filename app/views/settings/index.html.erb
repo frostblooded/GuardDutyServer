@@ -16,7 +16,7 @@
   <div id="email-settings">
     <div class="form-group row">
       <%= label_tag t('.report_locale') %>
-      <%= select_tag 'report_locale', options_for_select(I18n.available_locales, @company.report_locale) %>
+      <%= select_tag 'report_locale', options_for_select(I18n.available_locales, @company.report_locale), class:'form-control'%>
     </div>
 
     <div class="form-group row">
