@@ -6,7 +6,7 @@ class CanAcessHomeTest < Capybara::Rails::TestCase
   end
 
   test 'can visit root' do
-    assert_content page, 'Attendance Check'
+    assert_content page, 'Guard Duty'
   end
 
   test 'has sign buttons when not logged in' do

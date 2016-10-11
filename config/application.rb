@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module AttendanceCheckRailsapp
+module GuardDuty
   class Application < Rails::Application
     config.email_regex = /\A\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*\z/
     config.time_regex = /\A([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\z/
