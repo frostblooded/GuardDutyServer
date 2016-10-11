@@ -6,7 +6,7 @@ en:
   sign_in: Sign in
   sign_up: Sign up
   app:
-    name: Attendance Check
+    name: Guard Duty
   empty_field: field is empty, please enter something first
   name:
     not_unique: not unique in company
@@ -93,4 +93,4 @@ en:
       header: Contacts
       content: You can contact us with feedback on nikolay_danailov@yahoo.com
     home:
-      content: Attendance Check is a platform, which helps you reliably control the presence and attendance of your workers.
+      content: Guard Duty is a platform, which helps you reliably control the presence and attendance of your workers.

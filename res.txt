@@ -1,0 +1,12 @@
+config/application.yml:MAIL_SENDER: "attendancecheck1337@gmail.com"
+config/routes.rb:  mount API::V1::AttendanceCheck => '/api'
+config/locales/en.yml:      content: Guard Duty is a platform, which helps you reliably control the presence and attendance of your workers.
+config/initializers/session_store.rb:Rails.application.config.session_store :cookie_store, key: '_AttendanceCheck-RailsApp_session'
+config/application.rb:module AttendanceCheckRailsapp
+test/features/shared/can_access_home_test.rb:    assert_content page, 'Attendance Check'
+Binary file .git/index matches
+.git/logs/HEAD:0000000000000000000000000000000000000000 39af539aee6c92c89a918a8e36d0622eb2416112 Nikolay Danailov <frostblooded@yahoo.com> 1472970860 +0300	clone: from git@bitbucket.org:frostblooded/attendancecheck-rails-app.git
+.git/logs/refs/heads/master:0000000000000000000000000000000000000000 39af539aee6c92c89a918a8e36d0622eb2416112 Nikolay Danailov <frostblooded@yahoo.com> 1472970860 +0300	clone: from git@bitbucket.org:frostblooded/attendancecheck-rails-app.git
+.git/logs/refs/remotes/origin/HEAD:0000000000000000000000000000000000000000 39af539aee6c92c89a918a8e36d0622eb2416112 Nikolay Danailov <frostblooded@yahoo.com> 1472970860 +0300	clone: from git@bitbucket.org:frostblooded/attendancecheck-rails-app.git
+README.md:# Attendance Check #
+README.md:This is the repository for the Attendance Check project

@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'attendance_check'
-set :repo_url, 'git@bitbucket.org:frostblooded/attendancecheck-rails-app.git'
+set :application, 'guard_duty'
+set :repo_url, 'git@bitbucket.org:frostblooded/guard-duty-rails-app.git'
 
 set :rails_env, 'production'
 

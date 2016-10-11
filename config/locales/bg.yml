@@ -6,7 +6,7 @@ bg:
   sign_in: Влез
   sign_up: Регистрирай се
   app:
-    name: Attendance Check
+    name: Guard Duty
   empty_field: полето е празно, моля въведи нещо първо
   name:
     not_unique: не е уникално в тази компания
@@ -93,4 +93,4 @@ bg:
       header: Контакти
       content: Можеш да се свържеш с нас на nikolay_danailov@yahoo.com
     home:
-      content: Attendance Check е платформа, която ти помага да управляваш работниците си и присъствието им.
+      content: Guard Duty е платформа, която ти помага да управляваш работниците си и присъствието им.

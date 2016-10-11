@@ -20,4 +20,4 @@ production:
   adapter: mysql2
   username: root
   password: <%= Figaro.env.PRODUCTION_DATABASE_PASSWORD %>
-  database: attendancecheck_production
+  database: guardduty_production

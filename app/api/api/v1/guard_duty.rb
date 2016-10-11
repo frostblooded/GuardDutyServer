@@ -1,7 +1,7 @@
 module API
   module V1
     # Contains some API-wide settings and other stuff
-    class AttendanceCheck < Grape::API
+    class GuardDuty < Grape::API
       # Set API version and determine it from URL
       version 'v1', using: :path
 

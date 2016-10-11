@@ -1,3 +1,3 @@
-# Attendance Check #
+# Guard Duty #
 
-This is the repository for the Attendance Check project
+This is the repository for the Guard Duty project

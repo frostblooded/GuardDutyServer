@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Add Grape routes, so that the API works
-  mount API::V1::AttendanceCheck => '/api'
+  mount API::V1::GuardDuty => '/api'
   
   # Use urls like '/:locale/workers' so that the locale is set in the url
   scope ':locale', locale: /#{I18n.available_locales.join("|")}/ do
