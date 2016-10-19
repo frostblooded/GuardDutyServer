@@ -12,4 +12,11 @@ class Activity < ActiveRecord::Base
   validates :time_left, numericality: true, presence: true, if: :call?
   validates :site, presence: true
   validates :worker, presence: true
+  validate :worker_belongs_to_site
+
+  def worker_belongs_to_site
+    if site and !site.workers.include? worker
+      errors.add(:worker, 'doesn\'t belong to site')
+    end
+  end
 end

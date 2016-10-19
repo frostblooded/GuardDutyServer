@@ -18,4 +18,11 @@ class ActivityTest < ActiveSupport::TestCase
   test 'has worker' do
     assert_not Activity.new(site: @site, worker: nil).valid?
   end
+
+  test 'validates worker belongs to site' do
+    @other_worker = create(:site).workers.first
+    @invalid_activity = Activity.new(site: @site, worker: @other_worker)
+    assert_not @invalid_activity.valid?
+    assert @invalid_activity.errors.full_messages.include? 'Worker doesn\'t belong to site'
+  end
 end
