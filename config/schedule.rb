@@ -5,5 +5,5 @@
 set :output, { error: 'error.log', standard: 'cron.log' }
 
 every 10.minutes do
-  runner 'CompanyHelper.check_mails_status'
+  rake 'reports:send'
 end
