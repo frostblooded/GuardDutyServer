@@ -36,6 +36,7 @@ class SiteTest < ActiveSupport::TestCase
 
     @worker = @site.workers.first
     @other_worker = @site.workers.second
+    @other_worker.sites << @other_site
 
     @site.shift_start = '11:00'
     @site.shift_end = '12:00'
@@ -142,7 +143,7 @@ class SiteTest < ActiveSupport::TestCase
     @other_worker = @other_site.workers.first
     @other_activity = create_activity(:call,
                                       @other_worker,
-                                      @site,
+                                      @other_site,
                                       Time.zone.parse('11:10'))
 
     time = Time.zone.parse(@site.shift_end) + 30.minutes
