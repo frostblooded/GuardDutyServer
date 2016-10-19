@@ -57,13 +57,13 @@ class Site < ActiveRecord::Base
   end
 
   def last_shift_start(shift_end)
-    shift_start = Time.zone.parse self.shift_start
+    shift_start = Time.parse self.shift_start
     shift_start -= 1.day while shift_start > shift_end
     shift_start
   end
 
   def last_shift_end
-    shift_end = Time.zone.parse self.shift_end
+    shift_end = Time.parse self.shift_end
     shift_end -= 1.day while shift_end > Time.zone.now
     shift_end
   end

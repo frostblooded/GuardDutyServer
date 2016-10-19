@@ -11,7 +11,7 @@ module CompanyHelper
   # has said that it should receive a mail has come and by checking
   # if the last time a mail was sent was today
   def should_send_report(company)
-    Time.zone.parse(company.email_time) < Time.zone.now \
+    Time.parse(company.email_time) < Time.zone.now \
     && Time.zone.now.day != company.last_mail_sent_at.day
   end
 

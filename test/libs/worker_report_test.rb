@@ -8,7 +8,7 @@ class WorkerReportTest < ActiveSupport::TestCase
 
     @worker = @site.workers.first
 
-    @shift = Shift.new(Time.zone.parse('11:00'), Time.zone.parse('12:00'))
+    @shift = Shift.new(Time.parse('11:00'), Time.parse('12:00'))
     @shift.site = @site
 
     @worker_report = WorkerReport.new(@worker, [], @shift)

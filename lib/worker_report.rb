@@ -82,7 +82,7 @@ class WorkerReport
   end
 
   def self.format_time(time)
-    time.strftime '%H:%M'
+    time.localtime.strftime '%H:%M'
   end
 
   def self.format_late_login(minutes, time)
