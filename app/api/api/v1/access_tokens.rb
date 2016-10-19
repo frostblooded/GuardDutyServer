@@ -34,7 +34,6 @@ module API
 
           # Return the generated token
           { access_token: company.api_key.access_token,
-            company_id: company.id,
             name: company.name }
         end
       end

@@ -21,7 +21,6 @@ class ApiAccessTokenTest < ActionDispatch::IntegrationTest
 
     assert_equal '201', @response.code
     assert_not json_response['access_token'].nil?
-    assert_not json_response['company_id'].nil?
     assert_not json_response['name'].nil?
   end
 
