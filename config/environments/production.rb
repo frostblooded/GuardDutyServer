@@ -52,7 +52,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :warn
+  config.log_level = :info
   #RAILS_DEFAULT_LOGGER = Logger.new('log/production.log')
 
   config.action_mailer.default_url_options = { host: '37.157.182.179' }
