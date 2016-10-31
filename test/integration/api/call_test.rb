@@ -16,7 +16,6 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '201', @response.code
-    assert_equal true, json_response['success']
   end
 
   test 'creatign call for unexisting worker throws error' do

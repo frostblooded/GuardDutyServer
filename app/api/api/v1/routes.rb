@@ -16,8 +16,6 @@ module API
                               latitude: p['latitude'],
                               index: index
         end
-
-        { success: true }
       end
     end
   end
