@@ -26,6 +26,8 @@ module API
                              time_left: params[:time_left],
                              site: params_site,
                              worker: params_worker)
+
+            {}
           end
 
           # Log login
@@ -40,6 +42,8 @@ module API
             Activity.create! category: :login,
                              worker: params_worker,
                              site: params_site
+
+            {}
           end
 
           # Log logout
@@ -47,6 +51,8 @@ module API
             Activity.create! category: :logout,
                              worker: params_worker,
                              site: params_site
+
+            {}
           end
         end
       end

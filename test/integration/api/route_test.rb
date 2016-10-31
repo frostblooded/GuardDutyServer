@@ -22,6 +22,7 @@ class ApiRouteTest < ActionDispatch::IntegrationTest
                    access_token: request_access_token }
 
     assert_equal '201', @response.code
+    assert_equal '{}', json_response.to_s
   end
 
   test 'route creation returns error if the site doesn\'t exist' do

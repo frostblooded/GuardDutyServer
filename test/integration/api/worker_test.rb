@@ -19,6 +19,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '201', @response.code
+    assert_equal '{}', json_response.to_s
   end
 
   test 'worker login return error on invalid worker' do
@@ -51,6 +52,7 @@ class ApiWorkerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal '201', @response.code
+    assert_equal '{}', json_response.to_s
   end
 
   test 'worker logout returns error on invalid worker' do
