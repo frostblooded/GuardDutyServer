@@ -20,12 +20,18 @@ module API
           # Log call
           params do
             requires :time_left, type: Integer
+            optional :created_at, type: String
           end
           post '/calls' do
-            Activity.create!(category: :call,
-                             time_left: params[:time_left],
-                             site: params_site,
-                             worker: params_worker)
+            act = Activity.create!(category: :call,
+                                   time_left: params[:time_left],
+                                   site: params_site,
+                                   worker: params_worker)
+
+            if params[:created_at]
+              created_at_datetime = Time.iso8601(params[:created_at])
+              act.update!(created_at: created_at_datetime)
+            end
 
             {}
           end

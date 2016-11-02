@@ -19,8 +19,23 @@ class ApiCallTest < ActionDispatch::IntegrationTest
     assert_equal '{}', json_response.to_s
   end
 
+  test 'creating call with delay' do
+    call_time = Time.zone.now - 1.hour
+    call_time_string = call_time.iso8601
 
-  test 'creatign call for unexisting worker throws error' do
+    assert_difference 'Activity.count', 1 do
+      post "/api/v1/sites/#{@site.id}/workers/#{@worker.id}/calls",
+           params: { access_token: request_access_token,
+                     time_left: 59,
+                     created_at: call_time_string }
+    end
+
+    assert_equal '201', @response.code
+    assert_equal '{}', json_response.to_s
+    assert_in_delta call_time, Activity.last.created_at, 1.second
+  end
+
+  test 'creating call for unexisting worker throws error' do
     assert_no_difference 'Activity.count' do
       post "/api/v1/sites/#{@site.id}/workers/-1/calls",
            params: { access_token: request_access_token,
