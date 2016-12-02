@@ -54,6 +54,7 @@ class WorkersController < ApplicationController
   def show
     # Set classes for the HTML tags from here
     @worker.activities.each { |a| a.row_class = get_row_class(a) }
+    @worker.activities.sort_by { |w| w.created_at }
   end
 
   def destroy

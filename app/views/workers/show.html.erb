@@ -6,19 +6,23 @@
 		
 	<div class="wtable">
 		<table>
-			<tr>
-				<th><%= t '.timestamp' %></th>
-				<th><%= t '.category' %></th>
-				<th><%= t '.time_left' %></th>
-			</tr>
-
-			<% @worker.activities.each do |a| %>
-				<tr class="<%= a.row_class %>">
-					<td><%= a.created_at.localtime.strftime '%H:%M:%S %d/%m/%Y' %></td>
-					<td><%= a.category %></td>
-					<td><%= a.time_left %></td>
+			<thead>
+				<tr>
+					<th><%= t '.timestamp' %></th>
+					<th><%= t '.category' %></th>
+					<th><%= t '.time_left' %></th>
 				</tr>
-			<% end %>
+			</thead>
+
+			<tbody class="activities">
+				<% @worker.activities.each do |a| %>
+					<tr class="<%= a.row_class %>">
+						<td><%= a.created_at.localtime.strftime '%H:%M:%S %d/%m/%Y' %></td>
+						<td><%= a.category %></td>
+						<td><%= a.time_left %></td>
+					</tr>
+				<% end %>
+			</tbody>
 		</table>
 	</div>
 </div>
