@@ -22,6 +22,7 @@ gem 'cancancan',                          '~> 1.15.0'
 gem 'grape-cancan',                       '~> 0.0.2'
 gem 'premailer-rails',                    '~> 1.9.4'
 gem 'nokogiri',                           '~> 1.6.8'
+gem 'will_paginate',                      '~> 3.1.5'
 
 # Needed by production environment
 
