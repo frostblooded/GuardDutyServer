@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   end
 
   def index
-    @sites = current_company.sites
+    @sites = current_company.sites.paginate page: params[:page]
   end
 
   def show
