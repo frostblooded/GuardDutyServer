@@ -22,7 +22,7 @@ class WorkersController < ApplicationController
   end
 
   def index
-    @workers = current_company.workers.paginate page: params[:page], per_page: 5
+    @workers = current_company.workers.paginate page: params[:page]
   end
 
   def new
