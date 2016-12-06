@@ -5,6 +5,7 @@
 	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
 		
 	<div class="wtable">
+		<%= will_paginate @activities, param_name: 'activities_page' %>
 		<table>
 			<thead>
 				<tr>
@@ -15,7 +16,7 @@
 			</thead>
 
 			<tbody class="activities">
-				<% @worker.activities.each do |a| %>
+				<% @activities.each do |a| %>
 					<tr class="<%= a.row_class %>">
 						<td><%= a.created_at.localtime.strftime '%H:%M:%S %d/%m/%Y' %></td>
 						<td><%= a.category %></td>
@@ -24,5 +25,6 @@
 				<% end %>
 			</tbody>
 		</table>
+		<%= will_paginate @activities, param_name: 'activities_page' %>
 	</div>
 </div>

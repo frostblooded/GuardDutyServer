@@ -53,9 +53,12 @@ class WorkersController < ApplicationController
 
   def show
     # Set classes for the HTML tags from here
-    @worker.activities.each { |a| a.row_class = get_row_class(a) }
-    @worker.activities.sort_by { |w| w.created_at }
+    @activities = @worker.activities
+    @activities.sort_by { |w| w.created_at }
+    @activities = @activities.paginate page: params[:activities_page]
+    @activities.each { |a| a.row_class = get_row_class(a) }
   end
+
 
   def destroy
     @worker = Worker.find(params[:id])
