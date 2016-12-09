@@ -6,7 +6,6 @@
   <%= link_to t('.create_worker'), new_worker_path, class:'btn btn-primary col-md-offset-4 col-md-4
                                                            col-xs-offset-4 col-xs-4' %>
 
-  <%= will_paginate @worker %>
   <table class="table table-hover">
     <thead>
       <tr>  
@@ -34,5 +33,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @workers %>
+  <%= will_paginate @workers, renderer: BootstrapPagination::Rails %>
 </div>

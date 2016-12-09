@@ -6,7 +6,6 @@
   <%= link_to t('.create_site'), new_site_path, class:'btn btn-primary col-md-offset-4 col-md-4
                                                        col-xs-offset-4 col-xs-4' %>
 
-  <%= will_paginate @sites %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -30,5 +29,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @sites %>
+  <%= will_paginate @sites, renderer: BootstrapPagination::Rails %>
 </div>
