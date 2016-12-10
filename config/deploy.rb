@@ -2,7 +2,7 @@
 lock '3.6.1'
 
 set :application, 'guard_duty'
-set :repo_url, 'git@bitbucket.org:frostblooded/guard-duty-rails-app.git'
+set :repo_url, 'git@github.com:frostblooded/GuardDutyServer.git'
 
 set :rails_env, 'production'
 
