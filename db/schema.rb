@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924101851) do
+ActiveRecord::Schema.define(version: 20161221080614) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -94,11 +94,12 @@ ActiveRecord::Schema.define(version: 20160924101851) do
   end
 
   create_table "workers", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.string   "name"
     t.integer  "company_id"
+    t.float    "trust_score",     default: 100.0
     t.index ["company_id"], name: "index_workers_on_company_id"
   end
 

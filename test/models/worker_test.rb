@@ -43,4 +43,20 @@ class WorkerTest < ActiveSupport::TestCase
   test 'belongs to correct site' do
     assert_equal @site, @worker.sites.first
   end
+
+  test 'has trust score' do
+    @worker.trust_score = nil
+    assert_not @worker.valid?
+  end
+
+  test 'trust score is a valid percentage' do
+    @worker.trust_score = 50.0
+    assert @worker.valid?
+
+    @worker.trust_score = -12.0
+    assert_not @worker.valid?
+
+    @worker.trust_score = 112.0
+    assert_not @worker.valid?
+  end
 end

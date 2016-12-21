@@ -14,6 +14,8 @@ class Worker < ActiveRecord::Base
                                  message: I18n.t('name.not_unique') }
   validates :password, presence: true, length: { minimum: 8 },
                        if: :password_changed?
+  validates_numericality_of :trust_score, greater_than_or_equal_to: 0.0,
+                                          less_than_or_equal_to: 100.0
   has_secure_password
 
   private
