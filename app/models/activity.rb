@@ -6,6 +6,11 @@ class Activity < ActiveRecord::Base
 
   enum category: [:call, :login, :logout]
 
+  after_save do
+    self.worker.reload
+    self.worker.update(trust_score: self.worker.calculate_trust_score) if call?
+  end
+
   # Used for showing the activity in the worker page
   attr_accessor :row_class
 

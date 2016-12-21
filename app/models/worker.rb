@@ -18,6 +18,17 @@ class Worker < ActiveRecord::Base
                                           less_than_or_equal_to: 100.0
   has_secure_password
 
+  def calculate_trust_score
+    calls = self.activities.select { |a| a.call? }
+    good_calls = calls.count { |c| c.time_left > 0 }
+
+    if calls.count == 0
+      100.0
+    else
+      100 * good_calls / calls.count
+    end
+  end
+
   private
 
   def password_changed?
