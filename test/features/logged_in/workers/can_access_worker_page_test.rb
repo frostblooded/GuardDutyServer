@@ -11,6 +11,7 @@ class CanAccessWorkerPageTest < Capybara::Rails::TestCase
 
   test 'displays correct data' do
     assert_text @worker.name
+    assert_text @worker.trust_score
 
     within '#sites' do
       @worker.sites.each do |s|

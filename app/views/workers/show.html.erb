@@ -1,6 +1,7 @@
 <% provide(:title, @worker.name) %>
 
 <h2 class="page-header"><%= @worker.name %></h2>
+<div class="text-center">Trust score: <%= @worker.trust_score %>%</div>
 <div class="col-md-8 col-md-offset-2">
 	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
 		
