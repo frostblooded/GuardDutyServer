@@ -66,7 +66,16 @@ FactoryGirl.define do
       category { [:call, :login, :logout].sample }
 
       before(:create) do |activity|
-        activity.time_left = rand(60) if activity.call?
+        if activity.call?
+          # Get randomly if call is good
+          good_call = [true, false].sample
+
+          if good_call
+            activity.time_left = rand(1..59)
+          else
+            activity.time_left = 0
+          end
+        end
       end
     end
   end
