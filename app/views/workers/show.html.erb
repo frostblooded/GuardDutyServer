@@ -1,9 +1,12 @@
 <% provide(:title, @worker.name) %>
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
 
 <h2 class="page-header"><%= @worker.name %></h2>
 <div class="text-center">Trust score: <%= @worker.trust_score %>%</div>
 <div class="col-md-8 col-md-offset-2">
 	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
+
+	<%= line_chart @worker.activities.group('DATE(created_at)').count %>
 		
 	<div class="wtable">
 		<table>
