@@ -17,3 +17,4 @@
 //= require autocomplete-rails
 //= require i18n
 //= require i18n/translations
+//= require chartkick
