@@ -6,7 +6,7 @@
 <div class="col-md-8 col-md-offset-2">
 	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
 
-	<%= line_chart @chart_data %>
+	<%= line_chart @chart_data, max: 100.0, library: { curveType: 'none' } %>
 		
 	<div class="wtable">
 		<table>

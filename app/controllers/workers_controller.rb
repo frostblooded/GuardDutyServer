@@ -58,7 +58,10 @@ class WorkersController < ApplicationController
     @activities = @activities.paginate page: params[:activities_page]
     @activities.each { |a| a.row_class = get_row_class(a) }
 
-    @chart_data = @worker.activities.group('DATE(created_at)').count
+    @calls = @worker.activities.select { |a| a.call? }
+    @call_dates = @calls.map { |c| c.created_at.to_date }.uniq
+    @chart_data = {}
+    @call_dates.each { |d| @chart_data[d] = @worker.calculate_trust_score(d) }
   end
 
 
