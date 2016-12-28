@@ -47,7 +47,7 @@ FactoryGirl.define do
   end
 
   factory :activity do
-    created_at { Time.zone.now }
+    created_at { Time.zone.now - rand(25).days }
 
     factory :call_activity do
       category :call
