@@ -57,6 +57,8 @@ class WorkersController < ApplicationController
     @activities.sort_by { |w| w.created_at }
     @activities = @activities.paginate page: params[:activities_page]
     @activities.each { |a| a.row_class = get_row_class(a) }
+
+    @chart_data = @worker.activities.group('DATE(created_at)').count
   end
 
 

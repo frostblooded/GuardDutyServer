@@ -76,4 +76,15 @@ class WorkerTest < ActiveSupport::TestCase
     create_activity(:call, @worker, @worker.sites.first, Time.now)
     assert_equal 60.0, @worker.trust_score
   end
+
+  test 'trust score can get calculated only for one date' do
+    @worker.activities = []
+    @worker.save!
+
+    create_activity(:call, @worker, @worker.sites.first, Time.now - 2.days, 0)
+    create_activity(:call, @worker, @worker.sites.first, Time.now - 2.days, 0)
+    create_activity(:call, @worker, @worker.sites.first, Time.now)
+    assert_equal 100.0, @worker.calculate_trust_score(Time.now.to_date)
+    assert_in_delta 33.33, @worker.calculate_trust_score, 0.01
+  end
 end

@@ -6,7 +6,7 @@
 <div class="col-md-8 col-md-offset-2">
 	<h4 id="sites"><%= t '.worker_sites' %>: <%=(@worker.sites.map &:name).join(', ')%></h4>
 
-	<%= line_chart @worker.activities.group('DATE(created_at)').count %>
+	<%= line_chart @chart_data %>
 		
 	<div class="wtable">
 		<table>
