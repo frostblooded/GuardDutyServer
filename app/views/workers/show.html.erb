@@ -1,5 +1,5 @@
 <% provide(:title, @worker.name) %>
-<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+<%= javascript_include_tag 'chart_loader.js' %>
 
 <h2 class="page-header"><%= @worker.name %></h2>
 <div class="text-center">Trust score: <%= @worker.trust_score %>%</div>
