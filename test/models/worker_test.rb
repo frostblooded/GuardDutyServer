@@ -63,7 +63,6 @@ class WorkerTest < ActiveSupport::TestCase
   test 'trust score gets updated correctly' do
     @worker.activities = []
     @worker.save!
-    assert_equal 100.0, @worker.trust_score
 
     create_activity(:call, @worker, @worker.sites.first, Time.now)
     create_activity(:call, @worker, @worker.sites.first, Time.now)
