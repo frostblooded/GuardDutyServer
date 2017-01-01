@@ -9,7 +9,6 @@ class Site < ActiveRecord::Base
   has_many :site_worker_relations, dependent: :destroy
   has_many :workers, through: :site_worker_relations, dependent: :destroy
 
-  has_many :routes, dependent: :destroy
   belongs_to :company
 
   validates :name, presence: true, length: { maximum: 40 },

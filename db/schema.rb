@@ -57,24 +57,6 @@ ActiveRecord::Schema.define(version: 20161221080614) do
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
   end
 
-  create_table "positions", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longitude"
-    t.integer  "index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "route_id"
-    t.index ["route_id"], name: "index_positions_on_route_id"
-  end
-
-  create_table "routes", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "site_id"
-    t.index ["site_id"], name: "index_routes_on_site_id"
-  end
-
   create_table "site_worker_relations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -12,10 +12,7 @@ Rails.application.routes.draw do
     end
 
     resources :settings
-
-    resources :sites do
-      resources :routes
-    end
+    resources :sites
 
     root              'static_pages#home'
     get  'contact' => 'static_pages#contact'

@@ -32,7 +32,6 @@ module API
               call_interval: params_site.call_interval }
           end
 
-          mount Routes
           mount Workers
         end
       end

@@ -10,9 +10,6 @@ en:
   empty_field: field is empty, please enter something first
   name:
     not_unique: not unique in company
-  routes:
-    create:
-      success: Route created
   settings:
     index:
       title: Settings
@@ -52,10 +49,6 @@ en:
       success: Site created
     destroy:
       success: Site deleted
-  routes:
-    header: Manage your routes
-    new:
-      title: Create route
   workers:
     edit:
       title: Edit worker

@@ -10,9 +10,6 @@ bg:
   empty_field: полето е празно, моля въведи нещо първо
   name:
     not_unique: не е уникално в тази компания
-  routes:
-    create:
-      success: Обход създаден
   settings:
     index:
       title: Настройки
@@ -52,10 +49,6 @@ bg:
       success: Обектът е създаден
     destroy:
       success: Обектът е изтрит
-  routes:
-    header: Управлявай обходите си
-    new:
-      title: Създай обход
   workers:
     edit:
       title: Редактирай работник

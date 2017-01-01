@@ -59,14 +59,4 @@ class AbilitiesTest < ActionDispatch::IntegrationTest
     assert_equal '403', @response.code
     assert_equal 'Access forbidden', json_response['error']
   end
-
-  test 'cannot create routes for other companies\' sites' do
-    data = [{ latitude: 42, longitude: 42 }]
-    post "/api/v1/sites/#{@other_site.id}/routes",
-         params: { positions: data,
-                   access_token: request_access_token }
-
-    assert_equal '403', @response.code
-    assert_equal 'Access forbidden', json_response['error']
-  end
 end
