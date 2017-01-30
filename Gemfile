@@ -23,12 +23,12 @@ gem 'will_paginate',                      '~> 3.1.5'
 gem 'will_paginate-bootstrap',            '~> 1.0.1'
 gem 'chartkick',                          '~> 2.2.1'
 
-
 group :development, :test do
   gem 'byebug',                  '~> 3.4.0'
   gem 'faker',                   '~> 1.6.6'
   gem 'sqlite3',                 '~> 1.3.9'
 end
+
 group :development do
   gem 'web-console',              '~> 3.3.1'
   gem 'capistrano',               '~> 3.6.1'
