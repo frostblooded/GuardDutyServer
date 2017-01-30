@@ -10,8 +10,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_company!, except: [:home, :contact]
-
   before_action :set_locale
+
+  # Add some additional data for the exception notifier to send
+  before_action :prepare_exception_notifier
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:danger] = exception.message
@@ -43,5 +45,13 @@ class ApplicationController < ActionController::Base
   # in the url
   def default_url_options(_options = {})
     { locale: I18n.locale }
+  end
+
+  private
+
+  def prepare_exception_notifier
+    request.env["exception_notifier.exception_data"] = {
+      current_company: current_company
+    }
   end
 end

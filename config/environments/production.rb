@@ -3,6 +3,12 @@ require 'rack/throttle'
 Rails.application.routes.default_url_options[:host] = 'http://37.157.182.179/'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+      email: {
+        email_prefix: "[Guard Duty Exception] ",
+        sender_address: ENV["MAIL_SENDER"],
+        exception_recipients: %w{frostblooded@yahoo.com}
+      }
 
   # Don't allow more than 60 request from the same IP per minute
   config.middleware.use Rack::Throttle::Minute, max: 60
