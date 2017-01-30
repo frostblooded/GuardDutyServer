@@ -27,7 +27,6 @@ gem 'chartkick',                          '~> 2.2.1'
 
 group :development, :test do
   gem 'byebug',                  '~> 3.4.0'
-  gem 'spring',                  '~> 1.1.3'
   gem 'faker',                   '~> 1.6.6'
   gem 'sqlite3',                 '~> 1.3.9'
 end
