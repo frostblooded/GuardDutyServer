@@ -53,9 +53,9 @@ end
 
 group :production do
   gem 'mysql2',                  '~> 0.4.4'
-  gem 'puma',                    '~> 3.4.0'
 
   # Needed by production environment
   gem 'uglifier',                '~> 3.0.2'
+  
   gem 'rack-throttle',           '~> 0.4.0'
 end
