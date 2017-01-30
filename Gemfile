@@ -55,3 +55,7 @@ group :production do
   gem 'mysql2',                  '~> 0.4.4'
   gem 'rack-throttle',           '~> 0.4.0'
 end
+
+group :assets do
+  gem 'uglifier',                '~> 3.0.2'
+end
