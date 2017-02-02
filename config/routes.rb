@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   end
 
   # Redirect to correct path if locale is missing
-  get '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  get '*path', to: redirect("/#{I18n.default_locale}/%{path}"),
+               constraints: ->(req) do
+                              !req.path.starts_with? "/#{I18n.default_locale}/"
+                            end
   get '', to: redirect("/#{I18n.default_locale}")
 end
