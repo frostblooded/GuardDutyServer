@@ -3,4 +3,4 @@ rvm:
     - 2.3.1
 
 before_script:
-    - rake db:test:prepare
+    - bundle exec rake db:test:prepare
