@@ -2,6 +2,5 @@ language: ruby
 rvm:
     - 2.3.1
 
-scipt:
+before_script:
     - rake db:test:prepare
-    - rake
