@@ -62,6 +62,7 @@ en:
       header: Create worker
     show:
       worker_sites: The sites, to which this worker belongs
+      trust_score: Trust score
       timestamp: Timestamp
       category: Category
       time_left: Time left

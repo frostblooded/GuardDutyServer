@@ -62,6 +62,7 @@ bg:
       header: Създай работник
     show:
       worker_sites: Обектите, на които принадлежи този работник
+      trust_score: Ефективност на работника
       timestamp: Време
       category: Категория
       time_left: Оставащо време
