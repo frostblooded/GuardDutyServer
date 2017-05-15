@@ -72,6 +72,11 @@ bg:
       success: Работникът е обновен
     destroy:
       success: Работникът е изтрит
+  activities:
+      categories:
+          call: Позвъняване
+          login: Вход
+          logout: Изход
   worker_report:
     late_login: е влязъл %{minutes} минути по-късно
     unreceived_call: неполучено обаждане

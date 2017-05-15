@@ -72,6 +72,11 @@ en:
       success: Worker updated
     destroy:
       success: Worker deleted
+  activities:
+      categories:
+          call: Call
+          login: Login
+          logout: Logout
   worker_report:
     late_login: logged in %{minutes} minutes too late
     unreceived_call: unreceived call

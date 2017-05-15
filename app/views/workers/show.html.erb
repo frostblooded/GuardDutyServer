@@ -22,7 +22,7 @@
 				<% @activities.each do |a| %>
 					<tr class="<%= a.row_class %>">
 						<td><%= l a.created_at.localtime, format: :long %></td>
-						<td><%= a.category %></td>
+						<td><%= t "activities.categories.#{a.category}" %></td>
 						<td><%= a.time_left %></td>
 					</tr>
 				<% end %>
