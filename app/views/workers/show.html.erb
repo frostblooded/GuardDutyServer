@@ -21,7 +21,7 @@
 			<tbody class="activities">
 				<% @activities.each do |a| %>
 					<tr class="<%= a.row_class %>">
-						<td><%= a.created_at.localtime.strftime '%H:%M:%S %d/%m/%Y' %></td>
+						<td><%= l a.created_at.localtime, format: :long %></td>
 						<td><%= a.category %></td>
 						<td><%= a.time_left %></td>
 					</tr>
