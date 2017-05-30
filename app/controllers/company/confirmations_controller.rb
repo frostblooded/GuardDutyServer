@@ -1,9 +1,11 @@
 class Company
   class ConfirmationsController < Devise::ConfirmationsController
     # GET /resource/confirmation/new
-    # def new
-    #   super
-    # end
+    def new
+      add_breadcrumb t('devise.sessions.new.title'), new_company_session_path
+      add_breadcrumb t('devise.confirmations.new.title'), new_company_confirmation_path
+      super
+    end
 
     # POST /resource/confirmation
     # def create

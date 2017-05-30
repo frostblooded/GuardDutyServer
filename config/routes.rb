@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   scope ':locale', locale: /#{I18n.available_locales.join("|")}/ do
       # Add Devise routes for Company
     devise_for :companies, controllers: {
-      registrations: 'company/registrations'
+      registrations: 'company/registrations',
+      sessions: 'company/sessions',
+      passwords: 'company/passwords',
+      confirmations: 'company/confirmations'
     }
 
     resources :workers do

@@ -1,9 +1,11 @@
 class Company
   class PasswordsController < Devise::PasswordsController
     # GET /resource/password/new
-    # def new
-    #   super
-    # end
+    def new
+      add_breadcrumb t('devise.sessions.new.title'), new_company_session_path
+      add_breadcrumb t('devise.passwords.new.title'), new_company_password_path
+      super
+    end
 
     # POST /resource/password
     # def create

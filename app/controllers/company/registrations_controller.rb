@@ -6,9 +6,10 @@ class Company
     before_action :configure_permitted_parameters
 
     # GET /resource/sign_up
-    # def new
-    #   super
-    # end
+    def new
+      add_breadcrumb t('devise.registrations.new.title'), new_company_registration_path
+      super
+    end
 
     # POST /resource
     # def create
