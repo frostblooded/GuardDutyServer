@@ -19,12 +19,6 @@ class CanAccessWorkerPageTest < Capybara::Rails::TestCase
         assert_text s.name
       end
     end
-
-    within '.wtable' do
-      @worker.activities.each do |a|
-        assert_text a.created_at.localtime.strftime('%H:%M:%S %d/%m/%Y')
-      end
-    end
   end
 
   test 'sorts activities by created_at' do

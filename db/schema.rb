@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221080614) do
+ActiveRecord::Schema.define(version: 20170530105505) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -57,13 +57,6 @@ ActiveRecord::Schema.define(version: 20161221080614) do
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
   end
 
-  create_table "site_worker_relations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "site_id"
-    t.integer  "worker_id"
-  end
-
   create_table "sites", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",    null: false
@@ -73,6 +66,13 @@ ActiveRecord::Schema.define(version: 20161221080614) do
     t.string   "shift_start"
     t.string   "shift_end"
     t.index ["company_id"], name: "index_sites_on_company_id"
+  end
+
+  create_table "sites_workers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "site_id"
+    t.integer  "worker_id"
   end
 
   create_table "workers", force: :cascade do |t|

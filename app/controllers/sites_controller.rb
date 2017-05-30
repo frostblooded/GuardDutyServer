@@ -79,13 +79,13 @@ class SitesController < ApplicationController
   end
 
   def remove_workers
-    @site.site_worker_relations.each do |swr|
+    @site.sites_workers.each do |swr|
       swr.destroy unless params[:workers].include? swr.worker.name
     end
   end
 
   def remove_all_workers
-    @site.site_worker_relations.each(&:destroy)
+    @site.sites_workers.each(&:destroy)
   end
 
   def add_workers
