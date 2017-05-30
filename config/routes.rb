@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   # Use urls like '/:locale/workers' so that the locale is set in the url
   scope ':locale', locale: /#{I18n.available_locales.join("|")}/ do
       # Add Devise routes for Company
-    devise_for :companies
+    devise_for :companies, controllers: {
+      registrations: 'company/registrations'
+    }
 
     resources :workers do
       get :autocomplete_worker_name, on: :collection

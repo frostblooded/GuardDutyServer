@@ -1,5 +1,7 @@
 # A controller that manages the settings of the logged in company
 class SettingsController < ApplicationController
+  before_action :add_settings_breadcrumbs
+
   def index
     @company = current_company
   end
@@ -40,5 +42,11 @@ class SettingsController < ApplicationController
     else
       current_company.recipients << recipient
     end
+  end
+
+  private
+
+  def add_settings_breadcrumbs
+    add_breadcrumb t('.title'), :settings_path
   end
 end

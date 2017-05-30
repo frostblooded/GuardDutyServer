@@ -15,9 +15,11 @@ class Company
     # end
 
     # GET /resource/edit
-    # def edit
-    #   super
-    # end
+    def edit
+      add_breadcrumb t('settings.index.title'), settings_path
+      add_breadcrumb t('settings.index.edit_credentials'), edit_company_registration_path
+      super
+    end
 
     # PUT /resource
     # def update

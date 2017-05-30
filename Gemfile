@@ -22,6 +22,7 @@ gem 'premailer-rails',                    '~> 1.9.4'
 gem 'will_paginate',                      '~> 3.1.5'
 gem 'will_paginate-bootstrap',            '~> 1.0.1'
 gem 'chartkick',                          '~> 2.2.1'
+gem 'breadcrumbs_on_rails',               '~> 3.0.1'
 
 group :development, :test do
   gem 'byebug',                  '~> 3.4.0'

@@ -19,7 +19,7 @@ en:
       email_time: When do you want to receive the mail?
       emails: Emails to report to
       submit: Save changes
-      edit_credentials: Want to edit your email or credentials?
+      edit_credentials: Edit credentials
       email_add_tooltip: Add email
       email_remove_tooltip: Remove email
     update:
@@ -92,4 +92,5 @@ en:
       header: Contacts
       content: You can contact us with feedback on nikolay_danailov@yahoo.com
     home:
+      title: Home
       content: Guard Duty is a platform, which helps you reliably control the presence and attendance of your workers.

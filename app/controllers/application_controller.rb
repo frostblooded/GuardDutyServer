@@ -11,9 +11,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_company!, except: [:home, :contact]
   before_action :set_locale
+  before_action :add_application_breadcrumbs
 
   # Add some additional data for the exception notifier to send
   before_action :prepare_exception_notifier
+
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:danger] = exception.message
@@ -23,6 +25,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, with: :render_not_found
 
   protected
+
+  def add_application_breadcrumbs
+    add_breadcrumb t('static_pages.home.title'), root_path
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up,

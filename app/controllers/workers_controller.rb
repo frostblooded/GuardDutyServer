@@ -2,6 +2,8 @@
 class WorkersController < ApplicationController
   load_and_authorize_resource
 
+  before_action :add_workers_breadcrumbs
+
   autocomplete :worker, :name, full: true
 
   def autocomplete_worker_name
@@ -26,9 +28,11 @@ class WorkersController < ApplicationController
   end
 
   def new
+    add_breadcrumb t('.title'), new_worker_path
   end
 
   def edit
+    add_breadcrumb t('.title') + " #{@worker.name}", edit_worker_path(@worker)
   end
 
   def create
@@ -52,6 +56,8 @@ class WorkersController < ApplicationController
   end
 
   def show
+    add_breadcrumb t('activerecord.models.worker') + " #{@worker.name}", worker_path(@worker)
+
     # Set classes for the HTML tags from here
     @activities = @worker.activities
     @activities.sort_by { |w| w.created_at }
@@ -73,6 +79,10 @@ class WorkersController < ApplicationController
   end
 
   private
+
+  def add_workers_breadcrumbs
+    add_breadcrumb I18n.t('workers.index.title'), workers_path
+  end
 
   def worker_params
     params.require(:worker).permit(:name, :password, :password_confirmation)

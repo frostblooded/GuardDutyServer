@@ -2,7 +2,10 @@
 class SitesController < ApplicationController
   load_and_authorize_resource
 
+  before_action :add_sites_breadcrumbs
+
   def new
+    add_breadcrumb t('.title'), new_site_path
   end
 
   def index
@@ -10,6 +13,8 @@ class SitesController < ApplicationController
   end
 
   def show
+    add_breadcrumb t('activerecord.models.site') + " #{@site.name}", site_path(@site, locale: I18n.locale)
+
     @workers = current_company.workers
   end
 
@@ -51,6 +56,10 @@ class SitesController < ApplicationController
   end
 
   private
+
+  def add_sites_breadcrumbs
+    add_breadcrumb I18n.t('sites.index.title'), sites_path
+  end
 
   def site_params
     params.require(:site).permit(:name)

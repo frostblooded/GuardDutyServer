@@ -19,7 +19,7 @@ bg:
       email_time: Кога искаш да получаваш докалада?
       emails: Email-и, на които да бъде докладвано
       submit: Запази промените
-      edit_credentials: Искаш ли да промениш email-а или паролата си?
+      edit_credentials: Промени информацията си
       email_add_tooltip: Добави email
       email_remove_tooltip: Премахни email
     update:
@@ -92,4 +92,5 @@ bg:
       header: Контакти
       content: Можеш да се свържеш с нас на nikolay_danailov@yahoo.com
     home:
+      title: Начало
       content: Guard Duty е платформа, която ти помага да управляваш работниците си и присъствието им.
