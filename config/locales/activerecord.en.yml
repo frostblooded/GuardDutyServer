@@ -6,11 +6,11 @@ en:
       site: Site
     attributes:
       company:
-        email: Email
-        name: Name
-        password: Password
-        password_confirmation: Password confirmation
-        current_password: Current password
+        email: Company email
+        name: Company name
+        password: Company password
+        password_confirmation: Company password confirmation
+        current_password: Current company password
         remember_me: Remember me
       worker:
         name: Name

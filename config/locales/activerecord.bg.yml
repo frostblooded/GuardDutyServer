@@ -6,11 +6,11 @@ bg:
       site: Обект
     attributes:
       company:
-        email: Email
-        name: Име
-        password: Парола
-        password_confirmation: Потвърждение на парола
-        current_password: Текуща парола
+        email: Email на компанията
+        name: Име на компанията
+        password: Парола на компанията
+        password_confirmation: Потвърждение на парола на компанията
+        current_password: Текуща парола на компанията
         remember_me: Запомни ме
       worker:
         name: Име
