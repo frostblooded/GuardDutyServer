@@ -18,6 +18,11 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+
+	<ol class="breadcrumb">
+	  <%= render_breadcrumbs :tag => :li, :separator => "" %>
+	</ol>
+
     <div id="wrap">
       <div id="main" class="container clear-top">
         <% flash.each do |message_type, message| %>
