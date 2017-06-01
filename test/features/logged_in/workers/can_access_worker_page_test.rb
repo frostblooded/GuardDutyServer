@@ -11,7 +11,7 @@ class CanAccessWorkerPageTest < Capybara::Rails::TestCase
 
   test 'displays correct data' do
     assert_text @worker.name
-    assert_text @worker.trust_score
+    assert_text @worker.trust_score.round(2)
     assert page.has_selector? '#chart-1'
 
     within '#sites' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530105505) do
+ActiveRecord::Schema.define(version: 20170601114650) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "category"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170530105505) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "company_id"
-    t.string   "call_interval"
+    t.integer  "call_interval"
     t.string   "shift_start"
     t.string   "shift_end"
     t.index ["company_id"], name: "index_sites_on_company_id"
