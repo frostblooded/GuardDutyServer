@@ -39,7 +39,7 @@ group :development do
   gem 'capistrano-faster-assets', '~> 1.0.2'
   gem 'capistrano-passenger',     '~> 0.2.0'
   gem 'capistrano-figaro-yml',    '~> 1.0.4'
-  gem 'rubocop',                  '~> 0.42.0'
+  gem 'rubocop',                  '~> 0.49.0'
 end
 
 group :test do
